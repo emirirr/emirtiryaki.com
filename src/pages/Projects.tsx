@@ -131,7 +131,8 @@ const ProjectsPage = () => {
                       </Badge>
                     ))}
                   </div>
-                  <div className="flex gap-3">
+                                  <div className="flex gap-3">
+                  {project.github && (
                     <Button 
                       variant="outline" 
                       size="sm" 
@@ -141,17 +142,18 @@ const ProjectsPage = () => {
                       <Github className="mr-2 h-4 w-4" />
                       Kod
                     </Button>
-                    {project.link !== "https://emirtiryaki.com" && (
-                      <Button 
-                        size="sm" 
-                        className="flex-1 hero-gradient"
-                        onClick={() => window.open(project.link, '_blank')}
-                      >
-                        <Eye className="mr-2 h-4 w-4" />
-                        Demo
-                      </Button>
-                    )}
-                  </div>
+                  )}
+                  {project.link !== "https://emirtiryaki.com" && (
+                    <Button 
+                      size="sm" 
+                      className={project.github ? "flex-1 hero-gradient" : "w-full hero-gradient"}
+                      onClick={() => window.open(project.link, '_blank')}
+                    >
+                      <Eye className="mr-2 h-4 w-4" />
+                      Demo
+                    </Button>
+                  )}
+                </div>
                 </CardContent>
               </Card>
             );

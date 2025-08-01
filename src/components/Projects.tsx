@@ -5,10 +5,10 @@ import { Github, ExternalLink, Eye } from "lucide-react";
 import { projects } from "@/data/projects";
 
 const Projects = () => {
-  // Get first 6 projects for homepage
-  const homepageProjects = projects.slice(0, 6);
-  const featuredProjects = homepageProjects.slice(0, 2);
-  const otherProjects = homepageProjects.slice(2);
+  // Get first 8 projects for homepage
+  const homepageProjects = projects.slice(0, 8);
+  const featuredProjects = homepageProjects.slice(0, 3);
+  const otherProjects = homepageProjects.slice(3);
 
   return (
     <section className="py-20 px-6">
@@ -76,19 +76,21 @@ const Projects = () => {
                       ))}
                     </div>
                     <div className="flex gap-3">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="flex-1"
-                        onClick={() => window.open(project.github, '_blank')}
-                      >
-                        <Github className="mr-2 h-4 w-4" />
-                        Kod
-                      </Button>
+                      {project.github && (
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="flex-1"
+                          onClick={() => window.open(project.github, '_blank')}
+                        >
+                          <Github className="mr-2 h-4 w-4" />
+                          Kod
+                        </Button>
+                      )}
                       {project.link !== "https://emirtiryaki.com" && (
                         <Button 
                           size="sm" 
-                          className="flex-1 hero-gradient"
+                          className={project.github ? "flex-1 hero-gradient" : "w-full hero-gradient"}
                           onClick={() => window.open(project.link, '_blank')}
                         >
                           <Eye className="mr-2 h-4 w-4" />
@@ -105,7 +107,7 @@ const Projects = () => {
 
         {/* Other Projects */}
         <div>
-          <h3 className="text-2xl font-semibold mb-8 text-center">Diğer Projeler</h3>
+          <h3 className="text-2xl font-semibold mb-8 text-center">Daha Fazla Proje</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {otherProjects.map((project, index) => {
               const IconComponent = project.icon;

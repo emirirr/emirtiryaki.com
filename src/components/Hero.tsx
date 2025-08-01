@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Github, Linkedin, Mail, Download, ExternalLink } from "lucide-react";
+import { Github, Linkedin, Mail, ExternalLink } from "lucide-react";
 import profileImage from "@/assets/emir-profile.jpg";
 import heroBg from "@/assets/tech-hero-bg.jpg";
 
@@ -61,7 +61,7 @@ const Hero = () => {
           </div>
           
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-slide-up" style={{ animationDelay: '0.8s' }}>
+          <div className="flex justify-center items-center mb-12 animate-slide-up" style={{ animationDelay: '0.8s' }}>
             <Button 
               size="lg" 
               className="hero-gradient glow-effect px-8 py-3 text-lg font-semibold"
@@ -74,10 +74,6 @@ const Hero = () => {
             >
               <Mail className="mr-2 h-5 w-5" />
               İletişime Geç
-            </Button>
-            <Button variant="outline" size="lg" className="px-8 py-3 text-lg font-semibold border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-              <Download className="mr-2 h-5 w-5" />
-              CV İndir
             </Button>
           </div>
           
