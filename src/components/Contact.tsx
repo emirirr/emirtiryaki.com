@@ -3,10 +3,87 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Form validation
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      toast({
+        title: "Hata",
+        description: "Lütfen tüm alanları doldurun.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!formData.email.includes('@')) {
+      toast({
+        title: "Hata",
+        description: "Lütfen geçerli bir e-posta adresi girin.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Create mailto link with form data
+      const mailtoLink = `mailto:info@emirtiryaki.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+        `Ad Soyad: ${formData.name}\n\nE-posta: ${formData.email}\n\nMesaj:\n${formData.message}`
+      )}`;
+
+      // Open default email client
+      window.open(mailtoLink, '_blank');
+
+      // Show success message
+      toast({
+        title: "Başarılı!",
+        description: "E-posta uygulamanız açıldı. Mesajınızı gönderdikten sonra size geri dönüş yapacağım.",
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+
+    } catch (error) {
+      toast({
+        title: "Hata",
+        description: "Bir hata oluştu. Lütfen tekrar deneyin.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <section className="py-20 px-6">
+    <section id="contact" className="py-20 px-6">
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -37,7 +114,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold">E-posta</h4>
-                  <p className="text-muted-foreground">emir@emirtiryaki.com</p>
+                  <p className="text-muted-foreground">info@emirtiryaki.com</p>
                 </div>
               </div>
               
@@ -47,7 +124,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold">Telefon</h4>
-                  <p className="text-muted-foreground">+90 555 123 45 67</p>
+                  <p className="text-muted-foreground">+90 543 447 6245</p>
                 </div>
               </div>
               
@@ -66,14 +143,29 @@ const Contact = () => {
             <div>
               <h4 className="font-semibold mb-4">Sosyal Medya</h4>
               <div className="flex gap-4">
-                <Button variant="outline" size="lg" className="w-12 h-12 p-0">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-12 h-12 p-0"
+                  onClick={() => window.open('https://github.com/emirirr', '_blank')}
+                >
                   <Github className="h-5 w-5" />
                 </Button>
-                <Button variant="outline" size="lg" className="w-12 h-12 p-0">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-12 h-12 p-0"
+                  onClick={() => window.open('https://www.linkedin.com/in/emir-tiryaki/', '_blank')}
+                >
                   <Linkedin className="h-5 w-5" />
                 </Button>
-                <Button variant="outline" size="lg" className="w-12 h-12 p-0">
-                  <Twitter className="h-5 w-5" />
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-12 h-12 p-0"
+                  onClick={() => window.open('mailto:info@emirtiryaki.com', '_blank')}
+                >
+                  <Mail className="h-5 w-5" />
                 </Button>
               </div>
             </div>
@@ -85,21 +177,29 @@ const Contact = () => {
               <CardTitle className="text-2xl">Mesaj Gönder</CardTitle>
             </CardHeader>
             <CardContent>
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm font-medium mb-2 block">Ad Soyad</label>
                     <Input 
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
                       placeholder="Adınız ve soyadınız" 
                       className="bg-muted/30 border-border/50 focus:border-primary"
+                      required
                     />
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-2 block">E-posta</label>
                     <Input 
+                      name="email"
                       type="email" 
+                      value={formData.email}
+                      onChange={handleInputChange}
                       placeholder="ornek@email.com" 
                       className="bg-muted/30 border-border/50 focus:border-primary"
+                      required
                     />
                   </div>
                 </div>
@@ -107,23 +207,36 @@ const Contact = () => {
                 <div>
                   <label className="text-sm font-medium mb-2 block">Konu</label>
                   <Input 
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
                     placeholder="Mesajınızın konusu" 
                     className="bg-muted/30 border-border/50 focus:border-primary"
+                    required
                   />
                 </div>
                 
                 <div>
                   <label className="text-sm font-medium mb-2 block">Mesaj</label>
                   <Textarea 
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
                     placeholder="Mesajınızı buraya yazın..." 
                     rows={6}
                     className="bg-muted/30 border-border/50 focus:border-primary resize-none"
+                    required
                   />
                 </div>
                 
-                <Button size="lg" className="w-full hero-gradient glow-effect">
+                <Button 
+                  type="submit"
+                  size="lg" 
+                  className="w-full hero-gradient glow-effect"
+                  disabled={isSubmitting}
+                >
                   <Send className="mr-2 h-5 w-5" />
-                  Mesaj Gönder
+                  {isSubmitting ? "Gönderiliyor..." : "Mesaj Gönder"}
                 </Button>
               </form>
             </CardContent>

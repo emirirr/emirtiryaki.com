@@ -62,7 +62,16 @@ const Hero = () => {
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-slide-up" style={{ animationDelay: '0.8s' }}>
-            <Button size="lg" className="hero-gradient glow-effect px-8 py-3 text-lg font-semibold">
+            <Button 
+              size="lg" 
+              className="hero-gradient glow-effect px-8 py-3 text-lg font-semibold"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               <Mail className="mr-2 h-5 w-5" />
               İletişime Geç
             </Button>
@@ -74,14 +83,29 @@ const Hero = () => {
           
           {/* Social Links */}
           <div className="flex justify-center gap-6 animate-slide-up" style={{ animationDelay: '1s' }}>
-            <Button variant="ghost" size="lg" className="text-muted-foreground hover:text-primary transition-colors">
+            <Button 
+              variant="ghost" 
+              size="lg" 
+              className="text-muted-foreground hover:text-primary transition-colors"
+              onClick={() => window.open('https://github.com/emirirr', '_blank')}
+            >
               <Github className="h-6 w-6" />
             </Button>
-            <Button variant="ghost" size="lg" className="text-muted-foreground hover:text-primary transition-colors">
+            <Button 
+              variant="ghost" 
+              size="lg" 
+              className="text-muted-foreground hover:text-primary transition-colors"
+              onClick={() => window.open('https://www.linkedin.com/in/emir-tiryaki/', '_blank')}
+            >
               <Linkedin className="h-6 w-6" />
             </Button>
-            <Button variant="ghost" size="lg" className="text-muted-foreground hover:text-primary transition-colors">
-              <ExternalLink className="h-6 w-6" />
+            <Button 
+              variant="ghost" 
+              size="lg" 
+              className="text-muted-foreground hover:text-primary transition-colors"
+              onClick={() => window.open('mailto:info@emirtiryaki.com', '_blank')}
+            >
+              <Mail className="h-6 w-6" />
             </Button>
           </div>
         </div>

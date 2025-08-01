@@ -32,8 +32,8 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">İletişim</h4>
             <div className="space-y-2 text-muted-foreground">
               <p>İstanbul, Türkiye</p>
-              <p>emir@emirtiryaki.com</p>
-              <p>+90 555 123 45 67</p>
+              <p>info@emirtiryaki.com</p>
+              <p>+90 543 447 6245</p>
             </div>
           </div>
         </div>
@@ -46,13 +46,28 @@ const Footer = () => {
           </div>
 
           <div className="flex gap-4">
-            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-muted-foreground hover:text-primary"
+              onClick={() => window.open('https://github.com/emirirr', '_blank')}
+            >
               <Github className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-muted-foreground hover:text-primary"
+              onClick={() => window.open('https://www.linkedin.com/in/emir-tiryaki/', '_blank')}
+            >
               <Linkedin className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-muted-foreground hover:text-primary"
+              onClick={() => window.open('mailto:info@emirtiryaki.com', '_blank')}
+            >
               <Mail className="h-5 w-5" />
             </Button>
           </div>
