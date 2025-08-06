@@ -2,9 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Github, ExternalLink, Eye } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { projects } from "@/data/projects";
 
 const Projects = () => {
+  const navigate = useNavigate();
   // Get first 8 projects for homepage
   const homepageProjects = projects.slice(0, 8);
   const featuredProjects = homepageProjects.slice(0, 3);
@@ -178,7 +180,7 @@ const Projects = () => {
             <Button 
               size="lg" 
               className="px-8 hero-gradient"
-              onClick={() => window.location.href = '/projects'}
+              onClick={() => navigate('/projects')}
             >
               Tüm Projeleri Gör
             </Button>
