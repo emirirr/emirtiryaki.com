@@ -39,8 +39,8 @@ const SocialMedia = () => {
     {
       id: 3,
       name: "Instagram",
-      username: "@emir.tsx",
-      url: "https://instagram.com/emir.tsx",
+      username: "@emirscode",
+      url: "https://instagram.com/emirscode",
       icon: Instagram,
       accent: "from-orange-500/25 to-amber-500/10",
       iconClass: "text-orange-400",

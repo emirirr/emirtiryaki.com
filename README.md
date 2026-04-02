@@ -80,7 +80,7 @@ npm run build
 
 - **GitHub**: [@emirirr](https://github.com/emirirr)
 - **LinkedIn**: [@emir-tiryaki](https://www.linkedin.com/in/emir-tiryaki/)
-- **Instagram**: [@emir.tsx](https://instagram.com/emir.tsx)
+- **Instagram**: [@emirscode](https://instagram.com/emirscode)
 - **YouTube**: [@emirtiryaki](https://youtube.com/@emirtiryaki)
 - **Portfolio**: [emirtiryaki.com](https://emirtiryaki.com)
 
