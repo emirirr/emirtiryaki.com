@@ -111,8 +111,7 @@ const ProjectsPage = () => {
             variants={fadeUp}
             className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground"
           >
-            Elle hazırlanan portföy kartlarının ardından GitHub’daki tüm repolar (forklar
-            hariç) API ile eklenir. Arayın veya kategori seçin.
+            Kullandığım teknolojiler ve teslim süreleri. Arayın veya kategori seçin.
           </motion.p>
           {ghReposQ.isError && (
             <motion.p
