@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { projects, categories } from "@/data/projects";
 import { fadeUp, staggerContainer } from "@/lib/motion";
@@ -20,24 +21,41 @@ import { cn } from "@/lib/utils";
 import { isMobileAppProject } from "@/lib/projectDisplay";
 import { IPhone17ProFrame } from "@/components/IPhone17ProFrame";
 import { PortfolioImage } from "@/components/PortfolioImage";
+import {
+  GITHUB_USERNAME,
+  fetchGitHubReposAll,
+} from "@/lib/githubApi";
+import { mergePortfolioWithGitHub } from "@/lib/portfolioGithubMerge";
 
 const ProjectsPage = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("Tümü");
   const [searchQuery, setSearchQuery] = useState("");
 
+  const ghReposQ = useQuery({
+    queryKey: ["github-repos-all", GITHUB_USERNAME],
+    queryFn: fetchGitHubReposAll,
+    staleTime: 15 * 60 * 1000,
+    retry: 1,
+  });
+
+  const allProjects = useMemo(
+    () => mergePortfolioWithGitHub(projects, ghReposQ.data),
+    [ghReposQ.data],
+  );
+
   const filteredProjects = useMemo(() => {
     const byCat =
       selectedCategory === "Tümü"
-        ? projects
-        : projects.filter((p) => p.category === selectedCategory);
+        ? allProjects
+        : allProjects.filter((p) => p.category === selectedCategory);
     const q = searchQuery.trim().toLowerCase();
     if (!q) return byCat;
     return byCat.filter((p) => {
       const hay = [p.title, p.description, ...p.technologies].join(" ").toLowerCase();
       return hay.includes(q);
     });
-  }, [selectedCategory, searchQuery]);
+  }, [allProjects, selectedCategory, searchQuery]);
 
   return (
     <div className="min-h-screen bg-background font-sans antialiased">
@@ -93,8 +111,30 @@ const ProjectsPage = () => {
             variants={fadeUp}
             className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground"
           >
-            Kullandığım teknolojiler ve teslim süreleri. Arayın veya kategori seçin.
+            Elle hazırlanan portföy kartlarının ardından GitHub’daki tüm repolar (forklar
+            hariç) API ile eklenir. Arayın veya kategori seçin.
           </motion.p>
+          {ghReposQ.isError && (
+            <motion.p
+              variants={fadeUp}
+              className="mx-auto mt-4 max-w-xl rounded-2xl border border-amber-500/25 bg-amber-500/10 px-4 py-3 text-center text-sm text-amber-200/90"
+            >
+              GitHub listesi yüklenemedi; yalnızca sitedeki sabit projeler gösteriliyor.
+              Oran sınırı için{" "}
+              <code className="rounded bg-black/30 px-1.5 py-0.5 text-xs">
+                VITE_GITHUB_TOKEN
+              </code>{" "}
+              tanımlayın.
+            </motion.p>
+          )}
+          {ghReposQ.isLoading && (
+            <motion.p
+              variants={fadeUp}
+              className="mx-auto mt-4 text-center text-sm text-muted-foreground"
+            >
+              GitHub repoları yükleniyor…
+            </motion.p>
+          )}
         </motion.div>
 
         <motion.div
@@ -271,13 +311,21 @@ const ProjectsPage = () => {
                         </Button>
                       )}
                     </div>
-                    <div className="absolute left-4 top-4">
+                    <div className="absolute left-4 top-4 flex flex-wrap gap-1.5">
                       <Badge
                         variant="secondary"
                         className="rounded-lg border border-white/10 bg-black/35 text-[10px] font-medium backdrop-blur-md"
                       >
                         {project.category}
                       </Badge>
+                      {project.imageKey.startsWith("gh-") && (
+                        <Badge
+                          variant="outline"
+                          className="rounded-lg border-primary/30 bg-primary/10 text-[10px] font-medium text-primary backdrop-blur-md"
+                        >
+                          GitHub
+                        </Badge>
+                      )}
                     </div>
                   </div>
 
@@ -362,25 +410,25 @@ const ProjectsPage = () => {
             <div className="grid gap-8 text-center md:grid-cols-4">
               <div>
                 <div className="text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
-                  {projects.length}
+                  {allProjects.length}
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground">Toplam proje</div>
               </div>
               <div>
                 <div className="text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
-                  {projects.filter((p) => p.category === "Web Uygulaması").length}
+                  {allProjects.filter((p) => p.category === "Web Uygulaması").length}
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground">Web</div>
               </div>
               <div>
                 <div className="text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
-                  {projects.filter((p) => p.category === "Mobil Uygulama").length}
+                  {allProjects.filter((p) => p.category === "Mobil Uygulama").length}
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground">Mobil</div>
               </div>
               <div>
                 <div className="text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
-                  {projects.filter((p) => p.category === "E-ticaret").length}
+                  {allProjects.filter((p) => p.category === "E-ticaret").length}
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground">E-ticaret</div>
               </div>
@@ -398,7 +446,11 @@ const ProjectsPage = () => {
             className="rounded-2xl border-white/15 bg-white/[0.03] px-8 backdrop-blur-md hover:bg-white/[0.07]"
             data-cursor="pointer"
             onClick={() =>
-              window.open("https://github.com/emirirr", "_blank", "noopener,noreferrer")
+              window.open(
+                `https://github.com/${GITHUB_USERNAME}`,
+                "_blank",
+                "noopener,noreferrer",
+              )
             }
           >
             <Github className="mr-2 h-5 w-5" />

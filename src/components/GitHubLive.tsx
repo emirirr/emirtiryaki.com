@@ -5,58 +5,21 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { cn } from "@/lib/utils";
-
-const USERNAME =
-  import.meta.env.VITE_GITHUB_USERNAME?.trim() || "emirirr";
-
-type GitHubUser = {
-  public_repos: number;
-  followers: number;
-  following: number;
-  login: string;
-  avatar_url: string;
-  html_url: string;
-};
-
-type Repo = {
-  id: number;
-  name: string;
-  description: string | null;
-  html_url: string;
-  stargazers_count: number;
-  language: string | null;
-  pushed_at: string;
-};
-
-function githubHeaders(): HeadersInit {
-  const token = import.meta.env.VITE_GITHUB_TOKEN?.trim();
-  if (!token) return { Accept: "application/vnd.github+json" };
-  return {
-    Accept: "application/vnd.github+json",
-    Authorization: `Bearer ${token}`,
-  };
-}
-
-async function fetchUser(): Promise<GitHubUser> {
-  const res = await fetch(`https://api.github.com/users/${USERNAME}`, {
-    headers: githubHeaders(),
-  });
-  if (!res.ok) throw new Error("GitHub kullanıcı verisi alınamadı");
-  return res.json();
-}
-
-async function fetchRepos(): Promise<Repo[]> {
-  const res = await fetch(
-    `https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=6`,
-    { headers: githubHeaders() },
-  );
-  if (!res.ok) throw new Error("GitHub repo listesi alınamadı");
-  return res.json();
-}
+import {
+  GITHUB_USERNAME,
+  fetchGitHubUser,
+  fetchGitHubReposRecent,
+} from "@/lib/githubApi";
 
 export function GitHubLive() {
-  const userQ = useQuery({ queryKey: ["gh-user", USERNAME], queryFn: fetchUser });
-  const reposQ = useQuery({ queryKey: ["gh-repos", USERNAME], queryFn: fetchRepos });
+  const userQ = useQuery({
+    queryKey: ["gh-user", GITHUB_USERNAME],
+    queryFn: fetchGitHubUser,
+  });
+  const reposQ = useQuery({
+    queryKey: ["gh-repos", GITHUB_USERNAME],
+    queryFn: () => fetchGitHubReposRecent(6),
+  });
 
   const loading = userQ.isLoading || reposQ.isLoading;
   const err = userQ.error || reposQ.error;
@@ -88,7 +51,11 @@ export function GitHubLive() {
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
             API üzerinden çekilen açık profil ve güncel repolar — backend entegrasyonu ve
-            gerçek zamanlı içerik örneği.
+            gerçek zamanlı içerik örneği. Tüm repolar{" "}
+            <a href="/projects" className="text-primary underline-offset-4 hover:underline">
+              Projeler
+            </a>{" "}
+            sayfasında listelenir.
           </p>
         </motion.div>
 
