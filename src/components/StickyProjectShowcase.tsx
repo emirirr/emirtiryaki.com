@@ -6,8 +6,12 @@ import { Github, ExternalLink } from "lucide-react";
 import { projects } from "@/data/projects";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+import { isMobileAppProject } from "@/lib/projectDisplay";
+import { IPhone17ProFrame } from "@/components/IPhone17ProFrame";
+import { PortfolioImage } from "@/components/PortfolioImage";
 
-const SHOWCASE = projects.slice(0, 6);
+const FEATURED = projects.filter((p) => p.featured === true).slice(0, 6);
+const SHOWCASE = FEATURED.length > 0 ? FEATURED : projects.slice(0, 6);
 
 function ProjectCard({
   project,
@@ -21,6 +25,9 @@ function ProjectCard({
   scrollYProgress: MotionValue<number>;
 }) {
   const Icon = project.icon;
+  const gallery = project.additionalImages ?? [];
+  const isMobile = isMobileAppProject(project);
+  const stickyPhoneSize: "md" | "lg" = gallery.length >= 3 ? "md" : "lg";
   const segment = 1 / total;
   const start = index * segment;
   const end = start + segment;
@@ -39,7 +46,7 @@ function ProjectCard({
         style={{ scale, y }}
         className={cn(
           "glass-strong relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-white/10",
-          "shadow-[0_24px_80px_rgba(0,0,0,0.45)]",
+          "shadow-[0_24px_80px_rgba(0,0,0,0.45)] [contain:layout_paint]",
         )}
       >
         <motion.div
@@ -47,9 +54,61 @@ function ProjectCard({
           style={{ opacity: dim }}
         />
         <div className="grid gap-0 md:grid-cols-[1.1fr_0.9fr]">
-          <div className="relative flex min-h-[220px] items-center justify-center bg-gradient-to-br from-primary/20 via-background/40 to-accent/15 p-10 md:min-h-[320px]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_hsl(var(--primary)/0.35),transparent_55%)]" />
-            <Icon className="relative h-20 w-20 text-primary md:h-28 md:w-28" strokeWidth={1.25} />
+          <div className="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-gradient-to-br from-primary/20 via-background/40 to-accent/15 p-6 md:min-h-[320px] md:p-8">
+            {isMobile && gallery.length > 0 && (
+              <div className="relative z-[1] flex max-w-full gap-3 overflow-x-auto px-1 py-2 [scrollbar-width:thin] snap-x snap-mandatory md:gap-5">
+                {gallery.map((src, i) => (
+                  <IPhone17ProFrame
+                    key={src}
+                    size={stickyPhoneSize}
+                    src={src}
+                    alt={`${project.title} — ekran ${i + 1}`}
+                    className="snap-center shrink-0"
+                  />
+                ))}
+              </div>
+            )}
+            {isMobile && gallery.length === 0 && (
+              <IPhone17ProFrame
+                size="lg"
+                fallbackIcon={Icon}
+                className="relative z-[1]"
+              />
+            )}
+            {!isMobile && gallery.length === 1 && (
+              <>
+                <PortfolioImage
+                  src={gallery[0]}
+                  alt={`${project.title} — ekran görüntüsü`}
+                  className="absolute inset-0 h-full w-full object-cover object-top"
+                  fetchPriority="low"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/20 to-transparent" />
+              </>
+            )}
+            {!isMobile && gallery.length > 1 && (
+              <div className="relative z-[1] flex h-full min-h-[200px] w-full gap-3 overflow-x-auto p-2 snap-x snap-mandatory md:min-h-[260px] md:gap-4">
+                {gallery.map((src, i) => (
+                  <div
+                    key={src}
+                    className="relative h-full min-h-[180px] w-[42%] min-w-[160px] shrink-0 snap-center overflow-hidden rounded-2xl border border-white/10 sm:min-w-[200px]"
+                  >
+                    <PortfolioImage
+                      src={src}
+                      alt={`${project.title} — ekran ${i + 1}`}
+                      className="h-full w-full object-cover object-top"
+                      fetchPriority="low"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+            {!isMobile && gallery.length === 0 && (
+              <>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_hsl(var(--primary)/0.35),transparent_55%)]" />
+                <Icon className="relative h-20 w-20 text-primary md:h-28 md:w-28" strokeWidth={1.25} />
+              </>
+            )}
             <span className="absolute left-6 top-6 rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur-md">
               {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
             </span>
@@ -113,6 +172,7 @@ export function StickyProjectShowcase() {
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
+    layoutEffect: false,
   });
 
   return (
@@ -133,7 +193,8 @@ export function StickyProjectShowcase() {
             <span className="text-foreground"> deneyimi</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Kaydırdıkça kartlar üst üste biniyor; odak her seferinde tek projede kalıyor.
+            Öne çıkan projeler (featured). Kaydırdıkça kartlar üst üste biniyor; tam liste için
+            Projeler sayfasına geçin.
           </p>
         </motion.div>
       </motion.div>

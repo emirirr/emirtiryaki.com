@@ -5,7 +5,7 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import profileImage from "@/assets/emir-profile.jpg";
 import heroBg from "@/assets/tech-hero-bg.jpg";
 import { fadeUp, staggerContainer } from "@/lib/motion";
-import { cn } from "@/lib/utils";
+import { cn, scrollToSection } from "@/lib/utils";
 
 const tech = [
   "React",
@@ -60,9 +60,7 @@ const Hero = () => {
                 size="lg"
                 className="rounded-2xl hero-gradient px-7 text-base font-medium shadow-lg shadow-primary/20"
                 data-cursor="pointer"
-                onClick={() =>
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
-                }
+                onClick={() => scrollToSection("contact")}
               >
                 <Mail className="mr-2 h-5 w-5" />
                 İletişime geç
@@ -72,9 +70,7 @@ const Hero = () => {
                 variant="outline"
                 className="rounded-2xl border-white/15 bg-white/[0.03] px-7 text-base font-medium backdrop-blur-md hover:bg-white/[0.07]"
                 data-cursor="pointer"
-                onClick={() =>
-                  document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
-                }
+                onClick={() => scrollToSection("projects")}
               >
                 Projeler
               </Button>

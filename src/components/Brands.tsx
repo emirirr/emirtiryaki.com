@@ -4,7 +4,7 @@ import { ExternalLink, Globe, Building2, Users, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/lib/motion";
-import { cn } from "@/lib/utils";
+import { cn, scrollToSection } from "@/lib/utils";
 
 const Brands = () => {
   const brands = [
@@ -206,9 +206,7 @@ const Brands = () => {
             size="lg"
             className="rounded-2xl px-8 hero-gradient shadow-lg shadow-primary/15"
             data-cursor="pointer"
-            onClick={() =>
-              document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
-            }
+            onClick={() => scrollToSection("contact")}
           >
             <ExternalLink className="mr-2 h-5 w-5" />
             İletişime geç

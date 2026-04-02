@@ -1,3 +1,5 @@
+Sitemap: https://emirtiryaki.com/sitemap.xml
+
 User-agent: Googlebot
 Allow: /
 

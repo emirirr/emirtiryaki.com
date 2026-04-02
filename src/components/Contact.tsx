@@ -9,6 +9,8 @@ import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
+const WEB3_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY?.trim();
+
 const Contact = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -48,23 +50,47 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const mailtoLink = `mailto:info@emirtiryaki.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-        `Ad Soyad: ${formData.name}\n\nE-posta: ${formData.email}\n\nMesaj:\n${formData.message}`,
-      )}`;
-
-      window.open(mailtoLink, "_blank");
-
-      toast({
-        title: "Başarılı!",
-        description:
-          "E-posta uygulamanız açıldı. Mesajınızı gönderdikten sonra size geri dönüş yapacağım.",
-      });
+      if (WEB3_ACCESS_KEY) {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: WEB3_ACCESS_KEY,
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+          }),
+        });
+        const data = (await res.json()) as { success?: boolean; message?: string };
+        if (!res.ok || !data.success) {
+          throw new Error(data.message || "Gönderim tamamlanamadı");
+        }
+        toast({
+          title: "Teşekkürler",
+          description: "Mesajınız alındı; en kısa sürede size dönüş yapacağım.",
+        });
+      } else {
+        const mailtoLink = `mailto:info@emirtiryaki.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+          `Ad Soyad: ${formData.name}\n\nE-posta: ${formData.email}\n\nMesaj:\n${formData.message}`,
+        )}`;
+        window.open(mailtoLink, "_blank");
+        toast({
+          title: "Başarılı!",
+          description:
+            "E-posta uygulamanız açıldı. Mesajınızı gönderdikten sonra size geri dönüş yapacağım.",
+        });
+      }
 
       setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch {
+    } catch (err) {
       toast({
         title: "Hata",
-        description: "Bir hata oluştu. Lütfen tekrar deneyin.",
+        description:
+          err instanceof Error ? err.message : "Bir hata oluştu. Lütfen tekrar deneyin.",
         variant: "destructive",
       });
     } finally {

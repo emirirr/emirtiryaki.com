@@ -1,16 +1,17 @@
-import { 
-  Globe, 
-  Smartphone, 
-  CreditCard, 
-  MapPin, 
-  Utensils, 
-  Fish, 
-  BookOpen, 
-  Calendar, 
-  Video, 
-  Settings, 
+import {
+  Globe,
+  Smartphone,
+  CreditCard,
+  MapPin,
+  Utensils,
+  Fish,
+  BookOpen,
+  Calendar,
+  Video,
+  Settings,
   Stethoscope,
-  Users
+  Users,
+  ShoppingBag,
 } from 'lucide-react';
 
 export const categories = [
@@ -20,7 +21,45 @@ export const categories = [
   'E-ticaret'
 ];
 
+/** featured: true → ana sayfa sticky vitrin (en fazla 6; listedeki sıra korunur). */
 export const projects = [
+  {
+    id: 19,
+    title: 'Audio — E-Ticaret (iOS)',
+    description:
+      'Swift ile geliştirdiğim ilk mobil çalışma: ürün keşfi, detay sayfası ve sepet akışı olan örnek e-ticaret arayüzü.',
+    longDescription:
+      'Swift ve SwiftUI ile iPhone için tasarladığım öğrenme odaklı e-ticaret uygulaması. Ana sayfada iki sütunlu ürün ızgarası, ürün detayında fiyat ve sepete ekleme, sepet ekranında adet ve toplam gösterimi yer alıyor. Yeşil vurgu rengi ve sade tipografi ile mağaza hissi veren arayüz; gerçek ödeme veya backend entegrasyonu içermeyen portföy / prototip niteliğindedir.',
+    technologies: ['Swift', 'SwiftUI', 'iOS'],
+    category: 'E-ticaret',
+    icon: ShoppingBag,
+    link: 'https://emirtiryaki.com',
+    github: 'https://github.com/emirirr/e-commerce-app',
+    features: [
+      'Ürün ızgarası ve kartlar',
+      'Ürün detayı ve değerlendirme alanı',
+      'Sepet ve toplam çubuğu',
+      'Alt sekme navigasyonu (Ana sayfa / Sepet)',
+    ],
+    imageKey: 'ecommerce-audio',
+    additionalImages: [
+      '/portfolio/images/ecommerce-audio-home.png',
+      '/portfolio/images/ecommerce-audio-product.png',
+      '/portfolio/images/ecommerce-audio-cart.png',
+    ],
+    challenges: [
+      'SwiftUI bileşen düzeni ve durum yönetimi',
+      'Liste ve detay ekranları arasında tutarlı deneyim',
+    ],
+    solutions: [
+      'SwiftUI NavigationStack ve grid düzeni',
+      'Tek tema ile yeşil marka vurgusu',
+    ],
+    duration: 'Öğrenme projesi',
+    teamSize: 'Tek kişi',
+    logo: null,
+    featured: true,
+  },
   {
     id: 1,
     title: 'Ege Teknik',
@@ -30,15 +69,16 @@ export const projects = [
     category: 'Web Uygulaması',
     icon: Globe,
     link: 'https://egeateknik.com',
-    github: 'https://github.com/emirirr/ege-teknik',
+    github: null,
     features: ['Responsive Tasarım', 'SEO Optimizasyonu', 'İletişim Formu', 'Hizmet Kategorileri'],
     imageKey: 'egeteknik',
-    additionalImages: ['/portfolio/images/ege-teknik1.png', '/portfolio/images/ege-teknik2.png'],
+    additionalImages: ['/portfolio/images/ege-teknik-hero.png'],
     challenges: ['Responsive tasarım', 'SEO optimizasyonu', 'Performans optimizasyonu'],
     solutions: ['Next.js ile SSR', 'Tailwind CSS ile responsive tasarım', 'Image optimization'],
     duration: '2 ay',
     teamSize: 'Tek kişi',
-    logo: null
+    logo: null,
+    featured: true,
   },
   {
     id: 2,
@@ -57,7 +97,8 @@ export const projects = [
     solutions: ['Keychain Services', 'SwiftUI ile modern tasarım', 'AES-256 şifreleme'],
     duration: '3 ay',
     teamSize: 'Tek kişi',
-    logo: null
+    logo: null,
+    featured: true,
   },
   {
     id: 3,
@@ -76,7 +117,8 @@ export const projects = [
     solutions: ['Chart.js entegrasyonu', 'Firebase Realtime Database', 'SwiftUI ile modern tasarım'],
     duration: '4 ay',
     teamSize: 'Tek kişi',
-    logo: null
+    logo: null,
+    featured: true,
   },
   {
     id: 4,
@@ -95,7 +137,8 @@ export const projects = [
     solutions: ['MapKit ve Google Maps API', 'Firebase Realtime Database', 'React state management'],
     duration: '5 ay',
     teamSize: '2 kişi',
-    logo: null
+    logo: null,
+    featured: true,
   },
   {
     id: 5,
@@ -114,7 +157,8 @@ export const projects = [
     solutions: ['API entegrasyonu', 'Core Location framework', 'MapKit optimizasyonu'],
     duration: '3 ay',
     teamSize: 'Tek kişi',
-    logo: null
+    logo: null,
+    featured: true,
   },
   {
     id: 6,

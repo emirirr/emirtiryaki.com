@@ -24,6 +24,8 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       "@typescript-eslint/no-unused-vars": "off",
+      // ESLint 9.39+ ile typescript-eslint@8.0 uyumsuzluğu (allowShortCircuit)
+      "@typescript-eslint/no-unused-expressions": "off",
     },
   }
 );

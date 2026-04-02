@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import {
   Github,
   ExternalLink,
@@ -8,26 +9,39 @@ import {
   ArrowLeft,
   Clock,
   Users as TeamIcon,
+  Search,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { projects, categories } from "@/data/projects";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+import { isMobileAppProject } from "@/lib/projectDisplay";
+import { IPhone17ProFrame } from "@/components/IPhone17ProFrame";
+import { PortfolioImage } from "@/components/PortfolioImage";
 
 const ProjectsPage = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("Tümü");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredProjects =
-    selectedCategory === "Tümü"
-      ? projects
-      : projects.filter((project) => project.category === selectedCategory);
+  const filteredProjects = useMemo(() => {
+    const byCat =
+      selectedCategory === "Tümü"
+        ? projects
+        : projects.filter((p) => p.category === selectedCategory);
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return byCat;
+    return byCat.filter((p) => {
+      const hay = [p.title, p.description, ...p.technologies].join(" ").toLowerCase();
+      return hay.includes(q);
+    });
+  }, [selectedCategory, searchQuery]);
 
   return (
     <div className="min-h-screen bg-background font-sans antialiased">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-background/75 backdrop-blur-xl backdrop-saturate-150">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-background/80 backdrop-blur-lg backdrop-saturate-125">
         <div className="container mx-auto flex items-center justify-between px-4 py-4 sm:px-6">
           <Button
             variant="ghost"
@@ -79,8 +93,30 @@ const ProjectsPage = () => {
             variants={fadeUp}
             className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground"
           >
-            Kullandığım teknolojiler ve teslim süreleri. Filtreleyerek inceleyebilirsiniz.
+            Kullandığım teknolojiler ve teslim süreleri. Arayın veya kategori seçin.
           </motion.p>
+        </motion.div>
+
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          className="mx-auto mb-8 max-w-md px-1"
+        >
+          <div className="relative">
+            <Search
+              className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+              aria-hidden
+            />
+            <Input
+              type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Proje adı veya teknoloji ara…"
+              className="rounded-xl border-white/10 bg-white/[0.04] pl-10 placeholder:text-muted-foreground/70"
+              aria-label="Projelerde ara"
+            />
+          </div>
         </motion.div>
 
         <motion.div
@@ -116,14 +152,95 @@ const ProjectsPage = () => {
           initial="hidden"
           animate="visible"
         >
+          {filteredProjects.length === 0 && (
+            <p className="col-span-full text-center text-muted-foreground">
+              Bu filtre / arama için sonuç yok. Aramayı temizleyip tekrar deneyin.
+            </p>
+          )}
           {filteredProjects.map((project) => {
             const IconComponent = project.icon;
+            const gallery = project.additionalImages ?? [];
+            const isMobile = isMobileAppProject(project);
+            const phoneSize: "sm" | "md" = gallery.length >= 3 ? "sm" : "md";
             return (
-              <motion.div key={project.id} variants={fadeUp}>
+              <motion.div
+                key={project.id}
+                variants={fadeUp}
+                className="[content-visibility:auto] [contain-intrinsic-size:420px]"
+              >
                 <Card className="glass-strong group h-full overflow-hidden rounded-3xl border border-white/10 transition-all duration-300 hover:border-primary/30 hover:shadow-[0_24px_60px_-20px_hsl(var(--primary)/0.25)]">
                   <div className="relative overflow-hidden">
-                    <div className="flex h-48 items-center justify-center bg-gradient-to-br from-primary/20 via-background/50 to-accent/15">
-                      <IconComponent className="h-16 w-16 text-primary/80" strokeWidth={1.25} />
+                    <div
+                      className={cn(
+                        "relative flex items-center justify-center bg-gradient-to-br from-primary/20 via-background/50 to-accent/15",
+                        gallery.length > 0
+                          ? isMobile
+                            ? "min-h-[240px] py-6 sm:min-h-[260px] sm:py-8"
+                            : gallery.length === 1
+                              ? "h-48"
+                              : "min-h-[200px] py-5 sm:min-h-[220px]"
+                          : isMobile
+                            ? "min-h-[260px] py-8 sm:min-h-[280px] sm:py-10"
+                            : "h-48",
+                      )}
+                    >
+                      {gallery.length > 0 && isMobile && (
+                        <div
+                          className={cn(
+                            "flex w-full items-stretch justify-start gap-4 overflow-x-auto px-4 py-1 [scrollbar-width:thin] sm:justify-center",
+                            "snap-x snap-mandatory",
+                          )}
+                        >
+                          {gallery.map((src, i) => (
+                            <IPhone17ProFrame
+                              key={src}
+                              size={phoneSize}
+                              src={src}
+                              alt={`${project.title} — ekran ${i + 1}`}
+                              className="snap-center"
+                            />
+                          ))}
+                        </div>
+                      )}
+                      {gallery.length > 0 && !isMobile && gallery.length === 1 && (
+                        <>
+                          <PortfolioImage
+                            src={gallery[0]}
+                            alt={`${project.title} — ekran görüntüsü`}
+                            className="absolute inset-0 h-full w-full"
+                            fetchPriority="low"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                        </>
+                      )}
+                      {gallery.length > 1 && !isMobile && (
+                        <div
+                          className={cn(
+                            "flex w-full items-stretch justify-start gap-4 overflow-x-auto px-4 py-1 [scrollbar-width:thin] sm:justify-center",
+                            "snap-x snap-mandatory",
+                          )}
+                        >
+                          {gallery.map((src, i) => (
+                            <div
+                              key={src}
+                              className="relative h-[11rem] w-[6.25rem] shrink-0 snap-center overflow-hidden rounded-2xl border border-white/15 shadow-md sm:h-[12.5rem] sm:w-[7rem]"
+                            >
+                              <PortfolioImage
+                                src={src}
+                                alt={`${project.title} — ekran ${i + 1}`}
+                                className="h-full w-full"
+                                fetchPriority="low"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {gallery.length === 0 && isMobile && (
+                        <IPhone17ProFrame size="md" fallbackIcon={IconComponent} />
+                      )}
+                      {gallery.length === 0 && !isMobile && (
+                        <IconComponent className="relative h-16 w-16 text-primary/80" strokeWidth={1.25} />
+                      )}
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     <div className="absolute right-4 top-4 flex translate-y-2 gap-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">

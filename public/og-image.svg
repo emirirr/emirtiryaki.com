@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Emir Tiryaki - Full Stack Developer">
+  <defs>
+    <linearGradient id="ogBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e14"/>
+      <stop offset="55%" stop-color="#0d1219"/>
+      <stop offset="100%" stop-color="#0a1018"/>
+    </linearGradient>
+    <radialGradient id="ogGlow" cx="50%" cy="-15%" r="75%">
+      <stop offset="0%" stop-color="#3985f5" stop-opacity="0.35"/>
+      <stop offset="45%" stop-color="#0ea3df" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#0a0e14" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ogMark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3985f5"/>
+      <stop offset="100%" stop-color="#0ea3df"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#ogBg)"/>
+  <rect width="1200" height="630" fill="url(#ogGlow)"/>
+  <g transform="translate(600 248) scale(6.25) translate(-16 -16)">
+    <rect x="1" y="1" width="30" height="30" rx="7" fill="url(#ogMark)" stroke="rgba(241,245,249,0.16)" stroke-width="1"/>
+    <g fill="#f1f5f9">
+      <path d="M8.5 9.5h7.2v2.4H10.9v2.8h4.2v2.3h-4.2v3.7h4.8v2.4H8.5z"/>
+      <path d="M17.3 9.5h6.4v2.4h-2v11.2h-2.4V11.9h-2z"/>
+    </g>
+  </g>
+  <text x="600" y="420" text-anchor="middle" fill="#f1f5f9" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="52" font-weight="600" letter-spacing="-0.02em">Emir Tiryaki</text>
+  <text x="600" y="478" text-anchor="middle" fill="#94a3b8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="26" font-weight="500" letter-spacing="0.12em">FULL STACK DEVELOPER</text>
+</svg>

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { scrollToSection } from "@/lib/utils";
 
 type Line = { type: "in" | "out" | "err"; text: string };
 
@@ -84,7 +85,7 @@ export function TerminalMode() {
           };
           const id = target ? map[target] : "";
           if (id) {
-            document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+            scrollToSection(id);
             push("out", `#${id} bölümüne kaydırıldı.`);
           } else {
             push("err", "Kullanım: open hero|skills|projects|contact");
