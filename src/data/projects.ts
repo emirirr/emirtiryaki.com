@@ -24,7 +24,6 @@ import {
   Zap,
   Factory,
   Moon,
-<<<<<<< Updated upstream
   LayoutDashboard,
   Store,
   Truck,
@@ -35,11 +34,9 @@ import {
   ShoppingCart,
   LifeBuoy,
   PenLine,
-=======
   Radio,
   LandPlot,
   PawPrint,
->>>>>>> Stashed changes
 } from 'lucide-react';
 
 export const categories = [
@@ -726,11 +723,6 @@ export const projects = [
     category: 'Mobil Uygulama',
     icon: Radio,
     link: 'https://emirtiryaki.com',
-<<<<<<< Updated upstream
-    github: 'https://github.com/emirirr/kortbul-admin-central',
-    features: ['Rezervasyon ve kort yönetimi', 'Kullanıcı / rol yönetimi', 'Raporlama ve özet ekranları'],
-    imageKey: 'kortbul-admin',
-=======
     github: null,
     features: [
       'LAN üzerinden metin ve ses',
@@ -739,7 +731,6 @@ export const projects = [
       'Android ve iOS istemcileri',
     ],
     imageKey: 'offline-rescue-communication',
->>>>>>> Stashed changes
     additionalImages: [],
     challenges: ['Çift platformda ortak protokol', 'İzinler ve arka plan davranışı'],
     solutions: ['Belgeli wire format (PROTOCOL.md)', 'Platforma özel ses API’leri'],
@@ -758,15 +749,14 @@ export const projects = [
     category: 'Mobil Uygulama',
     icon: Car,
     link: 'https://emirtiryaki.com',
-<<<<<<< Updated upstream
-    github: 'https://github.com/emirirr/kortbul',
-    features: ['Kort listeleme ve filtreleme', 'Rezervasyon akışı', 'Responsive masaüstü ve mobil tarayıcı'],
-    imageKey: 'kortbul-web',
-=======
     github: null,
-    features: ['Mobil uygulama (iOS / Android)', 'Supabase ve Clerk entegrasyonu', 'Vite ile admin web', 'Push ve yerel özellikler'],
+    features: [
+      'Mobil uygulama (iOS / Android)',
+      'Supabase ve Clerk entegrasyonu',
+      'Vite ile admin web',
+      'Push ve yerel özellikler',
+    ],
     imageKey: 'dacar',
->>>>>>> Stashed changes
     additionalImages: [],
     challenges: ['Mobil ve web istemcilerin tutarlı veri modeli', 'Store ve gizlilik gereksinimleri'],
     solutions: ['Paylaşılan Supabase şeması', 'Expo modülleri ile yetenek ayrımı'],
@@ -784,15 +774,14 @@ export const projects = [
     category: 'Mobil Uygulama',
     icon: LandPlot,
     link: 'https://emirtiryaki.com',
-<<<<<<< Updated upstream
     github: 'https://github.com/emirirr/kortbul-mobile',
-    features: ['Mobil rezervasyon', 'Konum / favori kortlar', 'Push bildirimleri'],
-    imageKey: 'kortbul-mobil',
-=======
-    github: null,
-    features: ['Rezervasyon ve kort akışları', 'Firebase ile gerçek zamanlı veri', 'Çoklu oturum sağlayıcıları', 'Production build pipeline'],
+    features: [
+      'Rezervasyon ve kort akışları',
+      'Firebase ile gerçek zamanlı veri',
+      'Çoklu oturum sağlayıcıları',
+      'Production build pipeline',
+    ],
     imageKey: 'kortbul-expo',
->>>>>>> Stashed changes
     additionalImages: [],
     challenges: ['Firebase + Clerk birlikte güvenli oturum', 'iOS ve Android sertifikasyon'],
     solutions: ['EAS Secrets ve profiller', 'Modüler ekran ve servis katmanı'],
