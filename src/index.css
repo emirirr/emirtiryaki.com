@@ -2,107 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Design system — HSL tokens, Apple-inspired dark depth */
 
 @layer base {
   :root {
-    --background: 220 13% 7%;
-    --foreground: 220 9% 96%;
+    --background: 224 24% 6%;
+    --foreground: 210 20% 98%;
 
-    --card: 220 13% 9%;
-    --card-foreground: 220 9% 96%;
+    --card: 224 22% 8%;
+    --card-foreground: 210 20% 98%;
 
-    --popover: 220 13% 9%;
-    --popover-foreground: 220 9% 96%;
+    --popover: 224 22% 8%;
+    --popover-foreground: 210 20% 98%;
 
-    --primary: 258 70% 60%;
-    --primary-foreground: 220 9% 96%;
-    --primary-glow: 258 70% 70%;
+    /* Okyanus mavisi — mor yerine nötr, güven veren teknik palet */
+    --primary: 217 90% 58%;
+    --primary-foreground: 210 20% 98%;
+    --primary-glow: 217 88% 68%;
 
-    --secondary: 220 13% 15%;
-    --secondary-foreground: 220 9% 96%;
+    --secondary: 224 18% 12%;
+    --secondary-foreground: 210 20% 98%;
 
-    --muted: 220 13% 15%;
-    --muted-foreground: 220 9% 65%;
+    --muted: 224 16% 14%;
+    --muted-foreground: 215 14% 62%;
 
-    --accent: 199 89% 48%;
-    --accent-foreground: 220 9% 96%;
-    --accent-glow: 199 89% 58%;
+    --accent: 199 88% 48%;
+    --accent-foreground: 210 20% 98%;
+    --accent-glow: 199 88% 58%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 220 9% 96%;
+    --destructive-foreground: 210 20% 98%;
 
-    --border: 220 13% 15%;
-    --input: 220 13% 15%;
-    --ring: 258 70% 60%;
+    --border: 224 16% 16%;
+    --input: 224 16% 16%;
+    --ring: 217 90% 58%;
 
-    --radius: 0.75rem;
+    --radius: 0.875rem;
 
-    /* Tech Portfolio Specific Colors */
-    --tech-blue: 199 89% 48%;
-    --tech-purple: 258 70% 60%;
-    --tech-cyan: 180 100% 50%;
-    --surface-glow: 220 13% 12%;
-    
-    /* Gradients */
+    --tech-blue: 199 88% 48%;
+    --tech-indigo: 212 86% 52%;
+    --tech-cyan: 187 85% 46%;
+    --surface-glow: 224 22% 10%;
+
     --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
-    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--surface-glow)));
-    --gradient-tech: linear-gradient(90deg, hsl(var(--tech-blue)), hsl(var(--tech-purple)));
-    
-    /* Shadows & Glows */
-    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.3);
-    --shadow-accent: 0 0 30px hsl(var(--accent) / 0.25);
-    --shadow-card: 0 8px 32px hsl(220 13% 5% / 0.4);
+    --gradient-card: linear-gradient(155deg, hsl(var(--card)), hsl(224 24% 6%));
+    --gradient-tech: linear-gradient(90deg, hsl(var(--tech-blue)), hsl(var(--tech-indigo)));
 
-    --radius: 0.75rem;
+    --shadow-glow: 0 0 48px hsl(var(--primary) / 0.22);
+    --shadow-accent: 0 0 36px hsl(var(--accent) / 0.2);
+    --shadow-card: 0 12px 40px hsl(224 40% 2% / 0.55);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 220 13% 7%;
-    --foreground: 220 9% 96%;
-
-    --card: 220 13% 9%;
-    --card-foreground: 220 9% 96%;
-
-    --popover: 220 13% 9%;
-    --popover-foreground: 220 9% 96%;
-
-    --primary: 258 70% 60%;
-    --primary-foreground: 220 9% 96%;
-
-    --secondary: 220 13% 15%;
-    --secondary-foreground: 220 9% 96%;
-
-    --muted: 220 13% 15%;
-    --muted-foreground: 220 9% 65%;
-
-    --accent: 199 89% 48%;
-    --accent-foreground: 220 9% 96%;
-
+    --background: 224 24% 6%;
+    --foreground: 210 20% 98%;
+    --card: 224 22% 8%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 22% 8%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 217 90% 58%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 224 18% 12%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 224 16% 14%;
+    --muted-foreground: 215 14% 62%;
+    --accent: 199 88% 48%;
+    --accent-foreground: 210 20% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 220 9% 96%;
-
-    --border: 220 13% 15%;
-    --input: 220 13% 15%;
-    --ring: 258 70% 60%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 224 16% 16%;
+    --input: 224 16% 16%;
+    --ring: 217 90% 58%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -119,10 +98,30 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
-    background: linear-gradient(135deg, hsl(var(--background)), hsl(220 13% 5%));
+    @apply bg-background text-foreground font-sans antialiased;
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(ellipse 120% 80% at 50% -30%, hsl(var(--primary) / 0.14), transparent),
+      linear-gradient(180deg, hsl(var(--background)) 0%, hsl(224 28% 4%) 100%);
     min-height: 100vh;
+  }
+
+  body.cursor-none,
+  body.cursor-none * {
+    cursor: none !important;
+  }
+
+  .glass {
+    @apply border border-white/[0.08] bg-white/[0.04] shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl backdrop-saturate-150;
+  }
+
+  .glass-strong {
+    @apply border border-white/[0.1] bg-white/[0.06] shadow-[0_16px_48px_rgba(0,0,0,0.45)] backdrop-blur-2xl backdrop-saturate-150;
   }
 
   .glow-effect {

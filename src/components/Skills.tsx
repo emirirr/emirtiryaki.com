@@ -1,116 +1,154 @@
+import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Code, Database, Server, Palette, Globe, Zap } from "lucide-react";
+import {
+  Code,
+  Database,
+  Globe,
+  Palette,
+  Server,
+  Zap,
+} from "lucide-react";
+import { TechStackVisual } from "@/components/TechStackVisual";
+import { fadeUp, staggerContainer } from "@/lib/motion";
+import { cn } from "@/lib/utils";
+
+const skillCategories = [
+  {
+    title: "Frontend",
+    icon: Palette,
+    color: "text-tech-blue",
+    span: "md:col-span-1",
+    skills: ["React", "Vue.js", "TypeScript", "Next.js", "Tailwind CSS", "Vite"],
+  },
+  {
+    title: "Backend",
+    icon: Server,
+    color: "text-tech-indigo",
+    span: "md:col-span-1",
+    skills: ["Node.js", "Python", "Express", "FastAPI", "GraphQL", "REST"],
+  },
+  {
+    title: "Veri",
+    icon: Database,
+    color: "text-accent",
+    span: "md:col-span-1",
+    skills: ["PostgreSQL", "MongoDB", "Redis", "Prisma", "Supabase"],
+  },
+  {
+    title: "DevOps & Cloud",
+    icon: Globe,
+    color: "text-tech-cyan",
+    span: "md:col-span-2 lg:col-span-2",
+    skills: ["Docker", "AWS", "Kubernetes", "CI/CD", "Terraform", "Linux"],
+  },
+  {
+    title: "Araçlar",
+    icon: Code,
+    color: "text-primary",
+    span: "md:col-span-1",
+    skills: ["Git", "GitHub Actions", "Jest", "Figma", "Postman"],
+  },
+  {
+    title: "Performans",
+    icon: Zap,
+    color: "text-amber-400",
+    span: "md:col-span-1",
+    skills: ["Web Vitals", "Caching", "CDN", "Bundle analizi"],
+  },
+];
+
+const stats = [
+  { label: "Yıl deneyim", value: "5+" },
+  { label: "Tamamlanan proje", value: "50+" },
+  { label: "Teknoloji", value: "25+" },
+  { label: "Memnuniyet", value: "100%" },
+];
 
 const Skills = () => {
-  const skillCategories = [
-    {
-      title: "Frontend",
-      icon: <Palette className="h-6 w-6" />,
-      color: "text-tech-blue",
-      skills: ["React", "Vue.js", "TypeScript", "Next.js", "Tailwind CSS", "SASS", "Webpack", "Vite"]
-    },
-    {
-      title: "Backend",
-      icon: <Server className="h-6 w-6" />,
-      color: "text-tech-purple",
-      skills: ["Node.js", "Python", "Express.js", "FastAPI", "Django", "GraphQL", "REST APIs", "Microservices"]
-    },
-    {
-      title: "Database",
-      icon: <Database className="h-6 w-6" />,
-      color: "text-accent",
-      skills: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "Prisma", "Supabase", "Firebase", "ElasticSearch"]
-    },
-    {
-      title: "DevOps & Cloud",
-      icon: <Globe className="h-6 w-6" />,
-      color: "text-tech-cyan",
-      skills: ["Docker", "AWS", "Azure", "Kubernetes", "CI/CD", "Terraform", "Nginx", "Linux"]
-    },
-    {
-      title: "Tools & Others",
-      icon: <Code className="h-6 w-6" />,
-      color: "text-primary",
-      skills: ["Git", "GitHub Actions", "Jest", "Cypress", "Figma", "VS Code", "Postman", "Jira"]
-    },
-    {
-      title: "Performance",
-      icon: <Zap className="h-6 w-6" />,
-      color: "text-yellow-400",
-      skills: ["Optimization", "Caching", "CDN", "SEO", "PWA", "Web Vitals", "Bundle Analysis", "Load Testing"]
-    }
-  ];
-
   return (
-    <section className="py-20 px-6">
-      <div className="container mx-auto max-w-6xl">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-gradient">Yeteneklerim</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Modern teknolojiler ve araçlarla güçlü, ölçeklenebilir uygulamalar geliştiriyorum
+    <section id="skills" className="relative py-24 px-4 sm:px-6">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+      <motion.div
+        className="container mx-auto max-w-6xl"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+      >
+        <motion.div variants={fadeUp} className="mb-12 text-center">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            Yetkinlikler
           </p>
-        </div>
+          <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
+            <span className="text-gradient">Bento </span>
+            <span className="text-foreground">grid</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+            Arayüzden veri katmanına kadar uçtan uca düşünür; her kutucuk bir ürün kararının özeti.
+          </p>
+        </motion.div>
 
-        {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, index) => (
-            <Card 
-              key={category.title} 
-              className="card-gradient card-shadow border-border/50 hover:border-primary/50 transition-all duration-300 hover:scale-105"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-3 text-xl">
-                  <div className={`${category.color} glow-effect rounded-lg p-2 bg-muted/50`}>
-                    {category.icon}
+        <motion.div variants={fadeUp} className="mb-10">
+          <TechStackVisual />
+        </motion.div>
+
+        <div className="grid auto-rows-fr gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {skillCategories.map((category) => {
+            const Icon = category.icon;
+            return (
+              <motion.div
+                key={category.title}
+                variants={fadeUp}
+                whileHover={{
+                  y: -4,
+                  transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] },
+                }}
+                className={cn(
+                  "glass group flex flex-col rounded-3xl border border-white/10 p-6 transition-shadow duration-300 hover:border-primary/25 hover:shadow-[0_20px_60px_-20px_hsl(var(--primary)/0.35)]",
+                  category.span,
+                )}
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className={cn(
+                      "flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]",
+                      category.color,
+                    )}
+                  >
+                    <Icon className="h-5 w-5" strokeWidth={1.75} />
                   </div>
-                  {category.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
+                  <h3 className="text-lg font-semibold tracking-tight">{category.title}</h3>
+                </div>
+                <div className="mt-5 flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
-                    <Badge 
-                      key={skill} 
-                      variant="secondary" 
-                      className="px-3 py-1 text-sm bg-muted/30 hover:bg-muted/50 transition-colors cursor-default"
+                    <Badge
+                      key={skill}
+                      variant="secondary"
+                      className="rounded-lg border border-white/5 bg-white/[0.05] px-2.5 py-1 text-[11px] font-medium"
                     >
                       {skill}
                     </Badge>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Experience Stats */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            { label: "Yıl Deneyim", value: "5+" },
-            { label: "Tamamlanan Proje", value: "50+" },
-            { label: "Teknoloji", value: "25+" },
-            { label: "Memnun Müşteri", value: "100%" }
-          ].map((stat, index) => (
-            <div 
-              key={stat.label} 
-              className="text-center animate-slide-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="text-3xl md:text-4xl font-bold text-gradient mb-2">
-                {stat.value}
+        <motion.div
+          variants={fadeUp}
+          className="glass-strong mt-12 grid grid-cols-2 gap-6 rounded-3xl border border-white/10 p-8 md:grid-cols-4"
+        >
+          {stats.map((s) => (
+            <div key={s.label} className="text-center">
+              <div className="text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
+                {s.value}
               </div>
-              <div className="text-muted-foreground text-sm">
-                {stat.label}
-              </div>
+              <div className="mt-1 text-xs text-muted-foreground">{s.label}</div>
             </div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
