@@ -117,21 +117,19 @@ const ProjectsPage = () => {
             <motion.p
               variants={fadeUp}
               className="mx-auto mt-4 max-w-xl rounded-2xl border border-amber-500/25 bg-amber-500/10 px-4 py-3 text-center text-sm text-amber-200/90"
+              role="status"
             >
-              GitHub listesi yüklenemedi; yalnızca sitedeki sabit projeler gösteriliyor.
-              Oran sınırı için{" "}
-              <code className="rounded bg-black/30 px-1.5 py-0.5 text-xs">
-                VITE_GITHUB_TOKEN
-              </code>{" "}
-              tanımlayın.
+              Ek proje listesi şu an yüklenemedi; yalnızca portföydeki kayıtlı projeler
+              gösteriliyor. Daha sonra sayfayı yenileyebilirsiniz.
             </motion.p>
           )}
           {ghReposQ.isLoading && (
             <motion.p
               variants={fadeUp}
               className="mx-auto mt-4 text-center text-sm text-muted-foreground"
+              aria-live="polite"
             >
-              GitHub repoları yükleniyor…
+              Proje listesi güncelleniyor…
             </motion.p>
           )}
         </motion.div>

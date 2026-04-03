@@ -62,13 +62,11 @@ npm run dev
 npm run build
 ```
 
-## 📊 Proje İstatistikleri
+`npm run build`, önce `sitemap.xml` güncellemesi ve `public/portfolio/images` altındaki PNG’lerden WebP üretimini çalıştırır. `sharp` ortamda yüklenemezse (ör. eksik native modül) WebP adımı uyarı ile atlanır; derleme yine tamamlanır.
 
-### 🎯 Projeler
-- **Toplam Proje**: 18
-- **Web Uygulaması**: 12
-- **Mobil Uygulama**: 4
-- **E-ticaret**: 2
+## 📊 Proje özeti
+
+Güncel proje listesi ve kategoriler **[emirtiryaki.com/projects](https://emirtiryaki.com/projects)** üzerinden takip edilir (GitHub ile senkron).
 
 ### 🏢 Oluşturulan Markalar
 - **Tiryaki Yazılım** - Yazılım geliştirme şirketi

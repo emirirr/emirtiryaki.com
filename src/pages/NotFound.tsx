@@ -9,10 +9,9 @@ const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.error(
-      "404: Var olmayan rota:",
-      location.pathname,
-    );
+    if (import.meta.env.DEV) {
+      console.warn("404:", location.pathname);
+    }
   }, [location.pathname]);
 
   return (

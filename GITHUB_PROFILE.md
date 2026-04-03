@@ -93,4 +93,4 @@ const emirTiryaki = {
 
 ---
 
-*Son güncelleme: 2024* | *Made with ❤️ by Emir Tiryaki* 
+*Son güncelleme: 2026* | *Made with ❤️ by Emir Tiryaki* 

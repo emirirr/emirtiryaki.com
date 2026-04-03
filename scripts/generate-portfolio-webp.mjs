@@ -1,4 +1,3 @@
-import sharp from "sharp";
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { existsSync } from "node:fs";
@@ -6,6 +5,17 @@ import { existsSync } from "node:fs";
 const dir = join(process.cwd(), "public", "portfolio", "images");
 if (!existsSync(dir)) {
   console.log("generate-portfolio-webp: klasör yok, atlanıyor:", dir);
+  process.exit(0);
+}
+
+let sharp;
+try {
+  sharp = (await import("sharp")).default;
+} catch (e) {
+  console.warn(
+    "generate-portfolio-webp: sharp yüklenemedi (ör. CI’da native modül yok), WebP adımı atlanıyor.",
+    e instanceof Error ? e.message : e,
+  );
   process.exit(0);
 }
 
