@@ -39,7 +39,7 @@ export const categories = [
   'E-ticaret'
 ];
 
-/** featured: true → ana sayfa sticky vitrin (en fazla 6; listedeki sıra korunur). */
+/** featured: true → ana sayfa sticky vitrin (en fazla 6). Sıra: featuredOrder küçükten büyüğe; yoksa 999 sayılır. */
 export const projects = [
   {
     id: 19,
@@ -76,7 +76,6 @@ export const projects = [
     duration: 'Öğrenme projesi',
     teamSize: 'Tek kişi',
     logo: null,
-    featured: true,
   },
   {
     id: 1,
@@ -97,6 +96,7 @@ export const projects = [
     teamSize: 'Tek kişi',
     logo: null,
     featured: true,
+    featuredOrder: 3,
   },
   {
     id: 2,
@@ -116,7 +116,6 @@ export const projects = [
     duration: '3 ay',
     teamSize: 'Tek kişi',
     logo: null,
-    featured: true,
   },
   {
     id: 3,
@@ -136,7 +135,6 @@ export const projects = [
     duration: '4 ay',
     teamSize: 'Tek kişi',
     logo: null,
-    featured: true,
   },
   {
     id: 4,
@@ -156,7 +154,6 @@ export const projects = [
     duration: '5 ay',
     teamSize: '2 kişi',
     logo: null,
-    featured: true,
   },
   {
     id: 5,
@@ -176,7 +173,6 @@ export const projects = [
     duration: '3 ay',
     teamSize: 'Tek kişi',
     logo: null,
-    featured: true,
   },
   {
     id: 6,
@@ -252,7 +248,9 @@ export const projects = [
     solutions: ['GPS ve harita API entegrasyonu', 'Algoritma optimizasyonu', 'Cloud senkronizasyon sistemi'],
     duration: '3 ay',
     teamSize: 'Tek kişi',
-    logo: null
+    logo: null,
+    featured: true,
+    featuredOrder: 5,
   },
   {
     id: 10,
@@ -276,21 +274,23 @@ export const projects = [
   {
     id: 11,
     title: 'Odak Software',
-    description: 'Enda markasının kaliteli kontrol cihazları ve göstergeleri ile endüstriyel otomasyon çözümleri',
-    longDescription: 'Odak Software, Enda markasının kaliteli kontrol cihazları ve göstergeleri ile endüstriyel otomasyon çözümleri sunan kapsamlı bir platformdur. Güvenli alışveriş ve hızlı teslimat garantisi ile endüstriyel müşterilerin ihtiyaçlarını karşılayan modern bir e-ticaret ve otomasyon yönetim sistemi. Sistem, ürün kataloğu yönetimi, sipariş takibi, stok yönetimi ve müşteri ilişkileri yönetimi gibi özellikler sunarak endüstriyel otomasyon sektöründe güvenilir bir çözüm sağlar.',
-    technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'AWS'],
-    category: 'E-ticaret',
+    description: 'Kurumsal müşteri ve satış süreçlerini yöneten CRM sistemi — odaksoftware.com',
+    longDescription: 'Odak Software, işletmelerin müşteri ilişkilerini, satış hunisini ve ekip süreçlerini tek panelden yönetmesini sağlayan bir CRM platformudur. odaksoftware.com üzerinden erişilen sistem; müşteri kayıtları, görev ve hatırlatmalar, teklif ve sipariş takibi ile raporlama gibi modüllerle kurumsal ekiplerin günlük operasyonunu destekler. Modern web teknolojileriyle geliştirilmiş, ölçeklenebilir ve güvenli bir yapı sunar.',
+    technologies: ['React', 'Node.js', 'PostgreSQL', 'TypeScript', 'AWS'],
+    category: 'Web Uygulaması',
     icon: Settings,
     link: 'https://odaksoftware.com',
     github: 'https://github.com/emirirr/odaksofware',
-    features: ['Endüstriyel Otomasyon', 'Güvenli Alışveriş', 'Hızlı Teslimat', 'Stok Yönetimi'],
+    features: ['CRM ve müşteri yönetimi', 'Satış süreçleri ve takip', 'Görev ve hatırlatmalar', 'Raporlama'],
     imageKey: 'odaksoftware',
     additionalImages: ['/portfolio/images/odak-software1.png', '/portfolio/images/odak-software2.png'],
-    challenges: ['Endüstriyel ürün kataloğu yönetimi', 'Güvenli ödeme sistemi entegrasyonu', 'Teslimat takip sistemi'],
-    solutions: ['Modüler ürün yönetim sistemi', 'Stripe entegrasyonu', 'Gerçek zamanlı teslimat takibi'],
+    challenges: ['Çok kullanıcılı rol ve yetki modeli', 'CRM veri modeli ve performans', 'Güvenli çok kiracılı yapı'],
+    solutions: ['Rol tabanlı erişim katmanı', 'İlişkisel veri tasarımı ve indeksleme', 'Kimlik doğrulama ve oturum güvenliği'],
     duration: '4 ay',
     teamSize: '2 kişi',
-    logo: null
+    logo: null,
+    featured: true,
+    featuredOrder: 6,
   },
   {
     id: 12,
@@ -309,7 +309,9 @@ export const projects = [
     solutions: ['Next.js ile SSR optimizasyonu', 'Prisma ORM ile veri yönetimi', 'Meta tag optimizasyonu'],
     duration: '3 ay',
     teamSize: 'Tek kişi',
-    logo: null
+    logo: null,
+    featured: true,
+    featuredOrder: 4,
   },
   {
     id: 14,
@@ -664,6 +666,8 @@ export const projects = [
     duration: 'Süregelen',
     teamSize: 'Tek kişi',
     logo: null,
+    featured: true,
+    featuredOrder: 2,
   },
   {
     id: 38,
@@ -678,12 +682,14 @@ export const projects = [
     github: null,
     features: ['Kurumsal vitrin', 'Mobil uyumlu düzen', 'Marka odaklı içerik'],
     imageKey: 'kortbul-web',
-    additionalImages: ['/portfolio/images/kortbulweb1.png'],
+    additionalImages: [],
     challenges: ['Ekosistem mesajını tek sitede net anlatmak'],
     solutions: ['Bölümlü içerik ve tutarlı görsel dil'],
     duration: 'Süregelen',
     teamSize: 'Tek kişi',
     logo: null,
+    featured: true,
+    featuredOrder: 1,
   },
   {
     id: 37,

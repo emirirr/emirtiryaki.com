@@ -14,9 +14,14 @@ import {
   hasProjectVisitLink,
   navigateOrOpenProjectLink,
 } from "@/lib/portfolioLink";
-import { resolvePortfolioGallerySrc } from "@/lib/portfolioBundled";
 
-const FEATURED = projects.filter((p) => p.featured === true).slice(0, 6);
+const FEATURED = projects
+  .filter((p) => p.featured === true)
+  .sort(
+    (a, b) =>
+      (a.featuredOrder ?? 999) - (b.featuredOrder ?? 999) || a.id - b.id,
+  )
+  .slice(0, 6);
 const SHOWCASE = FEATURED.length > 0 ? FEATURED : projects.slice(0, 6);
 
 function ProjectCard({
@@ -68,7 +73,7 @@ function ProjectCard({
                   <IPhone17ProFrame
                     key={src}
                     size={stickyPhoneSize}
-                    src={resolvePortfolioGallerySrc(project.imageKey, src, i)}
+                    src={src}
                     alt={`${project.title} — ekran ${i + 1}`}
                     className="snap-center shrink-0"
                   />
@@ -85,11 +90,7 @@ function ProjectCard({
             {!isMobile && gallery.length === 1 && (
               <>
                 <PortfolioImage
-                  src={resolvePortfolioGallerySrc(
-                    project.imageKey,
-                    gallery[0],
-                    0,
-                  )}
+                  src={gallery[0]}
                   alt={`${project.title} — ekran görüntüsü`}
                   className="absolute inset-0 h-full w-full object-cover object-top"
                   fetchPriority="low"
@@ -105,11 +106,7 @@ function ProjectCard({
                     className="relative h-full min-h-[180px] w-[42%] min-w-[160px] shrink-0 snap-center overflow-hidden rounded-2xl border border-white/10 sm:min-w-[200px]"
                   >
                     <PortfolioImage
-                      src={resolvePortfolioGallerySrc(
-                        project.imageKey,
-                        src,
-                        i,
-                      )}
+                      src={src}
                       alt={`${project.title} — ekran ${i + 1}`}
                       className="h-full w-full object-cover object-top"
                       fetchPriority="low"

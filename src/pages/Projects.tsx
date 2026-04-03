@@ -31,7 +31,6 @@ import {
   navigateOrOpenProjectLink,
   projectVisitButtonLabel,
 } from "@/lib/portfolioLink";
-import { resolvePortfolioGallerySrc } from "@/lib/portfolioBundled";
 
 const ProjectsPage = () => {
   const navigate = useNavigate();
@@ -237,11 +236,7 @@ const ProjectsPage = () => {
                             <IPhone17ProFrame
                               key={src}
                               size={phoneSize}
-                              src={resolvePortfolioGallerySrc(
-                                project.imageKey,
-                                src,
-                                i,
-                              )}
+                              src={src}
                               alt={`${project.title} — ekran ${i + 1}`}
                               className="snap-center"
                             />
@@ -251,11 +246,7 @@ const ProjectsPage = () => {
                       {gallery.length > 0 && !isMobile && gallery.length === 1 && (
                         <>
                           <PortfolioImage
-                            src={resolvePortfolioGallerySrc(
-                              project.imageKey,
-                              gallery[0],
-                              0,
-                            )}
+                            src={gallery[0]}
                             alt={`${project.title} — ekran görüntüsü`}
                             className="absolute inset-0 h-full w-full"
                             fetchPriority="low"
@@ -276,11 +267,7 @@ const ProjectsPage = () => {
                               className="relative h-[11rem] w-[6.25rem] shrink-0 snap-center overflow-hidden rounded-2xl border border-white/15 shadow-md sm:h-[12.5rem] sm:w-[7rem]"
                             >
                               <PortfolioImage
-                                src={resolvePortfolioGallerySrc(
-                                  project.imageKey,
-                                  src,
-                                  i,
-                                )}
+                                src={src}
                                 alt={`${project.title} — ekran ${i + 1}`}
                                 className="h-full w-full"
                                 fetchPriority="low"

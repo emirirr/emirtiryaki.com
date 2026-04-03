@@ -8,9 +8,6 @@ import SocialMedia from "@/components/SocialMedia";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
-const GitHubLive = lazy(() =>
-  import("@/components/GitHubLive").then((m) => ({ default: m.GitHubLive })),
-);
 const StickyProjectShowcase = lazy(() =>
   import("@/components/StickyProjectShowcase").then((m) => ({
     default: m.StickyProjectShowcase,
@@ -30,9 +27,6 @@ const Index = () => {
       <Hero />
       <Skills />
       <SystemArchitecture />
-      <Suspense fallback={belowFoldFallback}>
-        <GitHubLive />
-      </Suspense>
       <Suspense fallback={belowFoldFallback}>
         <StickyProjectShowcase />
       </Suspense>

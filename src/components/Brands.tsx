@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Globe, Building2, Users, Calendar } from "lucide-react";
+import { ExternalLink, Globe, Users, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/lib/motion";
@@ -12,6 +12,7 @@ const Brands = () => {
       id: 1,
       name: "Tiryaki Yazılım",
       description: "Yazılım geliştirme ve dijital çözümler şirketi",
+      screenshot: "/brands/tiryakiyazilim.webp",
       website: "https://tiryakiyazilim.com",
       category: "Teknoloji",
       year: "2024",
@@ -21,27 +22,19 @@ const Brands = () => {
     {
       id: 2,
       name: "Odak Software",
-      description: "Endüstriyel otomasyon ve kontrol sistemleri",
+      description: "İşletmeler için müşteri ve süreç yönetimi sunan CRM sistemi (odaksoftware.com)",
+      screenshot: "/brands/odaksoftware.webp",
       website: "https://odaksoftware.com",
-      category: "Endüstriyel",
+      category: "Kurumsal",
       year: "2024",
-      services: ["E-ticaret Platformu", "Stok Yönetimi", "Güvenli Ödeme"],
-      technologies: ["React", "Node.js", "PostgreSQL", "Stripe"],
+      services: ["CRM", "Müşteri takibi", "Satış süreçleri", "Raporlama"],
+      technologies: ["React", "Node.js", "PostgreSQL", "TypeScript"],
     },
     {
       id: 3,
-      name: "Figrinova",
-      description: "İnovatif çözümler ve teknoloji hizmetleri",
-      website: "https://figrinova.com",
-      category: "Teknoloji",
-      year: "2024",
-      services: ["Web Geliştirme", "Mobil Uygulama", "UI/UX Tasarım", "Dijital Pazarlama"],
-      technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-    },
-    {
-      id: 4,
       name: "Kodlasa",
       description: "Eğitim ve geliştirme platformu",
+      screenshot: "/brands/kodlasa.webp",
       website: "https://kodlasa.com",
       category: "Eğitim",
       year: "2024",
@@ -76,7 +69,7 @@ const Brands = () => {
           </p>
         </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
           {brands.map((brand) => (
             <motion.div
               key={brand.id}
@@ -92,9 +85,15 @@ const Brands = () => {
                   "transition-shadow duration-300 hover:border-primary/25 hover:shadow-[0_20px_50px_-20px_hsl(var(--primary)/0.3)]",
                 )}
               >
-                <div className="relative flex h-44 items-center justify-center overflow-hidden bg-gradient-to-br from-primary/20 via-background/40 to-accent/15">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_30%,hsl(var(--primary)/0.25),transparent_60%)]" />
-                  <Building2 className="relative h-16 w-16 text-primary/85" strokeWidth={1.25} />
+                <div className="relative h-44 overflow-hidden bg-muted/30">
+                  <img
+                    src={brand.screenshot}
+                    alt={`${brand.name} sitesi ekran görüntüsü`}
+                    className="h-full w-full object-cover object-top"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                   <Badge
                     variant="secondary"
                     className="absolute right-4 top-4 rounded-lg border border-white/10 bg-black/35 text-[10px] font-medium backdrop-blur-md"
@@ -191,9 +190,9 @@ const Brands = () => {
             </div>
             <div>
               <div className="text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
-                {brands.filter((b) => b.category === "Endüstriyel").length}
+                {brands.filter((b) => b.category === "Kurumsal").length}
               </div>
-              <div className="mt-1 text-xs text-muted-foreground">Endüstriyel</div>
+              <div className="mt-1 text-xs text-muted-foreground">Kurumsal</div>
             </div>
           </div>
         </motion.div>

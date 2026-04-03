@@ -1,4 +1,4 @@
-/** Ortak GitHub REST çağrıları — GitHubLive ve portföy senkronu. */
+/** Ortak GitHub REST çağrıları — portföy / Projeler sayfası senkronu. */
 
 export const GITHUB_USERNAME =
   import.meta.env.VITE_GITHUB_USERNAME?.trim() || "emirirr";

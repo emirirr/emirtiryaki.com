@@ -43,7 +43,12 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/#github-live" className={linkClass}>
+                <a
+                  href="https://github.com/emirirr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkClass}
+                >
                   GitHub
                 </a>
               </li>
