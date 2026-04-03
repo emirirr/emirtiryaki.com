@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { publicAssetUrl } from '@/lib/publicAssetUrl'
 
 type PortfolioImageProps = {
   src: string
@@ -14,18 +15,23 @@ export function PortfolioImage({
   className,
   fetchPriority = 'low',
 }: PortfolioImageProps) {
+  const resolvedSrc = publicAssetUrl(src)
   const isPng = /\.png$/i.test(src)
-  const webpSrc = isPng ? src.replace(/\.png$/i, '.webp') : null
+  /** Yalnızca public/portfolio görselleri için eş WebP; Vite asset URL’lerinde eş dosya yok. */
+  const canUseWebp =
+    isPng && src.startsWith("/portfolio/")
+  const webpSrc = canUseWebp
+    ? publicAssetUrl(src.replace(/\.png$/i, ".webp"))
+    : null
 
   if (webpSrc) {
     return (
-      <div className={cn(className)}>
-        <picture className="block h-full w-full">
+      <div className={cn('relative z-[1] min-h-0', className)}>
+        <picture className="block h-full min-h-0 w-full [&>img]:h-full [&>img]:w-full [&>img]:object-cover [&>img]:object-top">
           <source srcSet={webpSrc} type="image/webp" />
           <img
-            src={src}
+            src={resolvedSrc}
             alt={alt}
-            className="h-full w-full object-cover object-top"
             loading="lazy"
             decoding="async"
             fetchPriority={fetchPriority}
@@ -37,7 +43,7 @@ export function PortfolioImage({
 
   return (
     <img
-      src={src}
+      src={resolvedSrc}
       alt={alt}
       className={cn(className)}
       loading="lazy"

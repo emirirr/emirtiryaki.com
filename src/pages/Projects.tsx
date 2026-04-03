@@ -26,6 +26,12 @@ import {
   fetchGitHubReposAll,
 } from "@/lib/githubApi";
 import { mergePortfolioWithGitHub } from "@/lib/portfolioGithubMerge";
+import {
+  hasProjectVisitLink,
+  navigateOrOpenProjectLink,
+  projectVisitButtonLabel,
+} from "@/lib/portfolioLink";
+import { resolvePortfolioGallerySrc } from "@/lib/portfolioBundled";
 
 const ProjectsPage = () => {
   const navigate = useNavigate();
@@ -201,9 +207,8 @@ const ProjectsPage = () => {
             const phoneSize: "sm" | "md" = gallery.length >= 3 ? "sm" : "md";
             return (
               <motion.div
-                key={project.id}
+                key={`${project.imageKey}-${project.id}`}
                 variants={fadeUp}
-                className="[content-visibility:auto] [contain-intrinsic-size:420px]"
               >
                 <Card className="glass-strong group h-full overflow-hidden rounded-3xl border border-white/10 transition-all duration-300 hover:border-primary/30 hover:shadow-[0_24px_60px_-20px_hsl(var(--primary)/0.25)]">
                   <div className="relative overflow-hidden">
@@ -232,7 +237,11 @@ const ProjectsPage = () => {
                             <IPhone17ProFrame
                               key={src}
                               size={phoneSize}
-                              src={src}
+                              src={resolvePortfolioGallerySrc(
+                                project.imageKey,
+                                src,
+                                i,
+                              )}
                               alt={`${project.title} — ekran ${i + 1}`}
                               className="snap-center"
                             />
@@ -242,7 +251,11 @@ const ProjectsPage = () => {
                       {gallery.length > 0 && !isMobile && gallery.length === 1 && (
                         <>
                           <PortfolioImage
-                            src={gallery[0]}
+                            src={resolvePortfolioGallerySrc(
+                              project.imageKey,
+                              gallery[0],
+                              0,
+                            )}
                             alt={`${project.title} — ekran görüntüsü`}
                             className="absolute inset-0 h-full w-full"
                             fetchPriority="low"
@@ -263,7 +276,11 @@ const ProjectsPage = () => {
                               className="relative h-[11rem] w-[6.25rem] shrink-0 snap-center overflow-hidden rounded-2xl border border-white/15 shadow-md sm:h-[12.5rem] sm:w-[7rem]"
                             >
                               <PortfolioImage
-                                src={src}
+                                src={resolvePortfolioGallerySrc(
+                                  project.imageKey,
+                                  src,
+                                  i,
+                                )}
                                 alt={`${project.title} — ekran ${i + 1}`}
                                 className="h-full w-full"
                                 fetchPriority="low"
@@ -294,14 +311,14 @@ const ProjectsPage = () => {
                           <Github className="h-4 w-4" />
                         </Button>
                       )}
-                      {project.link !== "https://emirtiryaki.com" && (
+                      {hasProjectVisitLink(project.link) && (
                         <Button
                           size="sm"
                           variant="secondary"
                           className="h-9 w-9 rounded-xl border border-white/10 bg-black/40 p-0 backdrop-blur-md"
                           data-cursor="pointer"
                           onClick={() =>
-                            window.open(project.link, "_blank", "noopener,noreferrer")
+                            navigateOrOpenProjectLink(project.link, navigate)
                           }
                         >
                           <ExternalLink className="h-4 w-4" />
@@ -372,7 +389,7 @@ const ProjectsPage = () => {
                           Kod
                         </Button>
                       )}
-                      {project.link !== "https://emirtiryaki.com" && (
+                      {hasProjectVisitLink(project.link) && (
                         <Button
                           size="sm"
                           className={cn(
@@ -381,11 +398,11 @@ const ProjectsPage = () => {
                           )}
                           data-cursor="pointer"
                           onClick={() =>
-                            window.open(project.link, "_blank", "noopener,noreferrer")
+                            navigateOrOpenProjectLink(project.link, navigate)
                           }
                         >
                           <Eye className="mr-2 h-4 w-4" />
-                          Demo
+                          {projectVisitButtonLabel(project.link)}
                         </Button>
                       )}
                     </div>

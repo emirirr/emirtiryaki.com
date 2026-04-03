@@ -11,6 +11,7 @@ import { CanonicalLink } from "@/components/CanonicalLink";
 import Index from "./pages/Index";
 
 const ProjectsPage = lazy(() => import("./pages/Projects"));
+const KortbulProjectPage = lazy(() => import("./pages/KortbulProjectPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const routeFallback = (
@@ -49,6 +50,10 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/projects" element={<ProjectsPage />} />
+                <Route
+                  path="/projects/kortbul/:slug"
+                  element={<KortbulProjectPage />}
+                />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

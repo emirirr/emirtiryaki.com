@@ -2,6 +2,38 @@ import { Code2 } from "lucide-react";
 import type { PortfolioProject } from "@/lib/projectDisplay";
 import type { GitHubRepo } from "@/lib/githubApi";
 
+/** GitHub’dan otomatik eklenen kartlarda gösterilmeyecek depo adları (tire/nokta birleştirilerek karşılaştırılır). */
+const EXCLUDED_GITHUB_REPO_NAMES_NORMALIZED = new Set(
+  [
+    "emirirr",
+    "coloro",
+    "enoca",
+    "gosbik",
+    "gosbikk",
+    "adhanprivacy",
+    "adhan-privacy",
+    /* Elle eklenen Kortbul web vitrin kartı ile çakışan depolar (ekransız ikinci kart oluşmasın) */
+    "kortbulweb",
+    "kortbulwebsite",
+    "kortbulcomtr",
+    "kortbulkulupadmin",
+  ].map((s) => s.toLowerCase().replace(/[-_.]/g, "")),
+);
+
+function normalizedRepoName(name: string): string {
+  return name.toLowerCase().replace(/[-_.]/g, "");
+}
+
+function isExcludedFromPortfolioMerge(repo: GitHubRepo): boolean {
+  const n = repo.name.toLowerCase();
+  const norm = normalizedRepoName(repo.name);
+  if (EXCLUDED_GITHUB_REPO_NAMES_NORMALIZED.has(norm)) return true;
+  /* coloro, coloro-app, ColorO-Mobile vb. tek listede tam yazılamayacağı için önek */
+  if (norm.startsWith("coloro")) return true;
+  if (n.includes("adhan") && n.includes("privacy")) return true;
+  return false;
+}
+
 function githubSlugFromUrl(url: string | null | undefined): string | null {
   if (!url) return null;
   try {
@@ -135,6 +167,7 @@ export function mergePortfolioWithGitHub(
   const slugs = curatedGithubSlugs(curated);
   const extraRepos = githubRepos.filter((repo) => {
     if (repo.fork) return false;
+    if (isExcludedFromPortfolioMerge(repo)) return false;
     return !slugs.has(repo.full_name.toLowerCase());
   });
 

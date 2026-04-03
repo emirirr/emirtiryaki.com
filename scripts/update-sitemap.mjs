@@ -16,6 +16,12 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://emirtiryaki.com/projects/kortbul/expo</loc>
+    <lastmod>${d}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
 `;
 

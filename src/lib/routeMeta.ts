@@ -1,3 +1,8 @@
+import {
+  isKortbulSlug,
+  kortbulPageTitle,
+} from "@/data/kortbulProjectRoutes";
+
 const SITE = "https://emirtiryaki.com";
 
 const HOME = {
@@ -25,6 +30,19 @@ const NOT_FOUND = {
   ogDescription: "Sayfa bulunamadı.",
 };
 
+function kortbulMeta(pathname: string) {
+  const m = pathname.match(/^\/projects\/kortbul\/([^/]+)\/?$/);
+  const slug = m?.[1];
+  if (!slug || !isKortbulSlug(slug)) return null;
+  const titleBase = kortbulPageTitle(slug);
+  return {
+    title: `${titleBase} | Emir Tiryaki`,
+    description: `Kortbul — ${titleBase}: mobil ve kulüp yönetimi ekosistemi, teknolojiler ve özet.`,
+    ogTitle: `${titleBase} | Emir Tiryaki`,
+    ogDescription: `Kortbul projesi: ${titleBase}.`,
+  };
+}
+
 function setMetaContent(selector: string, content: string) {
   document.querySelector(selector)?.setAttribute("content", content);
 }
@@ -37,13 +55,18 @@ function canonicalHref(pathname: string): string {
 
 /** Route değişince title, açıklama, Open Graph, Twitter ve canonical senkronlanır. */
 export function syncRouteDocumentHead(pathname: string) {
-  const isIndexedRoute = pathname === "/" || pathname === "/projects";
+  const normalized = pathname.replace(/\/$/, "") || "/";
+  const kortbul = kortbulMeta(normalized);
+  const isIndexedRoute =
+    normalized === "/" || normalized === "/projects" || kortbul !== null;
   const pack =
-    pathname === "/projects"
-      ? PROJECTS
-      : pathname === "/"
-        ? HOME
-        : NOT_FOUND;
+    kortbul !== null
+      ? kortbul
+      : normalized === "/projects"
+        ? PROJECTS
+        : normalized === "/"
+          ? HOME
+          : NOT_FOUND;
 
   document.title = pack.title;
 

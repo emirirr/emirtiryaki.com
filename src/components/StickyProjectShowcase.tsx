@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink } from "lucide-react";
@@ -9,6 +10,11 @@ import { cn } from "@/lib/utils";
 import { isMobileAppProject } from "@/lib/projectDisplay";
 import { IPhone17ProFrame } from "@/components/IPhone17ProFrame";
 import { PortfolioImage } from "@/components/PortfolioImage";
+import {
+  hasProjectVisitLink,
+  navigateOrOpenProjectLink,
+} from "@/lib/portfolioLink";
+import { resolvePortfolioGallerySrc } from "@/lib/portfolioBundled";
 
 const FEATURED = projects.filter((p) => p.featured === true).slice(0, 6);
 const SHOWCASE = FEATURED.length > 0 ? FEATURED : projects.slice(0, 6);
@@ -24,6 +30,7 @@ function ProjectCard({
   total: number;
   scrollYProgress: MotionValue<number>;
 }) {
+  const navigate = useNavigate();
   const Icon = project.icon;
   const gallery = project.additionalImages ?? [];
   const isMobile = isMobileAppProject(project);
@@ -61,7 +68,7 @@ function ProjectCard({
                   <IPhone17ProFrame
                     key={src}
                     size={stickyPhoneSize}
-                    src={src}
+                    src={resolvePortfolioGallerySrc(project.imageKey, src, i)}
                     alt={`${project.title} — ekran ${i + 1}`}
                     className="snap-center shrink-0"
                   />
@@ -78,7 +85,11 @@ function ProjectCard({
             {!isMobile && gallery.length === 1 && (
               <>
                 <PortfolioImage
-                  src={gallery[0]}
+                  src={resolvePortfolioGallerySrc(
+                    project.imageKey,
+                    gallery[0],
+                    0,
+                  )}
                   alt={`${project.title} — ekran görüntüsü`}
                   className="absolute inset-0 h-full w-full object-cover object-top"
                   fetchPriority="low"
@@ -94,7 +105,11 @@ function ProjectCard({
                     className="relative h-full min-h-[180px] w-[42%] min-w-[160px] shrink-0 snap-center overflow-hidden rounded-2xl border border-white/10 sm:min-w-[200px]"
                   >
                     <PortfolioImage
-                      src={src}
+                      src={resolvePortfolioGallerySrc(
+                        project.imageKey,
+                        src,
+                        i,
+                      )}
                       alt={`${project.title} — ekran ${i + 1}`}
                       className="h-full w-full object-cover object-top"
                       fetchPriority="low"
@@ -146,17 +161,17 @@ function ProjectCard({
                   Kaynak
                 </Button>
               )}
-              {project.link !== "https://emirtiryaki.com" && (
+              {hasProjectVisitLink(project.link) && (
                 <Button
                   size="sm"
                   className="rounded-xl hero-gradient"
                   data-cursor="pointer"
                   onClick={() =>
-                    window.open(project.link, "_blank", "noopener,noreferrer")
+                    navigateOrOpenProjectLink(project.link, navigate)
                   }
                 >
                   <ExternalLink className="mr-2 h-4 w-4" />
-                  Canlı / detay
+                  {project.link.startsWith("/") ? "Detay" : "Canlı / detay"}
                 </Button>
               )}
             </div>
