@@ -59,16 +59,17 @@ function ProjectCard({
         className={cn(
           "glass-strong relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-white/10",
           "shadow-[0_24px_80px_rgba(0,0,0,0.45)] [contain:layout_paint]",
+          "h-[min(32rem,78svh)] min-h-[26rem] md:h-[30rem] md:min-h-[30rem] md:max-h-[30rem]",
         )}
       >
         <motion.div
           className="pointer-events-none absolute inset-0 bg-background/40"
           style={{ opacity: dim }}
         />
-        <div className="grid gap-0 md:grid-cols-[1.1fr_0.9fr]">
-          <div className="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-gradient-to-br from-primary/20 via-background/40 to-accent/15 p-6 md:min-h-[320px] md:p-8">
+        <div className="grid h-full min-h-0 gap-0 md:grid-cols-[1.1fr_0.9fr]">
+          <div className="relative flex h-full min-h-0 items-center justify-center overflow-hidden bg-gradient-to-br from-primary/20 via-background/40 to-accent/15 p-6 md:p-8">
             {isMobile && gallery.length > 0 && (
-              <div className="relative z-[1] flex max-w-full gap-3 overflow-x-auto px-1 py-2 [scrollbar-width:thin] snap-x snap-mandatory md:gap-5">
+              <div className="relative z-[1] flex max-h-full max-w-full gap-3 overflow-x-auto overflow-y-hidden px-1 py-2 [scrollbar-width:thin] snap-x snap-mandatory md:gap-5">
                 {gallery.map((src, i) => (
                   <IPhone17ProFrame
                     key={src}
@@ -99,11 +100,11 @@ function ProjectCard({
               </>
             )}
             {!isMobile && gallery.length > 1 && (
-              <div className="relative z-[1] flex h-full min-h-[200px] w-full gap-3 overflow-x-auto p-2 snap-x snap-mandatory md:min-h-[260px] md:gap-4">
+              <div className="relative z-[1] flex h-full min-h-0 w-full gap-3 overflow-x-auto overflow-y-hidden p-2 snap-x snap-mandatory md:gap-4">
                 {gallery.map((src, i) => (
                   <div
                     key={src}
-                    className="relative h-full min-h-[180px] w-[42%] min-w-[160px] shrink-0 snap-center overflow-hidden rounded-2xl border border-white/10 sm:min-w-[200px]"
+                    className="relative h-full min-h-[140px] w-[42%] min-w-[160px] shrink-0 snap-center overflow-hidden rounded-2xl border border-white/10 sm:min-w-[200px]"
                   >
                     <PortfolioImage
                       src={src}
@@ -125,14 +126,14 @@ function ProjectCard({
               {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
             </span>
           </div>
-          <div className="flex flex-col justify-center p-8 md:p-10">
-            <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">
+          <div className="flex min-h-0 flex-col justify-center overflow-y-auto overflow-x-hidden p-8 md:p-10 [scrollbar-width:thin]">
+            <h3 className="line-clamp-2 text-2xl font-semibold tracking-tight md:text-3xl">
               {project.title}
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
+            <p className="mt-3 line-clamp-4 text-sm leading-relaxed text-muted-foreground md:line-clamp-5 md:text-base">
               {project.description}
             </p>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-5 flex min-h-0 flex-wrap gap-2">
               {project.technologies.slice(0, 5).map((t) => (
                 <Badge
                   key={t}
