@@ -78,15 +78,28 @@ const ProjectsPage = () => {
           <h1 className="text-lg font-semibold tracking-tight sm:text-xl">
             <span className="text-gradient">Projeler</span>
           </h1>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="rounded-xl text-muted-foreground hover:bg-white/[0.06]"
-            data-cursor="pointer"
-            asChild
-          >
-            <a href="/#contact">İletişim</a>
-          </Button>
+          <div className="flex items-center gap-1 sm:gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="rounded-xl text-muted-foreground hover:bg-white/[0.06]"
+              data-cursor="pointer"
+              asChild
+            >
+              <a href="/cv.html" target="_blank" rel="noopener noreferrer">
+                CV
+              </a>
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="rounded-xl text-muted-foreground hover:bg-white/[0.06]"
+              data-cursor="pointer"
+              asChild
+            >
+              <a href="/#contact">İletişim</a>
+            </Button>
+          </div>
         </div>
       </header>
 

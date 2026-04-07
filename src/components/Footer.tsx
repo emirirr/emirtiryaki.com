@@ -62,6 +62,11 @@ const Footer = () => {
                   Tüm projeler
                 </Link>
               </li>
+              <li>
+                <a href="/cv.html" className={linkClass}>
+                  Özgeçmiş (CV)
+                </a>
+              </li>
             </ul>
           </div>
 

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { FileText, Github, Linkedin, Mail } from "lucide-react";
 import profileImage from "@/assets/emir-profile.jpg";
 import heroBg from "@/assets/tech-hero-bg.jpg";
 import { fadeUp, staggerContainer } from "@/lib/motion";
@@ -73,6 +73,18 @@ const Hero = () => {
                 onClick={() => scrollToSection("projects")}
               >
                 Projeler
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="rounded-2xl border-white/15 bg-white/[0.03] px-7 text-base font-medium backdrop-blur-md hover:bg-white/[0.07]"
+                data-cursor="pointer"
+                asChild
+              >
+                <a href="/cv.html" target="_blank" rel="noopener noreferrer">
+                  <FileText className="mr-2 h-5 w-5" />
+                  Özgeçmiş
+                </a>
               </Button>
             </div>
           </motion.div>
