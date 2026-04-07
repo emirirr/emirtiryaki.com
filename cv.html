@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c0f14" />
+    <title>İsmail Emir Tiryaki — Özgeçmiş</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --background: 224 24% 6%;
+        --foreground: 210 20% 98%;
+        --primary: 217 90% 58%;
+        --accent: 199 88% 48%;
+        --muted: 224 16% 14%;
+        --muted-fg: 215 14% 62%;
+        --border: 224 16% 18%;
+        --card: 224 22% 8%;
+        --radius: 1rem;
+        --font: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font);
+        font-size: 15px;
+        line-height: 1.55;
+        color: hsl(var(--foreground));
+        background-color: hsl(var(--background));
+        background-image:
+          radial-gradient(ellipse 120% 70% at 50% -25%, hsl(var(--primary) / 0.2), transparent 55%),
+          linear-gradient(180deg, hsl(var(--background)) 0%, hsl(224 28% 4%) 100%);
+        min-height: 100vh;
+      }
+
+      .bg-photo {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.18;
+        pointer-events: none;
+        background-size: cover;
+        background-position: center top;
+        background-image: url("./src/assets/tech-hero-bg.jpg");
+        mask-image: linear-gradient(180deg, black 0%, transparent 80%);
+        -webkit-mask-image: linear-gradient(180deg, black 0%, transparent 80%);
+      }
+
+      .wrap {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 1.5rem 1.15rem 2.5rem;
+      }
+
+      .glass {
+        background: hsl(var(--card) / 0.7);
+        border: 1px solid hsl(0 0% 100% / 0.1);
+        box-shadow: 0 8px 32px hsl(224 40% 2% / 0.45);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+      }
+
+      .screen-only {
+        text-align: center;
+        font-size: 12px;
+        color: hsl(var(--muted-fg));
+        padding: 10px 14px;
+        margin: 0 auto 1rem;
+        max-width: 800px;
+        border-radius: var(--radius);
+        border: 1px dashed hsl(var(--border));
+        background: hsl(var(--muted) / 0.45);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1.5rem;
+        align-items: start;
+        padding: 1.5rem 1.5rem 1.4rem;
+        margin-bottom: 1.25rem;
+      }
+
+      @media (max-width: 640px) {
+        .hero {
+          grid-template-columns: 1fr;
+          justify-items: center;
+          text-align: center;
+        }
+      }
+
+      .eyebrow {
+        margin: 0 0 0.3rem;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: hsl(var(--muted-fg));
+        line-height: 1.4;
+      }
+
+      .hero h1 {
+        margin: 0 0 0.4rem;
+        font-size: clamp(1.55rem, 4vw, 2rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+      }
+
+      .hero h1 span.grad {
+        background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .subtitle {
+        margin: 0 0 0.5rem;
+        font-weight: 500;
+        color: hsl(var(--muted-fg));
+        font-size: 0.92rem;
+        line-height: 1.45;
+      }
+
+      .location {
+        margin: 0 0 0.85rem;
+        font-size: 0.88rem;
+        color: hsl(var(--muted-fg));
+      }
+
+      .metrics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+
+      .metric {
+        padding: 0.28rem 0.65rem;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 600;
+        background: hsl(var(--muted));
+        border: 1px solid hsl(var(--border));
+      }
+
+      .avatar-block {
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .avatar-glow {
+        position: absolute;
+        inset: -8px;
+        border-radius: 1.5rem;
+        background: linear-gradient(135deg, hsl(var(--primary) / 0.4), hsl(var(--accent) / 0.3));
+        filter: blur(18px);
+        z-index: 0;
+      }
+
+      .avatar-img {
+        position: relative;
+        z-index: 1;
+        width: 124px;
+        height: 124px;
+        border-radius: 1.35rem;
+        object-fit: cover;
+        border: 1px solid hsl(0 0% 100% / 0.12);
+        display: block;
+      }
+
+      .avatar-fallback {
+        position: relative;
+        z-index: 1;
+        width: 124px;
+        height: 124px;
+        border-radius: 1.35rem;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(145deg, hsl(var(--primary) / 0.35), hsl(var(--accent) / 0.25));
+        border: 1px solid hsl(0 0% 100% / 0.12);
+      }
+
+      .avatar-fallback.show {
+        display: flex;
+      }
+
+      .contact-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem 0.65rem;
+        margin-top: 0.85rem;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .contact-row a {
+        color: hsl(var(--accent));
+        text-decoration: none;
+      }
+
+      .contact-row a:hover {
+        text-decoration: underline;
+      }
+
+      .contact-row span.sep {
+        color: hsl(var(--border));
+        user-select: none;
+      }
+
+      section {
+        margin-bottom: 1.1rem;
+      }
+
+      h2 {
+        margin: 0 0 0.5rem;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: hsl(var(--muted-fg));
+      }
+
+      .card-inner {
+        padding: 1rem 1.15rem;
+      }
+
+      .card-inner p {
+        margin: 0 0 0.65rem;
+        font-size: 0.93rem;
+        line-height: 1.5;
+      }
+
+      .card-inner p:last-child {
+        margin-bottom: 0;
+      }
+
+      .job {
+        margin-bottom: 0.85rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid hsl(var(--border));
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .job:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      .job h3 {
+        margin: 0 0 0.35rem;
+        font-size: 0.93rem;
+        font-weight: 600;
+        line-height: 1.35;
+      }
+
+      .job .period {
+        font-weight: 500;
+        font-style: italic;
+        color: hsl(var(--muted-fg));
+        white-space: nowrap;
+      }
+
+      .job p,
+      .job li {
+        font-size: 0.88rem;
+        line-height: 1.5;
+        color: hsl(var(--foreground) / 0.9);
+      }
+
+      .job ul {
+        margin: 0.4rem 0 0;
+        padding-left: 1.1rem;
+      }
+
+      .job li {
+        margin-bottom: 0.3rem;
+      }
+
+      .brand-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.65rem;
+      }
+
+      @media (min-width: 620px) {
+        .brand-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .brand-card {
+        padding: 0.75rem 0.85rem;
+        border-radius: calc(var(--radius) - 2px);
+        background: hsl(0 0% 100% / 0.03);
+        border: 1px solid hsl(var(--border));
+      }
+
+      .brand-card h3 {
+        margin: 0 0 0.3rem;
+        font-size: 0.88rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        line-height: 1.3;
+      }
+
+      .brand-card img.icon {
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
+      }
+
+      .brand-card a {
+        color: inherit;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .brand-card a:hover {
+        color: hsl(var(--primary));
+      }
+
+      .brand-card p {
+        margin: 0;
+        font-size: 0.8rem;
+        color: hsl(var(--muted-fg));
+        line-height: 1.4;
+      }
+
+      .projects {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11.5px;
+        line-height: 1.4;
+      }
+
+      .projects th,
+      .projects td {
+        text-align: left;
+        padding: 6px 8px;
+        border-bottom: 1px solid hsl(var(--border));
+        vertical-align: top;
+      }
+
+      .projects th {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: hsl(var(--muted-fg));
+        background: hsl(0 0% 100% / 0.04);
+      }
+
+      .projects tr:last-child td {
+        border-bottom: none;
+      }
+
+      .proj-name {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.45rem;
+        font-weight: 600;
+      }
+
+      .proj-name img {
+        width: 16px;
+        height: 16px;
+        border-radius: 3px;
+        margin-top: 2px;
+        flex-shrink: 0;
+      }
+
+      .projects a {
+        color: hsl(var(--accent));
+        text-decoration: none;
+        word-break: break-all;
+      }
+
+      .skill-line {
+        margin: 0 0 0.35rem;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .skill-line strong {
+        display: inline;
+        font-weight: 600;
+        margin-right: 0.35rem;
+      }
+
+      .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-top: 0.5rem;
+      }
+
+      .badge {
+        padding: 0.25rem 0.55rem;
+        border-radius: 999px;
+        font-size: 10.5px;
+        font-weight: 500;
+        background: hsl(var(--muted));
+        border: 1px solid hsl(var(--border));
+      }
+
+      ul.plain {
+        margin: 0;
+        padding-left: 1.1rem;
+        font-size: 0.88rem;
+      }
+
+      ul.plain li {
+        margin-bottom: 0.25rem;
+      }
+
+      .after-table {
+        margin: 0.45rem 0 0;
+        font-size: 11.5px;
+        color: hsl(var(--muted-fg));
+      }
+
+      /* ——— Yazdırma / PDF: ekrandaki gibi koyu + renkli (Arka plan grafikleri AÇIK olsun) ——— */
+      @media print {
+        @page {
+          size: A4;
+          margin: 11mm 12mm;
+        }
+
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+
+        body {
+          font-size: 10pt;
+          line-height: 1.45;
+          color: hsl(var(--foreground)) !important;
+          background-color: hsl(var(--background)) !important;
+          background-image:
+            radial-gradient(ellipse 140% 80% at 50% -20%, hsl(217 90% 58% / 0.28), transparent 55%),
+            radial-gradient(ellipse 70% 45% at 100% 30%, hsl(199 88% 48% / 0.14), transparent 50%),
+            linear-gradient(180deg, hsl(224 24% 6%) 0%, hsl(224 28% 4%) 100%) !important;
+        }
+
+        .bg-photo {
+          display: block !important;
+          opacity: 0.14 !important;
+          position: fixed !important;
+        }
+
+        .screen-only {
+          display: none !important;
+        }
+
+        .wrap {
+          max-width: 100%;
+          padding: 0;
+          margin: 0;
+        }
+
+        .glass,
+        .brand-card {
+          background: hsl(224 22% 10% / 0.95) !important;
+          border: 1px solid hsl(0 0% 100% / 0.14) !important;
+          box-shadow: 0 6px 24px hsl(0 0% 0% / 0.35) !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+        }
+
+        .hero h1 span.grad {
+          background: linear-gradient(135deg, hsl(217 90% 58%), hsl(199 88% 52%)) !important;
+          -webkit-background-clip: text !important;
+          background-clip: text !important;
+          color: transparent !important;
+        }
+
+        .eyebrow,
+        .subtitle,
+        .location,
+        .job .period,
+        .brand-card p,
+        .after-table {
+          color: hsl(215 14% 62%) !important;
+        }
+
+        h2 {
+          margin-bottom: 6pt;
+          page-break-after: avoid;
+          color: hsl(199 88% 55%) !important;
+          border-bottom: 1pt solid hsl(217 90% 58% / 0.35);
+          padding-bottom: 3pt;
+        }
+
+        .metric {
+          background: hsl(224 18% 16%) !important;
+          border: 1px solid hsl(217 90% 58% / 0.25) !important;
+          color: hsl(210 20% 98%) !important;
+        }
+
+        .badge {
+          background: hsl(224 18% 14%) !important;
+          border: 1px solid hsl(199 88% 48% / 0.35) !important;
+          color: hsl(210 20% 96%) !important;
+        }
+
+        a,
+        .contact-row a,
+        .projects a {
+          color: hsl(199 88% 52%) !important;
+        }
+
+        .avatar-glow {
+          display: block !important;
+          opacity: 0.75 !important;
+          filter: blur(14pt) !important;
+        }
+
+        .avatar-img,
+        .avatar-fallback {
+          border: 1px solid hsl(0 0% 100% / 0.2) !important;
+        }
+
+        .hero {
+          padding: 8pt 10pt !important;
+          margin-bottom: 10pt !important;
+          border-bottom: 2pt solid hsl(217 90% 58%);
+          box-shadow: 0 10pt 30pt hsl(199 88% 48% / 0.08) !important;
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+
+        section {
+          margin-bottom: 10pt;
+          break-inside: auto;
+        }
+
+        .glass {
+          break-inside: auto;
+        }
+
+        .card-inner {
+          padding: 8pt 10pt !important;
+        }
+
+        .job {
+          break-inside: avoid;
+          page-break-inside: avoid;
+          border-bottom-color: hsl(var(--border)) !important;
+        }
+
+        .brand-grid {
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 8pt;
+        }
+
+        table.projects {
+          font-size: 9pt;
+          border: 1pt solid hsl(0 0% 100% / 0.12);
+        }
+
+        table.projects th {
+          background: hsl(217 90% 58% / 0.18) !important;
+          color: hsl(210 20% 96%) !important;
+          border-bottom: 1pt solid hsl(217 90% 58% / 0.35);
+        }
+
+        table.projects th,
+        table.projects td {
+          border: 1pt solid hsl(0 0% 100% / 0.1);
+          padding: 5pt 6pt;
+        }
+
+        .projects thead {
+          display: table-header-group;
+        }
+
+        .projects tr {
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+
+        .skills-grid {
+          gap: 4pt;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-photo" aria-hidden="true"></div>
+
+    <p class="screen-only wrap">
+      <strong>PDF (renkli):</strong> Ctrl+P → <strong>PDF olarak kaydet</strong>. Ayarlarda mutlaka
+      <strong>Arka plan grafikleri</strong> / <em>Background graphics</em> seçeneğini <strong>aç</strong>;
+      böylece koyu tema ve mavi–turkuaz vurgular PDF’e yansır.
+    </p>
+
+    <div class="wrap">
+      <header class="glass hero">
+        <div>
+          <p class="eyebrow">Full Stack Developer · Satın almacı</p>
+          <h1>İsmail Emir <span class="grad">Tiryaki</span></h1>
+          <p class="subtitle">
+            Yazılım: web/mobil ve backend. İş: endüstriyel tedarik ve satın alma süreçleri.
+          </p>
+          <p class="location">İstanbul, Pendik</p>
+          <div class="metrics">
+            <span class="metric">5+ yıl deneyim</span>
+            <span class="metric">50+ proje</span>
+            <span class="metric">25+ teknoloji</span>
+          </div>
+          <div class="contact-row">
+            <a href="mailto:info@emirtiryaki.com">info@emirtiryaki.com</a>
+            <span class="sep">·</span>
+            <span>+90 543 447 6245</span>
+            <span class="sep">·</span>
+            <a href="https://emirtiryaki.com" target="_blank" rel="noopener">emirtiryaki.com</a>
+            <span class="sep">·</span>
+            <a href="https://github.com/emirirr" target="_blank" rel="noopener">GitHub</a>
+            <span class="sep">·</span>
+            <a href="https://www.linkedin.com/in/emir-tiryaki/" target="_blank" rel="noopener">LinkedIn</a>
+            <span class="sep">·</span>
+            <a href="https://emirtiryaki.com/projects" target="_blank" rel="noopener">Projeler listesi</a>
+          </div>
+        </div>
+        <div class="avatar-block">
+          <div class="avatar-glow" aria-hidden="true"></div>
+          <img
+            class="avatar-img"
+            src="./src/assets/emir-profile.jpg"
+            width="124"
+            height="124"
+            alt="İsmail Emir Tiryaki"
+            id="profilePhoto"
+          />
+          <div class="avatar-fallback" id="photoFallback" aria-hidden="true">İE</div>
+        </div>
+      </header>
+
+      <section aria-labelledby="k-summary">
+        <h2 id="k-summary">Kariyer özeti</h2>
+        <div class="glass card-inner">
+          <p>
+            <strong>Satın alma:</strong> Endüstriyel sensör ve ölçüm ürünleri odağında tedarik, teklif karşılaştırma,
+            sipariş ve stok süreçleri ile tedarikçi koordinasyonu.
+            <strong>Yazılım:</strong> Web ve mobil istemciden API ve veritabanına kadar ürünleri uçtan uca
+            geliştirme; kurumsal ve freelance projelerde teknik teslimat ve mimari tutarlılık.
+          </p>
+          <p>
+            Hoca Ahmet Yesevi Üniversitesi Bilgisayar Programcılığı öğrenimi ile endüstriyel otomasyon,
+            sağlık teknolojileri ve dijital ürün hatlarında çok yönlü saha deneyimi.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="k-exp">
+        <h2 id="k-exp">İş deneyimi</h2>
+        <div class="glass card-inner">
+          <article class="job">
+            <h3>
+              İstanbul Sensörler — Satın almacı
+              <span class="period">Mart 2026 – Günümüz</span>
+            </h3>
+            <p>
+              Tedarik ve satın alma; teklif toplama ve değerlendirme, sipariş oluşturma ve takip, stok ile
+              tedarikçi ilişkilerinin yürütülmesi. Endüstriyel sensör ve ölçüm bileşenleri satın alma odağı.
+            </p>
+          </article>
+          <article class="job">
+            <h3>
+              Han Endüstri Otomasyon — Satış danışmanı
+              <span class="period">2024 – Mart 2026</span>
+            </h3>
+            <p>
+              Endüstriyel ürün portföyünde pazarlama ve satış; müşteri ihtiyaçlarına teknik çözüm önerileri ve
+              satış operasyonlarının yürütülmesi.
+            </p>
+          </article>
+          <article class="job">
+            <h3>
+              Hamle Mühendislik — Web, mobil ve multimedya
+              <span class="period">2019 – 2024</span>
+            </h3>
+            <ul>
+              <li>Kurumsal web (sağlık sektörü): performans, SEO, kullanılabilirlik, dijital dönüşüm.</li>
+              <li>Mobil ve web için UX/UI stratejisi ve arayüz standartları.</li>
+              <li>Sosyal medya içeriği, YouTube prodüksiyonları, görsel iletişim.</li>
+            </ul>
+          </article>
+          <article class="job">
+            <h3>
+              Hamle Mühendislik — Yazılım stajyeri
+              <span class="period">2017 – 2019</span>
+            </h3>
+            <p>
+              Endüstriyel cihaz programlama ve gömülü uygulamalar; eğitim materyali ve teknik dokümantasyon;
+              web/mobil projelerde destek.
+            </p>
+          </article>
+          <article class="job">
+            <h3>
+              Tiryaki Yazılım (freelance)
+              <span class="period">2017 – Günümüz</span>
+            </h3>
+            <p>
+              <a href="https://tiryakiyazilim.com" target="_blank" rel="noopener">tiryakiyazilim.com</a>
+              — Kurumsal web ve mobil çözümler; Ege Teknik, Kortbul ve diğer müşteri projelerinde uçtan uca
+              geliştirme.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="k-brands">
+        <h2 id="k-brands">Markalar ve ürünler</h2>
+        <div class="brand-grid">
+          <div class="brand-card glass">
+            <h3>
+              <img class="icon" src="https://www.google.com/s2/favicons?domain=tiryakiyazilim.com&sz=64" alt="" />
+              <a href="https://tiryakiyazilim.com" target="_blank" rel="noopener">Tiryaki Yazılım</a>
+            </h3>
+            <p>Web, mobil, e-ticaret ve kurumsal yazılım geliştirme.</p>
+          </div>
+          <div class="brand-card glass">
+            <h3>
+              <img class="icon" src="https://www.google.com/s2/favicons?domain=odaksoftware.com&sz=64" alt="" />
+              <a href="https://odaksoftware.com" target="_blank" rel="noopener">Odak Software</a>
+            </h3>
+            <p>Kurumsal CRM (müşteri, satış, görevler, raporlama). React, Node.js, PostgreSQL, TypeScript, AWS.</p>
+          </div>
+          <div class="brand-card glass">
+            <h3>
+              <img class="icon" src="https://www.google.com/s2/favicons?domain=kodlasa.com&sz=64" alt="" />
+              <a href="https://kodlasa.com" target="_blank" rel="noopener">Kodlasa</a>
+            </h3>
+            <p>Eğitim ve geliştirme platformu. 2024 – günümüz, kurucu / lead developer.</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="k-proj">
+        <h2 id="k-proj">Seçili yazılım projeleri</h2>
+        <div class="glass" style="overflow-x: auto">
+          <table class="projects">
+            <thead>
+              <tr>
+                <th style="width: 22%">Proje</th>
+                <th style="width: 42%">Özet</th>
+                <th style="width: 36%">Bağlantı</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span class="proj-name">
+                    <img src="https://www.google.com/s2/favicons?domain=kortbul.com.tr&sz=64" alt="" />
+                    Kortbul
+                  </span>
+                </td>
+                <td>Rezervasyon ekosistemi: kurumsal web ve Expo mobil uygulama.</td>
+                <td>
+                  <a href="https://kortbul.com.tr/" target="_blank" rel="noopener">kortbul.com.tr</a><br />
+                  <a href="https://github.com/emirirr/kortbul-mobile" target="_blank" rel="noopener">GitHub (mobil)</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="proj-name">
+                    <img src="https://www.google.com/s2/favicons?domain=egeateknik.com&sz=64" alt="" />
+                    Ege Teknik
+                  </span>
+                </td>
+                <td>Teknik servis firması kurumsal web sitesi.</td>
+                <td><a href="https://egeateknik.com" target="_blank" rel="noopener">egeateknik.com</a></td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="proj-name">
+                    <img src="https://www.google.com/s2/favicons?domain=vercel.app&sz=64" alt="" />
+                    Doctor Site
+                  </span>
+                </td>
+                <td>Sağlık kurumu vitrini: randevu ve konsültasyon akışları.</td>
+                <td>
+                  <a href="https://doctor-site-phi.vercel.app/" target="_blank" rel="noopener">Canlı demo</a>
+                  ·
+                  <a href="https://github.com/emirirr/doctor-site" target="_blank" rel="noopener">Kaynak kod</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="proj-name">
+                    <img src="https://www.google.com/s2/favicons?domain=vercel.app&sz=64" alt="" />
+                    Kuta
+                  </span>
+                </td>
+                <td>Kurye yönetimi, gerçek zamanlı takip ve rota.</td>
+                <td>
+                  <a href="https://kuta-ten.vercel.app/" target="_blank" rel="noopener">Demo</a>
+                  ·
+                  <a href="https://github.com/emirirr/Kuta" target="_blank" rel="noopener">GitHub</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="proj-name">
+                    <img src="https://www.google.com/s2/favicons?domain=odaksoftware.com&sz=64" alt="" />
+                    Odak Software
+                  </span>
+                </td>
+                <td>CRM web uygulaması.</td>
+                <td><a href="https://odaksoftware.com" target="_blank" rel="noopener">odaksoftware.com</a></td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="proj-name">
+                    <img src="https://www.google.com/s2/favicons?domain=emirtiryaki.com&sz=64" alt="" />
+                    Portföy sitesi
+                  </span>
+                </td>
+                <td>Kişisel portföy: React, TypeScript, Vite, bileşen tasarımı.</td>
+                <td>
+                  <a href="https://emirtiryaki.com" target="_blank" rel="noopener">Site</a>
+                  ·
+                  <a href="https://github.com/emirirr/emirtiryaki.com" target="_blank" rel="noopener">Repo</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="after-table">
+          Tam proje listesi:
+          <a href="https://emirtiryaki.com/projects" target="_blank" rel="noopener">emirtiryaki.com/projects</a>
+        </p>
+      </section>
+
+      <section aria-labelledby="k-edu">
+        <h2 id="k-edu">Eğitim ve sertifikalar</h2>
+        <div class="glass card-inner">
+          <p>
+            <strong>Hoca Ahmet Yesevi Üniversitesi</strong> — Bilgisayar Programcılığı (ön lisans), mezuniyet
+            2026.
+          </p>
+          <ul class="plain">
+            <li>BTK Akademi — iOS geliştirme</li>
+            <li>BTK Akademi — React ile web geliştirme</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="k-skills">
+        <h2 id="k-skills">Teknik yetkinlikler</h2>
+        <div class="glass card-inner">
+          <p class="skill-line">
+            <strong>Ön yüz:</strong> React, Vue.js, TypeScript, Next.js, Tailwind CSS, Vite
+          </p>
+          <p class="skill-line">
+            <strong>Arka uç:</strong> Node.js, Python, Express, FastAPI, GraphQL, REST
+          </p>
+          <p class="skill-line">
+            <strong>Veri:</strong> PostgreSQL, MongoDB, Redis, Prisma, Supabase
+          </p>
+          <p class="skill-line">
+            <strong>DevOps:</strong> Docker, AWS, Kubernetes, CI/CD, Terraform, Linux
+          </p>
+          <p class="skill-line">
+            <strong>Araçlar:</strong> Git, GitHub Actions, Jest, Figma, Postman
+          </p>
+          <p class="skill-line">
+            <strong>Performans:</strong> Web Vitals, önbellekleme, CDN
+          </p>
+          <div class="skills-grid">
+            <span class="badge">React</span>
+            <span class="badge">Node.js</span>
+            <span class="badge">TypeScript</span>
+            <span class="badge">Swift</span>
+            <span class="badge">PostgreSQL</span>
+            <span class="badge">Docker</span>
+            <span class="badge">AWS</span>
+            <span class="badge">Figma</span>
+          </div>
+          <p class="skill-line" style="margin-top: 0.65rem">
+            <strong>Tasarım içerik:</strong> Adobe, video kurgu, sosyal medya içerikleri (Hamle dönemi).
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      (function () {
+        var img = document.getElementById("profilePhoto");
+        var fb = document.getElementById("photoFallback");
+        img.addEventListener("error", function () {
+          img.style.display = "none";
+          fb.classList.add("show");
+        });
+      })();
+    </script>
+  </body>
+</html>
