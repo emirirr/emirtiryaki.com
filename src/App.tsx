@@ -12,6 +12,7 @@ import Index from "./pages/Index";
 
 const ProjectsPage = lazy(() => import("./pages/Projects"));
 const KortbulProjectPage = lazy(() => import("./pages/KortbulProjectPage"));
+const DacarMobileProjectPage = lazy(() => import("./pages/DacarMobileProjectPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const routeFallback = (
@@ -53,6 +54,10 @@ const App = () => (
                 <Route
                   path="/projects/kortbul/:slug"
                   element={<KortbulProjectPage />}
+                />
+                <Route
+                  path="/projects/dacar/mobile"
+                  element={<DacarMobileProjectPage />}
                 />
                 <Route path="*" element={<NotFound />} />
               </Routes>

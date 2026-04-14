@@ -1,35 +1,23 @@
 import { useMemo } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { ArrowLeft, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { projects } from "@/data/projects";
-import {
-  isKortbulSlug,
-  KORTBUL_SLUG_TO_IMAGE_KEY,
-  kortbulStoreUrl,
-} from "@/data/kortbulProjectRoutes";
 
-export default function KortbulProjectPage() {
-  const { slug } = useParams<{ slug: string }>();
+export default function DacarMobileProjectPage() {
   const navigate = useNavigate();
 
-  const project = useMemo(() => {
-    if (!slug || !isKortbulSlug(slug)) return null;
-    const key = KORTBUL_SLUG_TO_IMAGE_KEY[slug];
-    return projects.find((p) => p.imageKey === key) ?? null;
-  }, [slug]);
-
-  if (!slug || !isKortbulSlug(slug)) {
-    return <Navigate to="/projects" replace />;
-  }
+  const project = useMemo(
+    () => projects.find((p) => p.imageKey === "dacar-mobile") ?? null,
+    [],
+  );
 
   if (!project) {
     return <Navigate to="/projects" replace />;
   }
 
   const Icon = project.icon;
-  const storeUrl = kortbulStoreUrl(slug);
 
   return (
     <div className="min-h-screen bg-background font-sans antialiased">
@@ -44,7 +32,7 @@ export default function KortbulProjectPage() {
             <ArrowLeft className="h-4 w-4" />
             Projeler
           </Button>
-          <span className="text-sm font-medium text-muted-foreground">Kortbul</span>
+          <span className="text-sm font-medium text-muted-foreground">daCAR Mobile</span>
           <Button variant="ghost" size="sm" className="rounded-xl" asChild>
             <a href="/">Ana sayfa</a>
           </Button>
@@ -53,7 +41,7 @@ export default function KortbulProjectPage() {
 
       <div className="pointer-events-none fixed inset-x-0 top-0 h-[40vh] bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,hsl(var(--primary)/0.12),transparent)]" />
 
-      <main className="container relative mx-auto max-w-3xl px-4 py-12 sm:px-6">
+      <main className="container relative mx-auto max-w-4xl px-4 py-12 sm:px-6">
         <div className="mb-8 flex flex-wrap items-center gap-3">
           <Badge variant="secondary" className="rounded-lg border border-white/10">
             {project.category}
@@ -85,18 +73,56 @@ export default function KortbulProjectPage() {
           </p>
         </section>
 
+        <section className="mt-10 grid gap-6 sm:grid-cols-2">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              Mimari
+            </h2>
+            <ul className="list-inside list-disc space-y-1 text-sm text-muted-foreground">
+              <li>Expo + React Native tabanlı çok platform mimari</li>
+              <li>Supabase: Auth, Postgres, Realtime, Storage ve Edge Functions</li>
+              <li>Context katmanı: Auth, Theme ve Language yönetimi</li>
+              <li>Ekran, bileşen ve servis katmanlarının ayrık organizasyonu</li>
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              Ana akışlar
+            </h2>
+            <ul className="list-inside list-disc space-y-1 text-sm text-muted-foreground">
+              <li>İlan keşfi, filtreleme, karşılaştırma ve favoriler</li>
+              <li>Detay sayfası, satıcı profili ve raporlama</li>
+              <li>Gerçek zamanlı chat, soru-cevap ve bildirim merkezi</li>
+              <li>Uzman listeleme, rezervasyon ve rapor görüntüleme</li>
+            </ul>
+          </div>
+        </section>
+
         <section className="mt-10">
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-            Öne çıkanlar
+            Servis katmanı
+          </h2>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            Uygulama servisleri Supabase etrafında kurgulandı: ilan yönetimi, sohbet, bildirim,
+            soru-cevap, profil, storage ve uzman rezervasyon süreçleri modüler servis dosyalarıyla
+            ayrıştırıldı. Realtime odaklı kullanım sayesinde mesajlaşma ve bildirim akışlarında düşük
+            gecikmeli deneyim hedeflendi.
+          </p>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            Release notları
           </h2>
           <ul className="list-inside list-disc space-y-1 text-sm text-muted-foreground">
-            {project.features.map((f) => (
-              <li key={f}>{f}</li>
-            ))}
+            <li>Yerel APK/AAB build akışları ve EAS preview/production profilleri hazır</li>
+            <li>Release öncesi ortam doğrulaması için `checkReleaseEnv` scripti kullanılıyor</li>
+            <li>Production için gerçek Android keystore ve imzalama zorunlu</li>
+            <li>RLS migration sırası ve native build stabilitesi düzenli takip ediliyor</li>
           </ul>
         </section>
 
-        <section className="mt-8 grid gap-6 sm:grid-cols-2">
+        <section className="mt-10 grid gap-6 sm:grid-cols-2">
           <div>
             <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
               Zorluklar
@@ -125,19 +151,8 @@ export default function KortbulProjectPage() {
           <span>Ekip: {project.teamSize}</span>
         </div>
 
-        {(project.github || storeUrl) && (
-          <div className="mt-10 flex flex-wrap gap-3">
-            {storeUrl && (
-              <Button
-                className="rounded-xl hero-gradient"
-                data-cursor="pointer"
-                onClick={() => window.open(storeUrl, "_blank", "noopener,noreferrer")}
-              >
-                <ExternalLink className="mr-2 h-4 w-4" />
-                Google Play
-              </Button>
-            )}
-            {project.github && (
+        {project.github && (
+          <div className="mt-10">
             <Button
               variant="outline"
               className="rounded-xl border-white/15 bg-white/[0.03] hover:bg-white/[0.08]"
@@ -149,7 +164,6 @@ export default function KortbulProjectPage() {
               <Github className="mr-2 h-4 w-4" />
               GitHub deposu
             </Button>
-            )}
           </div>
         )}
       </main>

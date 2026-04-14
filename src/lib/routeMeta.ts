@@ -30,6 +30,15 @@ const NOT_FOUND = {
   ogDescription: "Sayfa bulunamadı.",
 };
 
+const DACAR_MOBILE = {
+  title: "daCAR Mobile | Emir Tiryaki",
+  description:
+    "daCAR Mobile: Expo + React Native ve Supabase tabanlı araç pazar yeri uygulaması. İlan, chat, rezervasyon ve release süreci detayları.",
+  ogTitle: "daCAR Mobile | Emir Tiryaki",
+  ogDescription:
+    "Araç pazar yeri mobil uygulaması: ilan, mesajlaşma, bildirim ve uzman rezervasyonu akışları.",
+};
+
 function kortbulMeta(pathname: string) {
   const m = pathname.match(/^\/projects\/kortbul\/([^/]+)\/?$/);
   const slug = m?.[1];
@@ -57,11 +66,17 @@ function canonicalHref(pathname: string): string {
 export function syncRouteDocumentHead(pathname: string) {
   const normalized = pathname.replace(/\/$/, "") || "/";
   const kortbul = kortbulMeta(normalized);
+  const dacarMobile = normalized === "/projects/dacar/mobile";
   const isIndexedRoute =
-    normalized === "/" || normalized === "/projects" || kortbul !== null;
+    normalized === "/" ||
+    normalized === "/projects" ||
+    kortbul !== null ||
+    dacarMobile;
   const pack =
     kortbul !== null
       ? kortbul
+      : dacarMobile
+        ? DACAR_MOBILE
       : normalized === "/projects"
         ? PROJECTS
         : normalized === "/"
