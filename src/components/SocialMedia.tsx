@@ -1,15 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { Globe, Mail, ArrowUpRight } from "lucide-react";
 import {
-  Github,
-  Linkedin,
-  Instagram,
-  Youtube,
-  Globe,
-  Mail,
-  MessageCircle,
-} from "lucide-react";
+  GithubIcon,
+  LinkedinIcon,
+  InstagramIcon,
+  YoutubeIcon,
+  WhatsappIcon,
+  TelegramIcon,
+} from "@/components/BrandIcons";
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -23,36 +23,36 @@ const SocialMedia = () => {
       name: "GitHub",
       username: "@emirirr",
       url: "https://github.com/emirirr",
-      icon: Github,
+      icon: GithubIcon,
       accent: "from-zinc-500/20 to-zinc-400/5",
-      iconClass: "text-zinc-200",
+      iconClass: "text-zinc-100",
     },
     {
       id: 2,
       name: "LinkedIn",
       username: "@emir-tiryaki",
       url: "https://www.linkedin.com/in/emir-tiryaki/",
-      icon: Linkedin,
+      icon: LinkedinIcon,
       accent: "from-sky-500/25 to-sky-600/5",
-      iconClass: "text-sky-400",
+      iconClass: "text-[#0A66C2]",
     },
     {
       id: 3,
       name: "Instagram",
       username: "@emirscode",
       url: "https://instagram.com/emirscode",
-      icon: Instagram,
-      accent: "from-orange-500/25 to-amber-500/10",
-      iconClass: "text-orange-400",
+      icon: InstagramIcon,
+      accent: "from-fuchsia-500/25 to-orange-500/10",
+      iconClass: "text-[#E1306C]",
     },
     {
       id: 4,
       name: "YouTube",
       username: "@emirtiryaki",
       url: "https://youtube.com/@emirtiryaki",
-      icon: Youtube,
+      icon: YoutubeIcon,
       accent: "from-red-500/25 to-red-600/5",
-      iconClass: "text-red-400",
+      iconClass: "text-[#FF0000]",
     },
     {
       id: 5,
@@ -99,10 +99,10 @@ const SocialMedia = () => {
         viewport={{ once: true, margin: "-80px" }}
       >
         <motion.div variants={fadeUp} className="mb-14 text-center">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-            Bağlantılar
+          <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
+            // bağlantılar
           </p>
-          <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
+          <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
             <span className="text-gradient">Sosyal </span>
             <span className="text-foreground">ağlar</span>
           </h2>
@@ -168,7 +168,7 @@ const SocialMedia = () => {
                         openLink(social.url, "internal" in social && social.internal);
                       }}
                     >
-                      <MessageCircle className="mr-2 h-4 w-4" />
+                      <ArrowUpRight className="mr-2 h-4 w-4" />
                       Aç
                     </Button>
                   </CardContent>
@@ -207,7 +207,7 @@ const SocialMedia = () => {
                     window.open("https://wa.me/905434476245", "_blank", "noopener,noreferrer")
                   }
                 >
-                  <MessageCircle className="mr-2 h-4 w-4" />
+                  <WhatsappIcon className="mr-2 h-4 w-4 text-[#25D366]" />
                   WhatsApp
                 </Button>
                 <Button
@@ -218,7 +218,7 @@ const SocialMedia = () => {
                     window.open("https://t.me/emirirr", "_blank", "noopener,noreferrer")
                   }
                 >
-                  <MessageCircle className="mr-2 h-4 w-4" />
+                  <TelegramIcon className="mr-2 h-4 w-4 text-[#26A5E4]" />
                   Telegram
                 </Button>
               </div>

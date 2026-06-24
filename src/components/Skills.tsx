@@ -76,15 +76,16 @@ const Skills = () => {
         viewport={{ once: true, margin: "-80px" }}
       >
         <motion.div variants={fadeUp} className="mb-12 text-center">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-            Yetkinlikler
+          <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
+            // yetkinlikler
           </p>
-          <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
-            <span className="text-gradient">Bento </span>
-            <span className="text-foreground">grid</span>
+          <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
+            <span className="text-gradient">Teknik </span>
+            <span className="text-foreground">yetkinlikler</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Arayüzden veri katmanına kadar uçtan uca düşünür; her kutucuk bir ürün kararının özeti.
+            Arayüzden veri katmanına kadar uçtan uca çalışırım; her kart günlük olarak kullandığım
+            araçların özeti.
           </p>
         </motion.div>
 
@@ -124,7 +125,7 @@ const Skills = () => {
                     <Badge
                       key={skill}
                       variant="secondary"
-                      className="rounded-lg border border-white/5 bg-white/[0.05] px-2.5 py-1 text-[11px] font-medium"
+                      className="rounded-lg border border-white/5 bg-white/[0.05] px-2.5 py-1 font-mono text-[11px] font-medium"
                     >
                       {skill}
                     </Badge>
@@ -141,10 +142,10 @@ const Skills = () => {
         >
           {stats.map((s) => (
             <div key={s.label} className="text-center">
-              <div className="text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
+              <div className="font-display text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
                 {s.value}
               </div>
-              <div className="mt-1 text-xs text-muted-foreground">{s.label}</div>
+              <div className="mt-1 font-mono text-xs text-muted-foreground">{s.label}</div>
             </div>
           ))}
         </motion.div>

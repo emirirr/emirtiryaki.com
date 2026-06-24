@@ -114,10 +114,10 @@ const Contact = () => {
         viewport={{ once: true, margin: "-80px" }}
       >
         <motion.div variants={fadeUp} className="mb-14 text-center">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-            İletişim
+          <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
+            // iletişim
           </p>
-          <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
+          <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
             <span className="text-gradient">Birlikte </span>
             <span className="text-foreground">üretelim</span>
           </h2>

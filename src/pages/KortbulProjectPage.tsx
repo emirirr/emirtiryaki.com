@@ -61,7 +61,7 @@ export default function KortbulProjectPage() {
           <Icon className="h-8 w-8 text-primary/90" strokeWidth={1.25} aria-hidden />
         </div>
 
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{project.title}</h1>
+        <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">{project.title}</h1>
         <p className="mt-3 text-lg text-muted-foreground">{project.description}</p>
 
         <div className="mt-6 flex flex-wrap gap-2">

@@ -27,6 +27,22 @@ export default {
 					"system-ui",
 					"sans-serif",
 				],
+				display: [
+					"Space Grotesk Variable",
+					"Space Grotesk",
+					"Inter Variable",
+					"ui-sans-serif",
+					"system-ui",
+					"sans-serif",
+				],
+				mono: [
+					"JetBrains Mono Variable",
+					"JetBrains Mono",
+					"ui-monospace",
+					"SFMono-Regular",
+					"Menlo",
+					"monospace",
+				],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

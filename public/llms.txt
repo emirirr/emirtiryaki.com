@@ -1,0 +1,43 @@
+# Emir Tiryaki — Full Stack Developer
+
+> İstanbul merkezli Full Stack Developer. React, React Native, Node.js ve bulut teknolojileriyle ölçeklenebilir web ve mobil ürünler geliştiriyorum. Ürün odaklı arayüzler, net API sözleşmeleri ve sürdürülebilir backend mimarisi üzerine çalışıyorum. Freelance proje ve uzun vadeli iş birlikleri için uygunum.
+
+## Hakkında
+
+- **İsim:** Emir Tiryaki
+- **Rol:** Full Stack Developer (web ve mobil)
+- **Konum:** İstanbul, Türkiye — uzaktan ve hibrit iş birlikleri
+- **Diller:** Türkçe, İngilizce
+- **İletişim:** info@emirtiryaki.com
+- **Çalışma biçimi:** Freelance projeler, ekip iş birlikleri, danışmanlık
+
+## Uzmanlık Alanları
+
+- Frontend: React, React Native, TypeScript, Tailwind CSS
+- Backend: Node.js, PostgreSQL, MongoDB, REST API tasarımı
+- Mobil: React Native, Swift (iOS)
+- Altyapı: Docker, AWS, CI/CD, gözlemlenebilirlik
+- Sistem tasarımı: şema tasarımı, ölçeklenebilir mimari, güvenli dağıtım
+
+## Kurduğu / Büyüttüğü Markalar
+
+- [Tiryaki Yazılım](https://tiryakiyazilim.com): Yazılım geliştirme ve dijital çözümler şirketi (web, mobil, e-ticaret, kurumsal çözümler).
+- [Odak Software](https://odaksoftware.com): İşletmeler için müşteri ve süreç yönetimi sunan CRM sistemi.
+- [Kodlasa](https://kodlasa.com): Eğitim ve geliştirme platformu (kodlama dersleri, mentorluk).
+
+## Önemli Sayfalar
+
+- [Ana sayfa](https://emirtiryaki.com/): Tanıtım, yetkinlikler, sistem mimarisi ve öne çıkan işler.
+- [Projeler](https://emirtiryaki.com/projects): Tüm web ve mobil projelerin listesi, teknoloji filtreleriyle.
+- [Özgeçmiş (CV)](https://emirtiryaki.com/cv.html): Güncel deneyim ve yetkinlik özeti.
+
+## Bağlantılar
+
+- GitHub: https://github.com/emirirr
+- LinkedIn: https://www.linkedin.com/in/emir-tiryaki/
+- Instagram: https://instagram.com/emirscode
+- YouTube: https://youtube.com/@emirtiryaki
+
+## İş Birliği
+
+Emir Tiryaki; React/React Native ile arayüz geliştirme, Node.js ile backend ve API geliştirme, mobil uygulama geliştirme ve uçtan uca ürün tasarımı konularında proje almaktadır. İletişim için: info@emirtiryaki.com

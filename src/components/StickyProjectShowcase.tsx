@@ -198,16 +198,16 @@ export function StickyProjectShowcase() {
         viewport={{ once: true, margin: "-60px" }}
       >
         <motion.div variants={fadeUp} className="mb-4 text-center">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-            Seçilmiş işler
+          <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
+            // seçilmiş işler
           </p>
-          <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
-            <span className="text-gradient">Sticky scroll</span>
-            <span className="text-foreground"> deneyimi</span>
+          <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
+            <span className="text-gradient">Öne çıkan</span>
+            <span className="text-foreground"> projeler</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Öne çıkan projeler (featured). Kaydırdıkça kartlar üst üste biniyor; tam liste için
-            Projeler sayfasına geçin.
+            Seçtiğim işler; her biri farklı bir problemi ve çözümünü anlatıyor. Tüm portföy için
+            Projeler sayfasına geçebilirsiniz.
           </p>
         </motion.div>
       </motion.div>

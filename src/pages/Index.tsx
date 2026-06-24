@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
 import { SystemArchitecture } from "@/components/SystemArchitecture";
@@ -24,6 +25,7 @@ const belowFoldFallback = (
 const Index = () => {
   return (
     <div className="min-h-screen font-sans antialiased">
+      <Navbar />
       <Hero />
       <Skills />
       <SystemArchitecture />

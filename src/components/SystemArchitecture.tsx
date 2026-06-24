@@ -46,12 +46,12 @@ export function SystemArchitecture() {
         viewport={{ once: true, margin: "-80px" }}
       >
         <motion.div variants={fadeUp} className="mb-12 max-w-3xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-            Full stack
+          <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
+            // full stack
           </p>
           <h2
             id="architecture-heading"
-            className="text-4xl font-semibold tracking-tight md:text-5xl"
+            className="font-display text-4xl font-semibold tracking-tight md:text-5xl"
           >
             <span className="text-foreground">Sistem </span>
             <span className="text-gradient">mimarisi</span>

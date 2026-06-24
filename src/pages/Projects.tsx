@@ -114,13 +114,13 @@ const ProjectsPage = () => {
         >
           <motion.p
             variants={fadeUp}
-            className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground"
+            className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80"
           >
-            Portföy
+            // portföy
           </motion.p>
           <motion.h2
             variants={fadeUp}
-            className="text-4xl font-semibold tracking-tight md:text-5xl"
+            className="font-display text-4xl font-semibold tracking-tight md:text-5xl"
           >
             <span className="text-gradient">Tüm </span>
             <span className="text-foreground">projeler</span>
@@ -423,25 +423,25 @@ const ProjectsPage = () => {
           <div className="glass-strong rounded-3xl border border-white/10 p-8 md:p-10">
             <div className="grid gap-8 text-center md:grid-cols-4">
               <div>
-                <div className="text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
+                <div className="font-display text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
                   {allProjects.length}
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground">Toplam proje</div>
               </div>
               <div>
-                <div className="text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
+                <div className="font-display text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
                   {allProjects.filter((p) => p.category === "Web Uygulaması").length}
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground">Web</div>
               </div>
               <div>
-                <div className="text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
+                <div className="font-display text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
                   {allProjects.filter((p) => p.category === "Mobil Uygulama").length}
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground">Mobil</div>
               </div>
               <div>
-                <div className="text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
+                <div className="font-display text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
                   {allProjects.filter((p) => p.category === "E-ticaret").length}
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground">E-ticaret</div>

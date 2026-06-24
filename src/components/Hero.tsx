@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FileText, Github, Linkedin, Mail } from "lucide-react";
 import profileImage from "@/assets/emir-profile.jpg";
-import heroBg from "@/assets/tech-hero-bg.jpg";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { cn, scrollToSection } from "@/lib/utils";
 
@@ -23,12 +22,16 @@ const Hero = () => {
       id="hero"
       className="relative min-h-screen overflow-hidden px-4 pb-24 pt-28 sm:px-6 sm:pt-32"
     >
+      <div className="aurora" aria-hidden>
+        <div className="aurora-blob aurora-blob--1" />
+        <div className="aurora-blob aurora-blob--2" />
+        <div className="aurora-blob aurora-blob--3" />
+      </div>
       <div
-        className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-40"
-        style={{ backgroundImage: `url(${heroBg})` }}
+        className="pointer-events-none absolute inset-0 opacity-[0.05] [background-image:linear-gradient(hsl(var(--foreground))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--foreground))_1px,transparent_1px)] [background-size:46px_46px] [mask-image:radial-gradient(ellipse_75%_60%_at_50%_30%,black,transparent)]"
+        aria-hidden
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-background/92 to-background" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,hsl(var(--primary)/0.22),transparent)]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-background" />
 
       <motion.div
         className="container relative z-10 mx-auto max-w-6xl"
@@ -44,12 +47,21 @@ const Hero = () => {
               "border border-white/10 shadow-[0_1px_0_rgba(255,255,255,0.06)_inset]",
             )}
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-              Full Stack Developer
-            </p>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl md:leading-[1.05]">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 motion-safe:animate-ping" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                Yeni projelere açık
+              </span>
+              <p className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
+                Full Stack Developer
+              </p>
+            </div>
+            <h1 className="mt-4 font-display text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl md:leading-[1.02]">
               <span className="text-foreground">Emir </span>
-              <span className="text-gradient">Tiryaki</span>
+              <span className="text-gradient-animated">Tiryaki</span>
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
               Ürün odaklı arayüzler, net API sözleşmeleri ve ölçeklenebilir backend. Her piksel ve
@@ -144,8 +156,8 @@ const Hero = () => {
             variants={fadeUp}
             className="glass col-span-12 rounded-3xl border border-white/10 p-6 md:col-span-4"
           >
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              Odak
+            <p className="font-mono text-xs font-medium uppercase tracking-widest text-primary/80">
+              // odak
             </p>
             <p className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
               Sistem tasarımı
@@ -159,15 +171,15 @@ const Hero = () => {
             variants={fadeUp}
             className="glass col-span-12 rounded-3xl border border-white/10 p-6 md:col-span-8"
           >
-            <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              Yığın
+            <p className="mb-4 font-mono text-xs font-medium uppercase tracking-widest text-primary/80">
+              // yığın
             </p>
             <div className="flex flex-wrap gap-2">
               {tech.map((t) => (
                 <Badge
                   key={t}
                   variant="secondary"
-                  className="rounded-xl border border-white/5 bg-white/[0.06] px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition-colors hover:border-primary/25 hover:bg-white/[0.1]"
+                  className="rounded-xl border border-white/5 bg-white/[0.06] px-3 py-1.5 font-mono text-xs font-medium backdrop-blur-sm transition-colors hover:border-primary/25 hover:bg-white/[0.1]"
                 >
                   {t}
                 </Badge>
