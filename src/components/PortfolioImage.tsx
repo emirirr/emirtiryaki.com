@@ -48,7 +48,7 @@ export function PortfolioImage({
       className={cn(className)}
       loading="lazy"
       decoding="async"
-      fetchPriority={fetchPriority}
+      {...{ fetchpriority: fetchPriority }}
     />
   )
 }

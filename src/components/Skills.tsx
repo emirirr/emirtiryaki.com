@@ -59,9 +59,9 @@ const skillCategories = [
 
 const stats = [
   { label: "Yıl deneyim", value: "5+" },
-  { label: "Tamamlanan proje", value: "50+" },
+  { label: "Tamamlanan proje", value: "40+" },
+  { label: "Sektör", value: "6+" },
   { label: "Teknoloji", value: "25+" },
-  { label: "Memnuniyet", value: "100%" },
 ];
 
 const Skills = () => {

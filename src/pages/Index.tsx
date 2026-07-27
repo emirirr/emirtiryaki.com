@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
+import Experience from "@/components/Experience";
 import { SystemArchitecture } from "@/components/SystemArchitecture";
 import Projects from "@/components/Projects";
 import Brands from "@/components/Brands";
@@ -28,6 +29,7 @@ const Index = () => {
       <Navbar />
       <Hero />
       <Skills />
+      <Experience />
       <SystemArchitecture />
       <Suspense fallback={belowFoldFallback}>
         <StickyProjectShowcase />

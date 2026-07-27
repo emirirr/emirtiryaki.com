@@ -67,6 +67,11 @@ const Footer = () => {
                   Özgeçmiş (CV)
                 </a>
               </li>
+              <li>
+                <a href="/cv-en.html" className={linkClass}>
+                  Resume (English)
+                </a>
+              </li>
             </ul>
           </div>
 

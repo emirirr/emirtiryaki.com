@@ -19,6 +19,21 @@
 - Altyapı: Docker, AWS, CI/CD, gözlemlenebilirlik
 - Sistem tasarımı: şema tasarımı, ölçeklenebilir mimari, güvenli dağıtım
 
+## İş Deneyimi
+
+- **İstanbul Sensörler** — Mobil Geliştirme & Satın Alma (2026 — günümüz): Şirket içi dashboard için mobil uygulama; endüstriyel sensör tedarik ve satın alma süreçleri.
+- **Han Endüstri Otomasyon** — Satış Danışmanı (2024 — Mart 2026): Endüstriyel ürün portföyünde B2B satış ve teknik çözüm danışmanlığı.
+- **Hamle Mühendislik** — Web, Mobil ve Multimedya (2019 — 2024): Sağlık sektörü kurumsal web, SEO, UX/UI ve multimedya prodüksiyon.
+- **Hamle Mühendislik** — Yazılım Stajyeri (2017 — 2019): Endüstriyel cihaz programlama, gömülü uygulamalar, teknik dokümantasyon.
+- **Tiryaki Yazılım (Freelance)** — Kurucu / Full Stack Developer (2017 — günümüz): Ege Teknik, Kortbul ve diğer müşteri projelerinde uçtan uca web ve mobil geliştirme.
+
+Toplam 5+ yıl profesyonel deneyim (2017'den beri).
+
+## Eğitim
+
+- Hoca Ahmet Yesevi Üniversitesi — Bilgisayar Programcılığı (ön lisans), mezuniyet 2026.
+- BTK Akademi — iOS geliştirme ve React ile web geliştirme sertifikaları.
+
 ## Kurduğu / Büyüttüğü Markalar
 
 - [Tiryaki Yazılım](https://tiryakiyazilim.com): Yazılım geliştirme ve dijital çözümler şirketi (web, mobil, e-ticaret, kurumsal çözümler).
@@ -29,7 +44,8 @@
 
 - [Ana sayfa](https://emirtiryaki.com/): Tanıtım, yetkinlikler, sistem mimarisi ve öne çıkan işler.
 - [Projeler](https://emirtiryaki.com/projects): Tüm web ve mobil projelerin listesi, teknoloji filtreleriyle.
-- [Özgeçmiş (CV)](https://emirtiryaki.com/cv.html): Güncel deneyim ve yetkinlik özeti.
+- [Özgeçmiş (CV) — Türkçe](https://emirtiryaki.com/cv.html): Güncel deneyim ve yetkinlik özeti.
+- [Resume (CV) — English](https://emirtiryaki.com/cv-en.html): Full résumé in English.
 
 ## Bağlantılar
 

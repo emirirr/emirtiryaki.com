@@ -151,7 +151,6 @@ export function githubRepoToPortfolioProject(repo: GitHubRepo): PortfolioProject
     duration: "GitHub",
     teamSize: "—",
     logo: null,
-    featured: false,
   };
 }
 

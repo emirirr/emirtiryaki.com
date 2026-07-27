@@ -24,6 +24,7 @@
     <meta property="og:description" content="Web ve mobil geliştirme, portföy ve iletişim. Türkiye." />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="tr_TR" />
+    <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:url" content="https://emirtiryaki.com/" />
     <meta property="og:image" content="https://emirtiryaki.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -106,7 +107,68 @@
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- SEO/GEO fallback: JS kapalı botlar (sosyal scraper, bazı AI crawler) için statik içerik.
+           JS yüklendiğinde React #root'u değiştirir; kullanıcılar bu bloğu görmez. -->
+      <noscript>
+        <main style="max-width:720px;margin:40px auto;padding:0 20px;font-family:system-ui,sans-serif;line-height:1.6;">
+          <h1>Emir Tiryaki — Full Stack Developer</h1>
+          <p>
+            İstanbul merkezli Full Stack Developer. React, React Native, Node.js ve bulut
+            teknolojileriyle web ve mobil ürünler geliştiriyorum. 2017'den bu yana yazılım ve
+            endüstri tarafında; staj, kurumsal roller ve freelance teslimatlarla uçtan uca deneyim.
+          </p>
+
+          <h2>İletişim</h2>
+          <ul>
+            <li>E-posta: <a href="mailto:info@emirtiryaki.com">info@emirtiryaki.com</a></li>
+            <li>Konum: İstanbul, Türkiye — uzaktan &amp; hibrit iş birlikleri</li>
+            <li><a href="https://github.com/emirirr">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/emir-tiryaki/">LinkedIn</a></li>
+            <li><a href="/cv.html">Özgeçmiş (Türkçe)</a> · <a href="/cv-en.html">CV (English)</a></li>
+          </ul>
+
+          <h2>Deneyim</h2>
+          <ul>
+            <li><strong>İstanbul Sensörler</strong> — Mobil Geliştirme &amp; Satın Alma (2026 — günümüz)</li>
+            <li><strong>Han Endüstri Otomasyon</strong> — Satış Danışmanı (2024 — Mart 2026)</li>
+            <li><strong>Hamle Mühendislik</strong> — Web, Mobil ve Multimedya (2019 — 2024)</li>
+            <li><strong>Hamle Mühendislik</strong> — Yazılım Stajyeri (2017 — 2019)</li>
+            <li><strong>Tiryaki Yazılım (Freelance)</strong> — Kurucu / Full Stack Developer (2017 — günümüz)</li>
+          </ul>
+
+          <h2>Teknik Yetkinlikler</h2>
+          <p>
+            React, React Native, TypeScript, Next.js, Vue.js, Node.js, Express, Python,
+            PostgreSQL, MongoDB, Prisma, Swift, Docker, AWS, CI/CD, REST/GraphQL API tasarımı.
+          </p>
+
+          <h2>Eğitim</h2>
+          <p>
+            Hoca Ahmet Yesevi Üniversitesi — Bilgisayar Programcılığı (ön lisans), mezuniyet 2026.
+            BTK Akademi — iOS ve React ile web geliştirme sertifikaları.
+          </p>
+
+          <h2>Öne Çıkan Projeler</h2>
+          <ul>
+            <li><a href="https://kortbul.com.tr/">Kortbul</a> — Rezervasyon ekosistemi: kurumsal web + Expo mobil uygulama.</li>
+            <li><a href="https://odaksoftware.com">Odak Software</a> — Kurumsal CRM (müşteri, satış, raporlama); React, Node.js, PostgreSQL, AWS.</li>
+            <li><a href="https://kodlasa.com">Kodlasa</a> — Eğitim ve geliştirme platformu; kurucu / lead developer.</li>
+            <li><a href="https://egeateknik.com">Ege Teknik</a> — Kurumsal teknik servis web sitesi.</li>
+            <li><a href="https://inomasyon.com">İnomasyon</a> — Endüstriyel otomasyon firması kurumsal sitesi.</li>
+          </ul>
+
+          <h2>Markalar</h2>
+          <p>
+            <a href="https://tiryakiyazilim.com">Tiryaki Yazılım</a> (web, mobil, e-ticaret, kurumsal),
+            <a href="https://odaksoftware.com">Odak Software</a> (CRM),
+            <a href="https://kodlasa.com">Kodlasa</a> (eğitim platformu).
+          </p>
+
+          <p><a href="/projects">Tüm projeleri gör →</a> · <a href="/cv-en.html">Resume in English →</a></p>
+        </main>
+      </noscript>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

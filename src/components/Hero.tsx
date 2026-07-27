@@ -99,6 +99,28 @@ const Hero = () => {
                 </a>
               </Button>
             </div>
+            <p className="mt-4 text-xs text-muted-foreground">
+              CV:{" "}
+              <a
+                href="/cv.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-white/20 underline-offset-4 transition-colors hover:text-foreground"
+                data-cursor="pointer"
+              >
+                Türkçe
+              </a>{" "}
+              ·{" "}
+              <a
+                href="/cv-en.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-white/20 underline-offset-4 transition-colors hover:text-foreground"
+                data-cursor="pointer"
+              >
+                English
+              </a>
+            </p>
           </motion.div>
 
           <motion.div
