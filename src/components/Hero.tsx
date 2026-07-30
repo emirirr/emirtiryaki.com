@@ -56,7 +56,7 @@ const Hero = () => {
                 Yeni projelere açık
               </span>
               <p className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
-                Full Stack Developer
+                Full-Stack &amp; iOS Developer
               </p>
             </div>
             <h1 className="mt-4 font-display text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl md:leading-[1.02]">
@@ -64,8 +64,8 @@ const Hero = () => {
               <span className="text-gradient-animated">Tiryaki</span>
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Ürün odaklı arayüzler, net API sözleşmeleri ve ölçeklenebilir backend. Her piksel ve
-              her endpoint birbirini tamamlasın diye tasarlarım.
+              Web ve mobilde uçtan uca ürün geliştiriyorum: piksel-hassas arayüzler, net API
+              sözleşmeleri ve ölçeklenebilir backend. Fikirden App Store yayınına kadar tek elden.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button
@@ -179,14 +179,24 @@ const Hero = () => {
             className="glass col-span-12 rounded-3xl border border-white/10 p-6 md:col-span-4"
           >
             <p className="font-mono text-xs font-medium uppercase tracking-widest text-primary/80">
-              // odak
+              // kanıt
             </p>
-            <p className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
-              Sistem tasarımı
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Şema, gözlemlenebilirlik ve güvenli dağıtım — tek parça değil, sürdürülebilir ürün.
-            </p>
+            <div className="mt-4 grid grid-cols-3 gap-2">
+              {[
+                { value: "5+", label: "yıl" },
+                { value: "40+", label: "proje" },
+                { value: "3", label: "app store" },
+              ].map((s) => (
+                <div key={s.label}>
+                  <div className="font-display text-2xl font-semibold tabular-nums text-gradient">
+                    {s.value}
+                  </div>
+                  <div className="mt-0.5 font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
+                    {s.label}
+                  </div>
+                </div>
+              ))}
+            </div>
           </motion.div>
 
           <motion.div

@@ -6,9 +6,9 @@ import { cn, scrollToSection } from "@/lib/utils";
 const links = [
   { id: "skills", label: "Yetenekler" },
   { id: "experience", label: "Deneyim" },
-  { id: "architecture", label: "Mimari" },
   { id: "projects", label: "Projeler" },
-  { id: "brands", label: "Markalar" },
+  { id: "apps", label: "Uygulamalar" },
+  { id: "services", label: "Hizmetler" },
   { id: "contact", label: "İletişim" },
 ];
 
