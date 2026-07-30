@@ -122,7 +122,8 @@ const Contact = () => {
             <span className="text-foreground">üretelim</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Proje fikrinizi veya ekip ihtiyacınızı yazın; mümkün olan en kısa sürede dönüş yaparım.
+            Proje fikrinizi veya ekip ihtiyacınızı yazın; genellikle 24 saat içinde net bir yol
+            haritası ve teklifle dönerim.
           </p>
         </motion.div>
 

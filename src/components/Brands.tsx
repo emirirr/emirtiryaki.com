@@ -12,7 +12,7 @@ const Brands = () => {
       id: 1,
       name: "Tiryaki Yazılım",
       description: "Yazılım geliştirme ve dijital çözümler şirketi",
-      screenshot: "/brands/tiryakiyazilim.webp",
+      logo: "/brands/logos/tiryakiyazilim.jpg",
       website: "https://tiryakiyazilim.com",
       category: "Teknoloji",
       year: "2024",
@@ -23,7 +23,7 @@ const Brands = () => {
       id: 2,
       name: "Odak Software",
       description: "İşletmeler için müşteri ve süreç yönetimi sunan CRM sistemi (odaksoftware.com)",
-      screenshot: "/brands/odaksoftware.webp",
+      logo: "/brands/logos/odaksoftware.svg",
       website: "https://odaksoftware.com",
       category: "Kurumsal",
       year: "2024",
@@ -34,7 +34,7 @@ const Brands = () => {
       id: 3,
       name: "Kodlasa",
       description: "Eğitim ve geliştirme platformu",
-      screenshot: "/brands/kodlasa.webp",
+      logo: "/brands/logos/kodlasa.png",
       website: "https://kodlasa.com",
       category: "Eğitim",
       year: "2024",
@@ -85,15 +85,16 @@ const Brands = () => {
                   "transition-shadow duration-300 hover:border-primary/25 hover:shadow-[0_20px_50px_-20px_hsl(var(--primary)/0.3)]",
                 )}
               >
-                <div className="relative h-44 overflow-hidden bg-muted/30">
-                  <img
-                    src={brand.screenshot}
-                    alt={`${brand.name} sitesi ekran görüntüsü`}
-                    className="h-full w-full object-cover object-top"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                <div className="relative flex h-44 items-center justify-center overflow-hidden border-b border-white/10 bg-[radial-gradient(circle_at_50%_40%,hsl(var(--primary)/0.10),transparent_70%)] p-6">
+                  <div className="flex h-24 w-24 items-center justify-center rounded-2xl border border-white/10 bg-white p-3 shadow-lg shadow-black/30">
+                    <img
+                      src={brand.logo}
+                      alt={`${brand.name} logosu`}
+                      className="h-full w-full object-contain"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
                   <Badge
                     variant="secondary"
                     className="absolute right-4 top-4 rounded-lg border border-white/10 bg-black/35 text-[10px] font-medium backdrop-blur-md"
