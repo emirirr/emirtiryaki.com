@@ -15,7 +15,7 @@ const Footer = () => {
         <div className="mb-10 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <h3 className="text-xl font-semibold tracking-tight">
-              <span className="text-gradient">Emir Tiryaki</span>
+              <span className="text-gradient">İsmail Emir Tiryaki</span>
             </h3>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               Ürün odaklı arayüz ve güvenilir backend ile uçtan uca dijital deneyimler inşa ediyorum.
@@ -115,7 +115,7 @@ const Footer = () => {
         <div className="flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 md:flex-row">
           <div className="flex flex-col items-center gap-1 text-center text-muted-foreground md:items-start md:text-left">
             <div className="flex items-center gap-2 text-sm">
-              <span>© {currentYear} Emir Tiryaki</span>
+              <span>© {currentYear} İsmail Emir Tiryaki</span>
               <Heart className="h-4 w-4 text-red-500/90" aria-hidden />
             </div>
             <p className="max-w-md text-[11px] leading-relaxed text-muted-foreground/70">

@@ -60,7 +60,7 @@ const Hero = () => {
               </p>
             </div>
             <h1 className="mt-4 font-display text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl md:leading-[1.02]">
-              <span className="text-foreground">Emir </span>
+              <span className="text-foreground">İsmail Emir </span>
               <span className="text-gradient-animated">Tiryaki</span>
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
@@ -131,7 +131,7 @@ const Hero = () => {
               <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-primary/30 to-accent/25 blur-2xl" />
               <img
                 src={profileImage}
-                alt="Emir Tiryaki"
+                alt="İsmail Emir Tiryaki"
                 width={160}
                 height={160}
                 className="relative h-36 w-36 rounded-[2rem] border border-white/15 object-cover shadow-2xl md:h-40 md:w-40"

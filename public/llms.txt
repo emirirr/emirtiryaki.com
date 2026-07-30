@@ -1,10 +1,10 @@
-# Emir Tiryaki — Full Stack Developer
+# İsmail Emir Tiryaki — Full Stack Developer
 
 > İstanbul merkezli Full Stack Developer. React, React Native, Node.js ve bulut teknolojileriyle ölçeklenebilir web ve mobil ürünler geliştiriyorum. Ürün odaklı arayüzler, net API sözleşmeleri ve sürdürülebilir backend mimarisi üzerine çalışıyorum. Freelance proje ve uzun vadeli iş birlikleri için uygunum.
 
 ## Hakkında
 
-- **İsim:** Emir Tiryaki
+- **İsim:** İsmail Emir Tiryaki (kısaca Emir Tiryaki)
 - **Rol:** Full Stack Developer (web ve mobil)
 - **Konum:** İstanbul, Türkiye — uzaktan ve hibrit iş birlikleri
 - **Diller:** Türkçe, İngilizce
@@ -21,11 +21,14 @@
 
 ## İş Deneyimi
 
-- **İstanbul Sensörler** — Mobil Geliştirme & Satın Alma (2026 — günümüz): Şirket içi dashboard için mobil uygulama; endüstriyel sensör tedarik ve satın alma süreçleri.
-- **Han Endüstri Otomasyon** — Satış Danışmanı (2024 — Mart 2026): Endüstriyel ürün portföyünde B2B satış ve teknik çözüm danışmanlığı.
+- **İstanbul Sensörler** — Mobil Geliştirme & Satın Alma (Mart 2026 — günümüz): Şirket içi dashboard için mobil uygulama; endüstriyel sensör tedarik ve satın alma süreçleri.
+- **Kortbul (Freelance)** — Full-Stack Developer (Eylül 2025 — Mart 2026): Raket sporları için tesis arama ve online rezervasyon platformu; React & Node.js, rol bazlı paneller, gerçek zamanlı bildirimler (kortbul.com.tr).
+- **Bionluk (Freelance)** — iOS & Web Developer (Ocak 2024 — Mart 2026): Swift & SwiftUI ile App Store uygulamaları (CarLog, Adhan, Terapi Asistanı); React & TypeScript web arayüzleri; Firebase.
+- **Cebinde** — Co-Founder (Eylül 2023 — Mart 2026): Mobil arayüz geliştirme ekibinde liderlik; UI/UX odaklı ürün geliştirme.
+- **Han Endüstri Otomasyon** — Satış (Aralık 2023 — Ocak 2026): Endüstriyel ürün portföyünde B2B satış ve teknik çözüm danışmanlığı.
+- **CK Tedarik (Freelance)** — Web Tasarımı & E-ticaret (Ağustos 2023 — Aralık 2023): Ürün sergileme odaklı kullanıcı dostu e-ticaret sitesi.
 - **Hamle Mühendislik** — Web, Mobil ve Multimedya (2019 — 2024): Sağlık sektörü kurumsal web, SEO, UX/UI ve multimedya prodüksiyon.
 - **Hamle Mühendislik** — Yazılım Stajyeri (2017 — 2019): Endüstriyel cihaz programlama, gömülü uygulamalar, teknik dokümantasyon.
-- **Tiryaki Yazılım (Freelance)** — Kurucu / Full Stack Developer (2017 — günümüz): Ege Teknik, Kortbul ve diğer müşteri projelerinde uçtan uca web ve mobil geliştirme.
 
 Toplam 5+ yıl profesyonel deneyim (2017'den beri).
 
@@ -52,7 +55,7 @@ Toplam 5+ yıl profesyonel deneyim (2017'den beri).
 - GitHub: https://github.com/emirirr
 - LinkedIn: https://www.linkedin.com/in/emir-tiryaki/
 - Instagram: https://instagram.com/emirscode
-- YouTube: https://youtube.com/@emirtiryaki
+- YouTube: https://youtube.com/@emirirrr
 
 ## İş Birliği
 

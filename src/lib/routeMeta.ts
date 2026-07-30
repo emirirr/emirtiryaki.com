@@ -6,35 +6,35 @@ import {
 const SITE = "https://emirtiryaki.com";
 
 const HOME = {
-  title: "Emir Tiryaki - Full Stack Developer",
+  title: "İsmail Emir Tiryaki - Full Stack Developer",
   description:
     "Full Stack Developer portföyü: React, React Native, Node.js ve bulut ile web ve mobil ürünler. Projeler ve iletişim — emirtiryaki.com.",
-  ogTitle: "Emir Tiryaki - Full Stack Developer",
+  ogTitle: "İsmail Emir Tiryaki - Full Stack Developer",
   ogDescription:
     "Web ve mobil geliştirme, portföy ve iletişim. Türkiye.",
 };
 
 const PROJECTS = {
-  title: "Projeler | Emir Tiryaki",
+  title: "Projeler | İsmail Emir Tiryaki",
   description:
     "Portföy: web uygulamaları, mobil uygulamalar ve e-ticaret. Teknolojiler, süre ve özetler.",
-  ogTitle: "Projeler | Emir Tiryaki",
+  ogTitle: "Projeler | İsmail Emir Tiryaki",
   ogDescription:
     "Seçili işler, kullanılan stack ve proje detayları.",
 };
 
 const NOT_FOUND = {
-  title: "Sayfa bulunamadı | Emir Tiryaki",
+  title: "Sayfa bulunamadı | İsmail Emir Tiryaki",
   description: "Aradığınız sayfa mevcut değil veya taşınmış olabilir.",
-  ogTitle: "404 | Emir Tiryaki",
+  ogTitle: "404 | İsmail Emir Tiryaki",
   ogDescription: "Sayfa bulunamadı.",
 };
 
 const DACAR_MOBILE = {
-  title: "daCAR Mobile | Emir Tiryaki",
+  title: "daCAR Mobile | İsmail Emir Tiryaki",
   description:
     "daCAR Mobile: Expo + React Native ve Supabase tabanlı araç pazar yeri uygulaması. İlan, chat, rezervasyon ve release süreci detayları.",
-  ogTitle: "daCAR Mobile | Emir Tiryaki",
+  ogTitle: "daCAR Mobile | İsmail Emir Tiryaki",
   ogDescription:
     "Araç pazar yeri mobil uygulaması: ilan, mesajlaşma, bildirim ve uzman rezervasyonu akışları.",
 };
@@ -45,9 +45,9 @@ function kortbulMeta(pathname: string) {
   if (!slug || !isKortbulSlug(slug)) return null;
   const titleBase = kortbulPageTitle(slug);
   return {
-    title: `${titleBase} | Emir Tiryaki`,
+    title: `${titleBase} | İsmail Emir Tiryaki`,
     description: `Kortbul — ${titleBase}: mobil ve kulüp yönetimi ekosistemi, teknolojiler ve özet.`,
-    ogTitle: `${titleBase} | Emir Tiryaki`,
+    ogTitle: `${titleBase} | İsmail Emir Tiryaki`,
     ogDescription: `Kortbul projesi: ${titleBase}.`,
   };
 }

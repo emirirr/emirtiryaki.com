@@ -16,7 +16,7 @@ const roles: Role[] = [
   {
     company: "İstanbul Sensörler",
     title: "Mobil Geliştirme & Satın Alma",
-    period: "2026 — günümüz",
+    period: "Mart 2026 — günümüz",
     current: true,
     points: [
       "Şirket içi dashboard için mobil uygulama; Excel kaynaklı verilerin okunaklı bileşenlerle sunulması, manuel tablo bağımlılığını azaltma.",
@@ -25,13 +25,53 @@ const roles: Role[] = [
     tags: ["React Native", "Dashboard", "Tedarik"],
   },
   {
+    company: "Kortbul — Freelance",
+    title: "Full-Stack Developer",
+    period: "Eylül 2025 — Mart 2026",
+    points: [
+      "Raket sporları için tesis arama ve online kort/saha rezervasyon platformunu uçtan uca geliştirdim (kortbul.com.tr).",
+      "React & Node.js ile modüler mimari; tesis yöneticisi ve sporcu için ayrı paneller, uygunluk takvimi, online rezervasyon ve raporlama.",
+      "Gerçek zamanlı bildirimler ve rol bazlı yetkilendirme ile anlık bilgi akışı ve veri güvenliği.",
+    ],
+    tags: ["React", "Node.js", "TypeScript", "Realtime"],
+  },
+  {
+    company: "Bionluk — Freelance",
+    title: "iOS & Web Developer",
+    period: "Ocak 2024 — Mart 2026",
+    points: [
+      "Web ve iOS platformlarında farklı sektörlerden müşteriler için uçtan uca ürün geliştirdim.",
+      "iOS: Swift & SwiftUI ile App Store'da yayınlanan uygulamalar (CarLog, Adhan, Terapi Asistanı).",
+      "Web: React & TypeScript arayüzler; Firebase ile kimlik doğrulama ve gerçek zamanlı veri yönetimi.",
+    ],
+    tags: ["Swift", "SwiftUI", "React", "Firebase"],
+  },
+  {
+    company: "Cebinde",
+    title: "Co-Founder",
+    period: "Eylül 2023 — Mart 2026",
+    points: [
+      "Cebinde platformunun mobil arayüzlerini geliştiren ekipte liderlik; kullanıcı deneyimini iyileştiren kullanıcı dostu arayüz tasarımı.",
+    ],
+    tags: ["Mobil", "UI/UX", "Ekip Liderliği"],
+  },
+  {
     company: "Han Endüstri Otomasyon",
-    title: "Satış Danışmanı",
-    period: "2024 — Mart 2026",
+    title: "Satış",
+    period: "Aralık 2023 — Ocak 2026",
     points: [
       "Endüstriyel ürün portföyünde pazarlama ve satış; müşteri ihtiyaçlarına teknik çözüm önerileri ve satış operasyonlarının yürütülmesi.",
     ],
     tags: ["B2B Satış", "Teknik Danışmanlık"],
+  },
+  {
+    company: "CK Tedarik — Freelance",
+    title: "Web Tasarımı & E-ticaret",
+    period: "Ağustos 2023 — Aralık 2023",
+    points: [
+      "Ürünleri etkili biçimde sergileyen, kullanıcı dostu e-ticaret sitesi tasarımı; firmanın dijital varlığını güçlendirme ve müşteri etkileşimini artırma.",
+    ],
+    tags: ["Web Tasarımı", "E-ticaret"],
   },
   {
     company: "Hamle Mühendislik",
@@ -51,16 +91,6 @@ const roles: Role[] = [
       "Endüstriyel cihaz programlama ve gömülü uygulamalar; eğitim materyali ve teknik dokümantasyon; web/mobil projelerde destek.",
     ],
     tags: ["Gömülü", "Dokümantasyon"],
-  },
-  {
-    company: "Tiryaki Yazılım — Freelance",
-    title: "Kurucu / Full Stack Developer",
-    period: "2017 — günümüz",
-    current: true,
-    points: [
-      "Kurumsal web ve mobil çözümler; Ege Teknik, Kortbul ve diğer müşteri projelerinde uçtan uca geliştirme ve teslim.",
-    ],
-    tags: ["React", "Node.js", "React Native", "Müşteri Teslimi"],
   },
 ];
 

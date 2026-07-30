@@ -49,7 +49,7 @@ export function TerminalMode() {
         case "whoami":
           push(
             "out",
-            "Emir Tiryaki — Full Stack Developer. Web, mobil ve bulut; ürün odaklı mimari.",
+            "İsmail Emir Tiryaki — Full Stack Developer. Web, mobil ve bulut; ürün odaklı mimari.",
           );
           break;
         case "skills":
