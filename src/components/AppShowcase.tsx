@@ -84,29 +84,24 @@ const AppShowcase = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-        <motion.div
-          variants={fadeUp}
-          className="mb-14 flex flex-col items-center gap-6 text-center md:flex-row md:items-end md:justify-between md:text-left"
-        >
-          <div>
-            <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
-              // mağazada yayında
-            </p>
-            <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
-              <span className="text-gradient">Yayınlanmış </span>
-              <span className="text-foreground">uygulamalar</span>
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground md:mx-0">
-              Fikirden mağaza yayınına kadar tek sorumlu olarak geliştirdiğim, App Store ve Google
-              Play'de canlı uygulamalar.
-            </p>
-          </div>
+        <motion.div variants={fadeUp} className="mb-14 text-center">
+          <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
+            // mağazada yayında
+          </p>
+          <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
+            <span className="text-gradient">Yayınlanmış </span>
+            <span className="text-foreground">uygulamalar</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+            Fikirden mağaza yayınına kadar tek sorumlu olarak geliştirdiğim, App Store ve Google
+            Play'de canlı uygulamalar.
+          </p>
           <a
             href={DEVELOPER_URL}
             target="_blank"
             rel="noopener noreferrer"
             data-cursor="pointer"
-            className="inline-flex shrink-0 items-center gap-2 rounded-2xl border border-white/15 bg-white/[0.03] px-4 py-2.5 text-sm font-medium backdrop-blur-md transition-colors hover:border-primary/30 hover:bg-white/[0.07]"
+            className="mt-6 inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/[0.03] px-4 py-2.5 text-sm font-medium backdrop-blur-md transition-colors hover:border-primary/30 hover:bg-white/[0.07]"
           >
             <AppleGlyph className="h-4 w-4" />
             App Store geliştirici sayfam

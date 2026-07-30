@@ -69,7 +69,7 @@ const Skills = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-        <motion.div variants={fadeUp} className="mb-12 text-center">
+        <motion.div variants={fadeUp} className="mb-14 text-center">
           <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
             // yetkinlikler
           </p>

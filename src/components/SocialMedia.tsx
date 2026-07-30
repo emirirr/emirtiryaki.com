@@ -106,7 +106,7 @@ const SocialMedia = () => {
             <span className="text-gradient">Sosyal </span>
             <span className="text-foreground">ağlar</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
             Projeleri ve notları farklı kanallarda paylaşıyorum; en güncel kod GitHub’da.
           </p>
         </motion.div>

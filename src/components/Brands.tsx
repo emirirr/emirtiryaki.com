@@ -63,7 +63,7 @@ const Brands = () => {
             <span className="text-gradient">Oluşturduğum </span>
             <span className="text-foreground">markalar</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
             Farklı sektörlerde kurduğum veya büyüttüğüm dijital varlıklar; her biri ölçülebilir iş
             hedefleriyle hizalandı.
           </p>

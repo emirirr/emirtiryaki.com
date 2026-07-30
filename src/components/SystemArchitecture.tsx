@@ -34,7 +34,7 @@ export function SystemArchitecture() {
   return (
     <section
       id="architecture"
-      className="relative py-24 px-6"
+      className="relative px-4 py-24 sm:px-6"
       aria-labelledby="architecture-heading"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,_hsl(var(--accent)/0.08),transparent_50%)]" />
@@ -45,7 +45,7 @@ export function SystemArchitecture() {
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-        <motion.div variants={fadeUp} className="mb-12 max-w-3xl">
+        <motion.div variants={fadeUp} className="mb-14 text-center">
           <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
             // full stack
           </p>
@@ -53,10 +53,10 @@ export function SystemArchitecture() {
             id="architecture-heading"
             className="font-display text-4xl font-semibold tracking-tight md:text-5xl"
           >
-            <span className="text-foreground">Sistem </span>
-            <span className="text-gradient">mimarisi</span>
+            <span className="text-gradient">Sistem </span>
+            <span className="text-foreground">mimarisi</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
             Üretimde kullandığım tipik katmanları tek diyagramda birleştiriyorum: güvenli
             sınır, net API sözleşmesi, tutarlı şema ve izlenebilir operasyon.
           </p>
