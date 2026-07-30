@@ -5,7 +5,9 @@ import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import { SystemArchitecture } from "@/components/SystemArchitecture";
 import Projects from "@/components/Projects";
+import AppShowcase from "@/components/AppShowcase";
 import Brands from "@/components/Brands";
+import Services from "@/components/Services";
 import SocialMedia from "@/components/SocialMedia";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -35,7 +37,9 @@ const Index = () => {
         <StickyProjectShowcase />
       </Suspense>
       <Projects />
+      <AppShowcase />
       <Brands />
+      <Services />
       <SocialMedia />
       <Contact />
       <Footer />
