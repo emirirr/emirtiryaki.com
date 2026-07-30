@@ -78,8 +78,8 @@ const Skills = () => {
             <span className="text-foreground">yetkinlikler</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Arayüzden veri katmanına kadar uçtan uca çalışırım; her kart günlük olarak kullandığım
-            araçların özeti.
+            Arayüzden veri katmanına, mobilden buluta kadar uçtan uca çalışırım. Aşağıdaki her
+            teknoloji, üretimde aktif kullandığım günlük stack'imin bir parçası.
           </p>
         </motion.div>
 
