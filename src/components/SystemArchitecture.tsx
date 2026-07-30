@@ -109,11 +109,14 @@ export function SystemArchitecture() {
                 Statik varlıklar, edge cache, güvenli transport
               </text>
 
-              <path
+              <motion.path
                 d="M320 104 V132"
                 stroke="url(#archLine)"
                 strokeWidth="2"
                 strokeLinecap="round"
+                strokeDasharray="3 7"
+                animate={{ strokeDashoffset: [0, -20] }}
+                transition={{ duration: 1.1, repeat: Infinity, ease: "linear" }}
               />
 
               <rect
@@ -138,11 +141,14 @@ export function SystemArchitecture() {
                 JWT/OAuth, Zod validation, idempotent işlemler
               </text>
 
-              <path
+              <motion.path
                 d="M320 220 V248"
                 stroke="url(#archLine)"
                 strokeWidth="2"
                 strokeLinecap="round"
+                strokeDasharray="3 7"
+                animate={{ strokeDashoffset: [0, -20] }}
+                transition={{ duration: 1.1, repeat: Infinity, ease: "linear", delay: 0.2 }}
               />
 
               <rect
@@ -189,11 +195,14 @@ export function SystemArchitecture() {
                 Cache · session · rate limit
               </text>
 
-              <path
+              <motion.path
                 d="M320 336 V364"
                 stroke="url(#archLine)"
                 strokeWidth="2"
                 strokeLinecap="round"
+                strokeDasharray="3 7"
+                animate={{ strokeDashoffset: [0, -20] }}
+                transition={{ duration: 1.1, repeat: Infinity, ease: "linear", delay: 0.4 }}
               />
 
               <rect
