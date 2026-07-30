@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Car, MoonStar, HeartPulse, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 
@@ -11,50 +11,71 @@ const AppleGlyph = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const PlayGlyph = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
+    <path d="M3.6 2.3c-.3.2-.5.6-.5 1.1v17.2c0 .5.2.9.5 1.1l9.2-9.7L3.6 2.3zm11 8.4 2.6-2.7L6.4 1.8c-.4-.2-.8-.2-1.1-.1l9.3 9zm0 2.6-9.3 9c.3.1.7.1 1.1-.1l10.8-6.2-2.6-2.7zm5.9-3.3-2.3-1.3-2.9 3 2.9 3 2.3-1.3c.9-.5.9-1.9 0-2.4z" />
+  </svg>
+);
+
 type App = {
   name: string;
   tagline: string;
-  Icon: typeof Car;
+  icon: string;
   tags: string[];
   url: string;
-  live: boolean;
+  platform: "ios" | "android";
 };
 
 const apps: App[] = [
   {
     name: "CarLog",
     tagline:
-      "Aracın bakım, yakıt ve resmi evrak bilgilerini tek yerden takip; satarken alıcıya rapor.",
-    Icon: Car,
+      "Aracın bakım, yakıt ve resmî evrak bilgilerini tek yerden takip; satarken alıcıya rapor.",
+    icon: "/apps/carlog.jpg",
     tags: ["Swift", "SwiftUI", "iOS"],
     url: "https://apps.apple.com/tr/app/carlog/id6760318180",
-    live: true,
+    platform: "ios",
   },
   {
     name: "Adhan — Namaz Vakti",
     tagline:
-      "GPS veya manuel şehir seçimiyle hassas namaz vakitleri, bildirim ve modern arayüz.",
-    Icon: MoonStar,
+      "GPS veya manuel şehir seçimiyle hassas namaz vakitleri, bildirim ve sade, modern arayüz.",
+    icon: "/apps/adhan.jpg",
     tags: ["Swift", "SwiftUI", "iOS"],
     url: "https://apps.apple.com/tr/app/adhan/id6755198431",
-    live: true,
+    platform: "ios",
   },
   {
-    name: "Terapi Asistanı",
+    name: "daCAR",
     tagline:
-      "Göğüs terapisi cihazına bağlanıp seans yönetimi; HealthKit ile ilerleme takibi.",
-    Icon: HeartPulse,
-    tags: ["Swift", "HealthKit", "Bluetooth"],
-    url: "https://therapy.vercel.app",
-    live: false,
+      "Senegal için uçtan uca araç pazaryeri: ilan yayınlama, gelişmiş arama ve doğrulanmış satıcılar.",
+    icon: "/apps/dacar.png",
+    tags: ["React Native", "Expo", "Supabase"],
+    url: "https://play.google.com/store/apps/details?id=com.ismailtiryaki.dacar",
+    platform: "android",
   },
 ];
+
+const platformMeta = {
+  ios: {
+    label: "App Store",
+    Glyph: AppleGlyph,
+    badge: "border-sky-400/25 bg-sky-400/10 text-sky-300",
+    cta: "App Store'da aç",
+  },
+  android: {
+    label: "Google Play",
+    Glyph: PlayGlyph,
+    badge: "border-emerald-400/25 bg-emerald-400/10 text-emerald-300",
+    cta: "Play Store'da aç",
+  },
+} as const;
 
 const AppShowcase = () => {
   return (
     <section id="apps" className="relative px-4 py-24 sm:px-6">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 top-1/3 h-[320px] bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.06),transparent_65%)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-1/3 h-[340px] bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.07),transparent_65%)]" />
 
       <motion.div
         className="container relative mx-auto max-w-6xl"
@@ -69,14 +90,15 @@ const AppShowcase = () => {
         >
           <div>
             <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
-              // app store
+              // mağazada yayında
             </p>
             <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
               <span className="text-gradient">Yayınlanmış </span>
               <span className="text-foreground">uygulamalar</span>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground md:mx-0">
-              Fikirden App Store yayınına kadar tek sorumlu olarak geliştirdiğim iOS uygulamaları.
+              Fikirden mağaza yayınına kadar tek sorumlu olarak geliştirdiğim, App Store ve Google
+              Play'de canlı uygulamalar.
             </p>
           </div>
           <a
@@ -87,67 +109,69 @@ const AppShowcase = () => {
             className="inline-flex shrink-0 items-center gap-2 rounded-2xl border border-white/15 bg-white/[0.03] px-4 py-2.5 text-sm font-medium backdrop-blur-md transition-colors hover:border-primary/30 hover:bg-white/[0.07]"
           >
             <AppleGlyph className="h-4 w-4" />
-            Geliştirici sayfam
+            App Store geliştirici sayfam
             <ArrowUpRight className="h-4 w-4" />
           </a>
         </motion.div>
 
         <div className="grid gap-6 md:grid-cols-3 lg:gap-5">
-          {apps.map((app) => (
-            <motion.a
-              key={app.name}
-              variants={fadeUp}
-              href={app.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="pointer"
-              whileHover={{ y: -4, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}
-              className="glass-strong group flex h-full flex-col rounded-3xl border border-white/10 p-6 transition-shadow duration-300 hover:border-primary/25 hover:shadow-[0_20px_50px_-20px_hsl(var(--primary)/0.3)]"
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-primary">
-                  <app.Icon className="h-7 w-7" strokeWidth={1.75} />
+          {apps.map((app) => {
+            const meta = platformMeta[app.platform];
+            return (
+              <motion.a
+                key={app.name}
+                variants={fadeUp}
+                href={app.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="pointer"
+                whileHover={{ y: -4, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}
+                className="glass-strong group flex h-full flex-col rounded-3xl border border-white/10 p-6 transition-shadow duration-300 hover:border-primary/25 hover:shadow-[0_24px_60px_-24px_hsl(var(--primary)/0.4)]"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <img
+                    src={app.icon}
+                    alt={`${app.name} uygulama simgesi`}
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-16 w-16 rounded-[22%] border border-white/15 object-cover shadow-lg shadow-black/40"
+                  />
+                  <Badge
+                    className={`gap-1.5 rounded-lg border px-2.5 py-1 text-[10px] font-medium ${meta.badge}`}
+                  >
+                    <meta.Glyph className="h-3 w-3" />
+                    {meta.label}
+                  </Badge>
                 </div>
-                {app.live ? (
-                  <Badge className="gap-1.5 rounded-lg border border-emerald-400/25 bg-emerald-400/10 px-2.5 py-1 text-[10px] font-medium text-emerald-300">
-                    <AppleGlyph className="h-3 w-3" />
-                    App Store
-                  </Badge>
-                ) : (
-                  <Badge
-                    variant="secondary"
-                    className="rounded-lg border border-white/10 bg-white/[0.05] px-2.5 py-1 text-[10px] font-medium text-muted-foreground"
-                  >
-                    Medikal · iOS
-                  </Badge>
-                )}
-              </div>
 
-              <h3 className="mt-5 text-lg font-semibold tracking-tight text-foreground">
-                {app.name}
-              </h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                {app.tagline}
-              </p>
+                <h3 className="mt-5 text-lg font-semibold tracking-tight text-foreground">
+                  {app.name}
+                </h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {app.tagline}
+                </p>
 
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {app.tags.map((t) => (
-                  <Badge
-                    key={t}
-                    variant="outline"
-                    className="rounded-lg border-white/10 bg-transparent px-2 py-0.5 text-[10px]"
-                  >
-                    {t}
-                  </Badge>
-                ))}
-              </div>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {app.tags.map((t) => (
+                    <Badge
+                      key={t}
+                      variant="outline"
+                      className="rounded-lg border-white/10 bg-transparent px-2 py-0.5 text-[10px]"
+                    >
+                      {t}
+                    </Badge>
+                  ))}
+                </div>
 
-              <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-                {app.live ? "App Store'da aç" : "Canlı demo"}
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </span>
-            </motion.a>
-          ))}
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+                  {meta.cta}
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </motion.a>
+            );
+          })}
         </div>
       </motion.div>
     </section>

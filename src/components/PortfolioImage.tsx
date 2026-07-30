@@ -34,7 +34,7 @@ export function PortfolioImage({
             alt={alt}
             loading="lazy"
             decoding="async"
-            fetchPriority={fetchPriority}
+            {...{ fetchpriority: fetchPriority }}
           />
         </picture>
       </div>

@@ -37,6 +37,13 @@ Toplam 5+ yıl profesyonel deneyim (2017'den beri).
 - Hoca Ahmet Yesevi Üniversitesi — Bilgisayar Programcılığı (ön lisans), mezuniyet 2026.
 - BTK Akademi — iOS geliştirme ve React ile web geliştirme sertifikaları.
 
+## Yayınlanmış Mobil Uygulamalar
+
+- [CarLog](https://apps.apple.com/tr/app/carlog/id6760318180) (App Store · iOS): Araç bakım, yakıt ve resmî evrak takip uygulaması; Swift & SwiftUI.
+- [Adhan — Namaz Vakti](https://apps.apple.com/tr/app/adhan/id6755198431) (App Store · iOS): Hassas namaz vakitleri, bildirimler ve modern arayüz; Swift & SwiftUI.
+- [daCAR](https://play.google.com/store/apps/details?id=com.ismailtiryaki.dacar) (Google Play · Android): Senegal için uçtan uca araç pazaryeri; React Native, Expo, Supabase.
+- App Store geliştirici sayfası: https://apps.apple.com/tr/developer/emir-tiryaki/id1852537743
+
 ## Kurduğu / Büyüttüğü Markalar
 
 - [Tiryaki Yazılım](https://tiryakiyazilim.com): Yazılım geliştirme ve dijital çözümler şirketi (web, mobil, e-ticaret, kurumsal çözümler).

@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import {
-  Code,
+  Cloud,
   Database,
-  Globe,
-  Palette,
+  Gauge,
+  LayoutTemplate,
   Server,
-  Zap,
+  Wrench,
 } from "lucide-react";
 import { TechStackVisual } from "@/components/TechStackVisual";
 import { fadeUp, staggerContainer } from "@/lib/motion";
@@ -15,44 +15,38 @@ import { cn } from "@/lib/utils";
 const skillCategories = [
   {
     title: "Frontend",
-    icon: Palette,
+    icon: LayoutTemplate,
     color: "text-tech-blue",
-    span: "md:col-span-1",
-    skills: ["React", "Vue.js", "TypeScript", "Next.js", "Tailwind CSS", "Vite"],
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Vite", "React Native"],
   },
   {
     title: "Backend",
     icon: Server,
     color: "text-tech-indigo",
-    span: "md:col-span-1",
-    skills: ["Node.js", "Python", "Express", "FastAPI", "GraphQL", "REST"],
+    skills: ["Node.js", "Express", "REST API", "GraphQL", "Firebase"],
   },
   {
     title: "Veri",
     icon: Database,
     color: "text-accent",
-    span: "md:col-span-1",
     skills: ["PostgreSQL", "MongoDB", "Redis", "Prisma", "Supabase"],
   },
   {
     title: "DevOps & Cloud",
-    icon: Globe,
+    icon: Cloud,
     color: "text-tech-cyan",
-    span: "md:col-span-2 lg:col-span-2",
-    skills: ["Docker", "AWS", "Kubernetes", "CI/CD", "Terraform", "Linux"],
+    skills: ["Docker", "AWS", "CI/CD", "GitHub Actions", "Linux"],
   },
   {
     title: "Araçlar",
-    icon: Code,
+    icon: Wrench,
     color: "text-primary",
-    span: "md:col-span-1",
-    skills: ["Git", "GitHub Actions", "Jest", "Figma", "Postman"],
+    skills: ["Git", "Figma", "Jest", "Postman", "Vercel"],
   },
   {
     title: "Performans",
-    icon: Zap,
+    icon: Gauge,
     color: "text-amber-400",
-    span: "md:col-span-1",
     skills: ["Web Vitals", "Caching", "CDN", "Bundle analizi"],
   },
 ];
@@ -104,10 +98,7 @@ const Skills = () => {
                   y: -4,
                   transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] },
                 }}
-                className={cn(
-                  "glass group flex flex-col rounded-3xl border border-white/10 p-6 transition-shadow duration-300 hover:border-primary/25 hover:shadow-[0_20px_60px_-20px_hsl(var(--primary)/0.35)]",
-                  category.span,
-                )}
+                className="glass group flex flex-col rounded-3xl border border-white/10 p-6 transition-shadow duration-300 hover:border-primary/25 hover:shadow-[0_20px_60px_-20px_hsl(var(--primary)/0.35)]"
               >
                 <div className="flex items-center gap-3">
                   <div
