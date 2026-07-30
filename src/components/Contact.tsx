@@ -9,8 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { cn } from "@/lib/utils";
-
-const WEB3_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY?.trim();
+import { talepGonder } from "@/lib/talep";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -51,40 +50,16 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      if (WEB3_ACCESS_KEY) {
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            access_key: WEB3_ACCESS_KEY,
-            name: formData.name,
-            email: formData.email,
-            subject: formData.subject,
-            message: formData.message,
-          }),
-        });
-        const data = (await res.json()) as { success?: boolean; message?: string };
-        if (!res.ok || !data.success) {
-          throw new Error(data.message || "Gönderim tamamlanamadı");
-        }
-        toast({
-          title: "Teşekkürler",
-          description: "Mesajınız alındı; en kısa sürede size dönüş yapacağım.",
-        });
-      } else {
-        const mailtoLink = `mailto:info@emirtiryaki.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-          `Ad Soyad: ${formData.name}\n\nE-posta: ${formData.email}\n\nMesaj:\n${formData.message}`,
-        )}`;
-        window.open(mailtoLink, "_blank");
-        toast({
-          title: "Başarılı!",
-          description:
-            "E-posta uygulamanız açıldı. Mesajınızı gönderdikten sonra size geri dönüş yapacağım.",
-        });
-      }
+      await talepGonder({
+        name: formData.name,
+        email: formData.email,
+        message: `Konu: ${formData.subject}\n\n${formData.message}`,
+        source: "emirtiryaki-iletisim",
+      });
+      toast({
+        title: "Teşekkürler",
+        description: "Mesajınız alındı; en kısa sürede size dönüş yapacağım.",
+      });
 
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
