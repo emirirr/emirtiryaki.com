@@ -4,7 +4,6 @@ import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import { SystemArchitecture } from "@/components/SystemArchitecture";
-import Projects from "@/components/Projects";
 import AppShowcase from "@/components/AppShowcase";
 import Brands from "@/components/Brands";
 import Services from "@/components/Services";
@@ -12,9 +11,9 @@ import SocialMedia from "@/components/SocialMedia";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
-const StickyProjectShowcase = lazy(() =>
-  import("@/components/StickyProjectShowcase").then((m) => ({
-    default: m.StickyProjectShowcase,
+const FeaturedProjects = lazy(() =>
+  import("@/components/FeaturedProjects").then((m) => ({
+    default: m.FeaturedProjects,
   })),
 );
 
@@ -34,9 +33,8 @@ const Index = () => {
       <Experience />
       <SystemArchitecture />
       <Suspense fallback={belowFoldFallback}>
-        <StickyProjectShowcase />
+        <FeaturedProjects />
       </Suspense>
-      <Projects />
       <AppShowcase />
       <Brands />
       <Services />

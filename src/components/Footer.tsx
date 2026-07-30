@@ -1,4 +1,5 @@
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { Mail, Heart } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/BrandIcons";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -133,7 +134,7 @@ const Footer = () => {
                 window.open("https://github.com/emirirr", "_blank", "noopener,noreferrer")
               }
             >
-              <Github className="h-5 w-5" />
+              <GithubIcon className="h-5 w-5" />
             </Button>
             <Button
               variant="ghost"
@@ -148,7 +149,7 @@ const Footer = () => {
                 )
               }
             >
-              <Linkedin className="h-5 w-5" />
+              <LinkedinIcon className="h-5 w-5" />
             </Button>
             <Button
               variant="ghost"

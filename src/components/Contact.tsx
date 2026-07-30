@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Send, Github, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/BrandIcons";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
@@ -190,7 +191,7 @@ const Contact = () => {
                     window.open("https://github.com/emirirr", "_blank", "noopener,noreferrer")
                   }
                 >
-                  <Github className="h-5 w-5" />
+                  <GithubIcon className="h-5 w-5" />
                 </Button>
                 <Button
                   variant="outline"
@@ -205,7 +206,7 @@ const Contact = () => {
                     )
                   }
                 >
-                  <Linkedin className="h-5 w-5" />
+                  <LinkedinIcon className="h-5 w-5" />
                 </Button>
                 <Button
                   variant="outline"

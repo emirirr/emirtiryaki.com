@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Github, Linkedin, Mail } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/BrandIcons";
 import profileImage from "@/assets/emir-profile.jpg";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { cn, scrollToSection } from "@/lib/utils";
@@ -149,7 +150,7 @@ const Hero = () => {
                 data-cursor="pointer"
                 onClick={() => window.open("https://github.com/emirirr", "_blank", "noopener,noreferrer")}
               >
-                <Github className="h-5 w-5" />
+                <GithubIcon className="h-5 w-5" />
               </Button>
               <Button
                 variant="ghost"
@@ -160,7 +161,7 @@ const Hero = () => {
                   window.open("https://www.linkedin.com/in/emir-tiryaki/", "_blank", "noopener,noreferrer")
                 }
               >
-                <Linkedin className="h-5 w-5" />
+                <LinkedinIcon className="h-5 w-5" />
               </Button>
               <Button
                 variant="ghost"
