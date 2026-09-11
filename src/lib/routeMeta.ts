@@ -2,6 +2,7 @@ import {
   isKortbulSlug,
   kortbulPageTitle,
 } from "@/data/kortbulProjectRoutes";
+import { bySlug, coverWebp } from "@/lib/portfolioMock";
 
 const SITE = "https://emirtiryaki.com";
 
@@ -52,6 +53,26 @@ function kortbulMeta(pathname: string) {
   };
 }
 
+/** /is/<imageKey> — proje detay sayfasinin meta paketi projects.ts'ten uretilir.
+ *  Bu eslesme olmadan tum detay sayfalari NOT_FOUND paketine dusuyor ve hem
+ *  "Sayfa bulunamadi" basligiyla hem de noindex olarak yayina cikiyordu. */
+function projectMeta(pathname: string) {
+  const m = pathname.match(/^\/is\/([^/]+)\/?$/);
+  const slug = m?.[1];
+  if (!slug) return null;
+  const p = bySlug(slug);
+  if (!p) return null;
+
+  const desc = (p.description || "").trim();
+  return {
+    title: `${p.title} | İsmail Emir Tiryaki`,
+    description: desc.slice(0, 158),
+    ogTitle: `${p.title} | İsmail Emir Tiryaki`,
+    ogDescription: desc.slice(0, 200),
+    ogImage: `${SITE}${coverWebp(p)}`,
+  };
+}
+
 function setMetaContent(selector: string, content: string) {
   document.querySelector(selector)?.setAttribute("content", content);
 }
@@ -66,14 +87,18 @@ function canonicalHref(pathname: string): string {
 export function syncRouteDocumentHead(pathname: string) {
   const normalized = pathname.replace(/\/$/, "") || "/";
   const kortbul = kortbulMeta(normalized);
+  const project = projectMeta(normalized);
   const dacarMobile = normalized === "/projects/dacar/mobile";
   const isIndexedRoute =
     normalized === "/" ||
     normalized === "/projects" ||
     kortbul !== null ||
+    project !== null ||
     dacarMobile;
   const pack =
-    kortbul !== null
+    project !== null
+      ? project
+      : kortbul !== null
       ? kortbul
       : dacarMobile
         ? DACAR_MOBILE
@@ -91,6 +116,11 @@ export function syncRouteDocumentHead(pathname: string) {
   setMetaContent('meta[property="og:url"]', canonicalHref(pathname));
   setMetaContent('meta[name="twitter:title"]', pack.ogTitle);
   setMetaContent('meta[name="twitter:description"]', pack.ogDescription);
+
+  // Proje sayfalarinda paylasim gorseli o projenin kendi ekran goruntusu olsun.
+  const ogImage = project?.ogImage ?? `${SITE}/og-image.png`;
+  setMetaContent('meta[property="og:image"]', ogImage);
+  setMetaContent('meta[name="twitter:image"]', ogImage);
 
   document
     .querySelector('link[rel="canonical"]')

@@ -52,7 +52,7 @@
 
 
 
-**Özet:** 5+ yıl deneyim · Web ve mobil ürün teslimatı · Detaylı portföy: [emirtiryaki.com/projects](https://emirtiryaki.com/projects)
+**Özet:** 9+ yıl deneyim · Web ve mobil ürün teslimatı · Detaylı portföy: [emirtiryaki.com/projects](https://emirtiryaki.com/projects)
 
 
 
@@ -112,7 +112,7 @@ Endüstriyel cihaz programlama ve gömülü uygulamalar; eğitim seti ve teknik 
 
 **Tiryaki Yazılım (bireysel marka)** — Freelance Software Developer · *2017 – Günümüz*  
 
-[Yazılım geliştirme ve dijital çözümler](https://tiryakiyazilim.com); kurumsal web ve mobil teslimatlar, çoklu sektörde uçtan uca geliştirme (ör. Ege Teknik, Kortbul ekosistemi).
+[Yazılım geliştirme ve dijital çözümler](https://tiryakiyazilim.com); kurumsal web ve mobil teslimatlar, çoklu sektörde uçtan uca geliştirme (ör. Kortbul ekosistemi, Karaca Yapı Market).
 
 
 
@@ -160,7 +160,6 @@ Tam liste, görseller ve teknik detaylar: **[emirtiryaki.com/projects](https://e
 
 | **Doctor Site** | Sağlık vitrini; randevu, konsültasyon; Next.js, Prisma. | [Demo](https://doctor-site-phi.vercel.app/) · [Kaynak](https://github.com/emirirr/doctor-site) |
 
-| **Ege Teknik** | Kurumsal web, teknik servis. | [egeateknik.com](https://egeateknik.com) |
 
 | **Kuta** | Kurye yönetimi, gerçek zamanlı takip. | [Demo](https://kuta-ten.vercel.app/) · [GitHub](https://github.com/emirirr/Kuta) |
 

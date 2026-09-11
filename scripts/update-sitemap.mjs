@@ -1,5 +1,23 @@
-import { writeFileSync } from "node:fs";
+import { writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+
+/** projects.ts'teki her kaydin kendi detay sayfasi var (/is/<imageKey>).
+ *  Listeyi elle tutmamak icin dosyadan okuyoruz. */
+function projectSlugs() {
+  const src = readFileSync(join(process.cwd(), "src", "data", "projects.ts"), "utf8");
+  return [...src.matchAll(/imageKey: '([^']+)'/g)].map((m) => m[1]);
+}
+
+const detailUrls = projectSlugs()
+  .map(
+    (slug) => `  <url>
+    <loc>https://emirtiryaki.com/is/${slug}</loc>
+    <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>`,
+  )
+  .join("\n");
 
 const d = new Date().toISOString().slice(0, 10);
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -44,6 +62,7 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+${detailUrls}
 </urlset>
 `;
 

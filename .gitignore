@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Elle alinmis eski build ciktisi — kaynak degil, yayina bu klasorden cikilmiyor.
+emirtiryaki-dist

@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { TechStackVisual } from "@/components/TechStackVisual";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+import { experienceLabel } from "@/lib/experience";
 import { cn } from "@/lib/utils";
 
 const skillCategories = [
@@ -52,7 +53,7 @@ const skillCategories = [
 ];
 
 const stats = [
-  { label: "Yıl deneyim", value: "5+" },
+  { label: "Yıl deneyim", value: experienceLabel() },
   { label: "Tamamlanan proje", value: "40+" },
   { label: "Sektör", value: "6+" },
   { label: "Teknoloji", value: "25+" },

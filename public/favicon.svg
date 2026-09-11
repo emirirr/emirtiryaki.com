@@ -1,13 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Emir Tiryaki">
+  <!-- Bas harf monogrami KULLANILMIYOR. Marka isareti: terminal caret + imlec. -->
   <defs>
     <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3985f5"/>
-      <stop offset="100%" stop-color="#0ea3df"/>
+      <stop offset="0%" stop-color="#7c5cff"/>
+      <stop offset="100%" stop-color="#c084fc"/>
     </linearGradient>
   </defs>
-  <rect x="1" y="1" width="30" height="30" rx="7" fill="url(#g)" stroke="rgba(241,245,249,0.14)" stroke-width="1"/>
-  <g fill="#f1f5f9">
-    <path d="M8.5 9.5h7.2v2.4H10.9v2.8h4.2v2.3h-4.2v3.7h4.8v2.4H8.5z"/>
-    <path d="M17.3 9.5h6.4v2.4h-2v11.2h-2.4V11.9h-2z"/>
+  <rect x="1" y="1" width="30" height="30" rx="8" fill="url(#g)"/>
+  <g fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9.5 11.5 L14.5 16 L9.5 20.5"/>
+    <path d="M17.5 21.5 H23"/>
   </g>
 </svg>

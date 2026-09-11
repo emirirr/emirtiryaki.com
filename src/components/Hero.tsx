@@ -11,11 +11,12 @@ import { FileText, Mail, ArrowRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/BrandIcons";
 import profileImage from "@/assets/emir-profile.jpg";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+import { experienceLabel } from "@/lib/experience";
 import { cn, scrollToSection } from "@/lib/utils";
 
 const tech = ["React", "Node.js", "TypeScript", "Swift", "PostgreSQL", "Docker", "AWS"];
 const stats = [
-  { value: "5+", label: "yıl" },
+  { value: experienceLabel(), label: "yıl" },
   { value: "40+", label: "proje" },
   { value: "3", label: "app store" },
 ];
