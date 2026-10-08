@@ -21,13 +21,13 @@ export default function DacarMobileProjectPage() {
 
   return (
     <div className="min-h-screen bg-background font-sans antialiased">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-background/80 backdrop-blur-lg backdrop-saturate-125">
+      <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg backdrop-saturate-125">
         <div className="container mx-auto flex items-center justify-between px-4 py-4 sm:px-6">
           <Button
             variant="ghost"
             onClick={() => navigate("/projects")}
-            className="gap-2 rounded-xl text-muted-foreground hover:bg-white/[0.06] hover:text-foreground"
-            data-cursor="pointer"
+            className="gap-2 rounded-xl text-muted-foreground hover:bg-secondary hover:text-foreground"
+
           >
             <ArrowLeft className="h-4 w-4" />
             Projeler
@@ -43,7 +43,7 @@ export default function DacarMobileProjectPage() {
 
       <main className="container relative mx-auto max-w-4xl px-4 py-12 sm:px-6">
         <div className="mb-8 flex flex-wrap items-center gap-3">
-          <Badge variant="secondary" className="rounded-lg border border-white/10">
+          <Badge variant="secondary" className="rounded-lg border border-border">
             {project.category}
           </Badge>
           <Icon className="h-8 w-8 text-primary/90" strokeWidth={1.25} aria-hidden />
@@ -57,7 +57,7 @@ export default function DacarMobileProjectPage() {
             <Badge
               key={tech}
               variant="secondary"
-              className="rounded-lg border border-white/5 bg-white/[0.06] px-2.5 py-0.5 text-xs font-medium"
+              className="rounded-lg border border-border bg-secondary px-2.5 py-0.5 text-xs font-medium"
             >
               {tech}
             </Badge>
@@ -74,7 +74,7 @@ export default function DacarMobileProjectPage() {
         </section>
 
         <section className="mt-10 grid gap-6 sm:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+          <div className="rounded-2xl border border-border bg-secondary p-5">
             <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
               Mimari
             </h2>
@@ -85,7 +85,7 @@ export default function DacarMobileProjectPage() {
               <li>Ekran, bileşen ve servis katmanlarının ayrık organizasyonu</li>
             </ul>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+          <div className="rounded-2xl border border-border bg-secondary p-5">
             <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
               Ana akışlar
             </h2>
@@ -155,8 +155,8 @@ export default function DacarMobileProjectPage() {
           <div className="mt-10">
             <Button
               variant="outline"
-              className="rounded-xl border-white/15 bg-white/[0.03] hover:bg-white/[0.08]"
-              data-cursor="pointer"
+              className="rounded-xl border-border bg-secondary hover:bg-secondary"
+
               onClick={() =>
                 window.open(project.github!, "_blank", "noopener,noreferrer")
               }

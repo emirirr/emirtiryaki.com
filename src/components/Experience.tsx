@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
-import { Briefcase, GraduationCap, MapPin } from "lucide-react";
+import { GraduationCap, MapPin } from "lucide-react";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+import { Section, SectionHeading } from "@/components/SectionHeading";
 
 type Role = {
   company: string;
@@ -105,134 +105,110 @@ const education = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="relative px-4 py-24 sm:px-6">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+    <Section id="experience">
       <motion.div
-        className="container mx-auto max-w-6xl"
+        className="mx-auto max-w-6xl"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-        <motion.div variants={fadeUp} className="mb-14 text-center">
-          <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
-            // deneyim
-          </p>
-          <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
-            <span className="text-gradient">İş </span>
-            <span className="text-foreground">geçmişi</span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            2017'den bu yana yazılım ve endüstri tarafında; staj, kurumsal roller ve freelance
-            teslimatlarla uçtan uca deneyim.
-          </p>
-        </motion.div>
+        <SectionHeading
+          eyebrow="Deneyim"
+          title="2017'den bu yana"
+          highlight="üretiyorum"
+          description="Staj, kurumsal roller ve freelance teslimatlarla yazılımın ve endüstrinin içinden gelen uçtan uca deneyim."
+        />
 
-        <div className="grid gap-10 lg:grid-cols-3 lg:gap-8">
-          <div className="lg:col-span-2">
-            <div className="relative space-y-4 before:absolute before:left-[7px] before:top-2 before:bottom-2 before:w-px before:bg-white/10">
-              {roles.map((role) => (
-                <motion.div
-                  key={`${role.company}-${role.period}`}
-                  variants={fadeUp}
-                  className="relative pl-8"
-                >
-                  <span className="absolute left-0 top-[10px] flex h-3.5 w-3.5 items-center justify-center">
-                    {role.current && (
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60 opacity-75" />
-                    )}
-                    <span
-                      className={
-                        role.current
-                          ? "relative inline-flex h-3 w-3 rounded-full border-2 border-background bg-emerald-400"
-                          : "relative inline-flex h-3 w-3 rounded-full border-2 border-background bg-primary/70"
-                      }
-                    />
+        <div className="grid gap-10 lg:grid-cols-[1fr_340px] lg:gap-12">
+          <ol className="relative">
+            <span className="absolute bottom-2 left-[7px] top-2 w-px bg-border" aria-hidden />
+            {roles.map((role) => (
+              <motion.li
+                key={`${role.company}-${role.title}`}
+                variants={fadeUp}
+                className="relative pb-8 pl-10 last:pb-0"
+              >
+                <span
+                  className={
+                    "absolute left-0 top-1.5 h-[15px] w-[15px] rounded-full border-[3px] " +
+                    (role.current
+                      ? "border-primary bg-card ring-4 ring-primary/15"
+                      : "border-border bg-card")
+                  }
+                  aria-hidden
+                />
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 className="text-lg font-bold tracking-tight text-foreground">
+                    {role.title}
+                    <span className="font-semibold text-muted-foreground"> · {role.company}</span>
+                  </h3>
+                  <span
+                    className={
+                      "text-xs font-semibold " +
+                      (role.current ? "text-primary" : "text-muted-foreground")
+                    }
+                  >
+                    {role.period}
                   </span>
-                  <div className="glass rounded-2xl border border-white/10 p-6 transition-colors hover:border-primary/25">
-                    <div className="flex flex-wrap items-start justify-between gap-2">
-                      <div>
-                        <h3 className="text-lg font-semibold tracking-tight text-foreground">
-                          {role.title}
-                        </h3>
-                        <p className="text-sm text-primary/90">{role.company}</p>
-                      </div>
-                      <span className="whitespace-nowrap font-mono text-xs text-muted-foreground">
-                        {role.period}
-                      </span>
-                    </div>
-                    <ul className="mt-3 space-y-1.5">
-                      {role.points.map((p) => (
-                        <li
-                          key={p}
-                          className="text-sm leading-relaxed text-muted-foreground"
-                        >
-                          {p}
-                        </li>
-                      ))}
-                    </ul>
-                    {role.tags && (
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {role.tags.map((t) => (
-                          <Badge
-                            key={t}
-                            variant="secondary"
-                            className="rounded-lg border border-white/5 bg-white/[0.05] px-2.5 py-1 font-mono text-[11px] font-medium"
-                          >
-                            {t}
-                          </Badge>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <motion.div
-              variants={fadeUp}
-              className="glass-strong rounded-2xl border border-white/10 p-6"
-            >
-              <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-primary">
-                  <GraduationCap className="h-5 w-5" strokeWidth={1.75} />
                 </div>
-                <h3 className="text-lg font-semibold tracking-tight">Eğitim & Sertifika</h3>
+                <ul className="mt-2 space-y-1.5">
+                  {role.points.map((p) => (
+                    <li key={p} className="text-sm leading-relaxed text-muted-foreground">
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </motion.li>
+            ))}
+          </ol>
+
+          <motion.aside variants={fadeUp} className="space-y-5 lg:sticky lg:top-24 lg:self-start">
+            <div className="card-surface p-6">
+              <div className="flex items-center gap-2.5">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-soft text-primary">
+                  <GraduationCap className="h-[18px] w-[18px]" strokeWidth={2} />
+                </span>
+                <h3 className="font-bold text-foreground">Eğitim & sertifika</h3>
               </div>
               <ul className="mt-5 space-y-4">
                 {education.map((e) => (
-                  <li key={e.detail} className="border-l border-white/10 pl-4">
-                    <p className="text-sm font-medium text-foreground">{e.school}</p>
+                  <li key={e.detail}>
+                    <p className="text-sm font-semibold text-foreground">{e.school}</p>
                     <p className="text-sm text-muted-foreground">{e.detail}</p>
                   </li>
                 ))}
               </ul>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              className="glass rounded-2xl border border-white/10 p-6"
-            >
-              <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-accent">
-                  <Briefcase className="h-5 w-5" strokeWidth={1.75} />
-                </div>
-                <h3 className="text-lg font-semibold tracking-tight">Çalışma tercihi</h3>
+            </div>
+            <div className="rounded-2xl bg-ink p-6 text-white">
+              <div className="flex items-center gap-2 text-sm font-semibold">
+                <MapPin className="h-4 w-4 text-primary-glow" />
+                İstanbul · Uzaktan & hibrit
               </div>
-              <div className="mt-4 space-y-2 text-sm text-muted-foreground">
-                <p className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-primary/80" strokeWidth={1.75} />
-                  İstanbul · Uzaktan &amp; hibrit
-                </p>
-                <p>Tam zamanlı roller, freelance projeler ve uzun vadeli iş birlikleri.</p>
-              </div>
-            </motion.div>
-          </div>
+              <p className="mt-2 text-sm leading-relaxed text-white/70">
+                Tam zamanlı roller, freelance projeler ve uzun vadeli iş birliklerine açığım.
+              </p>
+              <a
+                href="/cv.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex h-10 items-center rounded-lg bg-white px-4 text-sm font-semibold text-ink transition-opacity hover:opacity-90"
+              >
+                Özgeçmişi görüntüle
+              </a>
+              <a
+                href="/cv-en.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-3 text-sm font-medium text-white/70 underline-offset-4 hover:text-white hover:underline"
+              >
+                English
+              </a>
+            </div>
+          </motion.aside>
         </div>
       </motion.div>
-    </section>
+    </Section>
   );
 };
 

@@ -1,263 +1,231 @@
-import { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValue,
-  useSpring,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { FileText, Mail, ArrowRight } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/BrandIcons";
+import { ArrowRight, Check, Star } from "lucide-react";
 import profileImage from "@/assets/emir-profile.jpg";
 import { fadeUp, staggerContainer } from "@/lib/motion";
-import { cn, scrollToSection } from "@/lib/utils";
+import { scrollToSection } from "@/lib/utils";
+import { LiveSitePreview } from "@/components/LiveSitePreview";
+import livePreview from "@/data/livePreview.json";
 
-const tech = ["React", "Node.js", "TypeScript", "Swift", "PostgreSQL", "Docker", "AWS"];
+const TIRYAKI_URL = "https://tiryakiyazilim.com";
+
+const trust = ["40+ teslim edilmiş proje", "App Store & Google Play'de yayında", "24 saat içinde dönüş"];
+
 const stats = [
-  { value: "5+", label: "yıl" },
-  { value: "40+", label: "proje" },
-  { value: "3", label: "app store" },
+  { value: "5+", label: "Yıl deneyim" },
+  { value: "40+", label: "Tamamlanan proje" },
+  { value: "8", label: "Mağazada uygulama" },
+  { value: "6+", label: "Farklı sektör" },
 ];
 
-/** Fare konumuna göre yumuşak 3B eğim (magnetic tilt). */
-function useTilt(strength = 8) {
-  const rx = useMotionValue(0);
-  const ry = useMotionValue(0);
-  const rotateX = useSpring(rx, { stiffness: 150, damping: 18 });
-  const rotateY = useSpring(ry, { stiffness: 150, damping: 18 });
-
-  const onMove = (e: React.MouseEvent<HTMLElement>) => {
-    const el = e.currentTarget;
-    const rect = el.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width - 0.5;
-    const py = (e.clientY - rect.top) / rect.height - 0.5;
-    ry.set(px * strength);
-    rx.set(-py * strength);
-  };
-  const onLeave = () => {
-    rx.set(0);
-    ry.set(0);
-  };
-  return { rotateX, rotateY, onMove, onLeave };
-}
+const clients = [
+  "Heybe",
+  "Kortbul",
+  "daCAR",
+  "Klinik Takip",
+  "Kuta",
+  "Odak Software",
+  "Karaca Yapı",
+  "AvtoUzbek",
+  "Marocar",
+  "NaijaCar",
+  "BharatKaar",
+  "AvtoBozor",
+  "Satılık",
+  "İnda Otomasyon",
+  "Tiryaki Yazılım",
+  "CarLog",
+  "Adhan",
+];
 
 const Hero = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  // Scroll ilerledikçe içerik hafifçe yukarı süzülür ve soner (sinematik çıkış)
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const auroraY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-
-  const mainTilt = useTilt(7);
-  const profileTilt = useTilt(9);
-
   return (
-    <section
-      ref={sectionRef}
-      id="hero"
-      className="relative min-h-screen overflow-hidden px-4 pb-24 pt-28 sm:px-6 sm:pt-32"
-    >
-      <motion.div className="aurora" aria-hidden style={{ y: auroraY }}>
-        <div className="aurora-blob aurora-blob--1" />
-        <div className="aurora-blob aurora-blob--2" />
-        <div className="aurora-blob aurora-blob--3" />
-      </motion.div>
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.05] [background-image:linear-gradient(hsl(var(--foreground))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--foreground))_1px,transparent_1px)] [background-size:46px_46px] [mask-image:radial-gradient(ellipse_75%_60%_at_50%_30%,black,transparent)]"
-        aria-hidden
-      />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-background" />
+    <section id="hero" className="relative overflow-hidden px-4 pb-0 pt-28 sm:px-6 md:pt-36">
+      <div className="bg-dots pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_30%,transparent_75%)]" />
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[900px] -translate-x-1/2 rounded-full bg-primary/[0.07] blur-3xl" />
 
       <motion.div
-        className="container relative z-10 mx-auto max-w-6xl"
-        style={{ y: contentY, opacity: contentOpacity }}
+        className="relative mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-10"
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
       >
-        <div className="grid auto-rows-[minmax(120px,auto)] grid-cols-12 gap-4 md:gap-5">
-          {/* Ana kart — 3B tilt */}
-          <motion.div
+        <div>
+          <motion.span variants={fadeUp} className="eyebrow">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
+            </span>
+            Yeni projelere açık · İstanbul
+          </motion.span>
+
+          <motion.h1
             variants={fadeUp}
-            onMouseMove={mainTilt.onMove}
-            onMouseLeave={mainTilt.onLeave}
-            style={{
-              rotateX: mainTilt.rotateX,
-              rotateY: mainTilt.rotateY,
-              transformPerspective: 1200,
-            }}
-            className={cn(
-              "glass-strong relative col-span-12 flex flex-col justify-center overflow-hidden rounded-3xl p-8 md:col-span-7 md:p-10",
-              "border border-white/10 shadow-[0_1px_0_rgba(255,255,255,0.06)_inset] [transform-style:preserve-3d]",
-            )}
+            className="mt-5 font-display text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-[4.1rem]"
           >
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 motion-safe:animate-ping" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+            Fikirden yayına,{" "}
+            <span className="text-primary">uçtan uca</span> dijital ürünler.
+          </motion.h1>
+
+          <motion.p
+            variants={fadeUp}
+            className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground"
+          >
+            Ben <strong className="font-semibold text-foreground">İsmail Emir Tiryaki</strong>.
+            Web sitesi, mobil uygulama ve yönetim paneli geliştiriyorum. Arayüzü, backend'i ve App
+            Store yayınını tek başıma üstleniyorum.
+          </motion.p>
+
+          <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button
+              size="lg"
+              className="h-12 rounded-lg px-6 text-[15px] font-semibold shadow-[0_8px_24px_-10px_hsl(var(--primary)/0.7)]"
+              onClick={() => scrollToSection("projects")}
+            >
+              Projeleri incele
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-12 rounded-lg px-6 text-[15px] font-semibold"
+              onClick={() => scrollToSection("contact")}
+            >
+              Ücretsiz ön görüşme
+            </Button>
+          </motion.div>
+
+          <motion.ul variants={fadeUp} className="mt-8 flex flex-wrap gap-x-5 gap-y-2">
+            {trust.map((t) => (
+              <li key={t} className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                <Check className="h-4 w-4 text-primary" strokeWidth={2.5} />
+                {t}
+              </li>
+            ))}
+          </motion.ul>
+        </div>
+
+        {/* Görsel: gerçek bir iş ekranı + yüzen bilgi kartları */}
+        <motion.div variants={fadeUp} className="relative mx-auto w-full max-w-[560px] lg:mr-0">
+          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_40px_80px_-32px_hsl(218_60%_25%/0.35)]">
+            <div className="flex items-center gap-1.5 border-b border-border bg-surface px-4 py-3">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+              <span className="ml-3 flex min-w-0 flex-1 items-center gap-2 rounded-md bg-background px-3 py-1 text-[11px] font-medium text-muted-foreground">
+                <span className="truncate">tiryakiyazilim.com</span>
+                <span className="ml-auto flex shrink-0 items-center gap-1 text-success">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-success" />
+                  </span>
+                  canlı
                 </span>
-                Yeni projelere açık
               </span>
-              <p className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
-                Full-Stack &amp; iOS Developer
+            </div>
+            <LiveSitePreview
+              url={TIRYAKI_URL}
+              poster="/portfolio/images/tiryakiyazilim-live.png"
+              title="Tiryaki Yazılım"
+              live={livePreview.enabled}
+            />
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="card-surface absolute -bottom-8 -left-3 flex items-center gap-3 p-3 pr-5 sm:-left-8"
+          >
+            <img
+              src={profileImage}
+              alt="İsmail Emir Tiryaki"
+              width={48}
+              height={48}
+              className="h-12 w-12 rounded-xl object-cover"
+            />
+            <div>
+              <p className="text-sm font-bold text-foreground">İsmail Emir Tiryaki</p>
+              <p className="flex items-center gap-1.5 text-xs font-medium text-success">
+                <span className="h-1.5 w-1.5 rounded-full bg-success" />
+                Projelere müsait
               </p>
             </div>
-            <h1 className="mt-4 font-display text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl md:leading-[1.02]">
-              <span className="text-foreground">İsmail Emir </span>
-              <span className="text-gradient-animated">Tiryaki</span>
-            </h1>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Web ve mobilde uçtan uca ürün geliştiriyorum: piksel-hassas arayüzler, net API
-              sözleşmeleri ve ölçeklenebilir backend. Fikirden App Store yayınına kadar tek elden.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button
-                size="lg"
-                className="rounded-2xl hero-gradient px-7 text-base font-medium shadow-lg shadow-primary/20"
-                data-cursor="pointer"
-                onClick={() => scrollToSection("contact")}
-              >
-                <Mail className="mr-2 h-5 w-5" />
-                İletişime geç
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="rounded-2xl border-white/15 bg-white/[0.03] px-7 text-base font-medium backdrop-blur-md hover:bg-white/[0.07]"
-                data-cursor="pointer"
-                onClick={() => scrollToSection("projects")}
-              >
-                Projeler
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="rounded-2xl border-white/15 bg-white/[0.03] px-7 text-base font-medium backdrop-blur-md hover:bg-white/[0.07]"
-                data-cursor="pointer"
-                asChild
-              >
-                <a href="/cv.html" target="_blank" rel="noopener noreferrer">
-                  <FileText className="mr-2 h-5 w-5" />
-                  Özgeçmiş
-                </a>
-              </Button>
-            </div>
-            <p className="mt-4 text-xs text-muted-foreground">
-              CV:{" "}
-              <a href="/cv.html" target="_blank" rel="noopener noreferrer" className="underline decoration-white/20 underline-offset-4 transition-colors hover:text-foreground" data-cursor="pointer">
-                Türkçe
-              </a>{" "}
-              ·{" "}
-              <a href="/cv-en.html" target="_blank" rel="noopener noreferrer" className="underline decoration-white/20 underline-offset-4 transition-colors hover:text-foreground" data-cursor="pointer">
-                English
-              </a>
-            </p>
           </motion.div>
 
-          {/* Profil kartı — 3B tilt */}
           <motion.div
-            variants={fadeUp}
-            onMouseMove={profileTilt.onMove}
-            onMouseLeave={profileTilt.onLeave}
-            style={{
-              rotateX: profileTilt.rotateX,
-              rotateY: profileTilt.rotateY,
-              transformPerspective: 1000,
-            }}
-            className="glass relative col-span-12 flex flex-col items-center justify-center rounded-3xl border border-white/10 p-8 md:col-span-5 [transform-style:preserve-3d]"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.65, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="card-surface absolute -right-2 -top-6 hidden items-center gap-3 p-3 pr-4 sm:flex md:-right-6"
           >
-            <div className="relative" style={{ transform: "translateZ(40px)" }}>
-              <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-primary/30 to-accent/25 blur-2xl" />
-              <img
-                src={profileImage}
-                alt="İsmail Emir Tiryaki"
-                width={160}
-                height={160}
-                className="relative h-36 w-36 rounded-[2rem] border border-white/15 object-cover shadow-2xl md:h-40 md:w-40"
-                decoding="async"
-              />
-            </div>
-            <p className="mt-6 text-center text-sm text-muted-foreground">
-              İstanbul · Uzaktan &amp; hibrit iş birlikleri
-            </p>
-            <div className="mt-5 flex gap-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label="GitHub"
-                className="h-11 w-11 rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08]"
-                data-cursor="pointer"
-                onClick={() => window.open("https://github.com/emirirr", "_blank", "noopener,noreferrer")}
-              >
-                <GithubIcon className="h-5 w-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label="LinkedIn"
-                className="h-11 w-11 rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08]"
-                data-cursor="pointer"
-                onClick={() => window.open("https://www.linkedin.com/in/emir-tiryaki/", "_blank", "noopener,noreferrer")}
-              >
-                <LinkedinIcon className="h-5 w-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label="E-posta"
-                className="h-11 w-11 rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08]"
-                data-cursor="pointer"
-                onClick={() => window.open("mailto:info@emirtiryaki.com", "_blank")}
-              >
-                <Mail className="h-5 w-5" />
-              </Button>
-            </div>
-          </motion.div>
-
-          {/* Kanıt istatistikleri */}
-          <motion.div variants={fadeUp} className="glass col-span-12 rounded-3xl border border-white/10 p-6 md:col-span-4">
-            <p className="font-mono text-xs font-medium uppercase tracking-widest text-primary/80">
-              // kanıt
-            </p>
-            <div className="mt-4 grid grid-cols-3 gap-2">
-              {stats.map((s) => (
-                <div key={s.label}>
-                  <div className="font-display text-2xl font-semibold tabular-nums text-gradient md:text-3xl">
-                    {s.value}
-                  </div>
-                  <div className="mt-0.5 font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
-                    {s.label}
-                  </div>
-                </div>
+            <div className="flex -space-x-2">
+              {["/apps/heybe.jpg", "/apps/kortbul.png", "/apps/carlog.jpg", "/apps/dacar.png"].map((src) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt=""
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 rounded-lg border-2 border-card object-cover"
+                />
               ))}
             </div>
-          </motion.div>
-
-          {/* Yığın */}
-          <motion.div variants={fadeUp} className="glass col-span-12 rounded-3xl border border-white/10 p-6 md:col-span-8">
-            <p className="mb-4 font-mono text-xs font-medium uppercase tracking-widest text-primary/80">
-              // yığın
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {tech.map((t) => (
-                <span
-                  key={t}
-                  className="rounded-xl border border-white/5 bg-white/[0.06] px-3 py-1.5 font-mono text-xs font-medium backdrop-blur-sm transition-colors hover:border-primary/25 hover:bg-white/[0.1]"
-                >
-                  {t}
-                </span>
-              ))}
+            <div>
+              <p className="text-xs font-bold text-foreground">Mağazada yayında</p>
+              <p className="flex items-center gap-0.5 text-[11px] text-muted-foreground">
+                <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+                8 uygulama · App Store & Google Play
+              </p>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </motion.div>
+
+      {/* Rakam şeridi */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.35, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        className="relative mx-auto mt-24 grid max-w-6xl grid-cols-2 divide-border rounded-2xl border border-border bg-card md:grid-cols-4 md:divide-x"
+        style={{ boxShadow: "var(--shadow-card)" }}
+      >
+        {stats.map((s, i) => (
+          <div
+            key={s.label}
+            className={
+              "px-6 py-6 text-center md:py-7 " +
+              (i < 2 ? "border-b border-border md:border-b-0 " : "") +
+              (i % 2 === 0 ? "border-r border-border md:border-r-0" : "")
+            }
+          >
+            <div className="font-display text-3xl font-extrabold tracking-tight text-primary md:text-4xl">
+              {s.value}
+            </div>
+            <div className="mt-1 text-sm text-muted-foreground">{s.label}</div>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Teslim edilen işler — kayan şerit */}
+      <div className="relative mx-auto mt-14 max-w-6xl pb-16">
+        <p className="mb-5 text-center text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          Geliştirdiğim ürünlerden bazıları
+        </p>
+        <div className="overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
+          <div className="animate-marquee flex w-max gap-12">
+            {[...clients, ...clients].map((c, i) => (
+              <span
+                key={`${c}-${i}`}
+                className="whitespace-nowrap text-lg font-bold tracking-tight text-foreground/35"
+                aria-hidden={i >= clients.length}
+              >
+                {c}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

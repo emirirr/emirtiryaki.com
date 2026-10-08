@@ -39,7 +39,7 @@ export async function talepGonder(payload: TalepPayload): Promise<void> {
       phone: payload.phone || null,
       service: payload.service || null,
       message: payload.message,
-      source: payload.source || "emirtiryaki-iletisim",
+      source: payload.source || "emirtiryaki.com",
     }),
   });
   if (!res.ok) {

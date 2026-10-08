@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { MotionConfig } from "framer-motion";
-import { CustomCursor } from "@/components/CustomCursor";
 import { TerminalMode } from "@/components/TerminalMode";
 import { CanonicalLink } from "@/components/CanonicalLink";
 import Index from "./pages/Index";
@@ -37,7 +36,6 @@ const App = () => (
   <MotionConfig reducedMotion="user">
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <CustomCursor />
         <TerminalMode />
         <Toaster />
         <Sonner />

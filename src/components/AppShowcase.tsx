@@ -1,175 +1,286 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { ArrowUpRight, Clock } from "lucide-react";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+import { Section, SectionHeading } from "@/components/SectionHeading";
+import { AppleLogo, GooglePlayLogo, StoreBadge } from "@/components/StoreBadge";
 
-const DEVELOPER_URL = "https://apps.apple.com/tr/developer/emir-tiryaki/id1852537743";
-
-const AppleGlyph = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
-    <path d="M16.365 1.43c0 1.14-.42 2.2-1.12 2.99-.79.9-2.08 1.6-3.2 1.51-.13-1.09.42-2.24 1.09-2.98.76-.84 2.1-1.48 3.23-1.52zM20.5 17.2c-.55 1.27-.81 1.84-1.52 2.96-.99 1.56-2.39 3.51-4.12 3.52-1.54.02-1.94-1-4.03-.99-2.09.01-2.53 1.01-4.07.99-1.73-.02-3.05-1.78-4.04-3.34C-.29 16.02-.63 10.1 1.7 7.25 2.72 5.98 4.34 5.17 5.86 5.17c1.55 0 2.52 1 3.8 1 1.24 0 2-1 3.8-1 1.36 0 2.8.74 3.83 2.02-3.36 1.84-2.82 6.64.21 8.01z" />
-  </svg>
-);
-
-const PlayGlyph = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
-    <path d="M3.6 2.3c-.3.2-.5.6-.5 1.1v17.2c0 .5.2.9.5 1.1l9.2-9.7L3.6 2.3zm11 8.4 2.6-2.7L6.4 1.8c-.4-.2-.8-.2-1.1-.1l9.3 9zm0 2.6-9.3 9c.3.1.7.1 1.1-.1l10.8-6.2-2.6-2.7zm5.9-3.3-2.3-1.3-2.9 3 2.9 3 2.3-1.3c.9-.5.9-1.9 0-2.4z" />
-  </svg>
-);
-
-type App = {
+type StoreApp = {
   name: string;
+  category: string;
   tagline: string;
   icon: string;
-  tags: string[];
-  url: string;
-  platform: "ios" | "android";
+  builtWith: string;
+  appStore?: string;
+  googlePlay?: string;
+  /** Müşteri hesabıyla yayınlanan uygulamalar */
+  client?: string;
+  /** Mağaza yayını öncesi uygulamalar için canlı web sitesi */
+  website?: string;
 };
 
-const apps: App[] = [
+/**
+ * Mağazalarda yayında olan uygulamalar (Ekim 2026 kontrolü).
+ * App Store hesapları: Emir Tiryaki (CarLog, Adhan), araç pazaryeri hesabı (daCAR, AvtoUzbek, Marocar, NaijaCar),
+ * Kortbul ve Heybe müşteri hesapları. Google Play: Afrikaapp + Kortbul + Heybe.
+ */
+const apps: StoreApp[] = [
   {
-    name: "CarLog",
+    name: "Heybe",
+    category: "Eğitim · Din",
     tagline:
-      "Aracın bakım, yakıt ve resmî evrak bilgilerini tek yerden takip; satarken alıcıya rapor.",
-    icon: "/apps/carlog.jpg",
-    tags: ["Swift", "SwiftUI", "iOS"],
-    url: "https://apps.apple.com/tr/app/carlog/id6760318180",
-    platform: "ios",
+      "Kur'an ve dini eğlenerek öğreten uygulama: elifba ve ibadet dersleri, namaz takibi, sure ezberi, lig ve topluluk.",
+    icon: "/apps/heybe.jpg",
+    builtWith: "Flutter & Firebase ile geliştirildi",
+    appStore: "https://apps.apple.com/tr/app/heybe-i-slami-%C3%B6%C4%9Fren/id6807960856",
+    googlePlay: "https://play.google.com/store/apps/details?id=com.charduck.heybe",
+    client: "Heybe markası için",
   },
   {
-    name: "Adhan — Namaz Vakti",
+    name: "Kortbul",
+    category: "Spor · Rezervasyon",
     tagline:
-      "GPS veya manuel şehir seçimiyle hassas namaz vakitleri, bildirim ve sade, modern arayüz.",
+      "Tenis, padel, pickleball, squash ve badminton için kort ve partner bulma; maç teklifi, sohbet ve turnuvalar.",
+    icon: "/apps/kortbul.png",
+    builtWith: "React Native & Expo ile geliştirildi",
+    appStore: "https://apps.apple.com/tr/app/kortbul-tenis-padel-ke%C5%9Ffet/id6758905599",
+    googlePlay: "https://play.google.com/store/apps/details?id=com.krtbl.expo",
+    client: "Kortbul markası için",
+  },
+  {
+    name: "CarLog",
+    category: "Araç · Kişisel",
+    tagline:
+      "Aracın bakım, yakıt ve resmî evrak bilgilerini tek yerden takip; satarken alıcıya rapor sunar.",
+    icon: "/apps/carlog.jpg",
+    builtWith: "Swift & SwiftUI ile geliştirildi",
+    appStore: "https://apps.apple.com/tr/app/carlog/id6760318180",
+  },
+  {
+    name: "Adhan",
+    category: "Namaz vakitleri",
+    tagline:
+      "GPS veya manuel şehir seçimiyle hassas namaz vakitleri, vakit bildirimleri ve sade, modern arayüz.",
     icon: "/apps/adhan.jpg",
-    tags: ["Swift", "SwiftUI", "iOS"],
-    url: "https://apps.apple.com/tr/app/adhan/id6755198431",
-    platform: "ios",
+    builtWith: "Swift & SwiftUI ile geliştirildi",
+    appStore: "https://apps.apple.com/tr/app/adhan/id6755198431",
   },
   {
     name: "daCAR",
+    category: "Senegal · Araç pazaryeri",
     tagline:
-      "Senegal için uçtan uca araç pazaryeri: ilan yayınlama, gelişmiş arama ve doğrulanmış satıcılar.",
+      "Senegal için araç alım-satım: ilan yayınlama, gelişmiş arama ve doğrulanmış satıcılar.",
     icon: "/apps/dacar.png",
-    tags: ["React Native", "Expo", "Supabase"],
-    url: "https://play.google.com/store/apps/details?id=com.ismailtiryaki.dacar",
-    platform: "android",
+    builtWith: "React Native, Expo & Supabase ile geliştirildi",
+    appStore: "https://apps.apple.com/tr/app/dacar-achat-vente-de-voitures/id6761602043",
+    googlePlay: "https://play.google.com/store/apps/details?id=com.ismailtiryaki.dacar",
+  },
+  {
+    name: "AvtoUzbek",
+    category: "Özbekistan · Araç pazaryeri",
+    tagline:
+      "Özbekistan'ın araç ilan pazarı: ikinci el ve sıfır araç ilanları, filtreli arama ve satıcıyla iletişim.",
+    icon: "/apps/avtouzbek.png",
+    builtWith: "React Native, Expo & Supabase ile geliştirildi",
+    appStore: "https://apps.apple.com/tr/app/avtouzbek-avto-elon-bozor/id6799088463",
+    googlePlay: "https://play.google.com/store/apps/details?id=com.appcarfy.avtouzbek",
+  },
+  {
+    name: "Marocar",
+    category: "Fas · Araç pazaryeri",
+    tagline:
+      "Fas için ikinci el araç pazaryeri: ilan verme, marka-model filtreleri ve güvenli iletişim.",
+    icon: "/apps/marocar.png",
+    builtWith: "React Native, Expo & Supabase ile geliştirildi",
+    appStore: "https://apps.apple.com/tr/app/marocar-voitures-doccasion/id6773120581",
+    googlePlay: "https://play.google.com/store/apps/details?id=com.appcarfy.marocar",
+  },
+  {
+    name: "NaijaCar",
+    category: "Nijerya · Araç pazaryeri",
+    tagline:
+      "Nijerya için araç alım-satım: doğrulanmış satıcılar, bütçeye göre arama ve uygulama içi mesajlaşma.",
+    icon: "/apps/naijacar.png",
+    builtWith: "React Native, Expo & Supabase ile geliştirildi",
+    appStore: "https://apps.apple.com/tr/app/naijacar-buy-sell-cars/id6775273788",
   },
 ];
 
-const platformMeta = {
-  ios: {
-    label: "App Store",
-    Glyph: AppleGlyph,
-    badge: "border-sky-400/25 bg-sky-400/10 text-sky-300",
-    cta: "App Store'da aç",
+/** Geliştirmesi tamamlanan, mağaza yayını öncesindeki uygulamalar. */
+const upcoming: StoreApp[] = [
+  {
+    name: "BharatKaar",
+    category: "Hindistan · Araç pazaryeri",
+    tagline: "Hindistan için araç alım-satım: komisyonsuz ilan, plakadan otomatik doldurma, şehir bazlı arama.",
+    icon: "/apps/bharatkaar.png",
+    builtWith: "React Native, Expo & Supabase ile geliştirildi",
+    website: "https://www.bharatkaar.com",
   },
-  android: {
-    label: "Google Play",
-    Glyph: PlayGlyph,
-    badge: "border-emerald-400/25 bg-emerald-400/10 text-emerald-300",
-    cta: "Play Store'da aç",
+  {
+    name: "AvtoBozor",
+    category: "Özbekistan · Araç pazaryeri",
+    tagline: "Özbekistan'ın komisyonsuz araç pazarı: doğrulanmış satıcılar, hızlı ilan ve detaylı filtreler.",
+    icon: "/apps/avtobozor.png",
+    builtWith: "React Native, Expo & Supabase ile geliştirildi",
+    website: "https://www.avtobozor.app",
   },
-} as const;
+  {
+    name: "Satılık",
+    category: "Türkiye · İlan platformu",
+    tagline: "Otomobilden emlağa, elektronikten iş makinelerine Türkiye'nin ilan platformu; web, mobil ve admin paneli.",
+    icon: "/apps/satilik.png",
+    builtWith: "React Native, Expo & Supabase ile geliştirildi",
+    website: "https://satilikapp.com",
+  },
+  {
+    name: "BanglaGari",
+    category: "Bangladeş · Araç pazaryeri",
+    tagline: "Bangladeş için Bengalce/İngilizce araç alım-satım uygulaması; pazaryeri ailesinin yedinci ülkesi.",
+    icon: "/apps/banglagari.png",
+    builtWith: "React Native, Expo & Supabase ile geliştirildi",
+  },
+];
 
 const AppShowcase = () => {
-  return (
-    <section id="apps" className="relative px-4 py-24 sm:px-6">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 top-1/3 h-[340px] bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.07),transparent_65%)]" />
+  const iosCount = apps.filter((a) => a.appStore).length;
+  const androidCount = apps.filter((a) => a.googlePlay).length;
 
+  return (
+    <Section id="apps">
       <motion.div
-        className="container relative mx-auto max-w-6xl"
+        className="mx-auto max-w-6xl"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-        <motion.div variants={fadeUp} className="mb-14 text-center">
-          <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
-            // mağazada yayında
+        <SectionHeading
+          eyebrow="Mağazada yayında"
+          title="Yayınlanmış"
+          highlight="uygulamalar"
+          description="Fikirden mağaza yayınına kadar geliştirdiğim, bugün App Store ve Google Play'de indirilebilen uygulamalar."
+        >
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground">
+              <AppleLogo className="h-4 w-4" />
+              App Store'da {iosCount} uygulama
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground">
+              <GooglePlayLogo className="h-4 w-4" />
+              Google Play'de {androidCount} uygulama
+            </span>
+          </div>
+        </SectionHeading>
+
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {apps.map((app) => (
+            <motion.article
+              key={app.name}
+              variants={fadeUp}
+              className="card-surface card-lift flex h-full flex-col p-6"
+            >
+              <div className="flex items-center gap-4">
+                <img
+                  src={app.icon}
+                  alt={`${app.name} uygulama simgesi`}
+                  width={64}
+                  height={64}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-16 w-16 shrink-0 rounded-[22%] border border-border object-cover shadow-[0_10px_24px_-12px_hsl(222_47%_9%/0.4)]"
+                />
+                <div className="min-w-0">
+                  <h3 className="truncate text-lg font-bold tracking-tight text-foreground">
+                    {app.name}
+                  </h3>
+                  <p className="truncate text-xs font-medium text-muted-foreground">
+                    {app.category}
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                {app.tagline}
+              </p>
+
+              <p className="mt-4 text-xs font-semibold text-primary">
+                {app.builtWith}
+                {app.client && (
+                  <span className="font-medium text-muted-foreground"> · {app.client}</span>
+                )}
+              </p>
+
+              <div className="mt-4 flex flex-wrap gap-2 border-t border-border pt-4">
+                {app.appStore && <StoreBadge store="appstore" href={app.appStore} size="sm" />}
+                {app.googlePlay && (
+                  <StoreBadge store="googleplay" href={app.googlePlay} size="sm" />
+                )}
+              </div>
+            </motion.article>
+          ))}
+        </div>
+
+        <motion.div variants={fadeUp} className="mt-16 flex flex-col items-center text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-amber-500/25 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">
+            <Clock className="h-3.5 w-3.5" />
+            Yakında mağazada
+          </span>
+          <h3 className="mt-3 text-2xl font-extrabold tracking-tight text-foreground">
+            Yayına hazırlanan uygulamalar
+          </h3>
+          <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+            Geliştirmesi tamamlandı, mağaza incelemesi bekleniyor. Web siteleri şimdiden yayında.
           </p>
-          <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
-            <span className="text-gradient">Yayınlanmış </span>
-            <span className="text-foreground">uygulamalar</span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Fikirden mağaza yayınına kadar tek sorumlu olarak geliştirdiğim, App Store ve Google
-            Play'de canlı uygulamalar.
-          </p>
-          <a
-            href={DEVELOPER_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-cursor="pointer"
-            className="mt-6 inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/[0.03] px-4 py-2.5 text-sm font-medium backdrop-blur-md transition-colors hover:border-primary/30 hover:bg-white/[0.07]"
-          >
-            <AppleGlyph className="h-4 w-4" />
-            App Store geliştirici sayfam
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
         </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-3 lg:gap-5">
-          {apps.map((app) => {
-            const meta = platformMeta[app.platform];
-            return (
-              <motion.a
-                key={app.name}
-                variants={fadeUp}
-                href={app.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor="pointer"
-                whileHover={{ y: -4, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}
-                className="glass-strong group flex h-full flex-col rounded-3xl border border-white/10 p-6 transition-shadow duration-300 hover:border-primary/25 hover:shadow-[0_24px_60px_-24px_hsl(var(--primary)/0.4)]"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <img
-                    src={app.icon}
-                    alt={`${app.name} uygulama simgesi`}
-                    width={64}
-                    height={64}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-16 w-16 rounded-[22%] border border-white/15 object-cover shadow-lg shadow-black/40"
-                  />
-                  <Badge
-                    className={`gap-1.5 rounded-lg border px-2.5 py-1 text-[10px] font-medium ${meta.badge}`}
-                  >
-                    <meta.Glyph className="h-3 w-3" />
-                    {meta.label}
-                  </Badge>
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {upcoming.map((app) => (
+            <motion.article
+              key={app.name}
+              variants={fadeUp}
+              className="flex h-full flex-col rounded-2xl border border-dashed border-border bg-surface p-6"
+            >
+              <div className="flex items-center gap-4">
+                <img
+                  src={app.icon}
+                  alt={`${app.name} uygulama simgesi`}
+                  width={56}
+                  height={56}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-14 w-14 shrink-0 rounded-[22%] border border-border bg-white object-cover"
+                />
+                <div className="min-w-0">
+                  <h4 className="truncate font-bold tracking-tight text-foreground">{app.name}</h4>
+                  <p className="truncate text-xs font-medium text-muted-foreground">{app.category}</p>
                 </div>
-
-                <h3 className="mt-5 text-lg font-semibold tracking-tight text-foreground">
-                  {app.name}
-                </h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {app.tagline}
-                </p>
-
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {app.tags.map((t) => (
-                    <Badge
-                      key={t}
-                      variant="outline"
-                      className="rounded-lg border-white/10 bg-transparent px-2 py-0.5 text-[10px]"
-                    >
-                      {t}
-                    </Badge>
-                  ))}
-                </div>
-
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-                  {meta.cta}
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </div>
+              <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">{app.tagline}</p>
+              <p className="mt-4 text-xs font-semibold text-primary">{app.builtWith}</p>
+              <div className="mt-4 flex items-center justify-between gap-2 border-t border-border pt-4">
+                <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                  <AppleLogo className="h-3.5 w-3.5" />
+                  <GooglePlayLogo className="h-3.5 w-3.5" />
+                  Yakında
                 </span>
-              </motion.a>
-            );
-          })}
+                {app.website ? (
+                  <a
+                    href={app.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+                  >
+                    Web sitesi
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                ) : (
+                  <span className="text-xs text-muted-foreground">Site hazırlanıyor</span>
+                )}
+              </div>
+            </motion.article>
+          ))}
         </div>
       </motion.div>
-    </section>
+    </Section>
   );
 };
 

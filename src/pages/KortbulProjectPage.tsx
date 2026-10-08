@@ -33,13 +33,13 @@ export default function KortbulProjectPage() {
 
   return (
     <div className="min-h-screen bg-background font-sans antialiased">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-background/80 backdrop-blur-lg backdrop-saturate-125">
+      <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg backdrop-saturate-125">
         <div className="container mx-auto flex items-center justify-between px-4 py-4 sm:px-6">
           <Button
             variant="ghost"
             onClick={() => navigate("/projects")}
-            className="gap-2 rounded-xl text-muted-foreground hover:bg-white/[0.06] hover:text-foreground"
-            data-cursor="pointer"
+            className="gap-2 rounded-xl text-muted-foreground hover:bg-secondary hover:text-foreground"
+
           >
             <ArrowLeft className="h-4 w-4" />
             Projeler
@@ -55,7 +55,7 @@ export default function KortbulProjectPage() {
 
       <main className="container relative mx-auto max-w-3xl px-4 py-12 sm:px-6">
         <div className="mb-8 flex flex-wrap items-center gap-3">
-          <Badge variant="secondary" className="rounded-lg border border-white/10">
+          <Badge variant="secondary" className="rounded-lg border border-border">
             {project.category}
           </Badge>
           <Icon className="h-8 w-8 text-primary/90" strokeWidth={1.25} aria-hidden />
@@ -69,7 +69,7 @@ export default function KortbulProjectPage() {
             <Badge
               key={tech}
               variant="secondary"
-              className="rounded-lg border border-white/5 bg-white/[0.06] px-2.5 py-0.5 text-xs font-medium"
+              className="rounded-lg border border-border bg-secondary px-2.5 py-0.5 text-xs font-medium"
             >
               {tech}
             </Badge>
@@ -130,7 +130,7 @@ export default function KortbulProjectPage() {
             {storeUrl && (
               <Button
                 className="rounded-xl hero-gradient"
-                data-cursor="pointer"
+
                 onClick={() => window.open(storeUrl, "_blank", "noopener,noreferrer")}
               >
                 <ExternalLink className="mr-2 h-4 w-4" />
@@ -140,8 +140,8 @@ export default function KortbulProjectPage() {
             {project.github && (
             <Button
               variant="outline"
-              className="rounded-xl border-white/15 bg-white/[0.03] hover:bg-white/[0.08]"
-              data-cursor="pointer"
+              className="rounded-xl border-border bg-secondary hover:bg-secondary"
+
               onClick={() =>
                 window.open(project.github!, "_blank", "noopener,noreferrer")
               }

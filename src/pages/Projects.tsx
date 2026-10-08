@@ -20,7 +20,7 @@ import { fadeUp, staggerContainer } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { isMobileAppProject } from "@/lib/projectDisplay";
 import { IPhone17ProFrame } from "@/components/IPhone17ProFrame";
-import { PortfolioImage } from "@/components/PortfolioImage";
+import { PortfolioImage, ProjectPlaceholder } from "@/components/PortfolioImage";
 import {
   GITHUB_USERNAME,
   fetchGitHubReposAll,
@@ -64,13 +64,13 @@ const ProjectsPage = () => {
 
   return (
     <div className="min-h-screen bg-background font-sans antialiased">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-background/80 backdrop-blur-lg backdrop-saturate-125">
+      <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg backdrop-saturate-125">
         <div className="container mx-auto flex items-center justify-between px-4 py-4 sm:px-6">
           <Button
             variant="ghost"
             onClick={() => navigate("/")}
-            className="gap-2 rounded-xl text-muted-foreground hover:bg-white/[0.06] hover:text-foreground"
-            data-cursor="pointer"
+            className="gap-2 rounded-xl text-muted-foreground hover:bg-secondary hover:text-foreground"
+
           >
             <ArrowLeft className="h-4 w-4" />
             Ana sayfa
@@ -82,8 +82,8 @@ const ProjectsPage = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="rounded-xl text-muted-foreground hover:bg-white/[0.06]"
-              data-cursor="pointer"
+              className="rounded-xl text-muted-foreground hover:bg-secondary"
+
               asChild
             >
               <a href="/cv.html" target="_blank" rel="noopener noreferrer">
@@ -93,8 +93,8 @@ const ProjectsPage = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="rounded-xl text-muted-foreground hover:bg-white/[0.06]"
-              data-cursor="pointer"
+              className="rounded-xl text-muted-foreground hover:bg-secondary"
+
               asChild
             >
               <a href="/#contact">İletişim</a>
@@ -134,7 +134,7 @@ const ProjectsPage = () => {
           {ghReposQ.isError && (
             <motion.p
               variants={fadeUp}
-              className="mx-auto mt-4 max-w-xl rounded-2xl border border-amber-500/25 bg-amber-500/10 px-4 py-3 text-center text-sm text-amber-200/90"
+              className="mx-auto mt-4 max-w-xl rounded-2xl border border-amber-500/25 bg-amber-500/10 px-4 py-3 text-center text-sm text-amber-800"
               role="status"
             >
               Ek proje listesi şu an yüklenemedi; yalnızca portföydeki kayıtlı projeler
@@ -168,7 +168,7 @@ const ProjectsPage = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Proje adı veya teknoloji ara…"
-              className="rounded-xl border-white/10 bg-white/[0.04] pl-10 placeholder:text-muted-foreground/70"
+              className="rounded-xl border-border bg-secondary pl-10 placeholder:text-muted-foreground/70"
               aria-label="Projelerde ara"
             />
           </div>
@@ -180,19 +180,19 @@ const ProjectsPage = () => {
           animate="visible"
           className="mb-12 flex justify-center"
         >
-          <div className="glass inline-flex flex-wrap justify-center gap-1 rounded-2xl border border-white/10 p-1.5">
+          <div className="glass inline-flex flex-wrap justify-center gap-1 rounded-2xl border border-border p-1.5">
             {categories.map((category) => (
               <Button
                 key={category}
                 variant="ghost"
                 size="sm"
                 onClick={() => setSelectedCategory(category)}
-                data-cursor="pointer"
+
                 className={cn(
                   "rounded-xl px-4 transition-all duration-300",
                   selectedCategory === category
-                    ? "bg-white/[0.1] text-foreground shadow-sm"
-                    : "text-muted-foreground hover:bg-white/[0.05] hover:text-foreground",
+                    ? "bg-secondary text-foreground shadow-sm"
+                    : "text-muted-foreground hover:bg-secondary hover:text-foreground",
                 )}
               >
                 {category}
@@ -222,7 +222,7 @@ const ProjectsPage = () => {
                 key={`${project.imageKey}-${project.id}`}
                 variants={fadeUp}
               >
-                <Card className="glass-strong group h-full overflow-hidden rounded-3xl border border-white/10 transition-all duration-300 hover:border-primary/30 hover:shadow-[0_24px_60px_-20px_hsl(var(--primary)/0.25)]">
+                <Card className="glass-strong group h-full overflow-hidden rounded-3xl border border-border transition-all duration-300 hover:border-primary/30 hover:shadow-[0_24px_60px_-20px_hsl(var(--primary)/0.25)]">
                   <div className="relative overflow-hidden">
                     <div
                       className={cn(
@@ -263,6 +263,7 @@ const ProjectsPage = () => {
                             alt={`${project.title} — ekran görüntüsü`}
                             className="absolute inset-0 h-full w-full"
                             fetchPriority="low"
+                            fallback={<ProjectPlaceholder title={project.title} icon={IconComponent} />}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                         </>
@@ -277,7 +278,7 @@ const ProjectsPage = () => {
                           {gallery.map((src, i) => (
                             <div
                               key={src}
-                              className="relative h-[11rem] w-[6.25rem] shrink-0 snap-center overflow-hidden rounded-2xl border border-white/15 shadow-md sm:h-[12.5rem] sm:w-[7rem]"
+                              className="relative h-[11rem] w-[6.25rem] shrink-0 snap-center overflow-hidden rounded-2xl border border-border shadow-md sm:h-[12.5rem] sm:w-[7rem]"
                             >
                               <PortfolioImage
                                 src={src}
@@ -302,8 +303,8 @@ const ProjectsPage = () => {
                         <Button
                           size="sm"
                           variant="secondary"
-                          className="h-9 w-9 rounded-xl border border-white/10 bg-black/40 p-0 backdrop-blur-md"
-                          data-cursor="pointer"
+                          className="h-9 w-9 rounded-xl border border-border bg-white/90 p-0 backdrop-blur-md"
+
                           onClick={() =>
                             window.open(project.github!, "_blank", "noopener,noreferrer")
                           }
@@ -315,8 +316,8 @@ const ProjectsPage = () => {
                         <Button
                           size="sm"
                           variant="secondary"
-                          className="h-9 w-9 rounded-xl border border-white/10 bg-black/40 p-0 backdrop-blur-md"
-                          data-cursor="pointer"
+                          className="h-9 w-9 rounded-xl border border-border bg-white/90 p-0 backdrop-blur-md"
+
                           onClick={() =>
                             navigateOrOpenProjectLink(project.link, navigate)
                           }
@@ -328,7 +329,7 @@ const ProjectsPage = () => {
                     <div className="absolute left-4 top-4 flex flex-wrap gap-1.5">
                       <Badge
                         variant="secondary"
-                        className="rounded-lg border border-white/10 bg-black/35 text-[10px] font-medium backdrop-blur-md"
+                        className="rounded-lg border border-border bg-white/90 text-[10px] font-medium backdrop-blur-md"
                       >
                         {project.category}
                       </Badge>
@@ -368,7 +369,7 @@ const ProjectsPage = () => {
                         <Badge
                           key={tech}
                           variant="secondary"
-                          className="rounded-lg border border-white/5 bg-white/[0.06] px-2 py-0.5 text-[11px] font-medium"
+                          className="rounded-lg border border-border bg-secondary px-2 py-0.5 text-[11px] font-medium"
                         >
                           {tech}
                         </Badge>
@@ -379,8 +380,8 @@ const ProjectsPage = () => {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="flex-1 rounded-xl border-white/15 bg-white/[0.03] hover:bg-white/[0.08]"
-                          data-cursor="pointer"
+                          className="flex-1 rounded-xl border-border bg-secondary hover:bg-secondary"
+
                           onClick={() =>
                             window.open(project.github!, "_blank", "noopener,noreferrer")
                           }
@@ -396,7 +397,7 @@ const ProjectsPage = () => {
                             "rounded-xl hero-gradient",
                             project.github ? "flex-1" : "w-full",
                           )}
-                          data-cursor="pointer"
+
                           onClick={() =>
                             navigateOrOpenProjectLink(project.link, navigate)
                           }
@@ -420,7 +421,7 @@ const ProjectsPage = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="glass-strong rounded-3xl border border-white/10 p-8 md:p-10">
+          <div className="glass-strong rounded-3xl border border-border p-8 md:p-10">
             <div className="grid gap-8 text-center md:grid-cols-4">
               <div>
                 <div className="font-display text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
@@ -457,8 +458,8 @@ const ProjectsPage = () => {
           <Button
             size="lg"
             variant="outline"
-            className="rounded-2xl border-white/15 bg-white/[0.03] px-8 backdrop-blur-md hover:bg-white/[0.07]"
-            data-cursor="pointer"
+            className="rounded-2xl border-border bg-secondary px-8 backdrop-blur-md hover:bg-secondary"
+
             onClick={() =>
               window.open(
                 `https://github.com/${GITHUB_USERNAME}`,

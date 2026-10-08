@@ -17,7 +17,7 @@ const NotFound = () => {
   return (
     <div className="relative min-h-screen overflow-hidden px-4 py-20 font-sans antialiased">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,hsl(var(--primary)/0.2),transparent)]" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-background to-[hsl(224_28%_4%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-background to-surface" />
 
       <motion.div
         className="relative z-10 mx-auto flex min-h-[70vh] max-w-lg flex-col items-center justify-center text-center"
@@ -27,7 +27,7 @@ const NotFound = () => {
       >
         <motion.div
           variants={fadeUp}
-          className="glass-strong mb-8 rounded-[2rem] border border-white/10 px-10 py-12"
+          className="glass-strong mb-8 rounded-[2rem] border border-border px-10 py-12"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
             Hata
@@ -48,7 +48,7 @@ const NotFound = () => {
             asChild
             size="lg"
             className="rounded-2xl hero-gradient px-8 shadow-lg shadow-primary/20"
-            data-cursor="pointer"
+
           >
             <Link to="/" className="inline-flex items-center gap-2">
               <Home className="h-5 w-5" />
@@ -59,8 +59,8 @@ const NotFound = () => {
             asChild
             variant="outline"
             size="lg"
-            className="rounded-2xl border-white/15 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.07]"
-            data-cursor="pointer"
+            className="rounded-2xl border-border bg-secondary backdrop-blur-md hover:bg-secondary"
+
           >
             <Link to="/projects" className="inline-flex items-center gap-2">
               <LayoutGrid className="h-5 w-5" />
