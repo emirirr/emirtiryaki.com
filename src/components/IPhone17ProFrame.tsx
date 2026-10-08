@@ -21,6 +21,14 @@ type IPhone17ProFrameProps = {
   fallbackIcon?: LucideIcon
 }
 
+function PhoneIcon({ Icon }: { Icon: LucideIcon }) {
+  return (
+    <div className="flex h-full w-full items-center justify-center bg-primary-soft">
+      <Icon className="h-[22%] w-[22%] text-primary" strokeWidth={1.5} />
+    </div>
+  )
+}
+
 export function IPhone17ProFrame({
   size = 'md',
   className,
@@ -36,8 +44,7 @@ export function IPhone17ProFrame({
       <div
         className={cn(
           'rounded-[2.35rem] bg-gradient-to-b from-zinc-600 via-zinc-800 to-zinc-950 p-[6px] sm:p-[7px]',
-          'shadow-[0_24px_48px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)]',
-          'ring-1 ring-white/12',
+          'shadow-[0_24px_48px_-16px_rgba(11,18,32,0.45),inset_0_1px_0_rgba(255,255,255,0.12)]',
         )}
       >
         <div
@@ -52,11 +59,10 @@ export function IPhone17ProFrame({
               alt={alt}
               className="h-full w-full object-cover object-top"
               fetchPriority="low"
+              fallback={Icon ? <PhoneIcon Icon={Icon} /> : undefined}
             />
           ) : Icon ? (
-            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/25 via-background/60 to-accent/20">
-              <Icon className="h-[22%] w-[22%] text-primary/85" strokeWidth={1.25} />
-            </div>
+            <PhoneIcon Icon={Icon} />
           ) : null}
         </div>
       </div>

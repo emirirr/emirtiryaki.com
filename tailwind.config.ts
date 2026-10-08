@@ -21,6 +21,7 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: [
+					"Plus Jakarta Sans Variable",
 					"Inter Variable",
 					"Inter",
 					"ui-sans-serif",
@@ -28,8 +29,7 @@ export default {
 					"sans-serif",
 				],
 				display: [
-					"Space Grotesk Variable",
-					"Space Grotesk",
+					"Plus Jakarta Sans Variable",
 					"Inter Variable",
 					"ui-sans-serif",
 					"system-ui",
@@ -53,8 +53,12 @@ export default {
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',
-					glow: 'hsl(var(--primary-glow))'
+					glow: 'hsl(var(--primary-glow))',
+					soft: 'hsl(var(--primary-soft))'
 				},
+				surface: 'hsl(var(--surface))',
+				ink: 'hsl(var(--ink))',
+				success: 'hsl(var(--success))',
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'

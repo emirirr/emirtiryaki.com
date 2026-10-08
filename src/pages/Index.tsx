@@ -1,13 +1,12 @@
 import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Skills from "@/components/Skills";
-import Experience from "@/components/Experience";
-import { SystemArchitecture } from "@/components/SystemArchitecture";
-import AppShowcase from "@/components/AppShowcase";
-import Brands from "@/components/Brands";
 import Services from "@/components/Services";
-import SocialMedia from "@/components/SocialMedia";
+import AppShowcase from "@/components/AppShowcase";
+import LiveSites from "@/components/LiveSites";
+import Testimonials from "@/components/Testimonials";
+import Experience from "@/components/Experience";
+import Brands from "@/components/Brands";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -17,28 +16,22 @@ const FeaturedProjects = lazy(() =>
   })),
 );
 
-const belowFoldFallback = (
-  <div
-    className="min-h-[28vh] w-full rounded-3xl border border-white/[0.06] bg-white/[0.02]"
-    aria-hidden
-  />
-);
+const belowFoldFallback = <div className="min-h-[60vh] w-full bg-surface" aria-hidden />;
 
 const Index = () => {
   return (
-    <div className="min-h-screen font-sans antialiased">
+    <div className="min-h-screen bg-background font-sans antialiased">
       <Navbar />
       <Hero />
-      <Skills />
-      <Experience />
-      <SystemArchitecture />
       <Suspense fallback={belowFoldFallback}>
         <FeaturedProjects />
       </Suspense>
       <AppShowcase />
-      <Brands />
+      <LiveSites />
+      <Testimonials />
       <Services />
-      <SocialMedia />
+      <Experience />
+      <Brands />
       <Contact />
       <Footer />
     </div>

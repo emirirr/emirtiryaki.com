@@ -5,10 +5,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { MotionConfig } from "framer-motion";
-import { CustomCursor } from "@/components/CustomCursor";
 import { TerminalMode } from "@/components/TerminalMode";
 import { CanonicalLink } from "@/components/CanonicalLink";
 import Index from "./pages/Index";
+import { useT } from "@/i18n/lang";
 
 const ProjectsPage = lazy(() => import("./pages/Projects"));
 const KortbulProjectPage = lazy(() => import("./pages/KortbulProjectPage"));
@@ -20,6 +20,15 @@ const routeFallback = (
     Yükleniyor…
   </div>
 );
+
+function SkipLink() {
+  const t = useT();
+  return (
+    <a href="#main-content" className={skipLinkClass}>
+      {t("Ana içeriğe geç", "Skip to content")}
+    </a>
+  );
+}
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,19 +46,17 @@ const App = () => (
   <MotionConfig reducedMotion="user">
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <CustomCursor />
         <TerminalMode />
         <Toaster />
         <Sonner />
         <BrowserRouter>
           <CanonicalLink />
-          <a href="#main-content" className={skipLinkClass}>
-            Ana içeriğe geç
-          </a>
+          <SkipLink />
           <main id="main-content" tabIndex={-1} className="outline-none">
             <Suspense fallback={routeFallback}>
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/en" element={<Index />} />
                 <Route path="/projects" element={<ProjectsPage />} />
                 <Route
                   path="/projects/kortbul/:slug"

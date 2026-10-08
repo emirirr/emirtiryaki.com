@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
-import { Briefcase, GraduationCap, MapPin } from "lucide-react";
+import { GraduationCap, MapPin } from "lucide-react";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+import { Section, SectionHeading } from "@/components/SectionHeading";
+import { useLang, useT } from "@/i18n/lang";
 
 type Role = {
   company: string;
@@ -9,7 +10,7 @@ type Role = {
   period: string;
   current?: boolean;
   points: string[];
-  tags?: string[];
+  en: { company?: string; title: string; period: string; points: string[] };
 };
 
 const roles: Role[] = [
@@ -22,7 +23,14 @@ const roles: Role[] = [
       "Şirket içi dashboard için mobil uygulama; Excel kaynaklı verilerin okunaklı bileşenlerle sunulması, manuel tablo bağımlılığını azaltma.",
       "Tedarik ve satın alma: teklif toplama/değerlendirme, sipariş–stok, tedarikçi ilişkileri (endüstriyel sensör ve ölçüm bileşenleri).",
     ],
-    tags: ["React Native", "Dashboard", "Tedarik"],
+    en: {
+      title: "Mobile Development & Procurement",
+      period: "Mar 2026 — present",
+      points: [
+        "Internal dashboard mobile app presenting Excel-based data through readable components, reducing reliance on manual spreadsheets.",
+        "Procurement: quotation collection and evaluation, order–stock and supplier relations (industrial sensors and measurement components).",
+      ],
+    },
   },
   {
     company: "Kortbul — Freelance",
@@ -33,7 +41,15 @@ const roles: Role[] = [
       "React & Node.js ile modüler mimari; tesis yöneticisi ve sporcu için ayrı paneller, uygunluk takvimi, online rezervasyon ve raporlama.",
       "Gerçek zamanlı bildirimler ve rol bazlı yetkilendirme ile anlık bilgi akışı ve veri güvenliği.",
     ],
-    tags: ["React", "Node.js", "TypeScript", "Realtime"],
+    en: {
+      title: "Full-Stack Developer",
+      period: "Sep 2025 — Mar 2026",
+      points: [
+        "Built the venue search and online court booking platform for racket sports end to end (kortbul.com.tr).",
+        "Modular React & Node.js architecture; separate venue-manager and player dashboards, availability calendar, online booking and reporting.",
+        "Real-time notifications and role-based authorization for instant updates and data security.",
+      ],
+    },
   },
   {
     company: "Bionluk — Freelance",
@@ -44,7 +60,15 @@ const roles: Role[] = [
       "iOS: Swift & SwiftUI ile App Store'da yayınlanan uygulamalar (CarLog, Adhan, Terapi Asistanı).",
       "Web: React & TypeScript arayüzler; Firebase ile kimlik doğrulama ve gerçek zamanlı veri yönetimi.",
     ],
-    tags: ["Swift", "SwiftUI", "React", "Firebase"],
+    en: {
+      title: "iOS & Web Developer",
+      period: "Jan 2024 — Mar 2026",
+      points: [
+        "Delivered end-to-end web and iOS products for clients across industries.",
+        "iOS: apps published on the App Store with Swift & SwiftUI (CarLog, Adhan, Therapy Assistant).",
+        "Web: React & TypeScript interfaces; authentication and real-time data with Firebase.",
+      ],
+    },
   },
   {
     company: "Cebinde",
@@ -53,7 +77,11 @@ const roles: Role[] = [
     points: [
       "Cebinde platformunun mobil arayüzlerini geliştiren ekipte liderlik; kullanıcı deneyimini iyileştiren kullanıcı dostu arayüz tasarımı.",
     ],
-    tags: ["Mobil", "UI/UX", "Ekip Liderliği"],
+    en: {
+      title: "Co-Founder",
+      period: "Sep 2023 — Mar 2026",
+      points: ["Led the team building Cebinde's mobile interfaces; user-friendly UI design that improved the user experience."],
+    },
   },
   {
     company: "Han Endüstri Otomasyon",
@@ -62,7 +90,11 @@ const roles: Role[] = [
     points: [
       "Endüstriyel ürün portföyünde pazarlama ve satış; müşteri ihtiyaçlarına teknik çözüm önerileri ve satış operasyonlarının yürütülmesi.",
     ],
-    tags: ["B2B Satış", "Teknik Danışmanlık"],
+    en: {
+      title: "Sales",
+      period: "Dec 2023 — Jan 2026",
+      points: ["Marketing and sales of industrial products; technical solution proposals for customer needs and sales operations."],
+    },
   },
   {
     company: "CK Tedarik — Freelance",
@@ -71,7 +103,11 @@ const roles: Role[] = [
     points: [
       "Ürünleri etkili biçimde sergileyen, kullanıcı dostu e-ticaret sitesi tasarımı; firmanın dijital varlığını güçlendirme ve müşteri etkileşimini artırma.",
     ],
-    tags: ["Web Tasarımı", "E-ticaret"],
+    en: {
+      title: "Web Design & E-commerce",
+      period: "Aug 2023 — Dec 2023",
+      points: ["Designed a user-friendly e-commerce site that showcases products effectively, strengthening the company's digital presence."],
+    },
   },
   {
     company: "Hamle Mühendislik",
@@ -81,7 +117,14 @@ const roles: Role[] = [
       "Kurumsal web (sağlık sektörü): performans, SEO, kullanılabilirlik ve dijital dönüşüm.",
       "Mobil ve web için UX/UI stratejisi ve arayüz standartları; sosyal medya içeriği ve video prodüksiyonu.",
     ],
-    tags: ["Web", "UX/UI", "SEO", "Multimedya"],
+    en: {
+      title: "Web, Mobile & Multimedia",
+      period: "2019 — 2024",
+      points: [
+        "Corporate web for the healthcare sector: performance, SEO, usability and digital transformation.",
+        "UX/UI strategy and interface standards for web and mobile; social media content and video production.",
+      ],
+    },
   },
   {
     company: "Hamle Mühendislik",
@@ -90,149 +133,146 @@ const roles: Role[] = [
     points: [
       "Endüstriyel cihaz programlama ve gömülü uygulamalar; eğitim materyali ve teknik dokümantasyon; web/mobil projelerde destek.",
     ],
-    tags: ["Gömülü", "Dokümantasyon"],
+    en: {
+      title: "Software Intern",
+      period: "2017 — 2019",
+      points: ["Industrial device programming and embedded applications; training material and technical documentation; support on web/mobile projects."],
+    },
   },
 ];
 
 const education = [
   {
-    school: "Hoca Ahmet Yesevi Üniversitesi",
-    detail: "Bilgisayar Programcılığı (ön lisans) — Mezuniyet: 2026",
+    school: "Anadolu Üniversitesi",
+    detail: "Yapay Zekâ ile Kodlama — devam ediyor",
+    en: { school: "Anadolu University", detail: "AI-Assisted Coding — in progress" },
   },
-  { school: "BTK Akademi", detail: "iOS Geliştirme sertifikası" },
-  { school: "BTK Akademi", detail: "React ile Web Geliştirme sertifikası" },
+  {
+    school: "BTK Akademi",
+    detail: "iOS Geliştirme sertifikası",
+    en: { school: "BTK Academy", detail: "iOS Development certificate" },
+  },
+  {
+    school: "BTK Akademi",
+    detail: "React ile Web Geliştirme sertifikası",
+    en: { school: "BTK Academy", detail: "Web Development with React certificate" },
+  },
 ];
 
 const Experience = () => {
+  const lang = useLang();
+  const t = useT();
   return (
-    <section id="experience" className="relative px-4 py-24 sm:px-6">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+    <Section id="experience">
       <motion.div
-        className="container mx-auto max-w-6xl"
+        className="mx-auto max-w-6xl"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-        <motion.div variants={fadeUp} className="mb-14 text-center">
-          <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
-            // deneyim
-          </p>
-          <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
-            <span className="text-gradient">İş </span>
-            <span className="text-foreground">geçmişi</span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            2017'den bu yana yazılım ve endüstri tarafında; staj, kurumsal roller ve freelance
-            teslimatlarla uçtan uca deneyim.
-          </p>
-        </motion.div>
+        <SectionHeading
+          eyebrow={t("Deneyim", "Experience")}
+          title={t("2017'den bu yana", "Building since")}
+          highlight={t("üretiyorum", "2017")}
+          description={t(
+            "Staj, kurumsal roller ve freelance teslimatlarla yazılımın ve endüstrinin içinden gelen uçtan uca deneyim.",
+            "End-to-end experience from both software and industry, through an internship, in-house roles and freelance delivery.",
+          )}
+        />
 
-        <div className="grid gap-10 lg:grid-cols-3 lg:gap-8">
-          <div className="lg:col-span-2">
-            <div className="relative space-y-4 before:absolute before:left-[7px] before:top-2 before:bottom-2 before:w-px before:bg-white/10">
-              {roles.map((role) => (
-                <motion.div
-                  key={`${role.company}-${role.period}`}
-                  variants={fadeUp}
-                  className="relative pl-8"
-                >
-                  <span className="absolute left-0 top-[10px] flex h-3.5 w-3.5 items-center justify-center">
-                    {role.current && (
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60 opacity-75" />
-                    )}
-                    <span
-                      className={
-                        role.current
-                          ? "relative inline-flex h-3 w-3 rounded-full border-2 border-background bg-emerald-400"
-                          : "relative inline-flex h-3 w-3 rounded-full border-2 border-background bg-primary/70"
-                      }
-                    />
+        <div className="grid gap-10 lg:grid-cols-[1fr_340px] lg:gap-12">
+          <ol className="relative">
+            <span className="absolute bottom-2 left-[7px] top-2 w-px bg-border" aria-hidden />
+            {roles.map((role) => (
+              <motion.li
+                key={`${role.company}-${role.title}`}
+                variants={fadeUp}
+                className="relative pb-8 pl-10 last:pb-0"
+              >
+                <span
+                  className={
+                    "absolute left-0 top-1.5 h-[15px] w-[15px] rounded-full border-[3px] " +
+                    (role.current
+                      ? "border-primary bg-card ring-4 ring-primary/15"
+                      : "border-border bg-card")
+                  }
+                  aria-hidden
+                />
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 className="text-lg font-bold tracking-tight text-foreground">
+                    {lang === "en" ? role.en.title : role.title}
+                    <span className="font-semibold text-muted-foreground"> · {role.company}</span>
+                  </h3>
+                  <span
+                    className={
+                      "text-xs font-semibold " +
+                      (role.current ? "text-primary" : "text-muted-foreground")
+                    }
+                  >
+                    {lang === "en" ? role.en.period : role.period}
                   </span>
-                  <div className="glass rounded-2xl border border-white/10 p-6 transition-colors hover:border-primary/25">
-                    <div className="flex flex-wrap items-start justify-between gap-2">
-                      <div>
-                        <h3 className="text-lg font-semibold tracking-tight text-foreground">
-                          {role.title}
-                        </h3>
-                        <p className="text-sm text-primary/90">{role.company}</p>
-                      </div>
-                      <span className="whitespace-nowrap font-mono text-xs text-muted-foreground">
-                        {role.period}
-                      </span>
-                    </div>
-                    <ul className="mt-3 space-y-1.5">
-                      {role.points.map((p) => (
-                        <li
-                          key={p}
-                          className="text-sm leading-relaxed text-muted-foreground"
-                        >
-                          {p}
-                        </li>
-                      ))}
-                    </ul>
-                    {role.tags && (
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {role.tags.map((t) => (
-                          <Badge
-                            key={t}
-                            variant="secondary"
-                            className="rounded-lg border border-white/5 bg-white/[0.05] px-2.5 py-1 font-mono text-[11px] font-medium"
-                          >
-                            {t}
-                          </Badge>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <motion.div
-              variants={fadeUp}
-              className="glass-strong rounded-2xl border border-white/10 p-6"
-            >
-              <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-primary">
-                  <GraduationCap className="h-5 w-5" strokeWidth={1.75} />
                 </div>
-                <h3 className="text-lg font-semibold tracking-tight">Eğitim & Sertifika</h3>
+                <ul className="mt-2 space-y-1.5">
+                  {(lang === "en" ? role.en.points : role.points).map((p) => (
+                    <li key={p} className="text-sm leading-relaxed text-muted-foreground">
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </motion.li>
+            ))}
+          </ol>
+
+          <motion.aside variants={fadeUp} className="space-y-5 lg:sticky lg:top-24 lg:self-start">
+            <div className="card-surface p-6">
+              <div className="flex items-center gap-2.5">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-soft text-primary">
+                  <GraduationCap className="h-[18px] w-[18px]" strokeWidth={2} />
+                </span>
+                <h3 className="font-bold text-foreground">{t("Eğitim & sertifika", "Education & certificates")}</h3>
               </div>
               <ul className="mt-5 space-y-4">
                 {education.map((e) => (
-                  <li key={e.detail} className="border-l border-white/10 pl-4">
-                    <p className="text-sm font-medium text-foreground">{e.school}</p>
-                    <p className="text-sm text-muted-foreground">{e.detail}</p>
+                  <li key={e.detail}>
+                    <p className="text-sm font-semibold text-foreground">{lang === "en" ? e.en.school : e.school}</p>
+                    <p className="text-sm text-muted-foreground">{lang === "en" ? e.en.detail : e.detail}</p>
                   </li>
                 ))}
               </ul>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              className="glass rounded-2xl border border-white/10 p-6"
-            >
-              <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-accent">
-                  <Briefcase className="h-5 w-5" strokeWidth={1.75} />
-                </div>
-                <h3 className="text-lg font-semibold tracking-tight">Çalışma tercihi</h3>
+            </div>
+            <div className="rounded-2xl bg-ink p-6 text-white">
+              <div className="flex items-center gap-2 text-sm font-semibold">
+                <MapPin className="h-4 w-4 text-primary-glow" />
+                {t("İstanbul · Uzaktan & hibrit", "Istanbul · Remote & hybrid")}
               </div>
-              <div className="mt-4 space-y-2 text-sm text-muted-foreground">
-                <p className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-primary/80" strokeWidth={1.75} />
-                  İstanbul · Uzaktan &amp; hibrit
-                </p>
-                <p>Tam zamanlı roller, freelance projeler ve uzun vadeli iş birlikleri.</p>
-              </div>
-            </motion.div>
-          </div>
+              <p className="mt-2 text-sm leading-relaxed text-white/70">
+                {t(
+                  "Tam zamanlı roller, freelance projeler ve uzun vadeli iş birliklerine açığım.",
+                  "Open to full-time roles, freelance projects and long-term collaborations.",
+                )}
+              </p>
+              <a
+                href={t("/cv.html", "/cv-en.html")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex h-10 items-center rounded-lg bg-white px-4 text-sm font-semibold text-ink transition-opacity hover:opacity-90"
+              >
+                {t("Özgeçmişi görüntüle", "View resume")}
+              </a>
+              <a
+                href={t("/cv-en.html", "/cv.html")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-3 text-sm font-medium text-white/70 underline-offset-4 hover:text-white hover:underline"
+              >
+                {t("English", "Türkçe")}
+              </a>
+            </div>
+          </motion.aside>
         </div>
       </motion.div>
-    </section>
+    </Section>
   );
 };
 

@@ -1,219 +1,95 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Globe, Users, Calendar } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { fadeUp, staggerContainer } from "@/lib/motion";
-import { cn, scrollToSection } from "@/lib/utils";
+import { Section, SectionHeading } from "@/components/SectionHeading";
+import { useLang, useT } from "@/i18n/lang";
+
+const brands = [
+  {
+    name: "Tiryaki Yazılım",
+    description: "Kurumsal web, mobil uygulama ve e-ticaret çözümleri sunan yazılım şirketi.",
+    logo: "/brands/logos/tiryakiyazilim.jpg",
+    website: "https://tiryakiyazilim.com",
+    domain: "tiryakiyazilim.com",
+    category: "Yazılım şirketi",
+    en: { description: "Software company delivering corporate websites, mobile apps and e-commerce solutions.", category: "Software company" },
+  },
+  {
+    name: "Odak Software",
+    description: "İşletmeler için müşteri, satış ve süreç yönetimi sunan CRM sistemi.",
+    logo: "/brands/logos/odaksoftware.svg",
+    website: "https://odak-crm.vercel.app",
+    domain: "odak-crm.vercel.app",
+    category: "CRM / SaaS",
+    en: { description: "A CRM system for businesses covering customers, sales and processes.", category: "CRM / SaaS" },
+  },
+  {
+    name: "Kodlasa",
+    description: "Kurumsal firmalara ve girişimlere özel yazılım çözümleri geliştiren ajans.",
+    logo: "/brands/logos/kodlasa.png",
+    website: "https://kodlasa.com",
+    domain: "kodlasa.com",
+    category: "Yazılım ajansı",
+    en: { description: "Software agency building custom solutions for companies and startups.", category: "Software agency" },
+  },
+];
 
 const Brands = () => {
-  const brands = [
-    {
-      id: 1,
-      name: "Tiryaki Yazılım",
-      description: "Yazılım geliştirme ve dijital çözümler şirketi",
-      logo: "/brands/logos/tiryakiyazilim.jpg",
-      website: "https://tiryakiyazilim.com",
-      category: "Teknoloji",
-      year: "2024",
-      services: ["Web Geliştirme", "Mobil Uygulama", "E-ticaret", "Kurumsal Çözümler"],
-      technologies: ["React", "Node.js", "Swift", "PostgreSQL"],
-    },
-    {
-      id: 2,
-      name: "Odak Software",
-      description: "İşletmeler için müşteri ve süreç yönetimi sunan CRM sistemi (odaksoftware.com)",
-      logo: "/brands/logos/odaksoftware.svg",
-      website: "https://odaksoftware.com",
-      category: "Kurumsal",
-      year: "2024",
-      services: ["CRM", "Müşteri takibi", "Satış süreçleri", "Raporlama"],
-      technologies: ["React", "Node.js", "PostgreSQL", "TypeScript"],
-    },
-    {
-      id: 3,
-      name: "Kodlasa",
-      description: "Eğitim ve geliştirme platformu",
-      logo: "/brands/logos/kodlasa.png",
-      website: "https://kodlasa.com",
-      category: "Eğitim",
-      year: "2024",
-      services: ["Eğitim Platformu", "Kodlama Dersleri", "Proje Geliştirme", "Mentorluk"],
-      technologies: ["React", "Node.js", "MongoDB", "Socket.io"],
-    },
-  ];
-
+  const lang = useLang();
+  const t = useT();
   return (
-    <section id="brands" className="relative px-4 py-24 sm:px-6">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 top-1/3 h-[320px] bg-[radial-gradient(circle_at_50%_50%,hsl(var(--accent)/0.06),transparent_65%)]" />
-
+    <Section id="brands" tone="surface">
       <motion.div
-        className="container relative mx-auto max-w-6xl"
+        className="mx-auto max-w-6xl"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-        <motion.div variants={fadeUp} className="mb-14 text-center">
-          <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
-            // markalar
-          </p>
-          <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
-            <span className="text-gradient">Oluşturduğum </span>
-            <span className="text-foreground">markalar</span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Farklı sektörlerde kurduğum veya büyüttüğüm dijital varlıklar; her biri ölçülebilir iş
-            hedefleriyle hizalandı.
-          </p>
-        </motion.div>
+        <SectionHeading
+          eyebrow={t("Markalar", "Brands")}
+          title={t("Kurduğum", "Brands I")}
+          highlight={t("markalar", "founded")}
+          description={t("Kendi kurduğum ve büyüttüğüm dijital markalar.", "Digital brands I founded and grew.")}
+        />
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+        <div className="grid gap-5 md:grid-cols-3">
           {brands.map((brand) => (
-            <motion.div
-              key={brand.id}
+            <motion.a
+              key={brand.name}
               variants={fadeUp}
-              whileHover={{
-                y: -4,
-                transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] },
-              }}
+              href={brand.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card-surface card-lift group flex items-start gap-4 p-6"
             >
-              <Card
-                className={cn(
-                  "glass-strong h-full overflow-hidden rounded-3xl border border-white/10",
-                  "transition-shadow duration-300 hover:border-primary/25 hover:shadow-[0_20px_50px_-20px_hsl(var(--primary)/0.3)]",
-                )}
-              >
-                <div className="relative flex h-44 items-center justify-center overflow-hidden border-b border-white/10 bg-[radial-gradient(circle_at_50%_40%,hsl(var(--primary)/0.10),transparent_70%)] p-6">
-                  <div className="flex h-24 w-24 items-center justify-center rounded-2xl border border-white/10 bg-white p-3 shadow-lg shadow-black/30">
-                    <img
-                      src={brand.logo}
-                      alt={`${brand.name} logosu`}
-                      className="h-full w-full object-contain"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <Badge
-                    variant="secondary"
-                    className="absolute right-4 top-4 rounded-lg border border-white/10 bg-black/35 text-[10px] font-medium backdrop-blur-md"
-                  >
-                    {brand.category}
-                  </Badge>
-                </div>
-
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold tracking-tight">{brand.name}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {brand.description}
-                  </p>
-
-                  <div className="mt-4 flex flex-wrap gap-3 text-xs text-muted-foreground">
-                    <span className="inline-flex items-center gap-1">
-                      <Calendar className="h-3.5 w-3.5" />
-                      {brand.year}
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      <Users className="h-3.5 w-3.5" />
-                      {brand.category}
-                    </span>
-                  </div>
-
-                  <div className="mt-5">
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      Hizmetler
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {brand.services.map((service) => (
-                        <Badge
-                          key={service}
-                          variant="secondary"
-                          className="rounded-lg border border-white/5 bg-white/[0.06] px-2 py-0.5 text-[10px] font-medium"
-                        >
-                          {service}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mt-4">
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      Teknoloji
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {brand.technologies.map((tech) => (
-                        <Badge
-                          key={tech}
-                          variant="outline"
-                          className="rounded-lg border-white/10 bg-transparent px-2 py-0.5 text-[10px]"
-                        >
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="mt-6 w-full rounded-xl border-white/15 bg-white/[0.03] hover:bg-white/[0.08]"
-                    data-cursor="pointer"
-                    onClick={() =>
-                      window.open(brand.website, "_blank", "noopener,noreferrer")
-                    }
-                  >
-                    <Globe className="mr-2 h-4 w-4" />
-                    Siteyi aç
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-white p-2">
+                <img
+                  src={brand.logo}
+                  alt={t(`${brand.name} logosu`, `${brand.name} logo`)}
+                  className="h-full w-full object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="flex items-center justify-between gap-2">
+                  <span className="font-bold tracking-tight text-foreground">{brand.name}</span>
+                  <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+                </span>
+                <span className="block text-xs font-semibold text-primary">{lang === "en" ? brand.en.category : brand.category}</span>
+                <span className="mt-2 block text-sm leading-relaxed text-muted-foreground">
+                  {lang === "en" ? brand.en.description : brand.description}
+                </span>
+                <span className="mt-3 block text-xs font-medium text-muted-foreground">
+                  {brand.domain}
+                </span>
+              </span>
+            </motion.a>
           ))}
         </div>
-
-        <motion.div
-          variants={fadeUp}
-          className="glass-strong mt-16 rounded-3xl border border-white/10 p-8 md:p-10"
-        >
-          <div className="grid gap-8 text-center md:grid-cols-3">
-            <div>
-              <div className="font-display text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
-                {brands.length}
-              </div>
-              <div className="mt-1 text-xs text-muted-foreground">Toplam marka</div>
-            </div>
-            <div>
-              <div className="font-display text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
-                {brands.filter((b) => b.category === "Teknoloji").length}
-              </div>
-              <div className="mt-1 text-xs text-muted-foreground">Teknoloji</div>
-            </div>
-            <div>
-              <div className="font-display text-3xl font-semibold tabular-nums text-gradient md:text-4xl">
-                {brands.filter((b) => b.category === "Kurumsal").length}
-              </div>
-              <div className="mt-1 text-xs text-muted-foreground">Kurumsal</div>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div variants={fadeUp} className="mt-14 text-center">
-          <p className="mb-6 text-muted-foreground">
-            Markanız için ürün ve platform tasarlayalım.
-          </p>
-          <Button
-            size="lg"
-            className="rounded-2xl px-8 hero-gradient shadow-lg shadow-primary/15"
-            data-cursor="pointer"
-            onClick={() => scrollToSection("contact")}
-          >
-            <ExternalLink className="mr-2 h-5 w-5" />
-            İletişime geç
-          </Button>
-        </motion.div>
       </motion.div>
-    </section>
+    </Section>
   );
 };
 

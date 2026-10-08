@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { publicAssetUrl } from '@/lib/publicAssetUrl'
 
@@ -6,6 +8,8 @@ type PortfolioImageProps = {
   alt: string
   className?: string
   fetchPriority?: 'high' | 'low' | 'auto'
+  /** Görsel yüklenemezse gösterilecek içerik (eksik ekran görüntüleri için). */
+  fallback?: React.ReactNode
 }
 
 /** PNG için WebP `<source>`; düzen kutusu `className` ile (absolute / boyut). */
@@ -14,7 +18,9 @@ export function PortfolioImage({
   alt,
   className,
   fetchPriority = 'low',
+  fallback,
 }: PortfolioImageProps) {
+  const [failed, setFailed] = useState(false)
   const resolvedSrc = publicAssetUrl(src)
   const isPng = /\.png$/i.test(src)
   /** Yalnızca public/portfolio görselleri için eş WebP; Vite asset URL’lerinde eş dosya yok. */
@@ -23,6 +29,12 @@ export function PortfolioImage({
   const webpSrc = canUseWebp
     ? publicAssetUrl(src.replace(/\.png$/i, ".webp"))
     : null
+
+  if (failed && fallback) {
+    return <div className={cn('relative z-[1] min-h-0', className)}>{fallback}</div>
+  }
+
+  const onError = () => setFailed(true)
 
   if (webpSrc) {
     return (
@@ -34,6 +46,7 @@ export function PortfolioImage({
             alt={alt}
             loading="lazy"
             decoding="async"
+            onError={onError}
             {...{ fetchpriority: fetchPriority }}
           />
         </picture>
@@ -48,7 +61,28 @@ export function PortfolioImage({
       className={cn(className)}
       loading="lazy"
       decoding="async"
+      onError={onError}
       {...{ fetchpriority: fetchPriority }}
     />
+  )
+}
+
+/** Ekran görüntüsü olmayan projeler için marka tonu taşıyan yer tutucu. */
+export function ProjectPlaceholder({
+  title,
+  icon: Icon,
+}: {
+  title: string
+  icon?: LucideIcon
+}) {
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-primary-soft p-6 text-center">
+      {Icon && (
+        <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-card text-primary shadow-sm">
+          <Icon className="h-7 w-7" strokeWidth={1.75} />
+        </span>
+      )}
+      <span className="max-w-[80%] text-sm font-bold tracking-tight text-foreground/70">{title}</span>
+    </div>
   )
 }
