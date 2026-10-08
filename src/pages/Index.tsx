@@ -7,6 +7,7 @@ import LiveSites from "@/components/LiveSites";
 import Testimonials from "@/components/Testimonials";
 import Experience from "@/components/Experience";
 import Brands from "@/components/Brands";
+import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -32,6 +33,7 @@ const Index = () => {
       <Services />
       <Experience />
       <Brands />
+      <Faq />
       <Contact />
       <Footer />
     </div>

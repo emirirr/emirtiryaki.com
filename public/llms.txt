@@ -66,3 +66,54 @@
 - LinkedIn: https://www.linkedin.com/in/emir-tiryaki/
 - Instagram: https://instagram.com/emirscode
 - YouTube: https://youtube.com/@emirtiryaki
+
+## Sık sorulan sorular
+
+**Emir Tiryaki kimdir?**
+İsmail Emir Tiryaki, İstanbul'da yaşayan full-stack ve mobil geliştiricidir. 2017'den bu yana yazılım geliştiriyor; web siteleri, mobil uygulamalar ve yönetim panellerini arayüzden backend'e ve App Store / Google Play yayınına kadar uçtan uca üstleniyor. App Store ve Google Play'de 8 yayında uygulaması, kendi alan adında yayında 15 web sitesi var.
+
+**Hangi hizmetleri veriyorsunuz?**
+Web geliştirme (kurumsal site, landing page, web uygulaması), iOS ve Android mobil uygulama geliştirme, CRM ve kurumsal yönetim sistemleri, e-ticaret ve ilan/pazaryeri platformları. Tasarım, geliştirme, yayın ve sonrasındaki bakım tek elden yürütülür.
+
+**Hangi mobil uygulamaları geliştirdiniz?**
+Yayında olanlar: Heybe (Kur'an ve din eğitimi), Kortbul (tenis ve padel kort/partner bulma), CarLog (araç bakım takibi), Adhan (namaz vakitleri) ve araç pazaryeri uygulamaları daCAR (Senegal), AvtoUzbek (Özbekistan), Marocar (Fas) ve NaijaCar (Nijerya). Yayına hazırlananlar: BharatKaar (Hindistan), AvtoBozor (Özbekistan), Satılık (Türkiye) ve BanglaGari (Bangladeş).
+
+**Hangi teknolojileri kullanıyorsunuz?**
+Mobilde React Native ve Expo, Swift ve SwiftUI, Flutter; web'de React, Next.js, TypeScript ve Tailwind CSS; backend ve veri tarafında Node.js, Supabase, Firebase ve PostgreSQL.
+
+**Yurt dışındaki müşterilerle uzaktan çalışıyor musunuz?**
+Evet. İstanbul'dan uzaktan ve hibrit çalışıyorum; Senegal, Fas, Özbekistan, Nijerya, Hindistan ve Bangladeş pazarları için ürünler geliştirdim. Türkçe ve İngilizce iletişim kuruyorum.
+
+**Proje süreci nasıl işliyor, nasıl teklif alabilirim?**
+Süreç dört adımdan oluşur: keşif (ihtiyaç ve kapsam), tasarım (ekran akışı ve arayüz), geliştirme (haftalık demolar) ve yayın & destek. Teklif için emirtiryaki.com'daki iletişim formunu, info@emirtiryaki.com adresini veya WhatsApp'ı (+90 543 447 6245) kullanabilirsiniz; genellikle 24 saat içinde dönüş yapılır.
+
+---
+
+# English summary
+
+> İsmail Emir Tiryaki (Emir Tiryaki) is a full-stack and mobile developer based in Istanbul, Türkiye. He builds websites, iOS & Android apps and admin panels end to end — interface, backend and App Store / Google Play release. 8 apps live on the App Store and Google Play, 15 live websites. Open to freelance projects, full-time roles and long-term collaborations. English site: https://emirtiryaki.com/en · Contact: info@emirtiryaki.com
+
+- **Published apps:** Heybe, Kortbul, CarLog, Adhan, daCAR (Senegal), AvtoUzbek (Uzbekistan), Marocar (Morocco), NaijaCar (Nigeria). Coming soon: BharatKaar (India), AvtoBozor (Uzbekistan), Satılık (Türkiye), BanglaGari (Bangladesh).
+- **Selected work:** a car marketplace family localized for 7 countries (web + mobile + admin), Kortbul racket-sports booking platform, Satılık classifieds platform, clinic management and courier tracking systems, corporate websites.
+- **Stack:** React Native, Expo, Swift, SwiftUI, Flutter, React, Next.js, TypeScript, Node.js, Supabase, Firebase, PostgreSQL.
+- **Resume:** https://emirtiryaki.com/cv-en.html · PDF: https://emirtiryaki.com/Ismail-Emir-Tiryaki-CV-EN.pdf
+
+## FAQ
+
+**Who is Emir Tiryaki?**
+İsmail Emir Tiryaki is a full-stack and mobile developer based in Istanbul, Türkiye. He has been building software since 2017 and delivers websites, mobile apps and admin panels end to end, from the interface and backend to the App Store and Google Play release. He has 8 apps live on the App Store and Google Play and 15 live websites on their own domains.
+
+**What services do you offer?**
+Web development (corporate sites, landing pages, web apps), iOS and Android mobile app development, CRM and business management systems, and e-commerce and classifieds/marketplace platforms. Design, development, launch and ongoing maintenance are handled by one person.
+
+**Which mobile apps have you built?**
+Live apps: Heybe (learning the Quran and Islam), Kortbul (tennis and padel court/partner finder), CarLog (car maintenance log), Adhan (prayer times) and the car marketplace apps daCAR (Senegal), AvtoUzbek (Uzbekistan), Marocar (Morocco) and NaijaCar (Nigeria). Coming soon: BharatKaar (India), AvtoBozor (Uzbekistan), Satılık (Türkiye) and BanglaGari (Bangladesh).
+
+**Which technologies do you use?**
+On mobile: React Native and Expo, Swift and SwiftUI, Flutter. On the web: React, Next.js, TypeScript and Tailwind CSS. For backend and data: Node.js, Supabase, Firebase and PostgreSQL.
+
+**Do you work remotely with international clients?**
+Yes. I work remotely and hybrid from Istanbul and have built products for the Senegalese, Moroccan, Uzbek, Nigerian, Indian and Bangladeshi markets. I communicate in Turkish and English.
+
+**How does a project work and how do I get a quote?**
+The process has four steps: discovery (needs and scope), design (screen flows and UI), development (weekly demos) and launch & support. For a quote, use the contact form on emirtiryaki.com, email info@emirtiryaki.com or WhatsApp (+90 543 447 6245); replies usually come within 24 hours.

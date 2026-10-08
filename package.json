@@ -9,7 +9,7 @@
     "generate:portfolio-webp": "node scripts/generate-portfolio-webp.mjs",
     "update:sitemap": "node scripts/update-sitemap.mjs",
     "prebuild": "node scripts/sync-cv.mjs && node scripts/update-sitemap.mjs && node scripts/generate-portfolio-webp.mjs && node scripts/check-live-preview.mjs && node scripts/portfolio-manifest.mjs",
-    "build": "vite build",
+    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
