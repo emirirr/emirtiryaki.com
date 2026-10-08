@@ -9,6 +9,16 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>${d}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1</priority>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://emirtiryaki.com/" xmlns:xhtml="http://www.w3.org/1999/xhtml" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://emirtiryaki.com/en" xmlns:xhtml="http://www.w3.org/1999/xhtml" />
+  </url>
+  <url>
+    <loc>https://emirtiryaki.com/en</loc>
+    <lastmod>${d}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://emirtiryaki.com/" xmlns:xhtml="http://www.w3.org/1999/xhtml" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://emirtiryaki.com/en" xmlns:xhtml="http://www.w3.org/1999/xhtml" />
   </url>
   <url>
     <loc>https://emirtiryaki.com/projects</loc>

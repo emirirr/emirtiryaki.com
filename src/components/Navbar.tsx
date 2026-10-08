@@ -4,28 +4,55 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, scrollToSection } from "@/lib/utils";
 import { BrandMark } from "@/components/BrandMark";
+import { Link } from "react-router-dom";
+import { homePath, useLang, useT } from "@/i18n/lang";
 
 const links = [
-  { id: "projects", label: "Projeler" },
-  { id: "apps", label: "Uygulamalar" },
-  { id: "services", label: "Hizmetler" },
-  { id: "experience", label: "Deneyim" },
-  { id: "brands", label: "Markalar" },
-  { id: "contact", label: "İletişim" },
+  { id: "projects", tr: "Projeler", en: "Projects" },
+  { id: "apps", tr: "Uygulamalar", en: "Apps" },
+  { id: "services", tr: "Hizmetler", en: "Services" },
+  { id: "experience", tr: "Deneyim", en: "Experience" },
+  { id: "brands", tr: "Markalar", en: "Brands" },
+  { id: "contact", tr: "İletişim", en: "Contact" },
 ];
 
+/** TR/EN geçişi — aynı bölüm kimlikleri iki dilde de geçerli. */
+function LangSwitch({ className }: { className?: string }) {
+  const lang = useLang();
+  return (
+    <div className={cn("flex h-9 items-center rounded-lg border border-border p-0.5 text-xs font-bold", className)}>
+      {(["tr", "en"] as const).map((l) => (
+        <Link
+          key={l}
+          to={homePath(l)}
+          hrefLang={l}
+          aria-current={lang === l ? "true" : undefined}
+          className={cn(
+            "flex h-full items-center rounded-md px-2.5 uppercase transition-colors",
+            lang === l ? "bg-secondary text-foreground" : "text-muted-foreground hover:text-foreground",
+          )}
+        >
+          {l}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
 export function Logo({ className }: { className?: string }) {
+  const lang = useLang();
+  const home = homePath(lang);
   return (
     <a
-      href="/#hero"
+      href={`${home}#hero`}
       onClick={(e) => {
-        if (window.location.pathname === "/") {
+        if (window.location.pathname === home) {
           e.preventDefault();
           scrollToSection("hero");
         }
       }}
       className={cn("flex items-center gap-2.5", className)}
-      aria-label="İsmail Emir Tiryaki — ana sayfa"
+      aria-label={lang === "en" ? "İsmail Emir Tiryaki — home" : "İsmail Emir Tiryaki — ana sayfa"}
     >
       <BrandMark blink className="h-9 w-9" />
       <span className="leading-tight">
@@ -33,7 +60,7 @@ export function Logo({ className }: { className?: string }) {
           Emir Tiryaki
         </span>
         <span className="block text-[11px] font-medium text-muted-foreground">
-          Full-Stack & iOS Developer
+          {lang === "en" ? "Full-Stack & Mobile Developer" : "Full-Stack & Mobil Geliştirici"}
         </span>
       </span>
     </a>
@@ -41,6 +68,8 @@ export function Logo({ className }: { className?: string }) {
 }
 
 const Navbar = () => {
+  const lang = useLang();
+  const t = useT();
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("hero");
   const [open, setOpen] = useState(false);
@@ -101,7 +130,7 @@ const Navbar = () => {
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                {link.label}
+                {link[lang]}
                 {active === link.id && (
                   <motion.span
                     layoutId="nav-underline"
@@ -115,13 +144,14 @@ const Navbar = () => {
         </ul>
 
         <div className="flex items-center gap-2">
+          <LangSwitch className="hidden sm:flex" />
           <Button
             variant="outline"
             size="sm"
             className="hidden h-9 rounded-lg sm:inline-flex"
             asChild
           >
-            <a href="/cv.html" target="_blank" rel="noopener noreferrer">
+            <a href={t("/cv.html", "/cv-en.html")} target="_blank" rel="noopener noreferrer">
               CV
             </a>
           </Button>
@@ -130,14 +160,14 @@ const Navbar = () => {
             className="hidden h-9 rounded-lg px-4 font-semibold sm:inline-flex"
             onClick={() => go("contact")}
           >
-            Teklif al
+            {t("Teklif al", "Get a quote")}
           </Button>
           <button
             type="button"
             className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-foreground lg:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
-            aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
+            aria-label={open ? t("Menüyü kapat", "Close menu") : t("Menüyü aç", "Open menu")}
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -161,19 +191,20 @@ const Navbar = () => {
                     onClick={() => go(link.id)}
                     className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-left text-[15px] font-medium text-foreground hover:bg-secondary"
                   >
-                    {link.label}
+                    {link[lang]}
                     <ArrowRight className="h-4 w-4 text-muted-foreground" />
                   </button>
                 </li>
               ))}
-              <li className="mt-2 grid grid-cols-2 gap-2 border-t border-border pt-3">
+              <li className="mt-2 grid grid-cols-[auto_1fr_1fr] gap-2 border-t border-border pt-3">
+                <LangSwitch className="h-10" />
                 <Button variant="outline" className="rounded-lg" asChild>
-                  <a href="/cv.html" target="_blank" rel="noopener noreferrer">
-                    Özgeçmiş
+                  <a href={t("/cv.html", "/cv-en.html")} target="_blank" rel="noopener noreferrer">
+                    {t("Özgeçmiş", "Resume")}
                   </a>
                 </Button>
                 <Button className="rounded-lg font-semibold" onClick={() => go("contact")}>
-                  Teklif al
+                  {t("Teklif al", "Get a quote")}
                 </Button>
               </li>
             </ul>

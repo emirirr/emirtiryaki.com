@@ -6,12 +6,19 @@ import {
 const SITE = "https://emirtiryaki.com";
 
 const HOME = {
-  title: "İsmail Emir Tiryaki - Full Stack Developer",
+  title: "İsmail Emir Tiryaki — Full-Stack & Mobil Geliştirici",
   description:
-    "Full Stack Developer portföyü: React, React Native, Node.js ve bulut ile web ve mobil ürünler. Projeler ve iletişim — emirtiryaki.com.",
-  ogTitle: "İsmail Emir Tiryaki - Full Stack Developer",
-  ogDescription:
-    "Web ve mobil geliştirme, portföy ve iletişim. Türkiye.",
+    "Web sitesi, mobil uygulama ve yönetim paneli geliştiriyorum. App Store ve Google Play'de 8 uygulama, 15 canlı site. Projeler ve iletişim — emirtiryaki.com.",
+  ogTitle: "İsmail Emir Tiryaki — Full-Stack & Mobil Geliştirici",
+  ogDescription: "Fikirden yayına, uçtan uca dijital ürünler. İstanbul · uzaktan.",
+};
+
+const HOME_EN = {
+  title: "İsmail Emir Tiryaki — Full-Stack & Mobile Developer",
+  description:
+    "I build websites, mobile apps and admin panels end to end. 8 apps on the App Store and Google Play, 15 live websites. Projects and contact — emirtiryaki.com.",
+  ogTitle: "İsmail Emir Tiryaki — Full-Stack & Mobile Developer",
+  ogDescription: "From idea to launch: end-to-end digital products. Istanbul · remote.",
 };
 
 const PROJECTS = {
@@ -67,8 +74,10 @@ export function syncRouteDocumentHead(pathname: string) {
   const normalized = pathname.replace(/\/$/, "") || "/";
   const kortbul = kortbulMeta(normalized);
   const dacarMobile = normalized === "/projects/dacar/mobile";
+  const isEnHome = normalized === "/en";
   const isIndexedRoute =
     normalized === "/" ||
+    isEnHome ||
     normalized === "/projects" ||
     kortbul !== null ||
     dacarMobile;
@@ -81,9 +90,26 @@ export function syncRouteDocumentHead(pathname: string) {
         ? PROJECTS
         : normalized === "/"
           ? HOME
-          : NOT_FOUND;
+          : isEnHome
+            ? HOME_EN
+            : NOT_FOUND;
 
   document.title = pack.title;
+  document.documentElement.lang = isEnHome ? "en" : "tr";
+  setMetaContent('meta[property="og:locale"]', isEnHome ? "en_US" : "tr_TR");
+
+  // Ana sayfa TR/EN eşleşmesi (hreflang)
+  document.querySelectorAll('link[rel="alternate"][data-route-sync="1"]').forEach((l) => l.remove());
+  if (normalized === "/" || isEnHome) {
+    for (const [lang, href] of [["tr", `${SITE}/`], ["en", `${SITE}/en`], ["x-default", `${SITE}/`]]) {
+      const link = document.createElement("link");
+      link.rel = "alternate";
+      link.hreflang = lang;
+      link.href = href;
+      link.dataset.routeSync = "1";
+      document.head.appendChild(link);
+    }
+  }
 
   setMetaContent('meta[name="description"]', pack.description);
   setMetaContent('meta[property="og:title"]', pack.ogTitle);

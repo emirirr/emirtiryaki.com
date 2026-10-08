@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { useLang } from "@/i18n/lang";
 
 /** Apple logosu (resmî glif). */
 export function AppleLogo({ className }: { className?: string }) {
@@ -31,12 +32,21 @@ type StoreBadgeProps = {
 /** Mağaza rozetleri — resmî rozetlerin siyah zemin + logo + iki satır düzeni. */
 export function StoreBadge({ store, href, size = "md", className }: StoreBadgeProps) {
   const apple = store === "appstore";
+  const en = useLang() === "en";
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={apple ? "App Store'dan indirin" : "Google Play'den alın"}
+      aria-label={
+        en
+          ? apple
+            ? "Download on the App Store"
+            : "Get it on Google Play"
+          : apple
+            ? "App Store'dan indirin"
+            : "Google Play'den alın"
+      }
       className={cn(
         "inline-flex items-center gap-2 rounded-lg bg-black text-white ring-1 ring-black/80 transition-transform hover:-translate-y-0.5",
         size === "md" ? "h-11 px-3.5" : "h-9 px-2.5",
@@ -50,7 +60,7 @@ export function StoreBadge({ store, href, size = "md", className }: StoreBadgePr
       )}
       <span className="flex flex-col text-left leading-none">
         <span className={cn("font-medium opacity-90", size === "md" ? "text-[9px]" : "text-[8px]")}>
-          {apple ? "Şimdi indirin" : "ŞİMDİ ALIN"}
+          {en ? (apple ? "Download on the" : "GET IT ON") : apple ? "Şimdi indirin" : "ŞİMDİ ALIN"}
         </span>
         <span className={cn("mt-0.5 font-semibold tracking-tight", size === "md" ? "text-[15px]" : "text-[13px]")}>
           {apple ? "App Store" : "Google Play"}

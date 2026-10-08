@@ -4,18 +4,23 @@ import { ArrowRight, Check, Star } from "lucide-react";
 import profileImage from "@/assets/emir-profile.jpg";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { scrollToSection } from "@/lib/utils";
+import { useLang, useT } from "@/i18n/lang";
 import { LiveSitePreview } from "@/components/LiveSitePreview";
 import livePreview from "@/data/livePreview.json";
 
 const TIRYAKI_URL = "https://tiryakiyazilim.com";
 
-const trust = ["40+ teslim edilmiş proje", "App Store & Google Play'de yayında", "24 saat içinde dönüş"];
+const trust = [
+  { tr: "40+ teslim edilmiş proje", en: "40+ projects delivered" },
+  { tr: "App Store & Google Play'de yayında", en: "Live on the App Store & Google Play" },
+  { tr: "24 saat içinde dönüş", en: "Reply within 24 hours" },
+];
 
 const stats = [
-  { value: "5+", label: "Yıl deneyim" },
-  { value: "40+", label: "Tamamlanan proje" },
-  { value: "8", label: "Mağazada uygulama" },
-  { value: "6+", label: "Farklı sektör" },
+  { value: "5+", tr: "Yıl deneyim", en: "Years of experience" },
+  { value: "40+", tr: "Tamamlanan proje", en: "Projects completed" },
+  { value: "8", tr: "Mağazada uygulama", en: "Apps in stores" },
+  { value: "6+", tr: "Farklı sektör", en: "Industries" },
 ];
 
 const clients = [
@@ -39,6 +44,8 @@ const clients = [
 ];
 
 const Hero = () => {
+  const lang = useLang();
+  const t = useT();
   return (
     <section id="hero" className="relative overflow-hidden px-4 pb-0 pt-28 sm:px-6 md:pt-36">
       <div className="bg-dots pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_30%,transparent_75%)]" />
@@ -56,24 +63,28 @@ const Hero = () => {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
             </span>
-            Yeni projelere açık · İstanbul
+            {t("Yeni projelere açık · İstanbul", "Open to new projects · Istanbul")}
           </motion.span>
 
           <motion.h1
             variants={fadeUp}
             className="mt-5 font-display text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-[4.1rem]"
           >
-            Fikirden yayına,{" "}
-            <span className="text-primary">uçtan uca</span> dijital ürünler.
+            {t("Fikirden yayına,", "From idea to launch,")}{" "}
+            <span className="text-primary">{t("uçtan uca", "end\u2011to\u2011end")}</span>{" "}
+            {t("dijital ürünler.", "digital products.")}
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
             className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground"
           >
-            Ben <strong className="font-semibold text-foreground">İsmail Emir Tiryaki</strong>.
-            Web sitesi, mobil uygulama ve yönetim paneli geliştiriyorum. Arayüzü, backend'i ve App
-            Store yayınını tek başıma üstleniyorum.
+            {t("Ben ", "I'm ")}
+            <strong className="font-semibold text-foreground">İsmail Emir Tiryaki</strong>.{" "}
+            {t(
+              "Web sitesi, mobil uygulama ve yönetim paneli geliştiriyorum. Arayüzü, backend'i ve App Store yayınını tek başıma üstleniyorum.",
+              "I build websites, mobile apps and admin panels, owning the interface, the backend and the App Store release myself.",
+            )}
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -82,7 +93,7 @@ const Hero = () => {
               className="h-12 rounded-lg px-6 text-[15px] font-semibold shadow-[0_8px_24px_-10px_hsl(var(--primary)/0.7)]"
               onClick={() => scrollToSection("projects")}
             >
-              Projeleri incele
+              {t("Projeleri incele", "View projects")}
               <ArrowRight className="ml-1 h-4 w-4" />
             </Button>
             <Button
@@ -91,15 +102,15 @@ const Hero = () => {
               className="h-12 rounded-lg px-6 text-[15px] font-semibold"
               onClick={() => scrollToSection("contact")}
             >
-              Ücretsiz ön görüşme
+              {t("Ücretsiz ön görüşme", "Free intro call")}
             </Button>
           </motion.div>
 
           <motion.ul variants={fadeUp} className="mt-8 flex flex-wrap gap-x-5 gap-y-2">
-            {trust.map((t) => (
-              <li key={t} className="flex items-center gap-1.5 text-sm text-muted-foreground">
+            {trust.map((item) => (
+              <li key={item.tr} className="flex items-center gap-1.5 text-sm text-muted-foreground">
                 <Check className="h-4 w-4 text-primary" strokeWidth={2.5} />
-                {t}
+                {item[lang]}
               </li>
             ))}
           </motion.ul>
@@ -119,7 +130,7 @@ const Hero = () => {
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
                     <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-success" />
                   </span>
-                  canlı
+                  {t("canlı", "live")}
                 </span>
               </span>
             </div>
@@ -148,7 +159,7 @@ const Hero = () => {
               <p className="text-sm font-bold text-foreground">İsmail Emir Tiryaki</p>
               <p className="flex items-center gap-1.5 text-xs font-medium text-success">
                 <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                Projelere müsait
+                {t("Projelere müsait", "Available for work")}
               </p>
             </div>
           </motion.div>
@@ -172,10 +183,10 @@ const Hero = () => {
               ))}
             </div>
             <div>
-              <p className="text-xs font-bold text-foreground">Mağazada yayında</p>
+              <p className="text-xs font-bold text-foreground">{t("Mağazada yayında", "Live in stores")}</p>
               <p className="flex items-center gap-0.5 text-[11px] text-muted-foreground">
                 <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-                8 uygulama · App Store & Google Play
+                {t("8 uygulama", "8 apps")} · App Store & Google Play
               </p>
             </div>
           </motion.div>
@@ -192,7 +203,7 @@ const Hero = () => {
       >
         {stats.map((s, i) => (
           <div
-            key={s.label}
+            key={s.tr}
             className={
               "px-6 py-6 text-center md:py-7 " +
               (i < 2 ? "border-b border-border md:border-b-0 " : "") +
@@ -202,7 +213,7 @@ const Hero = () => {
             <div className="font-display text-3xl font-extrabold tracking-tight text-primary md:text-4xl">
               {s.value}
             </div>
-            <div className="mt-1 text-sm text-muted-foreground">{s.label}</div>
+            <div className="mt-1 text-sm text-muted-foreground">{s[lang]}</div>
           </div>
         ))}
       </motion.div>
@@ -210,7 +221,7 @@ const Hero = () => {
       {/* Teslim edilen işler — kayan şerit */}
       <div className="relative mx-auto mt-14 max-w-6xl pb-16">
         <p className="mb-5 text-center text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-          Geliştirdiğim ürünlerden bazıları
+          {t("Geliştirdiğim ürünlerden bazıları", "Some of the products I've built")}
         </p>
         <div className="overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
           <div className="animate-marquee flex w-max gap-12">

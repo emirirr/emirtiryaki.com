@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { PortfolioImage } from "@/components/PortfolioImage";
+import { useT } from "@/i18n/lang";
 
 type LiveSitePreviewProps = {
   /** Canlı gösterilecek site (hedef site `frame-ancestors` ile emirtiryaki.com'a izin vermeli). */
@@ -28,6 +29,7 @@ export function LiveSitePreview({
   live = true,
   className,
 }: LiveSitePreviewProps) {
+  const t = useT();
   const boxRef = useRef<HTMLAnchorElement>(null);
   const [scale, setScale] = useState(0);
   const [mount, setMount] = useState(false);
@@ -72,12 +74,12 @@ export function LiveSitePreview({
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${title} — siteyi yeni sekmede aç`}
+      aria-label={t(`${title} — siteyi yeni sekmede aç`, `${title} — open site in a new tab`)}
       className={cn("group relative block aspect-[16/10] overflow-hidden bg-surface", className)}
     >
       <PortfolioImage
         src={poster}
-        alt={`${title} ana sayfası`}
+        alt={t(`${title} ana sayfası`, `${title} homepage`)}
         className={cn(
           "absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-500",
           loaded && "opacity-0",
@@ -87,7 +89,7 @@ export function LiveSitePreview({
       {mount && scale > 0 && (
         <iframe
           src={url}
-          title={`${title} — canlı önizleme`}
+          title={t(`${title} — canlı önizleme`, `${title} — live preview`)}
           tabIndex={-1}
           aria-hidden
           loading="lazy"

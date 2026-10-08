@@ -171,6 +171,11 @@ export const projects = [
     logo: null,
     featured: true,
     featuredOrder: 2,
+    en: {
+      title: 'daCAR — Senegal Car Marketplace',
+      description: "End-to-end car marketplace for Senegal: website, mobile app and admin panel. Verified listings and advanced search.",
+      features: ["Listing publishing and management", "Verified sellers", "Advanced search and filters", "Favorites and messaging", "Inspection flow", "Admin panel"],
+    },
   },
   {
     id: 59,
@@ -405,6 +410,11 @@ export const projects = [
     logo: null,
     featured: true,
     featuredOrder: 4,
+    en: {
+      title: 'Kuta',
+      description: "A complete courier management system that lets delivery companies track their couriers in real time.",
+      features: ["Real-time tracking", "Route optimization", "Delivery tracking", "Performance analytics"],
+    },
   },
   {
     id: 10,
@@ -521,6 +531,11 @@ export const projects = [
     logo: null,
     featured: true,
     featuredOrder: 3,
+    en: {
+      title: 'Clinic Tracker',
+      description: "Clinic and hospital management system.",
+      features: ["Patient records", "Appointment management", "Treatment tracking", "Reporting"],
+    },
   },
   {
     id: 20,
@@ -687,6 +702,11 @@ export const projects = [
     logo: null,
     featured: true,
     featuredOrder: 5,
+    en: {
+      title: 'İnda',
+      description: "Corporate website for an industrial automation company and its reference projects.",
+      features: ["Corporate page structure", "Reference / project showcases", "Responsive layout"],
+    },
   },
   {
     id: 30,
@@ -787,6 +807,11 @@ export const projects = [
     logo: null,
     featured: true,
     featuredOrder: 1,
+    en: {
+      title: 'Kortbul',
+      description: "A racket-sports super-app combining court discovery, partner matching, match organization, messaging and a marketplace.",
+      features: ["Club/court discovery with detailed venue info", "Partner finder, match invites and invite management", "Chat, unread badges and a hybrid push notification model", "Tournaments, community and the İlanbul marketplace"],
+    },
   },
   {
     id: 38,

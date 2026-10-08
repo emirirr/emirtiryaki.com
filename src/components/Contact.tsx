@@ -10,29 +10,32 @@ import { fadeUp, staggerContainer } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { talepGonder } from "@/lib/talep";
 import { Section, SectionHeading } from "@/components/SectionHeading";
+import { useLang, useT } from "@/i18n/lang";
 
 const channels = [
-  { Icon: Mail, label: "E-posta", value: "info@emirtiryaki.com", href: "mailto:info@emirtiryaki.com" },
-  { Icon: Phone, label: "Telefon", value: "+90 543 447 6245", href: "tel:+905434476245" },
-  { Icon: MapPin, label: "Konum", value: "İstanbul, Türkiye" },
+  { Icon: Mail, label: "E-posta", en: "Email", value: "info@emirtiryaki.com", href: "mailto:info@emirtiryaki.com" },
+  { Icon: Phone, label: "Telefon", en: "Phone", value: "+90 543 447 6245", href: "tel:+905434476245" },
+  { Icon: MapPin, label: "Konum", en: "Location", value: "İstanbul, Türkiye" },
 ];
 
 
 /** emirscode-teklif CRM'indeki SERVICE_LABEL anahtarlarıyla birebir aynı olmalı. */
 const SERVICES = [
-  { value: "web", label: "Web Geliştirme" },
-  { value: "mobil", label: "Mobil Uygulama" },
-  { value: "kurumsal", label: "Kurumsal Yazılım (CRM/ERP)" },
-  { value: "uiux", label: "UI/UX Tasarım" },
-  { value: "dijital", label: "Dijital Dönüşüm" },
-  { value: "seo", label: "SEO" },
-  { value: "diger", label: "Diğer" },
+  { value: "web", label: "Web Geliştirme", en: "Web development" },
+  { value: "mobil", label: "Mobil Uygulama", en: "Mobile app" },
+  { value: "kurumsal", label: "Kurumsal Yazılım (CRM/ERP)", en: "Business software (CRM/ERP)" },
+  { value: "uiux", label: "UI/UX Tasarım", en: "UI/UX design" },
+  { value: "dijital", label: "Dijital Dönüşüm", en: "Digital transformation" },
+  { value: "seo", label: "SEO", en: "SEO" },
+  { value: "diger", label: "Diğer", en: "Other" },
 ];
 
 const EMPTY_FORM = { name: "", email: "", phone: "", service: "", message: "" };
 
 const Contact = () => {
   const { toast } = useToast();
+  const lang = useLang();
+  const t = useT();
   const [formData, setFormData] = useState(EMPTY_FORM);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -48,8 +51,11 @@ const Contact = () => {
 
     if (!formData.name || !formData.email || !formData.service || !formData.message) {
       toast({
-        title: "Hata",
-        description: "Lütfen ad, e-posta, hizmet ve mesaj alanlarını doldurun.",
+        title: t("Hata", "Error"),
+        description: t(
+          "Lütfen ad, e-posta, hizmet ve mesaj alanlarını doldurun.",
+          "Please fill in your name, email, service and message.",
+        ),
         variant: "destructive",
       });
       return;
@@ -57,8 +63,8 @@ const Contact = () => {
 
     if (!formData.email.includes("@")) {
       toast({
-        title: "Hata",
-        description: "Lütfen geçerli bir e-posta adresi girin.",
+        title: t("Hata", "Error"),
+        description: t("Lütfen geçerli bir e-posta adresi girin.", "Please enter a valid email address."),
         variant: "destructive",
       });
       return;
@@ -73,19 +79,22 @@ const Contact = () => {
         phone: formData.phone.trim(),
         service: formData.service,
         message: formData.message.trim(),
-        source: "emirtiryaki.com",
+        source: lang === "en" ? "emirtiryaki.com (EN)" : "emirtiryaki.com",
       });
       toast({
-        title: "Teşekkürler",
-        description: "Mesajınız alındı; en kısa sürede size dönüş yapacağım.",
+        title: t("Teşekkürler", "Thank you"),
+        description: t(
+          "Mesajınız alındı; en kısa sürede size dönüş yapacağım.",
+          "Your message has been received; I'll get back to you shortly.",
+        ),
       });
 
       setFormData(EMPTY_FORM);
     } catch (err) {
       toast({
-        title: "Hata",
+        title: t("Hata", "Error"),
         description:
-          err instanceof Error ? err.message : "Bir hata oluştu. Lütfen tekrar deneyin.",
+          err instanceof Error ? err.message : t("Bir hata oluştu. Lütfen tekrar deneyin.", "Something went wrong. Please try again."),
         variant: "destructive",
       });
     } finally {
@@ -106,10 +115,13 @@ const Contact = () => {
         viewport={{ once: true, margin: "-80px" }}
       >
         <SectionHeading
-          eyebrow="İletişim"
-          title="Projenizi birlikte"
-          highlight="hayata geçirelim"
-          description="Fikrinizi veya ekip ihtiyacınızı yazın; genellikle 24 saat içinde net bir yol haritası ve teklifle dönerim."
+          eyebrow={t("İletişim", "Contact")}
+          title={t("Projenizi birlikte", "Let's build")}
+          highlight={t("hayata geçirelim", "your project")}
+          description={t(
+            "Fikrinizi veya ekip ihtiyacınızı yazın; genellikle 24 saat içinde net bir yol haritası ve teklifle dönerim.",
+            "Tell me about your idea or team needs; I usually reply within 24 hours with a clear roadmap and a quote.",
+          )}
         />
 
         <motion.div
@@ -123,11 +135,14 @@ const Contact = () => {
             <div className="relative">
               <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white">
                 <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                Yeni projeler için müsait
+                {t("Yeni projeler için müsait", "Available for new projects")}
               </span>
-              <h3 className="mt-5 text-2xl font-extrabold tracking-tight">Doğrudan ulaşın</h3>
+              <h3 className="mt-5 text-2xl font-extrabold tracking-tight">{t("Doğrudan ulaşın", "Reach me directly")}</h3>
               <p className="mt-2 text-sm leading-relaxed text-white/65">
-                Formu doldurabilir ya da aşağıdaki kanallardan birini kullanabilirsiniz.
+                {t(
+                  "Formu doldurabilir ya da aşağıdaki kanallardan birini kullanabilirsiniz.",
+                  "Fill in the form or use one of the channels below.",
+                )}
               </p>
 
               <ul className="mt-8 space-y-5">
@@ -138,7 +153,7 @@ const Contact = () => {
                         <c.Icon className="h-5 w-5" strokeWidth={1.75} />
                       </span>
                       <span>
-                        <span className="block text-xs text-white/55">{c.label}</span>
+                        <span className="block text-xs text-white/55">{lang === "en" ? c.en : c.label}</span>
                         <span className="block text-[15px] font-semibold">{c.value}</span>
                       </span>
                     </>
@@ -159,7 +174,7 @@ const Contact = () => {
 
               <div className="mt-10 border-t border-white/10 pt-6">
                 <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/50">
-                  Sosyal
+                  {t("Sosyal", "Social")}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {socials.map((s) => (
@@ -182,29 +197,35 @@ const Contact = () => {
 
           {/* Form */}
           <div className="p-8 sm:p-10">
-            <h3 className="text-xl font-extrabold tracking-tight text-foreground">Mesaj gönderin</h3>
-            <p className="mt-1 text-sm text-muted-foreground">Mesajınız doğrudan teklif sistemime düşer; genellikle aynı gün dönerim.</p>
+            <h3 className="text-xl font-extrabold tracking-tight text-foreground">{t("Mesaj gönderin", "Send a message")}</h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {t(
+                "Mesajınız doğrudan teklif sistemime düşer; genellikle aynı gün dönerim.",
+                "Your message goes straight into my quoting system; I usually reply the same day.",
+              )}
+            </p>
             <form onSubmit={handleSubmit} className="mt-6 space-y-5">
               <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
               <div className="grid gap-5 md:grid-cols-2">
                 <div>
-                  <label htmlFor="c-name" className="mb-2 block text-sm font-semibold text-foreground">Ad Soyad</label>
-                  <Input id="c-name" name="name" value={formData.name} onChange={handleInputChange} placeholder="Adınız ve soyadınız" className={fields} required />
+                  <label htmlFor="c-name" className="mb-2 block text-sm font-semibold text-foreground">{t("Ad Soyad", "Full name")}</label>
+                  <Input id="c-name" name="name" value={formData.name} onChange={handleInputChange} placeholder={t("Adınız ve soyadınız", "Your full name")} className={fields} required />
                 </div>
                 <div>
-                  <label htmlFor="c-email" className="mb-2 block text-sm font-semibold text-foreground">E-posta</label>
-                  <Input id="c-email" name="email" type="email" value={formData.email} onChange={handleInputChange} placeholder="ornek@email.com" className={fields} required />
+                  <label htmlFor="c-email" className="mb-2 block text-sm font-semibold text-foreground">{t("E-posta", "Email")}</label>
+                  <Input id="c-email" name="email" type="email" value={formData.email} onChange={handleInputChange} placeholder={t("ornek@email.com", "you@example.com")} className={fields} required />
                 </div>
               </div>
               <div className="grid gap-5 md:grid-cols-2">
                 <div>
                   <label htmlFor="c-phone" className="mb-2 block text-sm font-semibold text-foreground">
-                    Telefon <span className="font-normal text-muted-foreground">(isteğe bağlı)</span>
+                    {t("Telefon", "Phone")}{" "}
+                    <span className="font-normal text-muted-foreground">{t("(isteğe bağlı)", "(optional)")}</span>
                   </label>
-                  <Input id="c-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" value={formData.phone} onChange={handleInputChange} placeholder="05xx xxx xx xx" className={fields} />
+                  <Input id="c-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" value={formData.phone} onChange={handleInputChange} placeholder={t("05xx xxx xx xx", "+1 555 000 0000")} className={fields} />
                 </div>
                 <div>
-                  <label htmlFor="c-service" className="mb-2 block text-sm font-semibold text-foreground">Hizmet</label>
+                  <label htmlFor="c-service" className="mb-2 block text-sm font-semibold text-foreground">{t("Hizmet", "Service")}</label>
                   <div className="relative">
                   <select
                     id="c-service"
@@ -219,11 +240,11 @@ const Contact = () => {
                     )}
                   >
                     <option value="" disabled>
-                      Seçin
+                      {t("Seçin", "Select")}
                     </option>
                     {SERVICES.map((s) => (
                       <option key={s.value} value={s.value} className="text-foreground">
-                        {s.label}
+                        {lang === "en" ? s.en : s.label}
                       </option>
                     ))}
                   </select>
@@ -232,8 +253,8 @@ const Contact = () => {
                 </div>
               </div>
               <div>
-                <label htmlFor="c-message" className="mb-2 block text-sm font-semibold text-foreground">Mesaj</label>
-                <Textarea id="c-message" name="message" value={formData.message} onChange={handleInputChange} placeholder="Projenizden kısaca bahsedin…" rows={6} className={cn(fields, "h-auto resize-none")} required />
+                <label htmlFor="c-message" className="mb-2 block text-sm font-semibold text-foreground">{t("Mesaj", "Message")}</label>
+                <Textarea id="c-message" name="message" value={formData.message} onChange={handleInputChange} placeholder={t("Projenizden kısaca bahsedin…", "Tell me briefly about your project…")} rows={6} className={cn(fields, "h-auto resize-none")} required />
               </div>
               <Button
                 type="submit"
@@ -242,7 +263,7 @@ const Contact = () => {
                 disabled={isSubmitting}
               >
                 <Send className="mr-2 h-4 w-4" />
-                {isSubmitting ? "Gönderiliyor…" : "Mesajı gönder"}
+                {isSubmitting ? t("Gönderiliyor…", "Sending…") : t("Mesajı gönder", "Send message")}
               </Button>
             </form>
           </div>

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { GraduationCap, MapPin } from "lucide-react";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { Section, SectionHeading } from "@/components/SectionHeading";
+import { useLang, useT } from "@/i18n/lang";
 
 type Role = {
   company: string;
@@ -9,7 +10,7 @@ type Role = {
   period: string;
   current?: boolean;
   points: string[];
-  tags?: string[];
+  en: { company?: string; title: string; period: string; points: string[] };
 };
 
 const roles: Role[] = [
@@ -22,7 +23,14 @@ const roles: Role[] = [
       "Şirket içi dashboard için mobil uygulama; Excel kaynaklı verilerin okunaklı bileşenlerle sunulması, manuel tablo bağımlılığını azaltma.",
       "Tedarik ve satın alma: teklif toplama/değerlendirme, sipariş–stok, tedarikçi ilişkileri (endüstriyel sensör ve ölçüm bileşenleri).",
     ],
-    tags: ["React Native", "Dashboard", "Tedarik"],
+    en: {
+      title: "Mobile Development & Procurement",
+      period: "Mar 2026 — present",
+      points: [
+        "Internal dashboard mobile app presenting Excel-based data through readable components, reducing reliance on manual spreadsheets.",
+        "Procurement: quotation collection and evaluation, order–stock and supplier relations (industrial sensors and measurement components).",
+      ],
+    },
   },
   {
     company: "Kortbul — Freelance",
@@ -33,7 +41,15 @@ const roles: Role[] = [
       "React & Node.js ile modüler mimari; tesis yöneticisi ve sporcu için ayrı paneller, uygunluk takvimi, online rezervasyon ve raporlama.",
       "Gerçek zamanlı bildirimler ve rol bazlı yetkilendirme ile anlık bilgi akışı ve veri güvenliği.",
     ],
-    tags: ["React", "Node.js", "TypeScript", "Realtime"],
+    en: {
+      title: "Full-Stack Developer",
+      period: "Sep 2025 — Mar 2026",
+      points: [
+        "Built the venue search and online court booking platform for racket sports end to end (kortbul.com.tr).",
+        "Modular React & Node.js architecture; separate venue-manager and player dashboards, availability calendar, online booking and reporting.",
+        "Real-time notifications and role-based authorization for instant updates and data security.",
+      ],
+    },
   },
   {
     company: "Bionluk — Freelance",
@@ -44,7 +60,15 @@ const roles: Role[] = [
       "iOS: Swift & SwiftUI ile App Store'da yayınlanan uygulamalar (CarLog, Adhan, Terapi Asistanı).",
       "Web: React & TypeScript arayüzler; Firebase ile kimlik doğrulama ve gerçek zamanlı veri yönetimi.",
     ],
-    tags: ["Swift", "SwiftUI", "React", "Firebase"],
+    en: {
+      title: "iOS & Web Developer",
+      period: "Jan 2024 — Mar 2026",
+      points: [
+        "Delivered end-to-end web and iOS products for clients across industries.",
+        "iOS: apps published on the App Store with Swift & SwiftUI (CarLog, Adhan, Therapy Assistant).",
+        "Web: React & TypeScript interfaces; authentication and real-time data with Firebase.",
+      ],
+    },
   },
   {
     company: "Cebinde",
@@ -53,7 +77,11 @@ const roles: Role[] = [
     points: [
       "Cebinde platformunun mobil arayüzlerini geliştiren ekipte liderlik; kullanıcı deneyimini iyileştiren kullanıcı dostu arayüz tasarımı.",
     ],
-    tags: ["Mobil", "UI/UX", "Ekip Liderliği"],
+    en: {
+      title: "Co-Founder",
+      period: "Sep 2023 — Mar 2026",
+      points: ["Led the team building Cebinde's mobile interfaces; user-friendly UI design that improved the user experience."],
+    },
   },
   {
     company: "Han Endüstri Otomasyon",
@@ -62,7 +90,11 @@ const roles: Role[] = [
     points: [
       "Endüstriyel ürün portföyünde pazarlama ve satış; müşteri ihtiyaçlarına teknik çözüm önerileri ve satış operasyonlarının yürütülmesi.",
     ],
-    tags: ["B2B Satış", "Teknik Danışmanlık"],
+    en: {
+      title: "Sales",
+      period: "Dec 2023 — Jan 2026",
+      points: ["Marketing and sales of industrial products; technical solution proposals for customer needs and sales operations."],
+    },
   },
   {
     company: "CK Tedarik — Freelance",
@@ -71,7 +103,11 @@ const roles: Role[] = [
     points: [
       "Ürünleri etkili biçimde sergileyen, kullanıcı dostu e-ticaret sitesi tasarımı; firmanın dijital varlığını güçlendirme ve müşteri etkileşimini artırma.",
     ],
-    tags: ["Web Tasarımı", "E-ticaret"],
+    en: {
+      title: "Web Design & E-commerce",
+      period: "Aug 2023 — Dec 2023",
+      points: ["Designed a user-friendly e-commerce site that showcases products effectively, strengthening the company's digital presence."],
+    },
   },
   {
     company: "Hamle Mühendislik",
@@ -81,7 +117,14 @@ const roles: Role[] = [
       "Kurumsal web (sağlık sektörü): performans, SEO, kullanılabilirlik ve dijital dönüşüm.",
       "Mobil ve web için UX/UI stratejisi ve arayüz standartları; sosyal medya içeriği ve video prodüksiyonu.",
     ],
-    tags: ["Web", "UX/UI", "SEO", "Multimedya"],
+    en: {
+      title: "Web, Mobile & Multimedia",
+      period: "2019 — 2024",
+      points: [
+        "Corporate web for the healthcare sector: performance, SEO, usability and digital transformation.",
+        "UX/UI strategy and interface standards for web and mobile; social media content and video production.",
+      ],
+    },
   },
   {
     company: "Hamle Mühendislik",
@@ -90,7 +133,11 @@ const roles: Role[] = [
     points: [
       "Endüstriyel cihaz programlama ve gömülü uygulamalar; eğitim materyali ve teknik dokümantasyon; web/mobil projelerde destek.",
     ],
-    tags: ["Gömülü", "Dokümantasyon"],
+    en: {
+      title: "Software Intern",
+      period: "2017 — 2019",
+      points: ["Industrial device programming and embedded applications; training material and technical documentation; support on web/mobile projects."],
+    },
   },
 ];
 
@@ -98,12 +145,23 @@ const education = [
   {
     school: "Anadolu Üniversitesi",
     detail: "Yapay Zekâ ile Kodlama — devam ediyor",
+    en: { school: "Anadolu University", detail: "AI-Assisted Coding — in progress" },
   },
-  { school: "BTK Akademi", detail: "iOS Geliştirme sertifikası" },
-  { school: "BTK Akademi", detail: "React ile Web Geliştirme sertifikası" },
+  {
+    school: "BTK Akademi",
+    detail: "iOS Geliştirme sertifikası",
+    en: { school: "BTK Academy", detail: "iOS Development certificate" },
+  },
+  {
+    school: "BTK Akademi",
+    detail: "React ile Web Geliştirme sertifikası",
+    en: { school: "BTK Academy", detail: "Web Development with React certificate" },
+  },
 ];
 
 const Experience = () => {
+  const lang = useLang();
+  const t = useT();
   return (
     <Section id="experience">
       <motion.div
@@ -114,10 +172,13 @@ const Experience = () => {
         viewport={{ once: true, margin: "-80px" }}
       >
         <SectionHeading
-          eyebrow="Deneyim"
-          title="2017'den bu yana"
-          highlight="üretiyorum"
-          description="Staj, kurumsal roller ve freelance teslimatlarla yazılımın ve endüstrinin içinden gelen uçtan uca deneyim."
+          eyebrow={t("Deneyim", "Experience")}
+          title={t("2017'den bu yana", "Building since")}
+          highlight={t("üretiyorum", "2017")}
+          description={t(
+            "Staj, kurumsal roller ve freelance teslimatlarla yazılımın ve endüstrinin içinden gelen uçtan uca deneyim.",
+            "End-to-end experience from both software and industry, through an internship, in-house roles and freelance delivery.",
+          )}
         />
 
         <div className="grid gap-10 lg:grid-cols-[1fr_340px] lg:gap-12">
@@ -140,7 +201,7 @@ const Experience = () => {
                 />
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <h3 className="text-lg font-bold tracking-tight text-foreground">
-                    {role.title}
+                    {lang === "en" ? role.en.title : role.title}
                     <span className="font-semibold text-muted-foreground"> · {role.company}</span>
                   </h3>
                   <span
@@ -149,11 +210,11 @@ const Experience = () => {
                       (role.current ? "text-primary" : "text-muted-foreground")
                     }
                   >
-                    {role.period}
+                    {lang === "en" ? role.en.period : role.period}
                   </span>
                 </div>
                 <ul className="mt-2 space-y-1.5">
-                  {role.points.map((p) => (
+                  {(lang === "en" ? role.en.points : role.points).map((p) => (
                     <li key={p} className="text-sm leading-relaxed text-muted-foreground">
                       {p}
                     </li>
@@ -169,13 +230,13 @@ const Experience = () => {
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-soft text-primary">
                   <GraduationCap className="h-[18px] w-[18px]" strokeWidth={2} />
                 </span>
-                <h3 className="font-bold text-foreground">Eğitim & sertifika</h3>
+                <h3 className="font-bold text-foreground">{t("Eğitim & sertifika", "Education & certificates")}</h3>
               </div>
               <ul className="mt-5 space-y-4">
                 {education.map((e) => (
                   <li key={e.detail}>
-                    <p className="text-sm font-semibold text-foreground">{e.school}</p>
-                    <p className="text-sm text-muted-foreground">{e.detail}</p>
+                    <p className="text-sm font-semibold text-foreground">{lang === "en" ? e.en.school : e.school}</p>
+                    <p className="text-sm text-muted-foreground">{lang === "en" ? e.en.detail : e.detail}</p>
                   </li>
                 ))}
               </ul>
@@ -183,26 +244,29 @@ const Experience = () => {
             <div className="rounded-2xl bg-ink p-6 text-white">
               <div className="flex items-center gap-2 text-sm font-semibold">
                 <MapPin className="h-4 w-4 text-primary-glow" />
-                İstanbul · Uzaktan & hibrit
+                {t("İstanbul · Uzaktan & hibrit", "Istanbul · Remote & hybrid")}
               </div>
               <p className="mt-2 text-sm leading-relaxed text-white/70">
-                Tam zamanlı roller, freelance projeler ve uzun vadeli iş birliklerine açığım.
+                {t(
+                  "Tam zamanlı roller, freelance projeler ve uzun vadeli iş birliklerine açığım.",
+                  "Open to full-time roles, freelance projects and long-term collaborations.",
+                )}
               </p>
               <a
-                href="/cv.html"
+                href={t("/cv.html", "/cv-en.html")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-5 inline-flex h-10 items-center rounded-lg bg-white px-4 text-sm font-semibold text-ink transition-opacity hover:opacity-90"
               >
-                Özgeçmişi görüntüle
+                {t("Özgeçmişi görüntüle", "View resume")}
               </a>
               <a
-                href="/cv-en.html"
+                href={t("/cv-en.html", "/cv.html")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ml-3 text-sm font-medium text-white/70 underline-offset-4 hover:text-white hover:underline"
               >
-                English
+                {t("English", "Türkçe")}
               </a>
             </div>
           </motion.aside>

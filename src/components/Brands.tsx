@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { Section, SectionHeading } from "@/components/SectionHeading";
+import { useLang, useT } from "@/i18n/lang";
 
 const brands = [
   {
@@ -11,14 +12,16 @@ const brands = [
     website: "https://tiryakiyazilim.com",
     domain: "tiryakiyazilim.com",
     category: "Yazılım şirketi",
+    en: { description: "Software company delivering corporate websites, mobile apps and e-commerce solutions.", category: "Software company" },
   },
   {
     name: "Odak Software",
     description: "İşletmeler için müşteri, satış ve süreç yönetimi sunan CRM sistemi.",
     logo: "/brands/logos/odaksoftware.svg",
-    website: "https://odaksoftware.com",
-    domain: "odaksoftware.com",
+    website: "https://odak-crm.vercel.app",
+    domain: "odak-crm.vercel.app",
     category: "CRM / SaaS",
+    en: { description: "A CRM system for businesses covering customers, sales and processes.", category: "CRM / SaaS" },
   },
   {
     name: "Kodlasa",
@@ -27,10 +30,13 @@ const brands = [
     website: "https://kodlasa.com",
     domain: "kodlasa.com",
     category: "Yazılım ajansı",
+    en: { description: "Software agency building custom solutions for companies and startups.", category: "Software agency" },
   },
 ];
 
 const Brands = () => {
+  const lang = useLang();
+  const t = useT();
   return (
     <Section id="brands" tone="surface">
       <motion.div
@@ -41,10 +47,10 @@ const Brands = () => {
         viewport={{ once: true, margin: "-80px" }}
       >
         <SectionHeading
-          eyebrow="Markalar"
-          title="Kurduğum"
-          highlight="markalar"
-          description="Kendi kurduğum ve büyüttüğüm dijital markalar."
+          eyebrow={t("Markalar", "Brands")}
+          title={t("Kurduğum", "Brands I")}
+          highlight={t("markalar", "founded")}
+          description={t("Kendi kurduğum ve büyüttüğüm dijital markalar.", "Digital brands I founded and grew.")}
         />
 
         <div className="grid gap-5 md:grid-cols-3">
@@ -60,7 +66,7 @@ const Brands = () => {
               <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-white p-2">
                 <img
                   src={brand.logo}
-                  alt={`${brand.name} logosu`}
+                  alt={t(`${brand.name} logosu`, `${brand.name} logo`)}
                   className="h-full w-full object-contain"
                   loading="lazy"
                   decoding="async"
@@ -71,9 +77,9 @@ const Brands = () => {
                   <span className="font-bold tracking-tight text-foreground">{brand.name}</span>
                   <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
                 </span>
-                <span className="block text-xs font-semibold text-primary">{brand.category}</span>
+                <span className="block text-xs font-semibold text-primary">{lang === "en" ? brand.en.category : brand.category}</span>
                 <span className="mt-2 block text-sm leading-relaxed text-muted-foreground">
-                  {brand.description}
+                  {lang === "en" ? brand.en.description : brand.description}
                 </span>
                 <span className="mt-3 block text-xs font-medium text-muted-foreground">
                   {brand.domain}

@@ -6,7 +6,8 @@ import { GithubIcon } from "@/components/BrandIcons";
 import { projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
 import { fadeUp, staggerContainer } from "@/lib/motion";
-import { builtWithLine } from "@/lib/projectDisplay";
+import { builtWithLine, categoryLabel, localizeProject } from "@/lib/projectDisplay";
+import { useLang, useT } from "@/i18n/lang";
 import { PortfolioImage, ProjectPlaceholder } from "@/components/PortfolioImage";
 import { Section, SectionHeading } from "@/components/SectionHeading";
 import { hasProjectVisitLink, navigateOrOpenProjectLink } from "@/lib/portfolioLink";
@@ -38,6 +39,8 @@ const CYCLE_MS = 6500;
 
 export function FeaturedProjects() {
   const navigate = useNavigate();
+  const lang = useLang();
+  const t = useT();
   const reduceMotion = useReducedMotion();
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -75,6 +78,7 @@ export function FeaturedProjects() {
   const select = useCallback((i: number) => setActive(i), []);
 
   const project = SHOWCASE[active];
+  const loc = localizeProject(project, lang);
   const cover = COVER_OVERRIDE[project.imageKey] ?? project.additionalImages?.[0];
   const canVisit = hasProjectVisitLink(project.link);
   const open = () => canVisit && navigateOrOpenProjectLink(project.link, navigate);
@@ -92,10 +96,13 @@ export function FeaturedProjects() {
           <SectionHeading
             align="left"
             className="mb-0 md:mb-0"
-            eyebrow="Seçilmiş işler"
-            title="Öne çıkan"
-            highlight="projeler"
-            description="Gerçek müşteri ihtiyaçlarından doğan, bugün canlıda çalışan ürünler: rezervasyon platformu, araç pazaryeri, klinik yönetimi, kurye takibi ve endüstriyel otomasyon."
+            eyebrow={t("Seçilmiş işler", "Selected work")}
+            title={t("Öne çıkan", "Featured")}
+            highlight={t("projeler", "projects")}
+            description={t(
+              "Gerçek müşteri ihtiyaçlarından doğan, bugün canlıda çalışan ürünler: rezervasyon platformu, araç pazaryeri, klinik yönetimi, kurye takibi ve endüstriyel otomasyon.",
+              "Products born from real client needs and running live today: a booking platform, a car marketplace, clinic management, courier tracking and industrial automation.",
+            )}
           />
           <motion.button
             variants={fadeUp}
@@ -103,7 +110,7 @@ export function FeaturedProjects() {
             onClick={() => navigate("/projects")}
             className="group inline-flex h-11 shrink-0 items-center gap-1.5 rounded-lg border border-border bg-card px-5 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary"
           >
-            Tüm projeler
+            {t("Tüm projeler", "All projects")}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </motion.button>
         </div>
@@ -122,7 +129,7 @@ export function FeaturedProjects() {
             ref={tabsRef}
             className="relative -mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none] lg:mx-0 lg:flex-col lg:gap-2.5 lg:overflow-visible lg:px-0 lg:pb-0"
             role="tablist"
-            aria-label="Öne çıkan projeler"
+            aria-label={t("Öne çıkan projeler", "Featured projects")}
           >
             {SHOWCASE.map((p, i) => {
               const isActive = i === active;
@@ -153,9 +160,11 @@ export function FeaturedProjects() {
                     </span>
                     <span className="min-w-0">
                       <span className="block truncate text-[15px] font-bold tracking-tight text-foreground">
-                        {shortTitle(p.title)}
+                        {shortTitle(localizeProject(p, lang).title)}
                       </span>
-                      <span className="block truncate text-xs text-muted-foreground">{p.category}</span>
+                      <span className="block truncate text-xs text-muted-foreground">
+                        {categoryLabel(p.category, lang)}
+                      </span>
                     </span>
                     <span
                       className={cn(
@@ -192,7 +201,7 @@ export function FeaturedProjects() {
                 <span className="truncate">{domainOf(project.link)}</span>
                 <span className="ml-auto flex shrink-0 items-center gap-1 text-success">
                   <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                  canlı
+                  {t("canlı", "live")}
                 </span>
               </span>
             </div>
@@ -201,7 +210,7 @@ export function FeaturedProjects() {
               type="button"
               onClick={open}
               disabled={!canVisit}
-              aria-label={`${project.title} — aç`}
+              aria-label={`${loc.title} — ${t("aç", "open")}`}
               className="group relative block aspect-[16/9] w-full overflow-hidden bg-surface text-left"
             >
               <AnimatePresence initial={false}>
@@ -216,12 +225,12 @@ export function FeaturedProjects() {
                   {cover ? (
                     <PortfolioImage
                       src={cover}
-                      alt={`${project.title} — önizleme`}
+                      alt={`${loc.title} — ${t("önizleme", "preview")}`}
                       className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                      fallback={<ProjectPlaceholder title={project.title} icon={project.icon} />}
+                      fallback={<ProjectPlaceholder title={loc.title} icon={project.icon} />}
                     />
                   ) : (
-                    <ProjectPlaceholder title={project.title} icon={project.icon} />
+                    <ProjectPlaceholder title={loc.title} icon={project.icon} />
                   )}
                 </motion.div>
               </AnimatePresence>
@@ -238,9 +247,9 @@ export function FeaturedProjects() {
               >
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <span className="eyebrow">{project.category}</span>
+                    <span className="eyebrow">{categoryLabel(project.category, lang)}</span>
                     <h3 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-[1.7rem]">
-                      {shortTitle(project.title)}
+                      {shortTitle(loc.title)}
                     </h3>
                   </div>
                   <div className="flex items-center gap-2">
@@ -249,7 +258,7 @@ export function FeaturedProjects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="Kaynak kod"
+                        aria-label={t("Kaynak kod", "Source code")}
                         className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
                       >
                         <GithubIcon className="h-4 w-4" />
@@ -261,7 +270,9 @@ export function FeaturedProjects() {
                         onClick={open}
                         className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-[0_8px_24px_-10px_hsl(var(--primary)/0.7)] transition-transform hover:-translate-y-0.5"
                       >
-                        {project.link.startsWith("/") ? "Vaka çalışması" : "Canlı siteyi aç"}
+                        {project.link.startsWith("/")
+                          ? t("Vaka çalışması", "Case study")
+                          : t("Canlı siteyi aç", "Open live site")}
                         <ArrowUpRight className="h-4 w-4" />
                       </button>
                     )}
@@ -269,12 +280,12 @@ export function FeaturedProjects() {
                 </div>
 
                 <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted-foreground">
-                  {project.description}
+                  {loc.description}
                 </p>
 
-                {project.features && project.features.length > 0 && (
+                {loc.features.length > 0 && (
                   <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
-                    {project.features.slice(0, 4).map((f) => (
+                    {loc.features.slice(0, 4).map((f) => (
                       <li key={f} className="flex items-start gap-2 text-sm font-medium text-foreground/85">
                         <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
                           <Check className="h-2.5 w-2.5" strokeWidth={3.5} />
@@ -286,14 +297,14 @@ export function FeaturedProjects() {
                 )}
 
                 <div className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-4">
-                  <p className="text-xs font-semibold text-primary">{builtWithLine(project.technologies)}</p>
+                  <p className="text-xs font-semibold text-primary">{builtWithLine(project.technologies, 3, lang)}</p>
                   <span className="flex shrink-0 gap-1.5">
                     {SHOWCASE.map((p, i) => (
                       <button
                         key={p.id}
                         type="button"
                         onClick={() => select(i)}
-                        aria-label={`${shortTitle(p.title)} projesine geç`}
+                        aria-label={t(`${shortTitle(p.title)} projesine geç`, `Show ${shortTitle(localizeProject(p, lang).title)}`)}
                         className={cn(
                           "h-1.5 rounded-full transition-all duration-300",
                           i === active ? "w-6 bg-primary" : "w-1.5 bg-border hover:bg-muted-foreground/40",
