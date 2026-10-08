@@ -96,8 +96,8 @@ const roles: Role[] = [
 
 const education = [
   {
-    school: "Hoca Ahmet Yesevi Üniversitesi",
-    detail: "Bilgisayar Programcılığı (ön lisans) — Mezuniyet: 2026",
+    school: "Anadolu Üniversitesi",
+    detail: "Yapay Zekâ ile Kodlama — devam ediyor",
   },
   { school: "BTK Akademi", detail: "iOS Geliştirme sertifikası" },
   { school: "BTK Akademi", detail: "React ile Web Geliştirme sertifikası" },
