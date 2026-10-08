@@ -1,57 +1,38 @@
-# Deployment Guide
+# Yayın (Hostinger)
 
-Bu proje canlı ortamda çalışması için aşağıdaki adımları takip edin:
+Site statik bir Vite uygulaması; `dist/` klasörü Hostinger'daki `public_html` içine yüklenir.
 
-## 1. Build İşlemi
+## 1. Paketi hazırla
 
 ```bash
 npm run build
 ```
 
-## 2. Sunucu Konfigürasyonu
+`prebuild` sırasında otomatik olarak: CV senkronu, site haritası, WebP görseller, canlı önizleme
+kontrolü ve portföy görsel listesi üretilir. Canlı önizleme kontrolü internet ister; build'i
+internetsiz alırsan girişte ekran görüntüsü gösterilir (site yine çalışır).
 
-### Netlify
-- `public/_redirects` dosyası otomatik olarak SPA routing'i sağlar
-- Build komutu: `npm run build`
-- Publish directory: `dist`
+## 2. Yükle
 
-### Vercel
-- Otomatik olarak SPA routing'i destekler
-- Build komutu: `npm run build`
-- Output directory: `dist`
+1. hPanel → Dosyalar → Dosya Yöneticisi → **Gizli dosyaları göster**i aç (`.htaccess` için).
+2. `public_html` içini yedekle ve boşalt.
+3. `dist/` klasörünün **içeriğini** (klasörün kendisini değil) `public_html` içine yükle.
+   Çok dosya olduğu için `dist`'i zip'leyip yükleyip Hostinger'da "Ayıkla" demek daha güvenli.
 
-### Apache (.htaccess)
-- `public/.htaccess` dosyası Apache sunucuları için SPA routing sağlar
+## 3. Kontrol et
 
-### Nginx
-```nginx
-location / {
-    try_files $uri $uri/ /index.html;
-}
-```
+| Adres | Beklenen |
+|---|---|
+| `emirtiryaki.com` | Türkçe ana sayfa |
+| `emirtiryaki.com/en` | İngilizce ana sayfa (yenileyince de açılmalı → `.htaccess` çalışıyor) |
+| `emirtiryaki.com/projects` | Tüm projeler |
+| `emirtiryaki.com/cv.html` · `/cv-en.html` | CV'ler, "PDF indir" çalışıyor |
+| İletişim formu | Gönderim sonrası "Teşekkürler"; talep emirscode-teklif'te görünüyor |
 
-## 3. Önemli Notlar
+## Notlar
 
-- Proje React Router v6 kullanıyor
-- BrowserRouter kullanıldığı için sunucu tarafında SPA routing desteği gerekli
-- Tüm route'lar `/index.html`'e yönlendirilmeli
-- Static file serving aktif olmalı
-
-## 4. Test Etme
-
-Build sonrası projeyi test etmek için:
-
-```bash
-npm run preview
-```
-
-Bu komut `http://localhost:4173` adresinde production build'ini çalıştırır.
-
-## 5. Sorun Giderme
-
-Eğer canlı ortamda routing çalışmıyorsa:
-
-1. Sunucu konfigürasyonunu kontrol edin
-2. `_redirects` veya `.htaccess` dosyalarının doğru yüklendiğinden emin olun
-3. Browser console'da hata mesajlarını kontrol edin
-4. Network tab'ında 404 hatalarını kontrol edin 
+- `public/.htaccess` SPA yönlendirmesini sağlar (`/en`, `/projects` vb. → `index.html`).
+- `vercel.json` Hostinger'da kullanılmaz; ileride Vercel'e geçilirse diye CSP'si güncel tutuluyor
+  (Supabase, Google Fonts ve tiryakiyazilim.com iframe'i izinli).
+- Girişteki canlı önizleme, tiryakiyazilim.com `frame-ancestors` ile emirtiryaki.com'a izin verince
+  bir sonraki build'de kendiliğinden açılır (tiryaki-web-studio PR #1).

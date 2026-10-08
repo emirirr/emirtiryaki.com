@@ -1,69 +1,68 @@
-# İsmail Emir Tiryaki — Full Stack Developer
+# İsmail Emir Tiryaki — Full-Stack & Mobil Geliştirici
 
-> İstanbul merkezli Full Stack Developer. React, React Native, Node.js ve bulut teknolojileriyle ölçeklenebilir web ve mobil ürünler geliştiriyorum. Ürün odaklı arayüzler, net API sözleşmeleri ve sürdürülebilir backend mimarisi üzerine çalışıyorum. Freelance proje ve uzun vadeli iş birlikleri için uygunum.
+> İstanbul merkezli full-stack ve mobil geliştirici. Web sitesi, mobil uygulama ve yönetim paneli geliştiriyor; arayüz, backend ve App Store / Google Play yayınını uçtan uca üstleniyor. App Store ve Google Play'de 8 yayında uygulaması, kendi alan adında yayında 15 web sitesi var. Freelance projeler, tam zamanlı roller ve uzun vadeli iş birliklerine açık.
 
 ## Hakkında
 
 - **İsim:** İsmail Emir Tiryaki (kısaca Emir Tiryaki)
-- **Rol:** Full Stack Developer (web ve mobil)
-- **Konum:** İstanbul, Türkiye — uzaktan ve hibrit iş birlikleri
-- **Diller:** Türkçe, İngilizce
-- **İletişim:** info@emirtiryaki.com
-- **Çalışma biçimi:** Freelance projeler, ekip iş birlikleri, danışmanlık
+- **Rol:** Full-Stack & Mobil Geliştirici
+- **Konum:** İstanbul, Türkiye — uzaktan ve hibrit
+- **İletişim:** info@emirtiryaki.com · +90 543 447 6245
+- **Site:** https://emirtiryaki.com (Türkçe) · https://emirtiryaki.com/en (English)
 
-## Uzmanlık Alanları
+## Yayınlanmış uygulamalar
 
-- Frontend: React, React Native, TypeScript, Tailwind CSS
-- Backend: Node.js, PostgreSQL, MongoDB, REST API tasarımı
-- Mobil: React Native, Swift (iOS)
-- Altyapı: Docker, AWS, CI/CD, gözlemlenebilirlik
-- Sistem tasarımı: şema tasarımı, ölçeklenebilir mimari, güvenli dağıtım
+- [Heybe](https://apps.apple.com/tr/app/heybe-i-slami-%C3%B6%C4%9Fren/id6807960856) (App Store · [Google Play](https://play.google.com/store/apps/details?id=com.charduck.heybe)): Kur'an ve dini eğlenerek öğreten eğitim uygulaması; Flutter, Firebase.
+- [Kortbul](https://apps.apple.com/tr/app/kortbul-tenis-padel-ke%C5%9Ffet/id6758905599) (App Store · [Google Play](https://play.google.com/store/apps/details?id=com.krtbl.expo)): Tenis, padel ve raket sporları için kort ve partner bulma; React Native, Expo, Firebase.
+- [CarLog](https://apps.apple.com/tr/app/carlog/id6760318180) (App Store): Araç bakım, yakıt ve evrak takibi; Swift, SwiftUI.
+- [Adhan](https://apps.apple.com/tr/app/adhan/id6755198431) (App Store): Namaz vakitleri ve bildirimler; Swift, SwiftUI.
+- [daCAR](https://apps.apple.com/tr/app/dacar-achat-vente-de-voitures/id6761602043) (App Store · [Google Play](https://play.google.com/store/apps/details?id=com.ismailtiryaki.dacar)): Senegal araç pazaryeri; React Native, Expo, Supabase.
+- [AvtoUzbek](https://apps.apple.com/tr/app/avtouzbek-avto-elon-bozor/id6799088463) (App Store · [Google Play](https://play.google.com/store/apps/details?id=com.appcarfy.avtouzbek)): Özbekistan araç pazaryeri.
+- [Marocar](https://apps.apple.com/tr/app/marocar-voitures-doccasion/id6773120581) (App Store · [Google Play](https://play.google.com/store/apps/details?id=com.appcarfy.marocar)): Fas ikinci el araç pazaryeri.
+- [NaijaCar](https://apps.apple.com/tr/app/naijacar-buy-sell-cars/id6775273788) (App Store): Nijerya araç pazaryeri.
+- Yayına hazırlanan: BharatKaar (Hindistan), AvtoBozor (Özbekistan), Satılık (Türkiye ilan platformu), BanglaGari (Bangladeş).
 
-## İş Deneyimi
+## Öne çıkan projeler
 
-- **İstanbul Sensörler** — Mobil Geliştirme & Satın Alma (Mart 2026 — günümüz): Şirket içi dashboard için mobil uygulama; endüstriyel sensör tedarik ve satın alma süreçleri.
-- **Kortbul (Freelance)** — Full-Stack Developer (Eylül 2025 — Mart 2026): Raket sporları için tesis arama ve online rezervasyon platformu; React & Node.js, rol bazlı paneller, gerçek zamanlı bildirimler (kortbul.com.tr).
-- **Bionluk (Freelance)** — iOS & Web Developer (Ocak 2024 — Mart 2026): Swift & SwiftUI ile App Store uygulamaları (CarLog, Adhan, Terapi Asistanı); React & TypeScript web arayüzleri; Firebase.
-- **Cebinde** — Co-Founder (Eylül 2023 — Mart 2026): Mobil arayüz geliştirme ekibinde liderlik; UI/UX odaklı ürün geliştirme.
-- **Han Endüstri Otomasyon** — Satış (Aralık 2023 — Ocak 2026): Endüstriyel ürün portföyünde B2B satış ve teknik çözüm danışmanlığı.
-- **CK Tedarik (Freelance)** — Web Tasarımı & E-ticaret (Ağustos 2023 — Aralık 2023): Ürün sergileme odaklı kullanıcı dostu e-ticaret sitesi.
-- **Hamle Mühendislik** — Web, Mobil ve Multimedya (2019 — 2024): Sağlık sektörü kurumsal web, SEO, UX/UI ve multimedya prodüksiyon.
-- **Hamle Mühendislik** — Yazılım Stajyeri (2017 — 2019): Endüstriyel cihaz programlama, gömülü uygulamalar, teknik dokümantasyon.
+- **Araç pazaryeri ailesi:** Tek ortak mimariden 7 ülkeye uyarlanan web + mobil + yönetim paneli — [dacar.sn](https://www.dacar.sn), [marocar.ma](https://www.marocar.ma), [avtouzbek.uz](https://www.avtouzbek.uz), [bharatkaar.com](https://www.bharatkaar.com), [naijacar.ng](https://www.naijacar.ng), [avtobozor.app](https://www.avtobozor.app).
+- **Kortbul:** Raket sporları rezervasyon platformu ve mobil super-app — [kortbul.com.tr](https://kortbul.com.tr).
+- **Satılık:** Türkiye ilan platformu (web, mobil, admin) — [satilikapp.com](https://satilikapp.com).
+- **Klinik Takip:** Doktor, hasta ve yönetici panelleriyle klinik yönetimi.
+- **Kuta:** Kargo firmaları için gerçek zamanlı kurye takip sistemi.
+- **Kurumsal siteler:** İnda Otomasyon, Karaca Yapı (Market, Dekorasyon, Tadilat), Kodlasa, Appcarfy, Tiryaki Yazılım, Heybe.
 
-Toplam 5+ yıl profesyonel deneyim (2017'den beri).
+## İş deneyimi
+
+- **İstanbul Sensörler** — Mobil Geliştirme & Satın Alma (Mart 2026 — günümüz)
+- **Freelance** — Full-Stack & Mobil Geliştirici, kendi müşterileri (2024 — günümüz)
+- **Kortbul (freelance)** — Full-Stack Developer (Eylül 2025 — Mart 2026)
+- **Bionluk (freelance)** — iOS & Web Developer (Ocak 2024 — Mart 2026)
+- **Cebinde** — Co-Founder (Eylül 2023 — Mart 2026)
+- **Han Endüstri Otomasyon** — Satış (Aralık 2023 — Ocak 2026)
+- **CK Tedarik (freelance)** — Web Tasarımı & E-ticaret (Ağustos — Aralık 2023)
+- **Hamle Mühendislik** — Yazılım stajyeri → Web, Mobil & Multimedya (2017 — 2024)
 
 ## Eğitim
 
-- Hoca Ahmet Yesevi Üniversitesi — Bilgisayar Programcılığı (ön lisans), mezuniyet 2026.
-- BTK Akademi — iOS geliştirme ve React ile web geliştirme sertifikaları.
+- Anadolu Üniversitesi — Yapay Zekâ ile Kodlama (devam ediyor)
+- BTK Akademi — iOS Geliştirme ve React ile Web Geliştirme sertifikaları
 
-## Yayınlanmış Mobil Uygulamalar
+## Markalar
 
-- [CarLog](https://apps.apple.com/tr/app/carlog/id6760318180) (App Store · iOS): Araç bakım, yakıt ve resmî evrak takip uygulaması; Swift & SwiftUI.
-- [Adhan — Namaz Vakti](https://apps.apple.com/tr/app/adhan/id6755198431) (App Store · iOS): Hassas namaz vakitleri, bildirimler ve modern arayüz; Swift & SwiftUI.
-- [daCAR](https://play.google.com/store/apps/details?id=com.ismailtiryaki.dacar) (Google Play · Android): Senegal için uçtan uca araç pazaryeri; React Native, Expo, Supabase.
-- App Store geliştirici sayfası: https://apps.apple.com/tr/developer/emir-tiryaki/id1852537743
+- [Tiryaki Yazılım](https://tiryakiyazilim.com): Yazılım şirketi (web, mobil, e-ticaret, kurumsal).
+- [Kodlasa](https://kodlasa.com): Yazılım ajansı.
+- [Odak Software](https://odak-crm.vercel.app): Küçük ve orta ölçekli işletmeler için CRM.
 
-## Kurduğu / Büyüttüğü Markalar
+## Önemli sayfalar
 
-- [Tiryaki Yazılım](https://tiryakiyazilim.com): Yazılım geliştirme ve dijital çözümler şirketi (web, mobil, e-ticaret, kurumsal çözümler).
-- [Odak Software](https://odaksoftware.com): İşletmeler için müşteri ve süreç yönetimi sunan CRM sistemi.
-- [Kodlasa](https://kodlasa.com): Eğitim ve geliştirme platformu (kodlama dersleri, mentorluk).
-
-## Önemli Sayfalar
-
-- [Ana sayfa](https://emirtiryaki.com/): Tanıtım, yetkinlikler, sistem mimarisi ve öne çıkan işler.
-- [Projeler](https://emirtiryaki.com/projects): Tüm web ve mobil projelerin listesi, teknoloji filtreleriyle.
-- [Özgeçmiş (CV) — Türkçe](https://emirtiryaki.com/cv.html): Güncel deneyim ve yetkinlik özeti.
-- [Resume (CV) — English](https://emirtiryaki.com/cv-en.html): Full résumé in English.
+- [Ana sayfa](https://emirtiryaki.com/) · [English](https://emirtiryaki.com/en)
+- [Tüm projeler](https://emirtiryaki.com/projects)
+- [Özgeçmiş — Türkçe](https://emirtiryaki.com/cv.html) · [PDF](https://emirtiryaki.com/Ismail-Emir-Tiryaki-CV.pdf)
+- [Resume — English](https://emirtiryaki.com/cv-en.html) · [PDF](https://emirtiryaki.com/Ismail-Emir-Tiryaki-CV-EN.pdf)
 
 ## Bağlantılar
 
 - GitHub: https://github.com/emirirr
 - LinkedIn: https://www.linkedin.com/in/emir-tiryaki/
 - Instagram: https://instagram.com/emirscode
-- YouTube: https://youtube.com/@emirirrr
-
-## İş Birliği
-
-Emir Tiryaki; React/React Native ile arayüz geliştirme, Node.js ile backend ve API geliştirme, mobil uygulama geliştirme ve uçtan uca ürün tasarımı konularında proje almaktadır. İletişim için: info@emirtiryaki.com
+- YouTube: https://youtube.com/@emirtiryaki
