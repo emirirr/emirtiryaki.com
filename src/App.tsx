@@ -42,38 +42,46 @@ const queryClient = new QueryClient({
 const skipLinkClass =
   "sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[20001] focus:m-0 focus:inline-block focus:rounded-xl focus:bg-primary focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-primary-foreground focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background";
 
-const App = () => (
+/** Sağlayıcılar — tarayıcı ve prerender (sunucu) aynı ağacı kullanır. */
+export const AppProviders = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="user">
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <TerminalMode />
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <CanonicalLink />
-          <SkipLink />
-          <main id="main-content" tabIndex={-1} className="outline-none">
-            <Suspense fallback={routeFallback}>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/en" element={<Index />} />
-                <Route path="/projects" element={<ProjectsPage />} />
-                <Route
-                  path="/projects/kortbul/:slug"
-                  element={<KortbulProjectPage />}
-                />
-                <Route
-                  path="/projects/dacar/mobile"
-                  element={<DacarMobileProjectPage />}
-                />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </main>
-        </BrowserRouter>
+        {children}
       </TooltipProvider>
     </QueryClientProvider>
   </MotionConfig>
+);
+
+/** Rotalar — bir Router (BrowserRouter / StaticRouter) içinde render edilir. */
+export const AppRoutes = () => (
+  <>
+    <CanonicalLink />
+    <SkipLink />
+    <main id="main-content" tabIndex={-1} className="outline-none">
+      <Suspense fallback={routeFallback}>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/en" element={<Index />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/kortbul/:slug" element={<KortbulProjectPage />} />
+          <Route path="/projects/dacar/mobile" element={<DacarMobileProjectPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+    </main>
+  </>
+);
+
+const App = () => (
+  <AppProviders>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  </AppProviders>
 );
 
 export default App;

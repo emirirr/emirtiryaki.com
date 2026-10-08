@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ isSsrBuild }) => ({
   base: "/",
   server: {
     host: "::",
@@ -20,13 +20,16 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: "dist",
     assetsDir: "assets",
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          router: ["react-router-dom"],
-          motion: ["framer-motion"],
+    // SSR (prerender) derlemesinde paketler dışarıda kalır; parça bölme yalnız istemci için
+    rollupOptions: isSsrBuild
+      ? {}
+      : {
+          output: {
+            manualChunks: {
+              router: ["react-router-dom"],
+              motion: ["framer-motion"],
+            },
+          },
         },
-      },
-    },
   },
 }));

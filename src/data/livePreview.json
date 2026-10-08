@@ -1,5 +1,5 @@
 {
-  "enabled": false,
-  "checkedAt": "2026-10-08T07:58:16.219Z",
-  "reason": "x-frame-options: sameorigin"
+  "enabled": true,
+  "checkedAt": "2026-10-08T09:42:26.625Z",
+  "reason": "kısıt yok"
 }
