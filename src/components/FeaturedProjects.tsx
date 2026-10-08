@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { builtWithLine, categoryLabel, localizeProject } from "@/lib/projectDisplay";
 import { useLang, useT } from "@/i18n/lang";
+import { trackEvent } from "@/lib/analytics";
 import { PortfolioImage, ProjectPlaceholder } from "@/components/PortfolioImage";
 import { Section, SectionHeading } from "@/components/SectionHeading";
 import { hasProjectVisitLink, navigateOrOpenProjectLink } from "@/lib/portfolioLink";
@@ -81,7 +82,11 @@ export function FeaturedProjects() {
   const loc = localizeProject(project, lang);
   const cover = COVER_OVERRIDE[project.imageKey] ?? project.additionalImages?.[0];
   const canVisit = hasProjectVisitLink(project.link);
-  const open = () => canVisit && navigateOrOpenProjectLink(project.link, navigate);
+  const open = () => {
+    if (!canVisit) return;
+    trackEvent(`proje-ac/${project.imageKey}`);
+    navigateOrOpenProjectLink(project.link, navigate);
+  };
 
   return (
     <Section id="projects" tone="surface">

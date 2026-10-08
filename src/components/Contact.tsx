@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { talepGonder } from "@/lib/talep";
+import { trackEvent } from "@/lib/analytics";
 import { Section, SectionHeading } from "@/components/SectionHeading";
 import { useLang, useT } from "@/i18n/lang";
 
@@ -81,6 +82,7 @@ const Contact = () => {
         message: formData.message.trim(),
         source: lang === "en" ? "emirtiryaki.com (EN)" : "emirtiryaki.com",
       });
+      trackEvent(`form-gonderildi/${formData.service}`);
       toast({
         title: t("Teşekkürler", "Thank you"),
         description: t(

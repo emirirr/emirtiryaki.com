@@ -4,6 +4,7 @@ import { fadeUp, staggerContainer } from "@/lib/motion";
 import { Section, SectionHeading } from "@/components/SectionHeading";
 import { PortfolioImage, ProjectPlaceholder } from "@/components/PortfolioImage";
 import { builtWithFor, useLang, useT } from "@/i18n/lang";
+import { trackEvent } from "@/lib/analytics";
 
 type LiveSite = {
   name: string;
@@ -184,6 +185,7 @@ const LiveSites = () => {
               href={site.url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent(`site-ac/${site.domain}`)}
               className="card-surface card-lift group flex flex-col overflow-hidden"
             >
               <div className="flex items-center gap-2 border-b border-border bg-surface px-3 py-2">

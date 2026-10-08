@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { useLang } from "@/i18n/lang";
+import { trackEvent } from "@/lib/analytics";
 
 /** Apple logosu (resmî glif). */
 export function AppleLogo({ className }: { className?: string }) {
@@ -38,6 +39,7 @@ export function StoreBadge({ store, href, size = "md", className }: StoreBadgePr
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackEvent(`magaza/${store}${href.replace(/^https?:\/\/[^/]+/, "")}`)}
       aria-label={
         en
           ? apple
