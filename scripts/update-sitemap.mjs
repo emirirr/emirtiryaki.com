@@ -1,20 +1,7 @@
-import { writeFileSync, readFileSync } from "node:fs";
+import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const d = new Date().toISOString().slice(0, 10);
-
-/** projects.ts'teki her kaydın kendi vaka çalışması sayfası var (/is/<imageKey>). */
-const slugs = [...readFileSync(join(process.cwd(), "src", "data", "projects.ts"), "utf8").matchAll(/imageKey: '([^']+)'/g)].map((m) => m[1]);
-const workUrls = slugs
-  .map(
-    (slug) => `  <url>
-    <loc>https://emirtiryaki.com/is/${slug}</loc>
-    <lastmod>${d}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>`,
-  )
-  .join("\n");
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -67,7 +54,6 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-${workUrls}
 </urlset>
 `;
 

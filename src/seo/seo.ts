@@ -6,8 +6,6 @@ import { apps } from "@/data/apps";
 import { sites } from "@/data/liveSites";
 import { faq } from "@/data/faq";
 import { projects } from "@/data/projects";
-import { all as allProjects, bySlug, coverWebp, type P } from "@/lib/portfolioMock";
-import { impactOf } from "@/data/impact";
 import { isKortbulSlug, kortbulPageTitle } from "@/data/kortbulProjectRoutes";
 
 export const SITE = "https://emirtiryaki.com";
@@ -45,8 +43,8 @@ const person = (lang: Lang) => ({
   jobTitle: lang === "en" ? "Full-Stack & Mobile Developer" : "Full-Stack & Mobil Geliştirici",
   description:
     lang === "en"
-      ? `Istanbul-based full-stack and mobile developer. Builds websites, mobile apps and admin panels end to end; ${apps.length} apps live on the App Store and Google Play, ${sites.length} live websites.`
-      : `İstanbul merkezli full-stack ve mobil geliştirici. Web sitesi, mobil uygulama ve yönetim paneli geliştiriyor; App Store ve Google Play'de ${apps.length} yayında uygulaması, ${sites.length} canlı web sitesi var.`,
+      ? "Istanbul-based full-stack and mobile developer. Builds websites, mobile apps and admin panels end to end; 8 apps live on the App Store and Google Play, 15 live websites."
+      : "İstanbul merkezli full-stack ve mobil geliştirici. Web sitesi, mobil uygulama ve yönetim paneli geliştiriyor; App Store ve Google Play'de 8 yayında uygulaması, 15 canlı web sitesi var.",
   email: "mailto:info@emirtiryaki.com",
   telephone: "+90-543-447-6245",
   address: { "@type": "PostalAddress", addressLocality: "İstanbul", addressCountry: "TR" },
@@ -194,8 +192,8 @@ function homeSeo(lang: Lang): RouteSeo {
       : "İsmail Emir Tiryaki — Full-Stack & Mobil Uygulama Geliştirici · İstanbul";
   const description =
     lang === "en"
-      ? `Istanbul-based developer building websites, iOS & Android apps and admin panels end to end. ${apps.length} apps on the App Store and Google Play, ${sites.length} live websites. Get a quote.`
-      : `İstanbul'da web sitesi, iOS & Android mobil uygulama ve yönetim paneli geliştiriyorum. App Store ve Google Play'de ${apps.length} uygulama, ${sites.length} canlı site. Ücretsiz ön görüşme ve teklif.`;
+      ? "Istanbul-based developer building websites, iOS & Android apps and admin panels end to end. 8 apps on the App Store and Google Play, 15 live websites. Get a quote."
+      : "İstanbul'da web sitesi, iOS & Android mobil uygulama ve yönetim paneli geliştiriyorum. App Store ve Google Play'de 8 uygulama, 15 canlı site. Ücretsiz ön görüşme ve teklif.";
   return {
     path: lang === "en" ? "/en" : "/",
     lang,
@@ -321,62 +319,6 @@ function caseStudySeo(path: string, name: string, description: string): RouteSeo
   };
 }
 
-/** /is/<imageKey> — her projenin vaka çalışması sayfası. Görsel: projenin kendi ekran görüntüsü. */
-function projectPageSeo(p: P): RouteSeo {
-  const path = `/is/${p.imageKey}`;
-  const url = `${SITE}${path}`;
-  const cover = coverWebp(p);
-  const image = p.noShot ? OG_IMAGE : cover.startsWith("http") ? cover : `${SITE}${cover}`;
-  const im = impactOf(p.imageKey);
-  const description = (p.description + (im ? ` Kullananlar: ${im.audience}.` : "")).slice(0, 300);
-  const isApp = p.category === "Mobil Uygulama";
-  return {
-    path,
-    lang: "tr",
-    title: `${p.title} — Vaka Çalışması | İsmail Emir Tiryaki`,
-    description,
-    canonical: url,
-    alternates: [],
-    robots: "index, follow, max-image-preview:large",
-    ogType: "article",
-    image,
-    indexable: true,
-    jsonLd: graph(
-      person("tr"),
-      website(),
-      {
-        "@type": isApp ? "MobileApplication" : "CreativeWork",
-        "@id": `${url}#work`,
-        name: p.title,
-        description: p.description,
-        url: p.link && /^https?:/.test(p.link) ? p.link : url,
-        image,
-        keywords: p.technologies.join(", "),
-        ...(isApp ? { operatingSystem: "iOS, Android", applicationCategory: "MobileApplication" } : {}),
-        ...(p.stores?.length ? { sameAs: p.stores.map((s) => s.url) } : {}),
-        author: { "@id": PERSON_ID },
-        inLanguage: "tr-TR",
-      },
-      {
-        "@type": "WebPage",
-        "@id": `${url}#page`,
-        url,
-        name: p.title,
-        description,
-        isPartOf: { "@id": WEBSITE_ID },
-        mainEntity: { "@id": `${url}#work` },
-        author: { "@id": PERSON_ID },
-        inLanguage: "tr-TR",
-      },
-      breadcrumb([
-        { name: "Ana sayfa", url: `${SITE}/` },
-        { name: "Projeler", url: `${SITE}/projects` },
-        { name: p.title, url },
-      ]),
-    ),
-  };
-}
-
 function notFoundSeo(path: string): RouteSeo {
   return {
     path,
@@ -394,25 +336,13 @@ function notFoundSeo(path: string): RouteSeo {
 }
 
 /** Statik HTML olarak üretilen sayfalar (sitemap ve prerender bu listeyi kullanır). */
-export const PRERENDER_PATHS: string[] = [
-  "/",
-  "/en",
-  "/projects",
-  "/projects/kortbul/expo",
-  "/projects/dacar/mobile",
-  ...allProjects.map((p) => `/is/${p.imageKey}`),
-];
+export const PRERENDER_PATHS = ["/", "/en", "/projects", "/projects/kortbul/expo", "/projects/dacar/mobile"] as const;
 
 export function getRouteSeo(pathname: string): RouteSeo {
   const path = pathname.replace(/\/$/, "") || "/";
   if (path === "/") return homeSeo("tr");
   if (path === "/en") return homeSeo("en");
   if (path === "/projects") return projectsSeo();
-  const work = path.match(/^\/is\/([^/]+)$/);
-  if (work) {
-    const p = bySlug(work[1]);
-    if (p) return projectPageSeo(p);
-  }
   const kortbul = path.match(/^\/projects\/kortbul\/([^/]+)$/);
   if (kortbul && isKortbulSlug(kortbul[1])) {
     return caseStudySeo(

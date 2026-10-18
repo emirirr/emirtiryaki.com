@@ -1,55 +1,42 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { SiteShell } from "@/components/site/SiteShell";
-import { Hero } from "@/components/site/home/Hero";
-import { Heybe } from "@/components/site/home/Heybe";
-import { Dacargo } from "@/components/site/home/Dacargo";
-import {
-  About,
-  CarFamily,
-  Contact,
-  Faq,
-  ImpactBand,
-  LogoWall,
-  Process,
-  Sectors,
-  Services,
-  Stack,
-  Testimonials,
-  Work,
-} from "@/components/site/home/Sections";
-import { scrollToId } from "@/components/site/useSite";
+import { lazy, Suspense } from "react";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import Services from "@/components/Services";
+import AppShowcase from "@/components/AppShowcase";
+import LiveSites from "@/components/LiveSites";
+import Testimonials from "@/components/Testimonials";
+import Experience from "@/components/Experience";
+import Brands from "@/components/Brands";
+import Faq from "@/components/Faq";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
-/** Ana sayfa — / (Türkçe) ve /en (İngilizce) aynı bileşeni kullanır. */
+const FeaturedProjects = lazy(() =>
+  import("@/components/FeaturedProjects").then((m) => ({
+    default: m.FeaturedProjects,
+  })),
+);
+
+const belowFoldFallback = <div className="min-h-[60vh] w-full bg-surface" aria-hidden />;
+
 const Index = () => {
-  const { hash } = useLocation();
-
-  // Başka sayfadan /#about gibi gelindiğinde bölüme in.
-  useEffect(() => {
-    if (!hash) return;
-    const id = decodeURIComponent(hash.slice(1));
-    const t = window.setTimeout(() => scrollToId(id, false), 60);
-    return () => window.clearTimeout(t);
-  }, [hash]);
-
   return (
-    <SiteShell>
+    <div className="min-h-screen bg-background font-sans antialiased">
+      <Navbar />
       <Hero />
-      <ImpactBand />
-      <LogoWall />
-      <Services />
-      <Work />
-      <CarFamily />
-      <Heybe />
-      <Dacargo />
-      <Sectors />
-      <Process />
-      <About />
+      <Suspense fallback={belowFoldFallback}>
+        <FeaturedProjects />
+      </Suspense>
+      <AppShowcase />
+      <LiveSites />
       <Testimonials />
-      <Stack />
+      <Services />
+      <Experience />
+      <Brands />
       <Faq />
       <Contact />
-    </SiteShell>
+      <Footer />
+    </div>
   );
 };
 
