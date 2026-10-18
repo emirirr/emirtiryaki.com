@@ -41,7 +41,10 @@ Toplam 5+ yıl profesyonel deneyim (2017'den beri).
 
 - [CarLog](https://apps.apple.com/tr/app/carlog/id6760318180) (App Store · iOS): Araç bakım, yakıt ve resmî evrak takip uygulaması; Swift & SwiftUI.
 - [Adhan — Namaz Vakti](https://apps.apple.com/tr/app/adhan/id6755198431) (App Store · iOS): Hassas namaz vakitleri, bildirimler ve modern arayüz; Swift & SwiftUI.
-- [daCAR](https://play.google.com/store/apps/details?id=com.ismailtiryaki.dacar) (Google Play · Android): Senegal için uçtan uca araç pazaryeri; React Native, Expo, Supabase.
+- [daCAR](https://play.google.com/store/apps/details?id=com.ismailtiryaki.dacar) (Google Play · Android, [App Store](https://apps.apple.com/tr/app/dacar-achat-vente-de-voitures/id6761602043) · iOS): Senegal için uçtan uca araç pazaryeri; React Native, Expo, Supabase.
+- [MaroCar](https://play.google.com/store/apps/details?id=com.appcarfy.marocar) (Google Play · Android, [App Store](https://apps.apple.com/tr/app/marocar-voitures-doccasion/id6773120581) · iOS): Fas araç pazaryeri; React Native, Expo, Supabase.
+- [AvtoUzbek](https://play.google.com/store/apps/details?id=com.appcarfy.avtouzbek) (Google Play · Android): Özbekistan araç pazaryeri; React Native, Expo, Supabase.
+- Araç pazaryeri ailesi: 6 ülkede 7 marka (daCAR, MaroCar, AvtoUzbek, AvtoBozor, BharatKaar, NaijaCar; BanglaGari geliştirme aşamasında) — ortak mimari, her markada mobil uygulama + web pazaryeri + yönetim paneli.
 - App Store geliştirici sayfası: https://apps.apple.com/tr/developer/emir-tiryaki/id1852537743
 
 ## Kurduğu / Büyüttüğü Markalar

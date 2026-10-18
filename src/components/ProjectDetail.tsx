@@ -1,23 +1,16 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ExternalLink, Github, ArrowRight } from "lucide-react";
-import { LpNav } from "@/components/lp/LpNav";
-import { LpFooter } from "@/components/lp/LpFooter";
-import { LpMockup } from "@/components/lp/LpMockup";
-import {
-  all,
-  bySlug,
-  slugOf,
-  coverWebp,
-  isLive,
-  isPhone,
-  domainOf,
-  isExternal,
-  type P,
-} from "@/lib/portfolioMock";
-import "@/styles/landing.css";
+import { motion } from "framer-motion";
+import { ArrowRight, CircleCheck, ExternalLink, Github, Users } from "lucide-react";
+import { SiteShell } from "@/components/site/SiteShell";
+import { Mockup } from "@/components/site/Mockup";
+import { StatusBadge } from "@/components/site/WorkCard";
+import { Reveal } from "@/components/site/primitives";
+import { Gallery } from "@/components/site/Gallery";
+import { impactOf } from "@/data/impact";
+import { all, bySlug, domainOf, isExternal, isLive, isPhone, slugOf, type P } from "@/lib/portfolioMock";
 
-/** Magaza baglantilarinda "Canli siteyi ac" yanlis duruyor; dogru magaza adini yaz. */
+/** Mağaza bağlantılarında "Canlı siteyi aç" yanlış duruyor; doğru mağaza adını yaz. */
 const storeCta = (href?: string | null) => {
   if (!href) return null;
   if (href.includes("play.google.com")) return "Google Play'de aç";
@@ -25,224 +18,256 @@ const storeCta = (href?: string | null) => {
   return null;
 };
 
+/** Birincil eylemler: mağazalar > canlı site > iç detay sayfası, ardından kaynak kodu. */
+function Actions({ p }: { p: P }) {
+  const stores = p.stores ?? [];
+  const hasPrimary = stores.length > 0 || isLive(p);
+  return (
+    <>
+      {stores.length ? (
+        stores.map((s, i) => (
+          <a key={s.url} className={"s-btn " + (i === 0 ? "primary" : "ghost")} href={s.url} target="_blank" rel="noopener noreferrer">
+            {storeCta(s.url) ?? s.label} <ExternalLink size={14} />
+          </a>
+        ))
+      ) : isLive(p) ? (
+        <a className="s-btn primary" href={p.link!} target="_blank" rel="noopener noreferrer">
+          {storeCta(p.link) ?? "Canlı siteyi aç"} <ExternalLink size={14} />
+        </a>
+      ) : null}
+      {p.link && !isExternal(p.link) ? (
+        <Link className={"s-btn " + (hasPrimary ? "ghost" : "primary")} to={p.link}>
+          Detay <ArrowRight size={14} />
+        </Link>
+      ) : null}
+      {p.github ? (
+        <a className="s-btn ghost" href={p.github} target="_blank" rel="noopener noreferrer">
+          <Github size={14} /> Kaynak
+        </a>
+      ) : null}
+    </>
+  );
+}
+
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
   const p = bySlug(slug);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, [slug]);
 
   if (!p) {
     return (
-      <div className="lp">
-        <LpNav />
-        <main className="lp-page lp-wrap" style={{ minHeight: "50vh" }}>
-          <Link className="lp-back" to="/projects">
-            ← Tüm projeler
-          </Link>
-          <div className="lp-sec-head" style={{ marginTop: 8 }}>
-            <h2>Proje bulunamadı</h2>
-            <p>Aradığın proje taşınmış veya kaldırılmış olabilir.</p>
+      <SiteShell>
+        <div className="s-wrap s-404">
+          <div className="big">404</div>
+          <h1 className="s-h3">Proje bulunamadı</h1>
+          <p className="s-lead" style={{ marginInline: "auto" }}>
+            Taşınmış veya kaldırılmış olabilir.
+          </p>
+          <div className="s-cta">
+            <Link className="s-btn primary lg" to="/projects">
+              Tüm işler <ArrowRight size={16} />
+            </Link>
           </div>
-        </main>
-        <LpFooter />
-      </div>
+        </div>
+      </SiteShell>
     );
   }
 
+  const im = impactOf(p.imageKey);
+  const gallery = (p.additionalImages ?? []).filter((s) => s.startsWith("/"));
+  const stores = p.stores ?? [];
   const idx = all.findIndex((x) => x.imageKey === p.imageKey);
   const next: P = all[(idx + 1) % all.length];
-  const gallery = (p.additionalImages ?? []).filter((s) => s.startsWith("/"));
+  const paragraphs = (p.longDescription ?? p.description)
+    .split(/\n\s*\n/)
+    .map((s) => s.trim())
+    .filter(Boolean);
 
   return (
-    <div className="lp">
-      <LpNav />
-      <main className="lp-page lp-wrap">
-        <Link className="lp-back" to="/projects">
-          ← Tüm projeler
-        </Link>
+    <SiteShell>
+      <article className="s-pagehead">
+        <div className="s-wrap">
+          <Link className="s-back" to="/projects">
+            ← Tüm işler
+          </Link>
 
-        {/* HEAD */}
-        <div className="lp-dhead">
-          <div>
-            <div className="lp-eyebrow">{p.category}</div>
-            <h1>{p.title}</h1>
-            <p className="lead">{p.description}</p>
-            <div className="lp-pills">
-              {p.duration ? <span className="lp-pill">⏱ {p.duration}</span> : null}
-              {p.teamSize ? <span className="lp-pill">👤 {p.teamSize}</span> : null}
-              {isLive(p) ? (
-                <span className="lp-pill">
-                  <span className="live" /> Canlı
+          <div className="s-dhead">
+            <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
+              <span className="s-eyebrow">{im?.sector ?? p.category}</span>
+              <h1>{p.title}</h1>
+              <p className="s-lead lg">{p.description}</p>
+              <div className="s-dmeta">
+                <StatusBadge p={p} />
+                {p.duration ? <span className="m">Süre: {p.duration}</span> : null}
+                {p.teamSize ? <span className="m">Ekip: {p.teamSize}</span> : null}
+              </div>
+              <div className="s-cta">
+                <Actions p={p} />
+              </div>
+            </motion.div>
+            <motion.div
+              className="s-dcover"
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Mockup p={p} eager />
+            </motion.div>
+          </div>
+
+          {im ? (
+            <Reveal className="s-dimpact">
+              <div className="who">
+                <span className="k">
+                  <Users size={13} style={{ display: "inline", verticalAlign: "-2px", marginRight: 6 }} />
+                  Kimler kullanıyor
                 </span>
-              ) : p.offline ? (
-                <span className="lp-pill">Adres şu an erişilemiyor</span>
+                <p>{im.audience}</p>
+                {im.client ? <span className="cl">Müşteri: {im.client}</span> : null}
+              </div>
+              {im.metrics?.length ? (
+                <dl>
+                  {im.metrics.map((m) => (
+                    <div key={m.label}>
+                      <dt>{m.value}</dt>
+                      <dd>
+                        {m.label}
+                        {m.asOf ? ` · ${m.asOf}` : ""}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
               ) : null}
-            </div>
-            <div className="lp-dbtns">
-              {isLive(p) ? (
-                <a className="lp-btn primary" href={p.link!} target="_blank" rel="noopener noreferrer">
-                  {storeCta(p.link) ?? "Canlı siteyi aç"} <ExternalLink size={15} />
-                </a>
-              ) : p.link && !isExternal(p.link) ? (
-                <Link className="lp-btn primary" to={p.link}>
-                  Detay <ArrowRight size={15} />
-                </Link>
-              ) : null}
-              {p.github ? (
-                <a className="lp-btn ghost" href={p.github} target="_blank" rel="noopener noreferrer">
-                  <Github size={15} /> Kaynak
-                </a>
-              ) : null}
-            </div>
-          </div>
+            </Reveal>
+          ) : null}
 
-          <div className={"lp-dcover" + (isPhone(p) ? " is-phone" : "")}>
-            <div className="glow" />
-            <LpMockup p={p} />
-          </div>
-        </div>
+          {/* Birden fazla doğrulanmış ekran görüntüsü varsa galeri; tek görsel zaten kapakta. */}
+          {!p.noShot && gallery.length > 1 ? (
+            <Reveal className="s-dgallery">
+              <h2 className="s-h3">Ekranlar</h2>
+              <Gallery images={gallery} title={p.title} phone={isPhone(p)} />
+            </Reveal>
+          ) : null}
 
-        {/* BODY */}
-        <div className="lp-dbody">
-          <div>
-            <div className="lp-block">
-              <h2>Genel bakış</h2>
-              {/* longDescription bos satirla ayrilmis birden fazla paragraf icerebilir. */}
-              {(p.longDescription ?? p.description)
-                .split(/\n\s*\n/)
-                .map((par) => par.trim())
-                .filter(Boolean)
-                .map((par, i) => (
+          <div className="s-dbody">
+            <div>
+              <Reveal className="s-block">
+                <h2>Genel bakış</h2>
+                {paragraphs.map((par, i) => (
                   <p key={i}>{par}</p>
                 ))}
+              </Reveal>
+
+              {p.features?.length ? (
+                <Reveal className="s-block">
+                  <h2>Öne çıkan özellikler</h2>
+                  <ul className="s-checks">
+                    {p.features.map((f) => (
+                      <li key={f}>
+                        <CircleCheck size={17} aria-hidden="true" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              ) : null}
+
+              {p.challenges?.length || p.solutions?.length ? (
+                <Reveal className="s-block">
+                  <h2>Zorluklar ve çözümler</h2>
+                  <div className="s-cs">
+                    {p.challenges?.length ? (
+                      <div className="col ch">
+                        <div className="lbl">Zorluk</div>
+                        <ul>
+                          {p.challenges.map((c) => (
+                            <li key={c}>{c}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+                    {p.solutions?.length ? (
+                      <div className="col so">
+                        <div className="lbl">Çözüm</div>
+                        <ul>
+                          {p.solutions.map((s) => (
+                            <li key={s}>{s}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+                  </div>
+                </Reveal>
+              ) : null}
             </div>
 
-            {p.features?.length ? (
-              <div className="lp-block">
-                <h2>Öne çıkan özellikler</h2>
-                <ul className="lp-feats">
-                  {p.features.map((f) => (
-                    <li key={f}>
-                      <span className="dot" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
+            <aside className="s-side">
+              <div className="row">
+                <span className="k">Tür</span>
+                <span className="v">{p.category}</span>
               </div>
-            ) : null}
-
-            {p.challenges?.length || p.solutions?.length ? (
-              <div className="lp-block">
-                <h2>Zorluklar &amp; çözümler</h2>
-                <div className="lp-cs">
-                  {p.challenges?.length ? (
-                    <div className="col ch">
-                      <div className="lbl">Zorluklar</div>
-                      <ul>
-                        {p.challenges.map((c) => (
-                          <li key={c}>{c}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
-                  {p.solutions?.length ? (
-                    <div className="col so">
-                      <div className="lbl">Çözümler</div>
-                      <ul>
-                        {p.solutions.map((s) => (
-                          <li key={s}>{s}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
+              {im?.sector ? (
+                <div className="row">
+                  <span className="k">Sektör</span>
+                  <span className="v">{im.sector}</span>
                 </div>
-              </div>
-            ) : null}
-          </div>
-
-          <aside className="lp-side">
-            <div className="row">
-              <span className="k">Tür</span>
-              <span className="v">{p.category}</span>
-            </div>
-            {p.duration ? (
+              ) : null}
+              {p.duration ? (
+                <div className="row">
+                  <span className="k">Süre</span>
+                  <span className="v">{p.duration}</span>
+                </div>
+              ) : null}
+              {p.teamSize ? (
+                <div className="row">
+                  <span className="k">Ekip</span>
+                  <span className="v">{p.teamSize}</span>
+                </div>
+              ) : null}
+              {stores.length ? (
+                <div className="row">
+                  <span className="k">Mağaza</span>
+                  <span className="v">{stores.map((s) => s.label).join(" · ")}</span>
+                </div>
+              ) : null}
+              {p.link ? (
+                <div className="row">
+                  <span className="k">Adres</span>
+                  <span className="v">
+                    {isPhone(p) ? "Mobil uygulama" : domainOf(p)}
+                    {p.offline ? " · erişilemiyor" : ""}
+                  </span>
+                </div>
+              ) : null}
               <div className="row">
-                <span className="k">Süre</span>
-                <span className="v">{p.duration}</span>
-              </div>
-            ) : null}
-            {p.teamSize ? (
-              <div className="row">
-                <span className="k">Ekip</span>
-                <span className="v">{p.teamSize}</span>
-              </div>
-            ) : null}
-            {p.link ? (
-              <div className="row">
-                <span className="k">Adres</span>
-                <span className="v">
-                  {isPhone(p) ? "Mobil uygulama" : domainOf(p)}
-                  {p.offline ? <small className="off"> · erişilemiyor</small> : null}
+                <span className="k">Teknoloji</span>
+                <span className="st">
+                  {p.technologies.map((t) => (
+                    <span key={t}>{t}</span>
+                  ))}
                 </span>
               </div>
-            ) : null}
-            <div className="row">
-              <span className="k">Stack</span>
-              <span className="st">
-                {p.technologies.map((t) => (
-                  <span key={t}>{t}</span>
-                ))}
-              </span>
-            </div>
-            <div className="links">
-              {isLive(p) ? (
-                <a className="lp-btn primary" href={p.link!} target="_blank" rel="noopener noreferrer">
-                  {storeCta(p.link) ?? "Canlı site"} <ExternalLink size={15} />
-                </a>
-              ) : null}
-              {p.github ? (
-                <a className="lp-btn ghost" href={p.github} target="_blank" rel="noopener noreferrer">
-                  <Github size={15} /> Kaynak kodu
-                </a>
-              ) : null}
-            </div>
-          </aside>
-        </div>
-
-        {/* GALLERY */}
-        {gallery.length > 1 ? (
-          <div className="lp-gallery">
-            <div className="lp-block">
-              <h2>Ekran görüntüleri</h2>
-            </div>
-            <div className="mk">
-              <div className="mk-bar">
-                <i style={{ background: "#f2605c" }} />
-                <i style={{ background: "#f5bd4f" }} />
-                <i style={{ background: "#61c554" }} />
-                <span className="u">{domainOf(p)}</span>
+              <div className="acts">
+                <Actions p={p} />
+                <Link className="s-btn ghost" to="/#contact">
+                  Benzer bir proje başlat
+                </Link>
               </div>
-              <div className="mk-screen" style={{ aspectRatio: "16/9" }}>
-                <img src={coverWebp(p)} alt={p.title} loading="lazy" />
-              </div>
-            </div>
+            </aside>
           </div>
-        ) : null}
 
-        {/* NEXT */}
-        <div className="lp-next">
-          <Link to={`/is/${slugOf(next)}`}>
+          <Link className="s-next" to={`/is/${slugOf(next)}`}>
             <div>
-              <span className="k">Sıradaki proje</span>
+              <span className="k">Sıradaki iş</span>
               <b>{next.title}</b>
             </div>
-            <ArrowRight size={22} />
+            <ArrowRight size={24} />
           </Link>
         </div>
-      </main>
-      <LpFooter />
-    </div>
+      </article>
+    </SiteShell>
   );
 }

@@ -69,7 +69,9 @@ function projectMeta(pathname: string) {
     description: desc.slice(0, 158),
     ogTitle: `${p.title} | İsmail Emir Tiryaki`,
     ogDescription: desc.slice(0, 200),
-    ogImage: `${SITE}${coverWebp(p)}`,
+    // Ekran görüntüsü olmayan projede var olmayan bir dosyaya işaret etmesin;
+    // varsayılan paylaşım görseline düşer.
+    ogImage: p.noShot ? undefined : `${SITE}${coverWebp(p)}`,
   };
 }
 

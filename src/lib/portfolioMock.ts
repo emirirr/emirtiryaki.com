@@ -13,6 +13,14 @@ export type P = (typeof projects)[number] & {
    *  Bu projelerin eski Vercel adresleri başka uygulamalara devredilmiş,
    *  otomatik çekilen görseller o uygulamalara ait olduğu için silindi. */
   noShot?: boolean;
+  /** noShot yer tutucusunda gösterilecek not (varsayılan: "Ekran görüntüsü arşivde yok"). */
+  shotNote?: string;
+  /** Ürünün yayın durumu — ör. "Geliştirme aşamasında". Kartta ve detay
+   *  sayfasında rozet olarak gösterilir; yayındaki ürünlerde boş kalır. */
+  status?: string;
+  /** Mobil uygulamanın TÜM mağaza adresleri (Google Play, App Store).
+   *  `link` tek bir adres taşıyabildiği için ikinci mağaza burada durur. */
+  stores?: { label: string; url: string }[];
   /** Ürün ailesi etiketi — şu an yalnızca 'car' (araç pazaryeri ailesi). */
   family?: string;
   challenges?: string[];
@@ -93,9 +101,11 @@ export const bySlug = (s?: string): P | undefined =>
 
 /** "Araç Pazaryeri" kategoriye göre değil, `family` alanına göre süzer. */
 export const CAR_FAMILY_LABEL = "Araç Pazaryeri";
+export const HEYBE_LABEL = "Heybe";
 export const categories = [
   "Tümü",
   CAR_FAMILY_LABEL,
+  HEYBE_LABEL,
   "Web Uygulaması",
   "Mobil Uygulama",
   "E-ticaret",
@@ -104,5 +114,6 @@ export const categories = [
 export const matchesCategory = (p: P, cat: string) => {
   if (cat === "Tümü") return true;
   if (cat === CAR_FAMILY_LABEL) return p.family === "car";
+  if (cat === HEYBE_LABEL) return p.family === "heybe";
   return p.category === cat;
 };

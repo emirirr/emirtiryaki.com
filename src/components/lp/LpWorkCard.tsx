@@ -30,7 +30,9 @@ export function LpWorkCard({ p, reveal = false }: { p: P; reveal?: boolean }) {
       <div className="lp-body">
         <div className="lp-kicker">
           <span className="cat">{p.category}</span>
-          {isLive(p) ? (
+          {p.status ? (
+            <span className="badge dev">{p.status}</span>
+          ) : isLive(p) ? (
             <span className="badge live">
               <i /> Canlı
             </span>

@@ -13,7 +13,7 @@ const HELP = `Komutlar:
   github        — GitHub profilini aç
   clear         — Ekranı temizle
   exit | close  — Terminali kapat
-  open <hedef>  — hero | skills | projects | contact
+  open <hedef>  — hero | about | skills | projects | contact
 
 İpucu: Ctrl+Shift+\` ile bu modu açıp kapatabilirsiniz.`;
 
@@ -61,7 +61,7 @@ export function TerminalMode() {
         case "projects":
           push(
             "out",
-            "Öne çıkanlar: Doctor Site, Odak Software, Kuta, Therapy Web — tam liste için ana sayfadaki projeler bölümü.",
+            "Öne çıkanlar: daCAR, Kortbul, Karaca Yapı Market, Klinik Takip, PrintPrice, Altın.net — tam liste: /projects",
           );
           break;
         case "github":
@@ -78,9 +78,10 @@ export function TerminalMode() {
         case "open": {
           const target = rest[0];
           const map: Record<string, string> = {
-            hero: "hero",
+            hero: "main-content",
+            about: "about",
             skills: "skills",
-            projects: "projects",
+            projects: "work",
             contact: "contact",
           };
           const id = target ? map[target] : "";
@@ -88,7 +89,7 @@ export function TerminalMode() {
             scrollToSection(id);
             push("out", `#${id} bölümüne kaydırıldı.`);
           } else {
-            push("err", "Kullanım: open hero|skills|projects|contact");
+            push("err", "Kullanım: open hero|about|skills|projects|contact");
           }
           break;
         }
@@ -137,8 +138,14 @@ export function TerminalMode() {
         }
       }
     };
+    // Editör kabuğundaki terminal düğmesi bu olayı gönderir.
+    const onToggle = () => setOpen((o) => !o);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener("site:terminal", onToggle);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("site:terminal", onToggle);
+    };
   }, []);
 
   useEffect(() => {

@@ -32,8 +32,24 @@ const LOCAL_LOGO = {
   "bharatkaar-mobile": ["indiencar/store-assets/icon-512.png", "indiencar/assets/icon.png"],
   "avtouzbek-mobile": ["avtouzbek-mobile/store-assets/icon-512.png", "avtouzbek-mobile/assets/icon.png"],
   "naijacar-mobile": ["nigeriacar-mobile/store-assets/icon-512.png", "nigeriacar-mobile/assets/icon.png"],
+  // "./" ile baslayan yol bu reponun kokune goredir (kaynak repo bu makinede yoksa).
+  "avtobozor-web": ["./assets-src/portfolio/logo-src/avtobozor-icon.png"],
+  "avtobozor-mobile": ["./assets-src/portfolio/logo-src/avtobozor-icon.png"],
   "banglagari-mobile": ["banglagari-mobile/store-assets/icon-512.png", "banglagari-mobile/assets/icon.png"],
   "banglagari-web": ["banglagari-web/public/favicon.png", "banglagari-web/public/logo.png"],
+  // Satilik: mobil / web / panel ayni "S" isaretini kullanir.
+  "satilik-mobile": ["satilik24/mobile/assets/icon-1024.png"],
+  "satilik-web": ["satilik24/mobile/assets/icon-1024.png"],
+  "satilik-admin": ["satilik24/mobile/assets/icon-1024.png"],
+  // Dacargo: musteri / surucu / ekip konsolu ayni marka isaretini kullanir.
+  dacargo: ["dacargo/store/graphics/icon-512.png", "dacargo/assets/icon.png"],
+  "dacargo-partenaire": ["dacargo/store/graphics/icon-512.png", "dacargo/assets/icon.png"],
+  "dacargo-admin": ["dacargo/store/graphics/icon-512.png", "dacargo/assets/icon.png"],
+  // Heybe ailesi: dort kayit da uygulamanin kendi ikonunu kullanir.
+  "heybe-mobile": ["heybe-app/ios/Runner/Assets.xcassets/AppIcon.appiconset/1024.png", "heybe-site/icon-512.png"],
+  "heybe-web": ["heybe-web/public/icon-512.png", "heybe-site/icon-512.png"],
+  "heybe-site": ["heybe-site/icon-512.png"],
+  "heybe-admin": ["heybe-site/icon-512.png"],
   "kortbul-expo": ["krtbl-expo/src/assets/kortbul-logo.jpg", "krtbl-expo/icon.jpg"],
   historicme: ["HistoricMe/assets/icon.png", "historicme-site/public/favicon.png"],
   rafim: ["rafim/assets/favicon.png", "rafim/assets/android-icon-foreground.png"],
@@ -191,7 +207,7 @@ async function save(key, buf) {
 
 async function firstLocal(key) {
   for (const rel of LOCAL_LOGO[key] ?? []) {
-    const p = join(GITHUB, rel);
+    const p = rel.startsWith("./") ? join(root, rel) : join(GITHUB, rel);
     if (existsSync(p)) return { buf: await readFile(p), from: rel };
   }
   return null;

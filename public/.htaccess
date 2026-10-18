@@ -1,43 +1,97 @@
+# emirtiryaki.com — Apache / LiteSpeed (Hostinger) yapılandırması
+# Bu dosya `public/` içinde durur, build sırasında `dist/` köküne kopyalanır.
+# Hostinger'da `public_html` klasörünün İÇİNE, index.html ile aynı seviyeye gider.
+
+Options -Indexes
+DirectoryIndex index.html
+
 RewriteEngine On
 RewriteBase /
 
-# --- Tek canonical host: http + www -> https://emirtiryaki.com (www'siz) ---
-# HTTPS'e zorla
-RewriteCond %{HTTPS} off
-RewriteRule ^ https://emirtiryaki.com%{REQUEST_URI} [L,R=301]
-# www'yi kaldir
-RewriteCond %{HTTP_HOST} ^www\.emirtiryaki\.com [NC]
+# --------------------------------------------------------------------------
+# Tek kanonik adres: https://emirtiryaki.com (www'suz)
+#
+# DİKKAT: Bu kurallar YALNIZCA emirtiryaki.com host'unda çalışır. Siteyi önce
+# Hostinger'ın geçici adresinde (ör. xxx.hostingersite.com) denerken sizi
+# emirtiryaki.com'a fırlatmasın diye host koşulu bilerek dar tutuldu.
+# --------------------------------------------------------------------------
+RewriteCond %{HTTP_HOST} ^www\.emirtiryaki\.com$ [NC]
 RewriteRule ^ https://emirtiryaki.com%{REQUEST_URI} [L,R=301]
 
-# --- SPA yonlendirme ---
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTP_HOST} ^(www\.)?emirtiryaki\.com$ [NC]
+RewriteRule ^ https://emirtiryaki.com%{REQUEST_URI} [L,R=301]
+
+# --------------------------------------------------------------------------
+# SPA yönlendirme — /is/dacar-web gibi adresler sunucuda dosya değil.
+# Gerçek dosya/klasör varsa dokunma, yoksa index.html'e düş.
+# --------------------------------------------------------------------------
 RewriteRule ^index\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
 RewriteRule . /index.html [L]
 
-# Güvenlik başlıkları (vercel.json / _headers karşılığı — Hostinger Apache/LiteSpeed)
+# --------------------------------------------------------------------------
+# MIME tipleri (LiteSpeed'de genelde tanımlı, garanti olsun)
+# --------------------------------------------------------------------------
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+  AddType font/woff2 .woff2
+  AddType application/manifest+json .webmanifest
+  AddType application/xml .xml
+</IfModule>
+
+# --------------------------------------------------------------------------
+# Güvenlik başlıkları
+# --------------------------------------------------------------------------
 <IfModule mod_headers.c>
-  Header set X-Frame-Options "DENY"
-  Header set X-Content-Type-Options "nosniff"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
-  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set X-Frame-Options "DENY"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # Hash'li dosya adları (index-a1b2c3.js) — içerik değişirse ad değişir,
+  # bu yüzden bir yıl önbelleğe alınabilir ve tekrar sorulması gerekmez.
+  <FilesMatch "\.(js|css|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Görseller hash'siz; uzun ama "immutable" olmayan önbellek.
+  <FilesMatch "\.(webp|png|jpg|jpeg|svg|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+
+  # HTML ve site haritası her zaman taze gelsin — yeni sürüm anında görünsün.
+  <FilesMatch "\.(html|xml|txt|webmanifest)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
 </IfModule>
 
+# --------------------------------------------------------------------------
 # Sıkıştırma
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml application/xml
+# --------------------------------------------------------------------------
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
 </IfModule>
 
-# Statik varlıklar için uzun önbellek; HTML her zaman taze
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+# --------------------------------------------------------------------------
+# Yedek önbellek tanımı (mod_headers kapalıysa devreye girer)
+# --------------------------------------------------------------------------
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/css "access plus 1 year"
   ExpiresByType application/javascript "access plus 1 year"
-  ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/svg+xml "access plus 1 year"
   ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
   ExpiresByType text/html "access plus 0 seconds"
 </IfModule>

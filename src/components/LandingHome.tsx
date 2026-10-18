@@ -155,8 +155,16 @@ function CarCard({ c }: { c: (typeof CAR_FAMILY)[number] }) {
     /* Kart icinde iki ayri hedef var (web + mobil), bu yuzden disi <div>:
        ic ice <Link> gecerli HTML degil. */
     <div className="car-card" data-reveal>
-      <Link className="shot" to={`/is/${c.key}`} aria-label={`${c.brand} web pazaryeri`}>
-        {p ? <img src={coverWebp(p)} alt={`${c.brand} web sitesi`} loading="lazy" decoding="async" /> : null}
+      <Link className="shot" to={`/is/${c.key}`} aria-label={`${c.brand} ${c.status ? "proje sayfası" : "web pazaryeri"}`}>
+        {p && !p.noShot ? (
+          <img src={coverWebp(p)} alt={`${c.brand} web sitesi`} loading="lazy" decoding="async" />
+        ) : (
+          /* Ekran görüntüsü yok — başka bir markanın görselini koymak yerine yer tutucu. */
+          <span className="ph" aria-hidden="true">
+            {logo ? <img className="ph-logo" src={logo} alt="" /> : <span className="ph-mono">{(c.brand.match(/[A-Z]/g) ?? [c.brand[0]]).slice(0, 2).join("")}</span>}
+            <b>{c.brand}</b>
+          </span>
+        )}
         <span className="code" aria-hidden="true">
           {c.code}
         </span>
@@ -170,15 +178,38 @@ function CarCard({ c }: { c: (typeof CAR_FAMILY)[number] }) {
           {live ? <span className="dot" title="Yayında" /> : null}
         </div>
         <span className="country">{c.country}</span>
-        <span className="domain">{c.domain}</span>
-        {c.store ? <span className="store">{c.storeLabel}</span> : null}
+        {c.domain ? <span className="domain">{c.domain}</span> : null}
+        <div className="stores">
+          {c.status ? (
+            <span className="store dev">{c.status}</span>
+          ) : c.stores?.length ? (
+            c.stores.map((s) => (
+              <span className="store" key={s.label}>
+                {s.label}
+              </span>
+            ))
+          ) : (
+            <span className="store off">Mağazada değil</span>
+          )}
+        </div>
         <div className="links">
-          <Link to={`/is/${c.key}`}>
-            <Globe size={13} /> Web
-          </Link>
-          <Link to={`/is/${c.mobileKey}`}>
-            <Smartphone size={13} /> Mobil
-          </Link>
+          {c.status ? (
+            /* Yayında değil: dış bağlantı yok, yalnızca proje sayfası. */
+            <Link to={`/is/${c.key}`}>
+              <ArrowRight size={13} /> Proje
+            </Link>
+          ) : (
+            <>
+              <Link to={`/is/${c.key}`}>
+                <Globe size={13} /> Web
+              </Link>
+              {c.mobileKey ? (
+                <Link to={`/is/${c.mobileKey}`}>
+                  <Smartphone size={13} /> Mobil
+                </Link>
+              ) : null}
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -403,11 +434,13 @@ export default function LandingHome() {
       <section className="lp-sec lp-wrap" id="pazaryeri">
         <div className="lp-sec-head" data-reveal>
           <div className="lp-eyebrow">Ürün ailesi</div>
-          <h2>Beş ülke, tek mimari</h2>
+          <h2>Altı ülke, yedi marka, tek mimari</h2>
           <p>
-            Aynı araç pazaryeri ürününü beş ülke için kurdum. Her ülkenin kendi mobil
-            uygulaması, web pazaryeri ve yönetim paneli var — {CAR_SUMMARY.apps} uygulama,
-            tek ortak mimari.
+            Aynı araç pazaryeri ürününü {CAR_SUMMARY.countries} ülkede {CAR_SUMMARY.brands} marka
+            altında kurdum; Özbekistan'da birbirinden bağımsız iki marka çalışıyor. Her markanın
+            kendi mobil uygulaması, web pazaryeri ve yönetim paneli var — bugün{" "}
+            {CAR_SUMMARY.liveSites} web sitesi yayında, {CAR_SUMMARY.storeApps} mobil uygulama
+            mağazada.
           </p>
         </div>
 
@@ -415,6 +448,17 @@ export default function LandingHome() {
           {CAR_FAMILY.map((c) => (
             <CarCard key={c.key} c={c} />
           ))}
+          {/* 7 kart 4'lü ızgarada bir boşluk bırakıyordu; o hücre ailenin özetini taşıyor. */}
+          <div className="car-card car-sum" data-reveal>
+            <span className="lp-eyebrow">Appcarfy</span>
+            <b>Tek çatı altında</b>
+            <dl>
+              <div><dt>Marka</dt><dd>{CAR_SUMMARY.brands}</dd></div>
+              <div><dt>Ülke</dt><dd>{CAR_SUMMARY.countries}</dd></div>
+              <div><dt>Canlı site</dt><dd>{CAR_SUMMARY.liveSites}</dd></div>
+              <div><dt>Mağazada</dt><dd>{CAR_SUMMARY.storeApps}</dd></div>
+            </dl>
+          </div>
         </div>
 
         <div className="car-arch" data-reveal>
@@ -436,12 +480,13 @@ export default function LandingHome() {
           </div>
           <div className="hub">
             <div className="lp-eyebrow">Central Admin</div>
-            <h3>Beş ülkeyi tek panelden yönetmek</h3>
+            <h3>Beş markayı tek panelden yönetmek</h3>
             <p>
-              Her ülke ayrı bir Supabase projesinde duruyor ama hepsi aynı şemayı ve aynı{" "}
-              {CAR_SUMMARY.adminScreens} yönetim ekranını paylaşıyor. Central Admin, ülke
-              seçiciyle bu panellerin hepsini tek arayüzde topluyor — ülke eklemek yeni bir
-              panel yazmayı gerektirmiyor.
+              daCAR, MaroCar, AvtoUzbek, BharatKaar ve NaijaCar ayrı Supabase projelerinde
+              duruyor ama aynı şemayı ve aynı {CAR_SUMMARY.adminScreens} yönetim ekranını
+              paylaşıyor. Central Admin, ülke seçiciyle bu panelleri tek arayüzde topluyor —
+              yeni bir ülke eklemek yeni bir panel yazmayı gerektirmiyor. AvtoBozor kendi
+              yönetim paneliyle bağımsız çalışıyor.
             </p>
             <Link className="lp-btn ghost" to="/projects">
               Tüm projeleri gör <ArrowRight size={16} />

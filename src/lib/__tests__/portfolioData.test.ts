@@ -53,9 +53,10 @@ describe("proje verisi", () => {
 });
 
 describe("vitrin", () => {
-  it("1-6 arası proje gösterir ve sırası benzersizdir", () => {
+  // Vitrin artık alt alta vaka satırları; üst sınır sayfanın uzamaması için.
+  it("1-8 arası proje gösterir ve sırası benzersizdir", () => {
     expect(featured.length).toBeGreaterThan(0);
-    expect(featured.length).toBeLessThanOrEqual(6);
+    expect(featured.length).toBeLessThanOrEqual(8);
     const orders = featured.map((p) => p.featuredOrder);
     expect(new Set(orders).size).toBe(orders.length);
   });

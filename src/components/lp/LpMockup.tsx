@@ -1,17 +1,19 @@
 import { ImageOff } from "lucide-react";
-import { coverWebp, isPhone, domainOf, type P } from "@/lib/portfolioMock";
+import { coverWebp, isPhone, domainOf, logoOf, type P } from "@/lib/portfolioMock";
 
 /** Doğrulanmış ekran görüntüsü olmayan projeler için yer tutucu.
  *  Başka bir uygulamanın görselini koymaktansa boş olduğunu söylemek daha doğru. */
 function NoShot({ p }: { p: P }) {
   const Icon = p.icon ?? ImageOff;
+  // Ürünün kendi logosu varsa genel ikon yerine onu göster.
+  const logo = logoOf(p);
   return (
     <div className="mk-noshot">
-      <span className="ic">
-        <Icon size={26} />
+      <span className={"ic" + (logo ? " has-logo" : "")}>
+        {logo ? <img src={logo} alt="" loading="lazy" decoding="async" /> : <Icon size={26} />}
       </span>
       <b>{p.title}</b>
-      <span className="note">Ekran görüntüsü arşivde yok</span>
+      <span className="note">{p.shotNote ?? p.status ?? "Ekran görüntüsü arşivde yok"}</span>
     </div>
   );
 }
