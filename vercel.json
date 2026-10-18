@@ -15,6 +15,10 @@
     {
       "source": "/projects/dacar/mobile",
       "destination": "/projects/dacar/mobile/index.html"
+    },
+    {
+      "source": "/is/:slug",
+      "destination": "/is/:slug/index.html"
     }
   ],
   "headers": [

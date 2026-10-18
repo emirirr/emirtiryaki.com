@@ -1,75 +1,35 @@
-import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Home, LayoutGrid } from "lucide-react";
-import { fadeUp, staggerContainer } from "@/lib/motion";
+import { Link, useLocation } from "react-router-dom";
+import { ArrowRight, Home } from "lucide-react";
+import { SiteShell } from "@/components/site/SiteShell";
+import { Reveal } from "@/components/site/primitives";
 
 const NotFound = () => {
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    if (import.meta.env.DEV) {
-      console.warn("404:", location.pathname);
-    }
-  }, [location.pathname]);
+    if (import.meta.env.DEV) console.warn("404:", pathname);
+  }, [pathname]);
 
   return (
-    <div className="relative min-h-screen overflow-hidden px-4 py-20 font-sans antialiased">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,hsl(var(--primary)/0.2),transparent)]" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-background to-surface" />
-
-      <motion.div
-        className="relative z-10 mx-auto flex min-h-[70vh] max-w-lg flex-col items-center justify-center text-center"
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.div
-          variants={fadeUp}
-          className="glass-strong mb-8 rounded-[2rem] border border-border px-10 py-12"
-        >
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-            Hata
-          </p>
-          <h1 className="mt-3 bg-gradient-to-br from-foreground to-muted-foreground bg-clip-text text-7xl font-semibold tabular-nums tracking-tight text-transparent md:text-8xl">
-            404
-          </h1>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Bu sayfa yok veya taşınmış olabilir.
-          </p>
-          <p className="mt-2 font-mono text-xs text-muted-foreground/80">
-            {location.pathname}
-          </p>
-        </motion.div>
-
-        <motion.div variants={fadeUp} className="flex flex-col gap-3 sm:flex-row sm:gap-4">
-          <Button
-            asChild
-            size="lg"
-            className="rounded-2xl hero-gradient px-8 shadow-lg shadow-primary/20"
-
-          >
-            <Link to="/" className="inline-flex items-center gap-2">
-              <Home className="h-5 w-5" />
-              Ana sayfa
-            </Link>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="rounded-2xl border-border bg-secondary backdrop-blur-md hover:bg-secondary"
-
-          >
-            <Link to="/projects" className="inline-flex items-center gap-2">
-              <LayoutGrid className="h-5 w-5" />
-              Projeler
-            </Link>
-          </Button>
-        </motion.div>
-      </motion.div>
-    </div>
+    <SiteShell>
+      <Reveal className="s-wrap s-404">
+        <div className="big">404</div>
+        <h1 className="s-h3">Bu sayfa bulunamadı</h1>
+        <span className="path">{pathname}</span>
+        <p className="s-lead" style={{ marginInline: "auto" }}>
+          Taşınmış ya da hiç var olmamış olabilir. Aşağıdan devam edebilir veya Ctrl+K ile arayabilirsin.
+        </p>
+        <div className="s-cta">
+          <Link className="s-btn primary lg" to="/">
+            <Home size={16} /> Ana sayfa
+          </Link>
+          <Link className="s-btn ghost lg" to="/projects">
+            Tüm işler <ArrowRight size={16} />
+          </Link>
+        </div>
+      </Reveal>
+    </SiteShell>
   );
 };
 

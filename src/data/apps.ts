@@ -16,7 +16,7 @@ export type StoreApp = {
 /**
  * Mağazalarda yayında olan uygulamalar (Ekim 2026 kontrolü).
  * App Store hesapları: Emir Tiryaki (CarLog, Adhan), araç pazaryeri hesabı (daCAR, AvtoUzbek, Marocar, NaijaCar),
- * Kortbul ve Heybe müşteri hesapları. Google Play: Afrikaapp + Kortbul + Heybe.
+ * Kortbul ve Heybe müşteri hesapları. Satılık da araç pazaryeri hesabından (Ekim 2026). Google Play: Afrikaapp + Kortbul + Heybe.
  */
 export const apps: StoreApp[] = [
   {
@@ -140,6 +140,20 @@ export const apps: StoreApp[] = [
         "Buy and sell cars in Nigeria: verified sellers, budget-based search and in-app messaging.",
     },
   },
+  {
+    name: "Satılık",
+    category: "Türkiye · İlan platformu",
+    tagline: "Otomobilden emlağa, elektronikten iş makinelerine Türkiye'nin ilan platformu; web, mobil ve admin paneli.",
+    icon: "/apps/satilik.png",
+    builtWith: "React Native, Expo & Supabase ile geliştirildi",
+    appStore: "https://apps.apple.com/tr/app/sat%C4%B1l%C4%B1k/id6819636199",
+    website: "https://satilikapp.com",
+    en: {
+      category: "Türkiye · Classifieds",
+      tagline:
+        "Türkiye's classifieds platform from cars to real estate, electronics and machinery; web, mobile and admin panel.",
+    },
+  },
 ];
 
 /** Geliştirmesi tamamlanan, mağaza yayını öncesindeki uygulamalar. */
@@ -171,19 +185,6 @@ export const upcoming: StoreApp[] = [
     },
   },
   {
-    name: "Satılık",
-    category: "Türkiye · İlan platformu",
-    tagline: "Otomobilden emlağa, elektronikten iş makinelerine Türkiye'nin ilan platformu; web, mobil ve admin paneli.",
-    icon: "/apps/satilik.png",
-    builtWith: "React Native, Expo & Supabase ile geliştirildi",
-    website: "https://satilikapp.com",
-    en: {
-      category: "Türkiye · Classifieds",
-      tagline:
-        "Türkiye's classifieds platform from cars to real estate, electronics and machinery; web, mobile and admin panel.",
-    },
-  },
-  {
     name: "BanglaGari",
     category: "Bangladeş · Araç pazaryeri",
     tagline: "Bangladeş için Bengalce/İngilizce araç alım-satım uygulaması; pazaryeri ailesinin yedinci ülkesi.",
@@ -193,6 +194,19 @@ export const upcoming: StoreApp[] = [
       category: "Bangladesh · Car marketplace",
       tagline:
         "A Bengali/English car marketplace app for Bangladesh; the seventh country of the marketplace family.",
+    },
+  },
+  {
+    name: "Dacargo",
+    category: "Senegal · Ulaşım pazaryeri",
+    tagline: "Taksi, moto, ortak yolculuk, at arabası ve koli teslimatı tek uygulamada; müşteri, sürücü ve ekip için üç uygulama.",
+    icon: "/apps/dacargo.png",
+    builtWith: "React Native, Expo & Supabase ile geliştirildi",
+    website: "https://dacargo.vercel.app",
+    en: {
+      category: "Senegal · Mobility marketplace",
+      tagline:
+        "Taxi, moto, ride sharing, horse cart and parcel delivery in one app; three apps for riders, drivers and the ops team.",
     },
   },
 ];

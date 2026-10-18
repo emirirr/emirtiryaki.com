@@ -10,7 +10,8 @@ import { CanonicalLink } from "@/components/CanonicalLink";
 import Index from "./pages/Index";
 import { useT } from "@/i18n/lang";
 
-const ProjectsPage = lazy(() => import("./pages/Projects"));
+const WorkListing = lazy(() => import("./components/WorkListing"));
+const ProjectDetail = lazy(() => import("./components/ProjectDetail"));
 const KortbulProjectPage = lazy(() => import("./pages/KortbulProjectPage"));
 const DacarMobileProjectPage = lazy(() => import("./pages/DacarMobileProjectPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -66,7 +67,8 @@ export const AppRoutes = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/en" element={<Index />} />
-          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects" element={<WorkListing />} />
+          <Route path="/is/:slug" element={<ProjectDetail />} />
           <Route path="/projects/kortbul/:slug" element={<KortbulProjectPage />} />
           <Route path="/projects/dacar/mobile" element={<DacarMobileProjectPage />} />
           <Route path="*" element={<NotFound />} />

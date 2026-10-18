@@ -78,9 +78,10 @@ export function TerminalMode() {
         case "open": {
           const target = rest[0];
           const map: Record<string, string> = {
-            hero: "hero",
-            skills: "skills",
-            projects: "projects",
+            hero: "top",
+            services: "services",
+            projects: "work",
+            about: "about",
             contact: "contact",
           };
           const id = target ? map[target] : "";
@@ -137,8 +138,14 @@ export function TerminalMode() {
         }
       }
     };
+    // Komut paletindeki "Terminali aç" bu olayı gönderir.
+    const onToggle = () => setOpen((o) => !o);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener("site:terminal", onToggle);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("site:terminal", onToggle);
+    };
   }, []);
 
   useEffect(() => {
