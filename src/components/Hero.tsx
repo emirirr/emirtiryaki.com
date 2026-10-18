@@ -7,6 +7,7 @@ import { scrollToSection } from "@/lib/utils";
 import { useLang, useT } from "@/i18n/lang";
 import { LiveSitePreview } from "@/components/LiveSitePreview";
 import livePreview from "@/data/livePreview.json";
+import { apps } from "@/data/apps";
 
 const TIRYAKI_URL = "https://tiryakiyazilim.com";
 
@@ -19,7 +20,7 @@ const trust = [
 const stats = [
   { value: "5+", tr: "Yıl deneyim", en: "Years of experience" },
   { value: "40+", tr: "Tamamlanan proje", en: "Projects completed" },
-  { value: "8", tr: "Mağazada uygulama", en: "Apps in stores" },
+  { value: String(apps.length), tr: "Mağazada uygulama", en: "Apps in stores" },
   { value: "6+", tr: "Farklı sektör", en: "Industries" },
 ];
 
@@ -186,7 +187,7 @@ const Hero = () => {
               <p className="text-xs font-bold text-foreground">{t("Mağazada yayında", "Live in stores")}</p>
               <p className="flex items-center gap-0.5 text-[11px] text-muted-foreground">
                 <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-                {t("8 uygulama", "8 apps")} · App Store & Google Play
+                {t(`${apps.length} uygulama`, `${apps.length} apps`)} · App Store & Google Play
               </p>
             </div>
           </motion.div>

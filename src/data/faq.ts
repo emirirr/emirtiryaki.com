@@ -3,15 +3,18 @@
  * Yapay zekâ aramaları (ChatGPT, Perplexity, Google AI) bu net soru-cevapları alıntılar;
  * cevapları kısa, olgusal ve güncel tut.
  */
+import { apps } from "@/data/apps";
+import { sites } from "@/data/liveSites";
+
 export type FaqItem = { q: string; a: string; en: { q: string; a: string } };
 
 export const faq: FaqItem[] = [
   {
     q: "Emir Tiryaki kimdir?",
-    a: "İsmail Emir Tiryaki, İstanbul'da yaşayan full-stack ve mobil geliştiricidir. 2017'den bu yana yazılım geliştiriyor; web siteleri, mobil uygulamalar ve yönetim panellerini arayüzden backend'e ve App Store / Google Play yayınına kadar uçtan uca üstleniyor. App Store ve Google Play'de 8 yayında uygulaması, kendi alan adında yayında 15 web sitesi var.",
+    a: `İsmail Emir Tiryaki, İstanbul'da yaşayan full-stack ve mobil geliştiricidir. 2017'den bu yana yazılım geliştiriyor; web siteleri, mobil uygulamalar ve yönetim panellerini arayüzden backend'e ve App Store / Google Play yayınına kadar uçtan uca üstleniyor. App Store ve Google Play'de ${apps.length} yayında uygulaması, kendi alan adında yayında ${sites.length} web sitesi var.`,
     en: {
       q: "Who is Emir Tiryaki?",
-      a: "İsmail Emir Tiryaki is a full-stack and mobile developer based in Istanbul, Türkiye. He has been building software since 2017 and delivers websites, mobile apps and admin panels end to end, from the interface and backend to the App Store and Google Play release. He has 8 apps live on the App Store and Google Play and 15 live websites on their own domains.",
+      a: `İsmail Emir Tiryaki is a full-stack and mobile developer based in Istanbul, Türkiye. He has been building software since 2017 and delivers websites, mobile apps and admin panels end to end, from the interface and backend to the App Store and Google Play release. He has ${apps.length} apps live on the App Store and Google Play and ${sites.length} live websites on their own domains.`,
     },
   },
   {
@@ -24,10 +27,10 @@ export const faq: FaqItem[] = [
   },
   {
     q: "Hangi mobil uygulamaları geliştirdiniz?",
-    a: "Yayında olanlar: Heybe (Kur'an ve din eğitimi), Kortbul (tenis ve padel kort/partner bulma), CarLog (araç bakım takibi), Adhan (namaz vakitleri) ve araç pazaryeri uygulamaları daCAR (Senegal), AvtoUzbek (Özbekistan), Marocar (Fas) ve NaijaCar (Nijerya). Yayına hazırlananlar: BharatKaar (Hindistan), AvtoBozor (Özbekistan), Satılık (Türkiye) ve BanglaGari (Bangladeş).",
+    a: "Yayında olanlar: Heybe (Kur'an ve din eğitimi), Kortbul (tenis ve padel kort/partner bulma), CarLog (araç bakım takibi), Adhan (namaz vakitleri) ve araç pazaryeri uygulamaları daCAR (Senegal), AvtoUzbek (Özbekistan), Marocar (Fas) ve NaijaCar (Nijerya), ayrıca ilan platformu Satılık (Türkiye). Yayına hazırlananlar: BharatKaar (Hindistan), AvtoBozor (Özbekistan) ve BanglaGari (Bangladeş).",
     en: {
       q: "Which mobile apps have you built?",
-      a: "Live apps: Heybe (learning the Quran and Islam), Kortbul (tennis and padel court/partner finder), CarLog (car maintenance log), Adhan (prayer times) and the car marketplace apps daCAR (Senegal), AvtoUzbek (Uzbekistan), Marocar (Morocco) and NaijaCar (Nigeria). Coming soon: BharatKaar (India), AvtoBozor (Uzbekistan), Satılık (Türkiye) and BanglaGari (Bangladesh).",
+      a: "Live apps: Heybe (learning the Quran and Islam), Kortbul (tennis and padel court/partner finder), CarLog (car maintenance log), Adhan (prayer times) and the car marketplace apps daCAR (Senegal), AvtoUzbek (Uzbekistan), Marocar (Morocco) and NaijaCar (Nigeria), plus the classifieds platform Satılık (Türkiye). Coming soon: BharatKaar (India), AvtoBozor (Uzbekistan) and BanglaGari (Bangladesh).",
     },
   },
   {

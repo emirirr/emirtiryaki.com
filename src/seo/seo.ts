@@ -43,8 +43,8 @@ const person = (lang: Lang) => ({
   jobTitle: lang === "en" ? "Full-Stack & Mobile Developer" : "Full-Stack & Mobil Geliştirici",
   description:
     lang === "en"
-      ? "Istanbul-based full-stack and mobile developer. Builds websites, mobile apps and admin panels end to end; 8 apps live on the App Store and Google Play, 15 live websites."
-      : "İstanbul merkezli full-stack ve mobil geliştirici. Web sitesi, mobil uygulama ve yönetim paneli geliştiriyor; App Store ve Google Play'de 8 yayında uygulaması, 15 canlı web sitesi var.",
+      ? `Istanbul-based full-stack and mobile developer. Builds websites, mobile apps and admin panels end to end; ${apps.length} apps live on the App Store and Google Play, ${sites.length} live websites.`
+      : `İstanbul merkezli full-stack ve mobil geliştirici. Web sitesi, mobil uygulama ve yönetim paneli geliştiriyor; App Store ve Google Play'de ${apps.length} yayında uygulaması, ${sites.length} canlı web sitesi var.`,
   email: "mailto:info@emirtiryaki.com",
   telephone: "+90-543-447-6245",
   address: { "@type": "PostalAddress", addressLocality: "İstanbul", addressCountry: "TR" },
@@ -192,8 +192,8 @@ function homeSeo(lang: Lang): RouteSeo {
       : "İsmail Emir Tiryaki — Full-Stack & Mobil Uygulama Geliştirici · İstanbul";
   const description =
     lang === "en"
-      ? "Istanbul-based developer building websites, iOS & Android apps and admin panels end to end. 8 apps on the App Store and Google Play, 15 live websites. Get a quote."
-      : "İstanbul'da web sitesi, iOS & Android mobil uygulama ve yönetim paneli geliştiriyorum. App Store ve Google Play'de 8 uygulama, 15 canlı site. Ücretsiz ön görüşme ve teklif.";
+      ? `Istanbul-based developer building websites, iOS & Android apps and admin panels end to end. ${apps.length} apps on the App Store and Google Play, ${sites.length} live websites. Get a quote.`
+      : `İstanbul'da web sitesi, iOS & Android mobil uygulama ve yönetim paneli geliştiriyorum. App Store ve Google Play'de ${apps.length} uygulama, ${sites.length} canlı site. Ücretsiz ön görüşme ve teklif.`;
   return {
     path: lang === "en" ? "/en" : "/",
     lang,

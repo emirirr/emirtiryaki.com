@@ -140,6 +140,20 @@ export const apps: StoreApp[] = [
         "Buy and sell cars in Nigeria: verified sellers, budget-based search and in-app messaging.",
     },
   },
+  {
+    name: "Satılık",
+    category: "Türkiye · İlan platformu",
+    tagline: "Otomobilden emlağa, elektronikten iş makinelerine Türkiye'nin ilan platformu; web, mobil ve admin paneli.",
+    icon: "/apps/satilik.png",
+    builtWith: "React Native, Expo & Supabase ile geliştirildi",
+    appStore: "https://apps.apple.com/tr/app/sat%C4%B1l%C4%B1k/id6819636199",
+    website: "https://satilikapp.com",
+    en: {
+      category: "Türkiye · Classifieds",
+      tagline:
+        "Türkiye's classifieds platform from cars to real estate, electronics and machinery; web, mobile and admin panel.",
+    },
+  },
 ];
 
 /** Geliştirmesi tamamlanan, mağaza yayını öncesindeki uygulamalar. */
@@ -168,19 +182,6 @@ export const upcoming: StoreApp[] = [
       category: "Uzbekistan · Car marketplace",
       tagline:
         "Uzbekistan's commission-free car market: verified sellers, quick listings and detailed filters.",
-    },
-  },
-  {
-    name: "Satılık",
-    category: "Türkiye · İlan platformu",
-    tagline: "Otomobilden emlağa, elektronikten iş makinelerine Türkiye'nin ilan platformu; web, mobil ve admin paneli.",
-    icon: "/apps/satilik.png",
-    builtWith: "React Native, Expo & Supabase ile geliştirildi",
-    website: "https://satilikapp.com",
-    en: {
-      category: "Türkiye · Classifieds",
-      tagline:
-        "Türkiye's classifieds platform from cars to real estate, electronics and machinery; web, mobile and admin panel.",
     },
   },
   {
