@@ -13,20 +13,14 @@ export { getRouteSeo, headTags, PRERENDER_PATHS };
 
 export function render(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    // Parçalar Buffer olarak toplanıp en sonda çözülür: çok baytlı bir harf
-    // (ör. "ı") iki parçanın sınırına denk gelirse tek tek toString() onu bozar.
-    const chunks: Buffer[] = [];
+    let html = "";
     const sink = new Writable({
       write(chunk, _enc, cb) {
-        chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+        html += chunk.toString();
         cb();
       },
       final(cb) {
-        // React 18.3.1 hatası: 2048 baytlık tamponun sonuna çok baytlı harf sığmayınca
-        // tampon, boş kalan son baytıyla (0x00) gönderiliyor. HTML'de NUL hiç bulunmaz ve
-        // UTF-8'de çok baytlı karakterlerin içinde yer almaz → güvenle atılır.
-        const bytes = Buffer.concat(chunks);
-        resolve(Buffer.from(bytes.filter((b) => b !== 0)).toString("utf8"));
+        resolve(html);
         cb();
       },
     });
