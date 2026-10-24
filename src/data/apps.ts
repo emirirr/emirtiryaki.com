@@ -134,6 +134,7 @@ export const apps: StoreApp[] = [
     icon: "/apps/naijacar.png",
     builtWith: "React Native, Expo & Supabase ile geliştirildi",
     appStore: "https://apps.apple.com/tr/app/naijacar-buy-sell-cars/id6775273788",
+    googlePlay: "https://play.google.com/store/apps/details?id=com.appcarfy.nigeriacar",
     en: {
       category: "Nigeria · Car marketplace",
       tagline:

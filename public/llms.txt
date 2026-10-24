@@ -19,7 +19,7 @@
 - [daCAR](https://apps.apple.com/tr/app/dacar-achat-vente-de-voitures/id6761602043) (App Store · [Google Play](https://play.google.com/store/apps/details?id=com.ismailtiryaki.dacar)): Senegal araç pazaryeri; React Native, Expo, Supabase.
 - [AvtoUzbek](https://apps.apple.com/tr/app/avtouzbek-avto-elon-bozor/id6799088463) (App Store · [Google Play](https://play.google.com/store/apps/details?id=com.appcarfy.avtouzbek)): Özbekistan araç pazaryeri.
 - [Marocar](https://apps.apple.com/tr/app/marocar-voitures-doccasion/id6773120581) (App Store · [Google Play](https://play.google.com/store/apps/details?id=com.appcarfy.marocar)): Fas ikinci el araç pazaryeri.
-- [NaijaCar](https://apps.apple.com/tr/app/naijacar-buy-sell-cars/id6775273788) (App Store): Nijerya araç pazaryeri.
+- [NaijaCar](https://apps.apple.com/tr/app/naijacar-buy-sell-cars/id6775273788) (App Store · [Google Play](https://play.google.com/store/apps/details?id=com.appcarfy.nigeriacar)): Nijerya araç pazaryeri.
 - [Satılık](https://apps.apple.com/tr/app/sat%C4%B1l%C4%B1k/id6819636199) (App Store): Türkiye ilan platformu — otomobilden emlağa her şeyin alınıp satıldığı uygulama; React Native, Expo, Supabase. Web: [satilikapp.com](https://satilikapp.com).
 - Yayına hazırlanan: BharatKaar (Hindistan), AvtoBozor (Özbekistan), BanglaGari (Bangladeş).
 
